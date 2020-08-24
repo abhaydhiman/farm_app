@@ -10,5 +10,15 @@
   <body>
     <h1>This is first home page</h1>
     <img src="{% static 'images/home.png' %}" alt="" />
+    {{var_1}} {{var_2}}
+
+  {% if user.is_authenticated %}
+      Hi {{ user.username }}!
+    <p><a href="{% url 'logout' %}">logout</a></p>
+  {% else %}
+      <p>You are not logged in</p>
+      <a href="{% url 'login' %}">login</a>
+  {% endif %}
   </body>
+  
 </html>
