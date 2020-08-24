@@ -72,6 +72,7 @@
 
 
     <img src="{% static 'images/home.png' %}" alt="" />
+<<<<<<< HEAD
 
 
     <!-- loader -->
@@ -97,5 +98,17 @@
     <script src="\..\farm_app\pro_farm\static\js\main.js"></script>
 
 
+=======
+    {{var_1}} {{var_2}}
+
+  {% if user.is_authenticated %}
+      Hi {{ user.username }}!
+    <p><a href="{% url 'logout' %}">logout</a></p>
+  {% else %}
+      <p>You are not logged in</p>
+      <a href="{% url 'login' %}">login</a>
+  {% endif %}
+>>>>>>> 464e3afba0d5fd756861e9affb25fb61e3a110d9
   </body>
+  
 </html>

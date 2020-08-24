@@ -33,11 +33,13 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'django.contrib.admin',
-    'django.contrib.auth',
+    'django.contrib.auth', 
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'accounts.apps.AccountsConfig', # for sign_up
+    'farm_app.apps.FarmAppConfig' , # main_app of our project
 ]
 
 MIDDLEWARE = [
@@ -121,3 +123,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
+
+LOGIN_REDIRECT_URL = 'home' # user_auth
+LOGOUT_REDIRECT_URL = 'home' # user_auth
