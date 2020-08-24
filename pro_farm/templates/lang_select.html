@@ -72,7 +72,19 @@
 
 
     <img src="{% static 'images/home.png' %}" alt="" />
-<<<<<<< HEAD
+
+
+<!-- >>>>>>@Ayush-Malik  -->
+{{var_1}} {{var_2}}
+
+{% if user.is_authenticated %}
+Hi {{ user.username }}!
+<p><a href="{% url 'logout' %}">logout</a></p>
+{% else %}
+<p>You are not logged in</p>
+<a href="{% url 'login' %}">login</a>
+{% endif %}
+<!--  -->
 
 
     <!-- loader -->
@@ -96,19 +108,6 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
     <script src="\..\farm_app\pro_farm\static\js\google-map.js"></script>
     <script src="\..\farm_app\pro_farm\static\js\main.js"></script>
-
-
-=======
-    {{var_1}} {{var_2}}
-
-  {% if user.is_authenticated %}
-      Hi {{ user.username }}!
-    <p><a href="{% url 'logout' %}">logout</a></p>
-  {% else %}
-      <p>You are not logged in</p>
-      <a href="{% url 'login' %}">login</a>
-  {% endif %}
->>>>>>> 464e3afba0d5fd756861e9affb25fb61e3a110d9
   </body>
   
 </html>
