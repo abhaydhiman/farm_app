@@ -39,7 +39,10 @@ def signup_page(request):
 def submit_signup_data(request):
     phone_number = request.POST['Phone_number']
     name         = request.POST['name']
-    context = {}
+    context = {
+        'Enter_OTP' : translator('Enter OTP' , to_langg = 'English'),
+        'Confirm'   : translator('Confirm'   , to_langg = 'English')
+        }
     return render(request , 'confirm_OTP.html' , context)
 
     
