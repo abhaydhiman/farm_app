@@ -10707,3 +10707,160 @@ iframe {
     opacity: 1;
   }
 }
+
+
+.services .icon {
+  width: 90px;
+  height: 90px;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  border-radius: 50%; }
+  .services .icon.color-1 {
+    background: #eaf8fd; }
+    .services .icon.color-1 span {
+      color: #78d5ef; }
+  .services .icon.color-2 {
+    background: #ebfdf4; }
+    .services .icon.color-2 span {
+      color: #79efb4; }
+  .services .icon.color-3 {
+    background: #fce7f1; }
+    .services .icon.color-3 span {
+      color: #ee76ad; }
+  .services .icon.color-4 {
+    background: #fdf2ea; }
+    .services .icon.color-4 span {
+      color: #efac78; }
+
+.services .media-body h3 {
+  font-size: 17px; }
+
+
+
+
+.ftco-section-parallax {
+  position: relative; }
+  .ftco-section-parallax .parallax-img {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: relative;
+    padding: 15em 0;
+    background: #78d5ef; }
+  .ftco-section-parallax .parallax-img-2 {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: relative;
+    padding: 15em 0;
+    background: #78efd1; }
+    .ftco-section-parallax .parallax-img.parallax-img-2 {
+      background: #ee76ad; }
+
+
+
+.block-3 .text, .block-3 .image {
+  width: 100%;
+  padding: 10% 7%;
+  display: block; }
+  @media (min-width: 768px) {
+    .block-3 .text, .block-3 .image {
+      width: 50%;
+      padding: 10% 7%; } }
+
+.block-3 .text {
+  background: #f8faff; }
+  .block-3 .text .subheading {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: #a3c2d1; }
+  .block-3 .text .heading {
+    font-size: 30px;
+    margin-bottom: 30px; }
+    .block-3 .text .heading a {
+      color: #404044; }
+  .block-3 .text p:last-child {
+    margin-bottom: 0; }
+
+.block-3 .image {
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat; }
+  @media (max-width: 767.98px) {
+    .block-3 .image {
+      height: 300px; } }
+
+
+
+.blog-entry-2 {
+  background: #fff;
+  -webkit-box-shadow: 0px 4px 18px -12px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 4px 18px -12px rgba(0, 0, 0, 0.75);
+  -ms-box-shadow: 0px 4px 18px -12px rgba(0, 0, 0, 0.75);
+  -o-box-shadow: 0px 4px 18px -12px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 4px 18px -12px rgba(0, 0, 0, 0.75);
+  border: 1px solid #f7f7f7; }
+  @media (min-width: 768px) {
+    .blog-entry-2 {
+      margin-bottom: 30px; } }
+  @media (max-width: 767.98px) {
+    .blog-entry-2 {
+      margin-bottom: 30px; } }
+  .blog-entry-2 .text {
+    position: relative;
+    border-top: 0;
+    border-radius: 2px; }
+    .blog-entry-2 .text .heading {
+      font-size: 20px;
+      margin-bottom: 16px; }
+      .blog-entry-2 .text .heading a {
+        color: #404044; }
+        .blog-entry-2 .text .heading a:hover, .blog-entry-2 .text .heading a:focus, .blog-entry-2 .text .heading a:active {
+          color: #78d5ef; }
+    .blog-entry-2 .text .meta-chat {
+      color: #a5a5ab; }
+    .blog-entry-2 .text .read {
+      color: #404044;
+      font-size: 14px; }
+  .blog-entry-2 .meta > div {
+    display: inline-block;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    font-size: 15px; }
+    .blog-entry-2 .meta > div a {
+      color: #a5a5ab;
+      font-size: 15px; }
+      .blog-entry-2-2 .meta > div a:hover {
+        color: white; }
+
+
+.ftco-section-2 .ftco-sub-title {
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: .5em;
+  color: #d4d4d4;
+  font-family: "Work Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-weight: 300; }
+
+.ftco-section-2 .ftco-primary-title {
+  margin-top: 0;
+  margin-bottom: 30px; }
+
+.ftco-section-2 {
+  padding: 8em 0;
+  position: relative; }
+  @media (max-width: 767.98px) {
+    .ftco-section-2 {
+      padding: 6em 0; } }
+
+
+.block-20-1 {
+  overflow: hidden;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 350px;
+  position: relative;
+  display: block; }
