@@ -17,5 +17,13 @@ from django.urls import path
 from farm_app import views
 
 urlpatterns = [
-    path('', views.home_page , name = 'home_page'),
+    # path('', views.home_page , name = 'home_page'),
+
+    path('' , views.lang_select , name = 'lang_select'),
+
+    path('signup' , views.signup_page , name = 'signup_page'),
+
+    path('submit_signup_data' , views.submit_signup_data , name = 'submit_signup_data_page'),
+
+    path('user_home' , views.user_home , name = 'user_home_page'),
 ]
