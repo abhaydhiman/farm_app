@@ -39,22 +39,22 @@
           <img src="{% static 'images\kisan-1.png' %}" alt="IMG">
         </div>
 
-        <form class="login100-form validate-form" method="POST" action="submit_signup_data">
+        <form id="sign-in-form" class="login100-form validate-form" method="POST" action="submit_signup_data">
           {% csrf_token %}
           <span class="login100-form-title">
             {{Enter_Credentials}}
           </span>
 
           <div class="wrap-input100 validate-input" data-validate = "Valid number is of 10 integers">
-            <input class="input100" type="text" name="Phone_number" placeholder="{{Phone_Number}}">
+            <input class="input100" type="text" pattern="\+[0-9\s\-\(\)]+" name="Phone_number" id="phone-number" placeholder="{{Phone_Number}}">
             <span class="focus-input100"></span>
             <span class="symbol-input100">
-              <i class="fa fa-phone" aria-hidden="true"></i>
+              <i class="fa fa-phone" aria-hidden="true" for="phone-number"></i>
             </span>
           </div>
 
           <div class="wrap-input100 validate-input" data-validate="Name is required">
-            <input class="input100" type="text" name="name" placeholder="{{Full_Name}}">
+            <input class="input100" type="text" name="name" id="name" placeholder="{{Full_Name}}">
             <span class="focus-input100"></span>
             <span class="symbol-input100">
               <i class="fa fa-user" aria-hidden="true"></i>
@@ -62,15 +62,43 @@
           </div>
 
           <div class="container-login100-form-btn">
-            <button class="login100-form-btn">
+            <button disabled class="login100-form-btn" id="sign-in-button">
               {{Generate_OTP}}
             </button>
           </div>
           <br> <br> <br> <br> <br> <br>
         </form>
+
+        <form id="verification-code-form" class="login100-form validate-form" method="POST" action="user_home">
+          {% csrf_token %}
+          <span class="login100-form-title">
+              {{Enter_OTP}}
+          </span>
+
+
+          <div class="wrap-input100 validate-input" data-validate="Name is required">
+              <input class="input100" type="text" name="otp" placeholder="12A3N" id="verification-code">
+              <span class="focus-input100"></span>
+              <span class="symbol-input100">
+                  <i class="fa fa-user" aria-hidden="true"for="verification-code"></i>
+              </span>
+          </div>
+
+
+
+
+          <div class="container-login100-form-btn">
+              <button class="login100-form-btn" id="verify-code-button">
+                  {{Confirm}}
+              </button>
+          </div>
+          <br> <br> <br> <br> <br> <br>
+      </form>
+
       </div>
     </div>
   </div>
+
 
 
       <!-- loader -->
@@ -110,6 +138,226 @@
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false' %}"></script>
   <script src="{% static 'js\google-map.js' %}"></script>
   <script src="{% static 'js\main.js' %}"></script>
+
+
+  <!--This the starting of the script for FIREBASE phone number Authentication-->
+
+
+  <script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-app.js"></script>
+
+
+  <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+  <script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-analytics.js"></script>
+
+  <!-- Add Firebase products that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/7.19.0/firebase-firestore.js"></script>
+
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyDzw1zsR_bkswyyrERPGMwGbHCJ55ANRZo",
+      authDomain: "python-project-f6272.firebaseapp.com",
+      databaseURL: "https://python-project-f6272.firebaseio.com",
+      projectId: "python-project-f6272",
+      storageBucket: "python-project-f6272.appspot.com",
+      messagingSenderId: "903096030764",
+      appId: "1:903096030764:web:2d4db592dbdec5260da389",
+      measurementId: "G-VCY22N6X8L"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
+
+  <script>
+    // Your web app's Firebase configuration
+    var firebaseConfig = {
+      apiKey: "AIzaSyDzw1zsR_bkswyyrERPGMwGbHCJ55ANRZo",
+      authDomain: "python-project-f6272.firebaseapp.com",
+      databaseURL: "https://python-project-f6272.firebaseio.com",
+      projectId: "python-project-f6272",
+      storageBucket: "python-project-f6272.appspot.com",
+      messagingSenderId: "903096030764",
+      appId: "1:903096030764:web:2d4db592dbdec5260da389",
+      measurementId: "G-VCY22N6X8L"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+  </script>
+  
+  <script type="text/javascript">
+  
+    window.onload = function(){
+      firebase.auth().onAuthStateChanged(function(user){
+        if(user){
+          var uid = user.uid;
+          var email = user.email;
+          var photoURL = user.photoURL;
+          var phonenumber = user.phonenumber;
+          var isAnonyomous = user.isAnonyomous;
+          var displayName = user.displayName;
+        }
+        updateSignInButtonUI();
+        updateSignInFormUI();
+        updateVerificationCodeFormUI();
+      });
+  
+      // Event bindings.
+      document.getElementById('phone-number').addEventListener('keyup', updateSignInButtonUI);
+      document.getElementById('phone-number').addEventListener('change', updateSignInButtonUI);
+      document.getElementById('verification-code').addEventListener('keyup', updateVerifyCodeButtonUI);
+      document.getElementById('verification-code').addEventListener('change', updateVerifyCodeButtonUI);
+      document.getElementById('verification-code-form').addEventListener('submit', onVerifyCodeSubmit);
+
+      // [START appVerifier]
+      window.recaptchaVerifier = new firebase.auth.RecaptchaVerifier('sign-in-button', {
+        'size': 'invisible',
+        'callback': function(response) {
+          // reCAPTCHA solved, allow signInWithPhoneNumber.
+          onSignInSubmit();
+        }
+      });
+      // [END appVerifier]
+      recaptchaVerifier.render().then(function(widgetId) {
+        window.recaptchaWidgetId = widgetId;
+        updateSignInButtonUI();
+      });
+  
+    };
+  
+    function onSignInSubmit() {
+      if (isPhoneNumberValid()) {
+        window.signingIn = true;
+        updateSignInButtonUI();
+        var phoneNumber = getPhoneNumberFromUserInput();
+        var appVerifier = window.recaptchaVerifier;
+        firebase.auth().signInWithPhoneNumber(phoneNumber, appVerifier)
+            .then(function (confirmationResult) {
+              // SMS sent. Prompt user to type the code from the message, then sign the
+              // user in with confirmationResult.confirm(code).
+              window.confirmationResult = confirmationResult;
+              window.signingIn = false;
+              updateSignInButtonUI();
+              updateVerificationCodeFormUI();
+              updateVerifyCodeButtonUI();
+              updateSignInFormUI();
+            }).catch(function (error) {
+              // Error; SMS not sent
+              console.error('Error during signInWithPhoneNumber', error);
+              window.alert('Error during signInWithPhoneNumber:\n\n'
+                  + error.code + '\n\n' + error.message);
+              window.signingIn = false;
+              updateSignInFormUI();
+              updateSignInButtonUI();
+            });
+      }
+    }
+  
+    /**
+     * Function called when clicking the "Verify Code" button.
+     */
+     function onVerifyCodeSubmit(e) {
+      e.preventDefault();
+      if (!!getCodeFromUserInput()) {
+        window.verifyingCode = true;
+        updateVerifyCodeButtonUI();
+        var code = getCodeFromUserInput();
+        confirmationResult.confirm(code).then(function (result) {
+          // User signed in successfully.
+          var user = result.user;
+          window.verifyingCode = false;
+          window.confirmationResult = null;
+          updateVerificationCodeFormUI();
+        }).catch(function (error) {
+          // User couldn't sign in (bad verification code?)
+          console.error('Error while checking the verification code', error);
+          window.alert('Error while checking the verification code:\n\n'
+              + error.code + '\n\n' + error.message);
+          window.verifyingCode = false;
+          updateSignInButtonUI();
+          updateVerifyCodeButtonUI();
+        });
+      }
+    }
+  
+     
+   
+    /**
+     * Reads the verification code from the user input.
+     */
+    function getCodeFromUserInput() {
+      return document.getElementById('verification-code').value;
+    }
+    /**
+     * Reads the phone number from the user input.
+     */
+    function getPhoneNumberFromUserInput() {
+      return document.getElementById('phone-number').value;
+    }
+  
+    /**
+     * Returns true if the phone number is valid.
+     */
+     function isPhoneNumberValid() {
+      var pattern = /^\+[0-9\s\-\(\)]+$/;
+      var phoneNumber = getPhoneNumberFromUserInput();
+      return phoneNumber.search(pattern) !== -1;
+    }
+  
+     /**
+     * Re-initializes the ReCaptacha widget.
+     */
+     function resetReCaptcha() {
+      if (typeof grecaptcha !== 'undefined'
+          && typeof window.recaptchaWidgetId !== 'undefined') {
+        grecaptcha.reset(window.recaptchaWidgetId);
+      }
+    }
+  
+    /**
+     * Updates the Sign-in button state depending on ReCAptcha and form values state.
+     */
+     function updateSignInButtonUI() {
+      document.getElementById('sign-in-button').disabled =!isPhoneNumberValid() || !!window.signingIn;
+    }
+    /**
+     * Updates the Verify-code button state depending on form values state.
+     */
+    function updateVerifyCodeButtonUI() {
+      document.getElementById('verify-code-button').disabled =
+          !!window.verifyingCode
+          || !getCodeFromUserInput();
+    }
+    /**
+     * Updates the state of the Sign-in form.
+     */
+    function updateSignInFormUI() {
+      if (firebase.auth().currentUser || window.confirmationResult) {
+        document.getElementById('sign-in-form').style.display = 'none';
+      } else {
+        resetReCaptcha();
+        document.getElementById('sign-in-form').style.display = 'block';
+      }
+    }
+    /**
+     * Updates the state of the Verify code form.
+     */
+    function updateVerificationCodeFormUI() {
+      if (!firebase.auth().currentUser && window.confirmationResult) {
+        document.getElementById('verification-code-form').style.display = 'block';
+      } else {
+        document.getElementById('verification-code-form').style.display = 'none';
+      }
+    }
+    
+  
+  </script>
+  
+  
+
+
 
 </body>
 
