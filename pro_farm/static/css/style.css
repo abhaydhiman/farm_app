@@ -8787,8 +8787,8 @@ h1, h2, h3, h4, h5,
           color: #fff;
           line-height: 1.1;
           font-weight: 900;
-          position: relative; 
-          text-shadow: 
+          position: relative; }
+          /* text-shadow: 
             -1px -1px 0 black,
             1px -1px 0 black,
             -1px 1px 0 black,
@@ -8796,7 +8796,7 @@ h1, h2, h3, h4, h5,
             -2px 0 0 black,
             2px 0 0 black,
             0 2px 0 black,
-            0 -2px 0 black;}
+            0 -2px 0 black;} */
         .owl-carousel.home-slider .slider-item .slider-text h1 span {
           color: #000000;
           display: block; }
