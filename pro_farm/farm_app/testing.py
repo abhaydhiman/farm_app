@@ -1,0 +1,1 @@
+print("background-image:url({% static 'images/1.jpg' %});")
