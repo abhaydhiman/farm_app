@@ -9,6 +9,7 @@
 
 from django.shortcuts import render
 from modules.imp_funcs import *
+from firebase import firebase
 
 #____________________________________________________________________________________________
 
@@ -40,12 +41,25 @@ def signup_page(request):
 def submit_signup_data(request):
     phone_number = request.POST['Phone_number']
     name         = request.POST['name']
+    Language     = request.POST["sign-in-button"]
 
     context = {
         'Enter_OTP' : translator('Enter OTP' , to_langg = 'English'),
         'Confirm'   : translator('Confirm'   , to_langg = 'English')
         }
-    return render(request , 'confirm_OTP.html' , context)
+
+    if request.POST['verify-code-button'] == "True":
+        firebase = firebase.FirebaseApplication("https://python-project-f6272.firebaseio.com/", None)
+        Data = {
+            'Name' : name,
+            'Phone_Number' :  phone_number,
+            'Language' : Language
+        }
+
+        result = firebase.post('/python-project-f6272/User:', Data)
+        print(result)
+
+    return render(request , 'signup.html' , context)
 
     
 #____________________________________________________________________________________________

@@ -63,7 +63,7 @@
           </div>
 
           <div class="container-login100-form-btn">
-            <button disabled class="login100-form-btn" id="sign-in-button">
+            <button disabled class="login100-form-btn" id="sign-in-button" name="sign-in-button" value={{language_selected}}>
               {{Generate_OTP}}
             </button>
           </div>
@@ -89,7 +89,7 @@
 
 
           <div class="container-login100-form-btn">
-            <button class="login100-form-btn" id="verify-code-button" value = "False">
+            <button class="login100-form-btn" id="verify-code-button" name="verify-code-button" value = "False">
               {{Confirm}}
             </button>
           </div>
@@ -350,6 +350,7 @@
     function updateVerificationCodeFormUI() {
       if (!firebase.auth().currentUser && window.confirmationResult) {
         document.getElementById('verification-code-form').style.display = 'block';
+        document.getElementById('verify-code-button').value = 'True';
       } else {
         document.getElementById('verification-code-form').style.display = 'none';
       }
