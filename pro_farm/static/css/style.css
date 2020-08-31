@@ -10755,7 +10755,14 @@ iframe {
     position: relative;
     padding: 15em 0;
     background: #78efd1; }
-    .ftco-section-parallax .parallax-img.parallax-img-2 {
+  .ftco-section-parallax .parallax-img-3 {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: relative;
+    padding: 15em 0;
+    background: #464a4e; }
+    .ftco-section-parallax .parallax-img.parallax-img-2.parallax-img-3 {
       background: #ee76ad; }
 
 
@@ -10796,6 +10803,16 @@ iframe {
 
 .blog-entry-2 {
   background: #fff;
+  opacity: .5;
+  -webkit-box-shadow: 0px 4px 18px -12px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 4px 18px -12px rgba(0, 0, 0, 0.75);
+  -ms-box-shadow: 0px 4px 18px -12px rgba(0, 0, 0, 0.75);
+  -o-box-shadow: 0px 4px 18px -12px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 4px 18px -12px rgba(0, 0, 0, 0.75);
+  border: 1px solid #f7f7f7; }
+  .blog-entry-2:hover{
+  background: #fff;
+  opacity: 1;
   -webkit-box-shadow: 0px 4px 18px -12px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 4px 18px -12px rgba(0, 0, 0, 0.75);
   -ms-box-shadow: 0px 4px 18px -12px rgba(0, 0, 0, 0.75);
