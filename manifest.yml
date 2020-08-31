@@ -1,0 +1,5 @@
+---
+applications:
+  - name: Farm_App
+    random-route: true
+    memory: 600M
