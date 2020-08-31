@@ -9435,6 +9435,16 @@ textarea.form-control {
   text-transform: uppercase;
   position: relative; }
 
+.heading-section .myheading {
+  font-size: 30px;
+  margin-bottom: 0;
+  color: #5a5859;
+  font-size: 30px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  position: relative; }
+
 .heading-section h2 {
   font-size: 36px;
   font-weight: 900;
@@ -10747,7 +10757,7 @@ iframe {
     background-position: center center;
     position: relative;
     padding: 15em 0;
-    background: #78d5ef; }
+    background: #e9ebeb; }
   .ftco-section-parallax .parallax-img-2 {
     background-size: cover;
     background-repeat: no-repeat;
@@ -10761,7 +10771,8 @@ iframe {
 
 
 .block-3 .text, .block-3 .image {
-  width: 100%;
+  height: 120%;
+  width: 120%;
   padding: 10% 7%;
   display: block; }
   @media (min-width: 768px) {
@@ -10796,6 +10807,8 @@ iframe {
 
 .blog-entry-2 {
   background: #fff;
+  border-radius: 25px;
+  transition: transform .2s;
   -webkit-box-shadow: 0px 4px 18px -12px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 0px 4px 18px -12px rgba(0, 0, 0, 0.75);
   -ms-box-shadow: 0px 4px 18px -12px rgba(0, 0, 0, 0.75);
@@ -10808,6 +10821,8 @@ iframe {
   @media (max-width: 767.98px) {
     .blog-entry-2 {
       margin-bottom: 30px; } }
+  .blog-entry-2:hover{
+  transform: scale(1.1); }
   .blog-entry-2 .text {
     position: relative;
     border-top: 0;
@@ -10859,6 +10874,8 @@ iframe {
 .block-20-1 {
   overflow: hidden;
   background-size: cover;
+  border-top-right-radius: 25px;
+  border-top-left-radius: 25px;
   background-repeat: no-repeat;
   background-position: center center;
   height: 350px;
