@@ -1,7 +1,7 @@
 # Importing Necessary Libraries
 from flask import Flask, render_template,request
-from modules import opt_generator, msg_sender, firebase_user_checker, firebase_user_registerer, firebase_user_loger
-from translator import text_translator, language_checker
+from modules import opt_generator, msg_sender, firebase_user_checker, firebase_user_registerer, firebase_user_loger, firebase_data_fetcher
+from translator import text_translator, language_checker, user_home_text_translator
 
 
 
@@ -79,7 +79,6 @@ def set_password():
             phone_number = request.form['phone']
             name = request.form['name']
             otp = request.form['otp']
-
             # check if Otp Is Correct
             if otp == otp_user:
                 text_ls = ['Submit Password', 'Enter Password', 'Confirm Password', 'Confirm']
@@ -109,11 +108,11 @@ def user_home():
         name = request.form['name']
         password1 = request.form['password']
         password2 = request.form['password-confirm']
-
         # If Both Password Match then register user and redirect to home page
         if password1 == password2 and len(password1)>=6:
             firebase_user_registerer(phone_number, password1, name, lang)
-            return render_template('user_home.html')
+            translated_list, name = user_home_text_translator(lang, name)
+            return render_template('user_home.html', t_lis = translated_list, phone_number = phone_number, name = name)
         
         # If condition not matched then show error
         else:
@@ -136,7 +135,9 @@ def user_home_2():
 
             # If Password matches with phone number then Redirect to home page
             if checker == 1:
-                return render_template('user_home.html')
+                name = firebase_data_fetcher(phone_number)
+                translated_list, name = user_home_text_translator(lang, name)
+                return render_template('user_home.html', t_lis = translated_list, phone_number = phone_number, name = name)
 
             # Otherwise Then error is shown 
             else:
