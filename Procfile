@@ -1,1 +1,1 @@
-web: gunicorn pro_farm.wsgi --log-file -
+web: gunicorn app:app
