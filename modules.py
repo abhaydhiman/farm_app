@@ -9,7 +9,7 @@ from firebase import firebase
 #__________________________________________________________________________________
 # Configuration Key Of firebase
 firebaseConfig = {
-
+    
 }
 
 # Init of Pyrebase
@@ -99,3 +99,12 @@ def firebase_user_loger(phone_number, password):
         return 1
     except:
         return 0
+
+# This function fetches name from database for registerd user
+def firebase_data_fetcher(phone_number):
+    data_list = firebase.get('the-farm-app-4015b/',None)
+    for data in data_list['Farmer:']:
+        if data_list['Farmer:'][data]['Phone Number'] == str(phone_number):
+            name = data_list['Farmer:'][data]['Name']
+            break
+    return name
