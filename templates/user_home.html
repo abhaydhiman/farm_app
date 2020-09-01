@@ -20,26 +20,54 @@
     <link rel="stylesheet" href="..\static\css\icomoon.css">
 </head>
 
+
 <body>
+    <!-- ============================================================================================================= -->
+
+
+    <!-- Profile Section Started -->
+    <div id="myNav" class="overlay">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><<</a>
+        <div class="container mt-5 pt-5">
+            <div class="row mt-5 pt-5">
+                <div class="col-md-6 col-lg-6 ftco-animate">
+                    <img src="../static/images/edited_vali4.png" class="profileimage" alt="">
+                </div>
+                <div class="col-md-6 col-lg-6 ftco-animate">
+                    <div class="overlay-content ml-1 pl-1">
+                        <p>Name - ooiiii</p>
+                        <p>Number - 1234567890</p>
+                        <p>Status - Farmer</p>
+                        <p>Primary language - english</p>
+                        <p>Location - Ambala, Haryana</p>
+                        <a href="profile.html">Edit Profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Profile Section Ended -->
+
+
     <!-- ============================================================================================================= -->
 
 
     <!-- navbar started -->
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
-            <a class="navbar-brand" href="home.html">The<span>F</span>armer</a>
+            <a class="navbar-brand" href="user_home.html">The<span>F</span>armer</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                 aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> {{t_lis[0]}}
             </button>
-
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active"><a href="index.html" class="nav-link"></a></li>
-                    <li class="nav-item"><a href="about.html" class="nav-link">{{t_lis[1]}}</a></li>
+                    <li class="nav-item active"><a href="user_home.html" class="nav-link">{{t_lis[58]}}</a></li>
+                    <li class="nav-item"><a href="wheather.html" class="nav-link">{{t_lis[1]}}</a></li>
                     <li class="nav-item"><a href="work.html" class="nav-link">{{t_lis[2]}}</a></li>
                     <li class="nav-item"><a href="blog.html" class="nav-link">{{t_lis[3]}}</a></li>
                     <li class="nav-item"><a href="contact.html" class="nav-link">{{t_lis[4]}}</a></li>
+
                 </ul>
             </div>
         </div>
@@ -59,9 +87,10 @@
                     <div class="row no-gutters slider-text js-fullheight align-items-center">
                         <div class="col-md-6 ftco-animate">
                             <div class="text">
-                                <h1 class="mb-4 navbar-brand">{{t_lis[5]}}<span
+                                <h1 class="mb-4 navbar-brand" style="font-weight: 500; font-family:Georgia, 'Times New Roman', Times, serif;">{{t_lis[5]}}<span
                                         style="color:#d1002c; display:inline-block;">{{t_lis[6]}}</span></h1>
                                 <p style="color: white;"><strong>{{t_lis[7]}}</strong></p>
+
                             </div>
                         </div>
                         <div class="col-lg-6 ftco-animate" style="position: relative; left:1px;">
@@ -71,7 +100,7 @@
                                     <div class="col-md-3">
                                         <a href="#">
                                             <img src="../static/images/edited_vali4.png"
-                                                style="border-radius: 50%; width: 150px; height: 150px;" alt="">
+                                                style="border-radius: 50%; width: 150px; height: 150px;" onclick="openNav()" alt="">
                                         </a>
                                     </div>
                                     <div style="position: relative; margin-left:150px;">
@@ -92,7 +121,7 @@
                     <div class="row no-gutters slider-text js-fullheight align-items-center">
                         <div class="col-md-6 ftco-animate">
                             <div class="text">
-                                <h1 class="mb-4 navbar-brand">{{t_lis[5]}}<span
+                                <h1 class="mb-4 navbar-brand" style="font-weight: 500; font-family:Georgia, 'Times New Roman', Times, serif;">{{t_lis[5]}}<span
                                         style="color:#d1002c; display:inline-block;">{{t_lis[6]}}</span></h1>
                                 <p style="color: white;"><strong>{{t_lis[7]}}</strong></p>
                             </div>
@@ -104,7 +133,7 @@
                                     <div class="col-md-3">
                                         <a href="#">
                                             <img src="../static/images/edited_vali4.png"
-                                                style="border-radius: 50%; width: 150px; height: 150px;" alt="">
+                                                style="border-radius: 50%; width: 150px; height: 150px;" onclick="openNav()" alt="">
                                         </a>
                                     </div>
                                     <div style="position: relative; margin-left:150px;">
@@ -123,7 +152,7 @@
                     <div class="row no-gutters slider-text js-fullheight align-items-center">
                         <div class="col-md-6 ftco-animate">
                             <div class="text">
-                                <h1 class="mb-4 navbar-brand">{{t_lis[5]}}<span
+                                <h1 class="mb-4 navbar-brand" style="font-weight: 500; font-family:Georgia, 'Times New Roman', Times, serif;">{{t_lis[5]}}<span
                                         style="color:#d1002c; display:inline-block;">{{t_lis[6]}}</span></h1>
                                 <p style="color: #fff;"><strong>{{t_lis[7]}}</strong></p>
                             </div>
@@ -135,7 +164,7 @@
                                     <div class="col-md-3">
                                         <a href="#">
                                             <img src="../static/images/edited_vali4.png"
-                                                style="border-radius: 50%; width: 150px; height: 150px;" alt="">
+                                                style="border-radius: 50%; width: 150px; height: 150px;" onclick="openNav()" alt="">
                                         </a>
                                     </div>
                                     <div style="position: relative; margin-left:150px;">
@@ -230,6 +259,8 @@
     </section>
     <!-- Main features to be shown ended -->
 
+
+    <!-- =============================================================================================================== -->
 
     <!-- =============================================================================================================== -->
 
@@ -332,7 +363,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
                     <div class="media block-6 services d-block text-center">
                         <div class="d-flex justify-content-center">
@@ -351,6 +381,25 @@
     <!-- ending of yojnaassss -->
 
 
+    <!-- =========================================================================================================== -->
+
+
+    <!-- discussion -->
+    <section>
+        <div>
+            <h3 style="color:rgb(17, 36, 36)">HELPFUL LINKS FOR YOU!!</h3>
+            <a href="https://krishijagran.com/agriculture-world/pm-kisan-samman-nidhi-yojana-direct-online-link-application-form-important-documents-eligibility-criteria/"
+                target="_blank">Click here
+                to associate with <strong>PM-KISAN-SAMMAN-NIDHI-YOJANA</strong></a>
+        </div>
+        <div>
+            <a href="https://kisansamadhan.com/central-government-schemes/ " target="_blank">Click here to know all details
+                of
+                <strong>CENTRAL-GOVERNMENT-SCHEMES</strong></a>
+        </div>
+    </section>
+
+
     <!-- ============================================================================================================ -->
 
 
@@ -360,8 +409,14 @@
             <div class="row mb-5">
                 <div class="col-md">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">{{t_lis[39]}}</h2>
-                        <p>{{t_lis[40]}}</p>
+
+                        <h2 class="ftco-heading-2">DEVELOPERS</h2>
+                        <p><strong style="color:#d1002c;"> PRO-CODERS</strong>
+                        <div>Aaditya Singhal </div>
+                        <div>Abhay Dhiman </div>
+                        <div>Ayush Malik </div>
+                        <div>Akshita Sharma </div>
+                        </p>
                         <ul class="ftco-footer-social list-unstyled float-md-left float-lft">
                             <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
                             <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
@@ -384,13 +439,19 @@
                 </div>
                 <div class="col-md">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">{{t_lis[48]}}</h2>
+
+                        <h2 class="ftco-heading-2">CONTACT</h2>
                         <ul class="list-unstyled">
-                            <li><a href="#" class="py-2 d-block">{{t_lis[49]}}</a>
+                            <li><a href="#" class="py-2 d-block " style=" color: #d1002c ;">Aaditya Singhal -<a
+                                        href=" https://github.com/Aaditya1978">https://github.com/Aaditya1978</a></a>
                             </li>
-                            <li><a href="#" class="py-2 d-block">{{t_lis[50]}}</a></li>
-                            <li><a href="#" class="py-2 d-block">{{t_lis[51]}}</a></li>
-                            <li><a href="#" class="py-2 d-block">{{t_lis[52]}}</a></li>
+                            <li><a href="#" class="py-2 d-block" style=" color: #d1002c;">Abhay Dhiman -<a
+                                        href="  https://github.com/abhaydhiman"> https://github.com/abhaydhiman</a></a></li>
+                            <li><a href="#" class="py-2 d-block" style=" color: #d1002c;">Ayush Malik -<a
+                                        href="https://github.com/Ayush-Malik ">https://github.com/Ayush-Malik</a></a></li>
+                            <li><a href="#" class="py-2 d-block" style=" color: #d1002c;">Akshita Sharma - <a
+                                        href="https://github.com/akshita-sharma8609 ">https://github.com/akshita-sharma8609</a></a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -398,6 +459,7 @@
                     <div class="ftco-footer-widget mb-4">
                         <h2 class="ftco-heading-2">{{t_lis[53]}}</h2>
                         <p>{{t_lis[54]}}</p>
+
                         <form action="#" class="subscribe-form">
                             <div class="form-group">
                                 <span class="icon icon-paper-plane"></span>
@@ -412,9 +474,11 @@
 
                     <p>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        {{t_lis[55]}} &copy;
-                        <script>document.write(new Date().getFullYear());</script> {{t_lis[56]}} <i class="icon-heart" aria-hidden="true"></i> <a href="https://colorlib.com"
-                            target="_blank">{{t_lis[57]}}</a>
+
+                        Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This template
+                        is made <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
+                            target="_blank"> &nbsp; PRO-CODERS</a>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </p>
                 </div>
@@ -455,6 +519,15 @@
     <script src="..\static\js\google-map.js"></script>
     <script src="..\static\js\main.js"></script>
 
+    <script>
+        function openNav() {
+            document.getElementById("myNav").style.width = "100%";
+        }
+
+        function closeNav() {
+            document.getElementById("myNav").style.width = "0%";
+        }
+    </script>
 
 </body>
 

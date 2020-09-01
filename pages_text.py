@@ -24,5 +24,5 @@ def user_home_text():
     live the blind texts.", "Quick Links", "Home","About","Services","Portfolio","Contact","Privacy",
     "Contact Information", "198 West 21th Street, Suite 721 New York NY 10016", "+ 1235 2355 98","info@yoursite.com","email@email.com",
     "Newsletter","Far far away, behind the word mountains, far from the countries.","Copyright"," All rights reserved | This template is made with",
-    "Colorlib"]
+    "Colorlib","Home"]
     return text_lis
