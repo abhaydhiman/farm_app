@@ -24,6 +24,33 @@
     <!-- ============================================================================================================= -->
 
 
+    <!-- Profile Section Started -->
+    <div id="myNav" class="overlay">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><<</a>
+        <div class="container mt-5 pt-5">
+            <div class="row mt-5 pt-5">
+                <div class="col-md-6 col-lg-6 ftco-animate">
+                    <img src="../static/images/edited_vali4.png" class="profileimage" alt="">
+                </div>
+                <div class="col-md-6 col-lg-6 ftco-animate">
+                    <div class="overlay-content ml-1 pl-1">
+                        <p>Name - ooiiii</p>
+                        <p>Number - 1234567890</p>
+                        <p>Status - Farmer</p>
+                        <p>Primary language - english</p>
+                        <p>Location - Ambala, Haryana</p>
+                        <a href="profile.html">Edit Profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Profile Section Ended -->
+
+
+    <!-- ============================================================================================================= -->
+
+
     <!-- navbar started -->
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
@@ -32,11 +59,10 @@
                 aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Menu
             </button>
-
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
+                    <li class="nav-item"><a href="about.html" class="nav-link">weather</a></li>
                     <li class="nav-item"><a href="work.html" class="nav-link">Work</a></li>
                     <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
                     <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
@@ -59,7 +85,7 @@
                     <div class="row no-gutters slider-text js-fullheight align-items-center">
                         <div class="col-md-6 ftco-animate">
                             <div class="text">
-                                <h1 class="mb-4 navbar-brand">Kisan<span
+                                <h1 class="mb-4 navbar-brand" style="font-weight: 500; font-family:Georgia, 'Times New Roman', Times, serif;">Kisan<span
                                         style="color:#d1002c; display:inline-block;">Tech</span></h1>
                                 <p style="color: white;"><strong>WELL ROOTED TO NATURE.</strong></p>
                             </div>
@@ -71,7 +97,7 @@
                                     <div class="col-md-3">
                                         <a href="#">
                                             <img src="../static/images/edited_vali4.png"
-                                                style="border-radius: 50%; width: 150px; height: 150px;" alt="">
+                                                style="border-radius: 50%; width: 150px; height: 150px;" onclick="openNav()" alt="">
                                         </a>
                                     </div>
                                     <div style="position: relative; margin-left:150px;">
@@ -92,7 +118,7 @@
                     <div class="row no-gutters slider-text js-fullheight align-items-center">
                         <div class="col-md-6 ftco-animate">
                             <div class="text">
-                                <h1 class="mb-4 navbar-brand">Kisan<span
+                                <h1 class="mb-4 navbar-brand" style="font-weight: 500; font-family:Georgia, 'Times New Roman', Times, serif;">Kisan<span
                                         style="color:#d1002c; display:inline-block;">Tech</span></h1>
                                 <p style="color: white;"><strong>WELL ROOTED TO NATURE.</strong></p>
                             </div>
@@ -104,7 +130,7 @@
                                     <div class="col-md-3">
                                         <a href="#">
                                             <img src="../static/images/edited_vali4.png"
-                                                style="border-radius: 50%; width: 150px; height: 150px;" alt="">
+                                                style="border-radius: 50%; width: 150px; height: 150px;" onclick="openNav()" alt="">
                                         </a>
                                     </div>
                                     <div style="position: relative; margin-left:150px;">
@@ -123,7 +149,7 @@
                     <div class="row no-gutters slider-text js-fullheight align-items-center">
                         <div class="col-md-6 ftco-animate">
                             <div class="text">
-                                <h1 class="mb-4 navbar-brand">Kisan<span
+                                <h1 class="mb-4 navbar-brand" style="font-weight: 500; font-family:Georgia, 'Times New Roman', Times, serif;">Kisan<span
                                         style="color:#d1002c; display:inline-block;">Tech</span></h1>
                                 <p style="color: #fff;"><strong>WELL ROOTED TO NATURE.</strong></p>
                             </div>
@@ -135,7 +161,7 @@
                                     <div class="col-md-3">
                                         <a href="#">
                                             <img src="../static/images/edited_vali4.png"
-                                                style="border-radius: 50%; width: 150px; height: 150px;" alt="">
+                                                style="border-radius: 50%; width: 150px; height: 150px;" onclick="openNav()" alt="">
                                         </a>
                                     </div>
                                     <div style="position: relative; margin-left:150px;">
@@ -502,6 +528,16 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
     <script src="..\static\js\google-map.js"></script>
     <script src="..\static\js\main.js"></script>
+
+    <script>
+        function openNav() {
+            document.getElementById("myNav").style.width = "100%";
+        }
+
+        function closeNav() {
+            document.getElementById("myNav").style.width = "0%";
+        }
+    </script>
 
 
 </body>
