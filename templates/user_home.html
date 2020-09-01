@@ -30,16 +30,16 @@
             <a class="navbar-brand" href="home.html">The<span>F</span>armer</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                 aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="oi oi-menu"></span> Menu
+                <span class="oi oi-menu"></span> {{t_lis[0]}}
             </button>
 
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="about.html" class="nav-link">About</a></li>
-                    <li class="nav-item"><a href="work.html" class="nav-link">Work</a></li>
-                    <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-                    <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                    <li class="nav-item active"><a href="index.html" class="nav-link"></a></li>
+                    <li class="nav-item"><a href="about.html" class="nav-link">{{t_lis[1]}}</a></li>
+                    <li class="nav-item"><a href="work.html" class="nav-link">{{t_lis[2]}}</a></li>
+                    <li class="nav-item"><a href="blog.html" class="nav-link">{{t_lis[3]}}</a></li>
+                    <li class="nav-item"><a href="contact.html" class="nav-link">{{t_lis[4]}}</a></li>
                 </ul>
             </div>
         </div>
@@ -59,9 +59,9 @@
                     <div class="row no-gutters slider-text js-fullheight align-items-center">
                         <div class="col-md-6 ftco-animate">
                             <div class="text">
-                                <h1 class="mb-4 navbar-brand">Kisan<span
-                                        style="color:#d1002c; display:inline-block;">Tech</span></h1>
-                                <p style="color: white;"><strong>WELL ROOTED TO NATURE.</strong></p>
+                                <h1 class="mb-4 navbar-brand">{{t_lis[5]}}<span
+                                        style="color:#d1002c; display:inline-block;">{{t_lis[6]}}</span></h1>
+                                <p style="color: white;"><strong>{{t_lis[7]}}</strong></p>
                             </div>
                         </div>
                         <div class="col-lg-6 ftco-animate" style="position: relative; left:1px;">
@@ -75,9 +75,9 @@
                                         </a>
                                     </div>
                                     <div style="position: relative; margin-left:150px;">
-                                        <h2 class="navbar-brand">Name-<span
-                                                style="color:#d1002c; display:inline-block;">ooiiii</span></h2>
-                                        <p>number - 1234567890</p>
+                                        <h2 class="navbar-brand">{{t_lis[8]}}-<span
+                                                style="color:#d1002c; display:inline-block;">{{name}}</span></h2>
+                                        <p>{{t_lis[9]}} - {{phone_number}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -92,9 +92,9 @@
                     <div class="row no-gutters slider-text js-fullheight align-items-center">
                         <div class="col-md-6 ftco-animate">
                             <div class="text">
-                                <h1 class="mb-4 navbar-brand">Kisan<span
-                                        style="color:#d1002c; display:inline-block;">Tech</span></h1>
-                                <p style="color: white;"><strong>WELL ROOTED TO NATURE.</strong></p>
+                                <h1 class="mb-4 navbar-brand">{{t_lis[5]}}<span
+                                        style="color:#d1002c; display:inline-block;">{{t_lis[6]}}</span></h1>
+                                <p style="color: white;"><strong>{{t_lis[7]}}</strong></p>
                             </div>
                         </div>
                         <div class="col-lg-6 ftco-animate" style="position: relative; left:1px;">
@@ -108,8 +108,8 @@
                                         </a>
                                     </div>
                                     <div style="position: relative; margin-left:150px;">
-                                        <h2>Name - ooiiii</h3>
-                                            <p>Number - 1234567890</p>
+                                        <h2>{{t_lis[8]}} - {{name}}</h3>
+                                            <p>{{t_lis[9]}} - {{phone_number}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -123,9 +123,9 @@
                     <div class="row no-gutters slider-text js-fullheight align-items-center">
                         <div class="col-md-6 ftco-animate">
                             <div class="text">
-                                <h1 class="mb-4 navbar-brand">Kisan<span
-                                        style="color:#d1002c; display:inline-block;">Tech</span></h1>
-                                <p style="color: #fff;"><strong>WELL ROOTED TO NATURE.</strong></p>
+                                <h1 class="mb-4 navbar-brand">{{t_lis[5]}}<span
+                                        style="color:#d1002c; display:inline-block;">{{t_lis[6]}}</span></h1>
+                                <p style="color: #fff;"><strong>{{t_lis[7]}}</strong></p>
                             </div>
                         </div>
                         <div class="col-lg-6 ftco-animate" style="position: relative; left:1px;">
@@ -139,8 +139,8 @@
                                         </a>
                                     </div>
                                     <div style="position: relative; margin-left:150px;">
-                                        <h2>Name - ooiiii</h3>
-                                            <p>Number - 1234567890</p>
+                                        <h2>{{t_lis[8]}} - {{name}}</h3>
+                                            <p>{{t_lis[9]}} - {{phone_number}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -161,9 +161,8 @@
         <div class="container">
             <div class="row justify-content-center mb-0 pb-0 mt-5 pt-5">
                 <div class="col-md-7 text-center heading-section ftco-animate">
-                    <h2 class="myheading"> OUR SPECIAL FEATURES </h2>
-                    <span class="subheading">HERE YOU WILL GET THE INFORMATION OF WEATHER OF YOUR LOCATION, FINANCIAL
-                        HELP AND FERTILIZERS SUITABLE FOR YOUR CROPS!!
+                    <h2 class="myheading"> {{t_lis[10]}} </h2>
+                    <span class="subheading">{{t_lis[11]}}
                     </span>
                 </div>
             </div>
@@ -187,12 +186,11 @@
                             </a>
                             <div class="text p-4 d-block">
                                 <div class="meta mb-3">
-                                    <div><a href="#">WEATHER FORECAST</a></div>
+                                    <div><a href="#">{{t_lis[12]}}</a></div>
                                     <div><a href="#"></a></div>
                                     <div><a href="#" class="meta-chat"><span class="icon-cloud"></span></a></div>
                                 </div>
-                                <h3 class="heading"><a href="#">click here to know the climatic changes for the next
-                                        seven days.</a></h3>
+                                <h3 class="heading"><a href="#">{{t_lis[13]}}</a></h3>
                             </div>
                         </div>
                     </div>
@@ -203,12 +201,11 @@
                             </a>
                             <div class="text p-4">
                                 <div class="meta mb-3">
-                                    <div><a href="#">Financial help</a></div>
+                                    <div><a href="#">{{t_lis[14]}}</a></div>
                                     <div><a href="#"></a></div>
                                     <div><a href="#" class="meta-chat"><span class="icon-inr"></span></a></div>
                                 </div>
-                                <h3 class="heading"><a href="#">Click here to get the benifit of amazing loan and
-                                        insurance offers.</a></h3>
+                                <h3 class="heading"><a href="#">{{t_lis[15]}}</a></h3>
                             </div>
                         </div>
                     </div>
@@ -219,12 +216,11 @@
                             </a>
                             <div class="text p-4">
                                 <div class="meta mb-3">
-                                    <div><a href="#">Shop now</a></div>
+                                    <div><a href="#">{{t_lis[16]}}</a></div>
                                     <div><a href="#"></a></div>
                                     <div><a href="#" class="meta-chat"><span class="icon-institution"></span></a></div>
                                 </div>
-                                <h3 class="heading"><a href="#">Click here to get the appropriate materials for
-                                        your crop at best price.</a></h3>
+                                <h3 class="heading"><a href="#">{{t_lis[17]}}</a></h3>
                             </div>
                         </div>
                     </div>
@@ -243,8 +239,8 @@
         <div class="container-fluid">
             <div class="row no-gutters justify-content-center mb-5 pb-5">
                 <div class="col-md-7 text-center heading-section ftco-animate">
-                    <span class="subheading">Videos</span>
-                    <h2 class="myheading">INFORMATIVE VIDEOS FOR YOU</h2>
+                    <span class="subheading">{{t_lis[18]}}</span>
+                    <h2 class="myheading">{{t_lis[19]}}</h2>
                 </div>
             </div>
             <div class="row no-gutters">
@@ -253,12 +249,10 @@
                         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
                     <div class="text">
-                        <h4 class="subheading">Illustration</h4>
-                        <h2 class="heading"><a href="portfolio.html">Even the all-powerful Pointing has no control</a>
+                        <h4 class="subheading">{{t_lis[20]}}</h4>
+                        <h2 class="heading"><a href="portfolio.html">{{t_lis[21]}}</a>
                         </h2>
-                        <p>Even the all-powerful Pointing has no control about the blind texts it is an almost
-                            unorthographic life One day however a small line of blind text by the name of Lorem Ipsum
-                            decided to leave for the far World of Grammar.</p>
+                        <p>{{t_lis[22]}}</p>
                     </div>
                 </div>
                 <div class="block-3 d-md-flex ftco-animate">
@@ -266,12 +260,10 @@
                         frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
                     <div class="text order-1">
-                        <h4 class="subheading">Application</h4>
-                        <h2 class="heading"><a href="portfolio.html">Even the all-powerful Pointing has no control</a>
+                        <h4 class="subheading">{{t_lis[23]}}</h4>
+                        <h2 class="heading"><a href="portfolio.html">{{t_lis[24]}}</a>
                         </h2>
-                        <p>Even the all-powerful Pointing has no control about the blind texts it is an almost
-                            unorthographic life One day however a small line of blind text by the name of Lorem Ipsum
-                            decided to leave for the far World of Grammar.</p>
+                        <p>{{t_lis[25]}}</p>
                     </div>
                 </div>
                 <div class="block-3 d-md-flex ftco-animate">
@@ -279,12 +271,10 @@
                         allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
                     <div class="text">
-                        <h4 class="subheading">Web Design</h4>
-                        <h2 class="heading"><a href="portfolio.html">Even the all-powerful Pointing has no control</a>
+                        <h4 class="subheading">{{t_lis[26]}}</h4>
+                        <h2 class="heading"><a href="portfolio.html">{{t_lis[27]}}</a>
                         </h2>
-                        <p>Even the all-powerful Pointing has no control about the blind texts it is an almost
-                            unorthographic life One day however a small line of blind text by the name of Lorem Ipsum
-                            decided to leave for the far World of Grammar.</p>
+                        <p>{{t_lis[28]}}</p>
                     </div>
                 </div>
             </div>
@@ -301,8 +291,8 @@
         <div class="container">
             <div class="row justify-content-center mb-5 pb-5">
                 <div class="col-md-7 text-center heading-section ftco-animate">
-                    <p class="myheading">THANKS FOR YOUR VISIT</p>
-                    <p class="subheading">HERE WE HAVE MORE FEATURES FOR YOU!!</p>
+                    <p class="myheading">{{t_lis[29]}}</p>
+                    <p class="subheading">{{t_lis[30]}}</p>
                 </div>
             </div>
             <div class="row">
@@ -313,9 +303,8 @@
                                     class="align-self-center icon-layers"></span></div>
                         </div>
                         <div class="media-body p-2">
-                            <h3 class="heading">Financial Help</h3>
-                            <p>Click here for financial support. "A good financial plan is a roadmap that shows us
-                                exactly how the choices we make today will affect our future."</p>
+                            <h3 class="heading">{{t_lis[31]}}</h3>
+                            <p>{{t_lis[32]}}</p>
                         </div>
                     </div>
                 </div>
@@ -326,9 +315,8 @@
                                     class="align-self-center icon-gears"></span></div>
                         </div>
                         <div class="media-body p-2">
-                            <h3 class="heading">Multiple Functions</h3>
-                            <p>Even the all-powerful Pointing has no control about the blind texts it is an almost
-                                unorthographic.</p>
+                            <h3 class="heading">{{t_lis[33]}}</h3>
+                            <p>{{t_lis[34]}}</p>
                         </div>
                     </div>
                 </div>
@@ -339,9 +327,8 @@
                                     class="align-self-center icon-paper-plane"></span></div>
                         </div>
                         <div class="media-body p-2">
-                            <h3 class="heading">Advanced Visualizations</h3>
-                            <p>Even the all-powerful Pointing has no control about the blind texts it is an almost
-                                unorthographic.</p>
+                            <h3 class="heading">{{t_lis[35]}}</h3>
+                            <p>{{t_lis[36]}}</p>
                         </div>
                     </div>
                 </div>
@@ -353,9 +340,8 @@
                                     class="align-self-center icon-live_help"></span></div>
                         </div>
                         <div class="media-body p-2">
-                            <h3 class="heading">Community &amp; Supports</h3>
-                            <p>Even the all-powerful Pointing has no control about the blind texts it is an almost
-                                unorthographic.</p>
+                            <h3 class="heading">{{t_lis[37]}}</h3>
+                            <p>{{t_lis[38]}}</p>
                         </div>
                     </div>
                 </div>
@@ -374,10 +360,8 @@
             <div class="row mb-5">
                 <div class="col-md">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Company</h2>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
-                            there
-                            live the blind texts.</p>
+                        <h2 class="ftco-heading-2">{{t_lis[39]}}</h2>
+                        <p>{{t_lis[40]}}</p>
                         <ul class="ftco-footer-social list-unstyled float-md-left float-lft">
                             <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
                             <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
@@ -387,33 +371,33 @@
                 </div>
                 <div class="col-md">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Quick Links</h2>
+                        <h2 class="ftco-heading-2">{{t_lis[41]}}</h2>
                         <ul class="list-unstyled">
-                            <li><a href="#" class="py-2 d-block">Home</a></li>
-                            <li><a href="#" class="py-2 d-block">About</a></li>
-                            <li><a href="#" class="py-2 d-block">Services</a></li>
-                            <li><a href="#" class="py-2 d-block">Portfolio</a></li>
-                            <li><a href="#" class="py-2 d-block">Contact</a></li>
-                            <li><a href="#" class="py-2 d-block">Privacy</a></li>
+                            <li><a href="#" class="py-2 d-block">{{t_lis[42]}}</a></li>
+                            <li><a href="#" class="py-2 d-block">{{t_lis[43]}}</a></li>
+                            <li><a href="#" class="py-2 d-block">{{t_lis[44]}}</a></li>
+                            <li><a href="#" class="py-2 d-block">{{t_lis[45]}}</a></li>
+                            <li><a href="#" class="py-2 d-block">{{t_lis[46]}}</a></li>
+                            <li><a href="#" class="py-2 d-block">{{t_lis[47]}}</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-md">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Contact Information</h2>
+                        <h2 class="ftco-heading-2">{{t_lis[48]}}</h2>
                         <ul class="list-unstyled">
-                            <li><a href="#" class="py-2 d-block">198 West 21th Street, Suite 721 New York NY 10016</a>
+                            <li><a href="#" class="py-2 d-block">{{t_lis[49]}}</a>
                             </li>
-                            <li><a href="#" class="py-2 d-block">+ 1235 2355 98</a></li>
-                            <li><a href="#" class="py-2 d-block">info@yoursite.com</a></li>
-                            <li><a href="#" class="py-2 d-block">email@email.com</a></li>
+                            <li><a href="#" class="py-2 d-block">{{t_lis[50]}}</a></li>
+                            <li><a href="#" class="py-2 d-block">{{t_lis[51]}}</a></li>
+                            <li><a href="#" class="py-2 d-block">{{t_lis[52]}}</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-md">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Newsletter</h2>
-                        <p>Far far away, behind the word mountains, far from the countries.</p>
+                        <h2 class="ftco-heading-2">{{t_lis[53]}}</h2>
+                        <p>{{t_lis[54]}}</p>
                         <form action="#" class="subscribe-form">
                             <div class="form-group">
                                 <span class="icon icon-paper-plane"></span>
@@ -428,11 +412,9 @@
 
                     <p>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;
-                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This template
-                        is
-                        made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
-                            target="_blank">Colorlib</a>
+                        {{t_lis[55]}} &copy;
+                        <script>document.write(new Date().getFullYear());</script> {{t_lis[56]}} <i class="icon-heart" aria-hidden="true"></i> <a href="https://colorlib.com"
+                            target="_blank">{{t_lis[57]}}</a>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </p>
                 </div>
