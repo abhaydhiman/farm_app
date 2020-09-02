@@ -8,77 +8,107 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>KisanTech</title>
 
+
     <!-- links -->
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{% static 'css/animate.css' %}">
-    <link rel="stylesheet" href="{% static 'css/owl.theme.default.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
-
-    <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/flaticon.css' %}">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-
-
-
-            <link rel="stylesheet" href="{% static 'css/icomoon.css' %}">
-            <!-- <link rel="stylesheet" href="/../racks/css/style.css"> -->
+    <link rel="stylesheet" href="{% static 'css\animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css\owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css\magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css\owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css\flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css\style.css' %}">
+    <link rel="stylesheet" href="{% static 'css\icomoon.css' %}">
 </head>
 
 <body>
-
+    <!-- ============================================================================================================= -->
+    
+    
+    <!-- Profile Section Started -->
+    <div id="myNav" class="overlay">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()"><<
+            </a>
+                <div class="container mt-5 pt-5">
+                    <div class="row mt-5 pt-5">
+                        <div class="col-md-6 col-lg-6 ftco-animate">
+                            <img src="{% static 'images/edited_vali4.png' %}" class="profileimage" alt="">
+                        </div>
+                        <div class="col-md-6 col-lg-6 ftco-animate">
+                            <div class="overlay-content ml-1 pl-1">
+                                <p>Name - ooiiii</p>
+                                <p>Number - 1234567890</p>
+                                <p>Status - Farmer</p>
+                                <p>Primary language - english</p>
+                                <p>Location - Ambala, Haryana</p>
+                                <a href="profile.html">Edit Profile</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </div>
+    <!-- Profile Section Ended -->
+    
+    
+    <!-- ============================================================================================================= -->
+    
+    
+    <!-- navbar started -->
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
         <div class="container">
             <a class="navbar-brand" href="home.html">The<span>F</span>armer</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+                aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> Menu
+            </button>
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="about.html" class="nav-link">weather</a></li>
+                    <li class="nav-item"><a href="work.html" class="nav-link">Work</a></li>
+                    <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
+                    <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+            </div>
+        </div>
     </nav>
     <!-- ended navbar -->
-
-
+    
+    
+    <!-- ============================================================================================================= -->
+    
+    
+    <!-- Started carousel -->
     <section class="hero-wrap degree-right js-fullheight">
         <div class="home-slider js-fullheight owl-carousel">
-            <div class="slider-item js-fullheight"
-                style="background-image:url({% static 'images/b1.jpg' %});">
+            <div class="slider-item js-fullheight" style="background-image:url({% static 'images/background1.jpg' %});">
                 <div class="overlay"></div>
                 <div class="container">
                     <div class="row no-gutters slider-text js-fullheight align-items-center">
                         <div class="col-md-6 ftco-animate">
                             <div class="text">
-                                <h1 class="mb-4">KisanTech</h1>
+                                <h1 class="mb-4 navbar-brand"
+                                    style="font-weight: 500; font-family:Georgia, 'Times New Roman', Times, serif;">
+                                    Kisan<span style="color:#d1002c; display:inline-block;">Tech</span></h1>
                                 <p style="color: white;"><strong>WELL ROOTED TO NATURE.</strong></p>
-                                <!-- <p class="mb-0"><a href="#" class="btn btn-primary py-md-3 py-2 px-2 px-md-4">Done</a></p> -->
                             </div>
-                            <!-- <div class="container">
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <div class="btn-group">
-                                            <button>English</button>
-                                            <button>Hindi</button>
-                                            <button>Punjabi</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <div class="btn-group">
-                                            <button>Marathi</button>
-                                            <button>Telugu</button>
-                                            <button>Haryanvi</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
                         </div>
                         <div class="col-lg-6 ftco-animate" style="position: relative; left:1px;">
                             <div class="container">
                                 <div class="row">
                                     <div class="col-md-3"><br></div>
                                     <div class="col-md-3">
-                                        <img src="{% static 'images/user dp.jpg' %}" style="border-radius: 50%; width: 200px; height: 200px;" alt="">
+                                        <a href="#">
+                                            <img src="{% static 'images/edited_vali4.png' %}"
+                                                style="border-radius: 50%; width: 150px; height: 150px;" onclick="openNav()"
+                                                alt="">
+                                        </a>
                                     </div>
                                     <div style="position: relative; margin-left:150px;">
-                                        <h2>Name - ooiiii</h3>
-                                            <p><strong>number - 1234567890</strong></p>
+                                        <h2 class="navbar-brand">Name-<span
+                                                style="color:#d1002c; display:inline-block;">ooiiii</span></h2>
+                                        <p>number - 1234567890</p>
                                     </div>
                                 </div>
                             </div>
@@ -86,49 +116,32 @@
                     </div>
                 </div>
             </div>
-            <div class="slider-item js-fullheight"
-                style="background-image:url({% static 'images/background.jpg' %});">
+            <div class="slider-item js-fullheight" style="background-image:url({% static 'images/edited_vali2.jpg' %});">
                 <div class="overlay"></div>
                 <div class="container">
                     <div class="row no-gutters slider-text js-fullheight align-items-center">
                         <div class="col-md-6 ftco-animate">
                             <div class="text">
-                                <h1 class="mb-4">KisanTech</h1>
+                                <h1 class="mb-4 navbar-brand"
+                                    style="font-weight: 500; font-family:Georgia, 'Times New Roman', Times, serif;">
+                                    Kisan<span style="color:#d1002c; display:inline-block;">Tech</span></h1>
                                 <p style="color: white;"><strong>WELL ROOTED TO NATURE.</strong></p>
-                                <!-- <p class="mb-0"><a href="#" class="btn btn-primary py-md-3 py-2 px-2 px-md-4">Done</a></p> -->
                             </div>
-                            <!-- <div class="container">
-                                            <div class="row">
-                                                <div class="col-md-2">
-                                                    <div class="btn-group">
-                                                        <button>English</button>
-                                                        <button>Hindi</button>
-                                                        <button>Punjabi</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-2">
-                                                    <div class="btn-group">
-                                                        <button>Marathi</button>
-                                                        <button>Telugu</button>
-                                                        <button>Haryanvi</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> -->
                         </div>
                         <div class="col-lg-6 ftco-animate" style="position: relative; left:1px;">
                             <div class="container">
                                 <div class="row">
                                     <div class="col-md-3"><br></div>
                                     <div class="col-md-3">
-                                        <img src="{% static 'images/user dp.jpg' %}"
-                                            style="border-radius: 50%; width: 200px; height: 200px;" alt="">
+                                        <a href="#">
+                                            <img src="{% static 'images/edited_vali4.png' %}"
+                                                style="border-radius: 50%; width: 150px; height: 150px;" onclick="openNav()"
+                                                alt="">
+                                        </a>
                                     </div>
                                     <div style="position: relative; margin-left:150px;">
                                         <h2>Name - ooiiii</h3>
-                                            <p><strong>number - 1234567890</strong></p>
+                                            <p>Number - 1234567890</p>
                                     </div>
                                 </div>
                             </div>
@@ -136,48 +149,32 @@
                     </div>
                 </div>
             </div>
-            <div class="slider-item js-fullheight" style="background-image:url({% static 'images/back3.jpg' %});">
+            <div class="slider-item js-fullheight" style="background-image:url({% static 'images/Bg.jpg' %});">
                 <div class="overlay"></div>
                 <div class="container">
                     <div class="row no-gutters slider-text js-fullheight align-items-center">
                         <div class="col-md-6 ftco-animate">
                             <div class="text">
-                                <h1 class="mb-4">KisanTech</h1>
-                                <p style="color: white;"><strong>WELL ROOTED TO NATURE.</strong></p>
-                                <!-- <p class="mb-0"><a href="#" class="btn btn-primary py-md-3 py-2 px-2 px-md-4">Done</a></p> -->
+                                <h1 class="mb-4 navbar-brand"
+                                    style="font-weight: 500; font-family:Georgia, 'Times New Roman', Times, serif;">
+                                    Kisan<span style="color:#d1002c; display:inline-block;">Tech</span></h1>
+                                <p style="color: #fff;"><strong>WELL ROOTED TO NATURE.</strong></p>
                             </div>
-                            <!-- <div class="container">
-                                                        <div class="row">
-                                                            <div class="col-md-2">
-                                                                <div class="btn-group">
-                                                                    <button>English</button>
-                                                                    <button>Hindi</button>
-                                                                    <button>Punjabi</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row">
-                                                            <div class="col-md-2">
-                                                                <div class="btn-group">
-                                                                    <button>Marathi</button>
-                                                                    <button>Telugu</button>
-                                                                    <button>Haryanvi</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div> -->
                         </div>
                         <div class="col-lg-6 ftco-animate" style="position: relative; left:1px;">
                             <div class="container">
                                 <div class="row">
                                     <div class="col-md-3"><br></div>
                                     <div class="col-md-3">
-                                        <img src="{% static 'images/user dp.jpg' %}"
-                                            style="border-radius: 50%; width: 200px; height: 200px;" alt="">
+                                        <a href="#">
+                                            <img src="{% static 'images/edited_vali4.png' %}"
+                                                style="border-radius: 50%; width: 150px; height: 150px;" onclick="openNav()"
+                                                alt="">
+                                        </a>
                                     </div>
                                     <div style="position: relative; margin-left:150px;">
                                         <h2>Name - ooiiii</h3>
-                                            <p><strong>number - 1234567890</strong></p>
+                                            <p>Number - 1234567890</p>
                                     </div>
                                 </div>
                             </div>
@@ -187,14 +184,159 @@
             </div>
         </div>
     </section>
-
-
+    <!-- carousel ended -->
+    
+    
+    <!-- =============================================================================================================== -->
+    
+    
+    <!-- Heading for main features -->
+    <section class="ftco-section-2 degree-right">
+        <div class="container">
+            <div class="row justify-content-center mb-0 pb-0 mt-5 pt-5">
+                <div class="col-md-7 text-center heading-section ftco-animate">
+                    <h2 class="myheading"> OUR SPECIAL FEATURES </h2>
+                    <span class="subheading">HERE YOU WILL GET THE INFORMATION OF WEATHER OF YOUR LOCATION, FINANCIAL
+                        HELP AND FERTILIZERS SUITABLE FOR YOUR CROPS!!
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Heading ended -->
+    
+    
+    <!-- =============================================================================================================== -->
+    
+    
+    <!-- Main features in cards -->
+    <section class="ftco-section-parallax degree-right">
+        <div class="parallax-img d-flex align-items-center">
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-4 ftco-animate">
+                        <div class="blog-entry-2">
+                            <a href="blog-single.html" class="block-20-1"
+                                style="background-image: url({% static 'images/weather2.jpg' %});">
+                            </a>
+                            <div class="text p-4 d-block">
+                                <div class="meta mb-3">
+                                    <div><a href="#">WEATHER FORECAST</a></div>
+                                    <div><a href="#"></a></div>
+                                    <div><a href="#" class="meta-chat"><span class="icon-cloud"></span></a></div>
+                                </div>
+                                <h3 class="heading"><a href="#">click here to know the climatic changes for the next
+                                        seven days.</a></h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 ftco-animate">
+                        <div class="blog-entry-2" data-aos-delay="100">
+                            <a href="blog-single.html" class="block-20-1"
+                                style="background-image: url({% static 'images/financial.jpeg' %});">
+                            </a>
+                            <div class="text p-4">
+                                <div class="meta mb-3">
+                                    <div><a href="#">Financial help</a></div>
+                                    <div><a href="#"></a></div>
+                                    <div><a href="#" class="meta-chat"><span class="icon-inr"></span></a></div>
+                                </div>
+                                <h3 class="heading"><a href="#">Click here to get the benifit of amazing loan and
+                                        insurance offers.</a></h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 ftco-animate">
+                        <div class="blog-entry-2" data-aos-delay="100">
+                            <a href="blog-single.html" class="block-20-1"
+                                style="background-image: url({% static 'images/fertilizer-1.jpg' %});">
+                            </a>
+                            <div class="text p-4">
+                                <div class="meta mb-3">
+                                    <div><a href="#">Shop now</a></div>
+                                    <div><a href="#"></a></div>
+                                    <div><a href="#" class="meta-chat"><span class="icon-institution"></span></a></div>
+                                </div>
+                                <h3 class="heading"><a href="#">Click here to get the appropriate materials for
+                                        your crop at best price.</a></h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Main features to be shown ended -->
+    
+    
+    <!-- =============================================================================================================== -->
+    
+    
+    <!-- Section where videos are added -->
+    <section class="ftco-section">
+        <div class="container-fluid">
+            <div class="row no-gutters justify-content-center mb-5 pb-5">
+                <div class="col-md-7 text-center heading-section ftco-animate">
+                    <span class="subheading">Videos</span>
+                    <h2 class="myheading">INFORMATIVE VIDEOS FOR YOU</h2>
+                </div>
+            </div>
+            <div class="row no-gutters">
+                <div class="block-3 d-md-flex ftco-animate">
+                    <iframe class="image" src="https://www.youtube-nocookie.com/embed/be-TpNWMCc8" frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                    <div class="text">
+                        <h4 class="subheading">Illustration</h4>
+                        <h2 class="heading"><a href="portfolio.html">Even the all-powerful Pointing has no control</a>
+                        </h2>
+                        <p>Even the all-powerful Pointing has no control about the blind texts it is an almost
+                            unorthographic life One day however a small line of blind text by the name of Lorem Ipsum
+                            decided to leave for the far World of Grammar.</p>
+                    </div>
+                </div>
+                <div class="block-3 d-md-flex ftco-animate">
+                    <iframe class="image order-2" src="https://www.youtube-nocookie.com/embed/be-TpNWMCc8" frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                    <div class="text order-1">
+                        <h4 class="subheading">Application</h4>
+                        <h2 class="heading"><a href="portfolio.html">Even the all-powerful Pointing has no control</a>
+                        </h2>
+                        <p>Even the all-powerful Pointing has no control about the blind texts it is an almost
+                            unorthographic life One day however a small line of blind text by the name of Lorem Ipsum
+                            decided to leave for the far World of Grammar.</p>
+                    </div>
+                </div>
+                <div class="block-3 d-md-flex ftco-animate">
+                    <iframe class="image" src="https://www.youtube-nocookie.com/embed/be-TpNWMCc8" frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                    <div class="text">
+                        <h4 class="subheading">Web Design</h4>
+                        <h2 class="heading"><a href="portfolio.html">Even the all-powerful Pointing has no control</a>
+                        </h2>
+                        <p>Even the all-powerful Pointing has no control about the blind texts it is an almost
+                            unorthographic life One day however a small line of blind text by the name of Lorem Ipsum
+                            decided to leave for the far World of Grammar.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Videos section ended -->
+    
+    
+    <!-- ============================================================================================================ -->
+    
+    
+    <!-- Thanks statement started, main yojnaassss to be displayed started -->
     <section class="ftco-section ftco-degree-bg">
         <div class="container">
             <div class="row justify-content-center mb-5 pb-5">
                 <div class="col-md-7 text-center heading-section ftco-animate">
-                    <span class="subheading">THANKS FOR YOUR VISIT</span>
-                    <h2>Here we have more features for you!!</h2>
+                    <p class="myheading">THANKS FOR YOUR VISIT</p>
+                    <p class="subheading">HERE WE HAVE MORE FEATURES FOR YOU!!</p>
                 </div>
             </div>
             <div class="row">
@@ -206,7 +348,8 @@
                         </div>
                         <div class="media-body p-2">
                             <h3 class="heading">Financial Help</h3>
-                            <p>Click here for financial support. "A good financial plan is a roadmap that shows us exactly how the choices we make today will affect our future."</p>
+                            <p>Click here for financial support. "A good financial plan is a roadmap that shows us
+                                exactly how the choices we make today will affect our future."</p>
                         </div>
                     </div>
                 </div>
@@ -253,202 +396,47 @@
             </div>
         </div>
     </section>
-
-
-    <section class="ftco-section-2 degree-right">
-        <div class="container">
-            <div class="row justify-content-center mb-5 pb-5">
-                <div class="col-md-7 text-center heading-section ftco-animate">
-                    <span class="subheading">OUR SPECIAL FEATURES</span>
-                    <h2>Here you will get the information of weather of your location, financial help and fertilizers suitable for your crops!!</h2>
-                </div>
-            </div>
+    <!-- ending of yojnaassss -->
+    
+    
+    <!-- =========================================================================================================== -->
+    
+    
+    <!-- discussion -->
+    <section>
+        <div>
+            <h3 style="color:rgb(17, 36, 36)">HELPFUL LINKS FOR YOU!!</h3>
+            <a href="https://krishijagran.com/agriculture-world/pm-kisan-samman-nidhi-yojana-direct-online-link-application-form-important-documents-eligibility-criteria/"
+                target="_blank">Click here
+                to associate with <strong>PM-KISAN-SAMMAN-NIDHI-YOJANA</strong></a>
         </div>
+    
+        <div>
+            <a href="https://kisansamadhan.com/central-government-schemes/ " target="_blank">Click here to know all details
+                of
+                <strong>CENTRAL-GOVERNMENT-SCHEMES</strong></a>
+        </div>
+    
+    
     </section>
-
-
-    <section class="ftco-section-parallax degree-right">
-        <div class="parallax-img d-flex align-items-center">
-            <div class="container">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-md-4 ftco-animate">
-                        <div class="blog-entry-2">
-                            <a href="blog-single.html" class="block-20-1"
-                                style="background-image: url({% static 'images/weather2.jpg' %});">
-                            </a>
-                            <div class="text p-4 d-block">
-                                <div class="meta mb-3">
-                                    <div><a href="#">WEATHER FORECAST</a></div>
-                                    <div><a href="#"></a></div>
-                                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> </a></div>
-                                </div>
-                                <h3 class="heading"><a href="#">click here to know the climatic changes for the next seven days.</a></h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 ftco-animate">
-                        <div class="blog-entry-2" data-aos-delay="100">
-                            <a href="blog-single.html" class="block-20-1"
-                                style="background-image: url({% static 'images/financial.jpeg' %});">
-                            </a>
-                            <div class="text p-4">
-                                <div class="meta mb-3">
-                                    <div><a href="#">Financial help</a></div>
-                                    <div><a href="#"></a></div>
-                                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> </a></div>
-                                </div>
-                                <h3 class="heading"><a href="#">Click here to get the benifit of amazing loan offers.</a></h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 ftco-animate">
-                        <div class="blog-entry-2" data-aos-delay="100">
-                            <a href="blog-single.html" class="block-20-1"
-                                style="background-image: url({% static 'images/fertilizer-1.jpg' %});">
-                            </a>
-                            <div class="text p-4">
-                                <div class="meta mb-3">
-                                    <div><a href="#">Shop now</a></div>
-                                    <div><a href="#"></a></div>
-                                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> </a></div>
-                                </div>
-                                <h3 class="heading"><a href="#">Click here to get the appropriate fertilizers for your crop at best price.</a></h3>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- <div class="col-md-10 text-center heading-section heading-section-white ftco-animate">
-                        <h2 class="h1 font-weight-bold">Turn every channel into a revenue channel and drive business growth
-                        </h2>
-                        <p><a href="#" class="btn btn-primary btn-outline-white mt-3 py-3 px-4">View more details</a></p>
-                    </div> -->
-                </div>
-            </div>
-        </div>
-        <div class="parallax-img-2 d-flex align-items-center">
-            <div class="container">
-                <section class="ftco-section-2">
-                    <div class="container">
-                        <div class="row justify-content-center mb-5 pb-5">
-                            <div class="col-md-7 text-center heading-section ftco-animate">
-                                <span class="subheading">OUR SPECIAL FEATURES</span>
-                                <h2>Here you will get the information of weather of your location, financial help and fertilizers suitable for your crops!!</h2>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-                <div class="row d-flex justify-content-center">
-                    <div class="col-md-4 ftco-animate">
-                        <div class="blog-entry-2">
-                            <a href="blog-single.html" class="block-20-1"
-                                style="background-image: url({% static 'images/weather2.jpg' %});">
-                            </a>
-                            <div class="text p-4 d-block">
-                                <div class="meta mb-3">
-                                    <div><a href="#">WEATHER FORECAST</a></div>
-                                    <div><a href="#"></a></div>
-                                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> </a></div>
-                                </div>
-                                <h3 class="heading"><a href="#">click here to know the climate change for next seven days.</a></h3>
-                                <h3 class="heading"><a href="#"></a></h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 ftco-animate">
-                        <div class="blog-entry-2" data-aos-delay="100">
-                            <a href="blog-single.html" class="block-20-1"
-                                style="background-image: url({% static 'images/financial.jpeg' %});">
-                            </a>
-                            <div class="text p-4">
-                                <div class="meta mb-3">
-                                    <div><a href="#">Financial help</a></div>
-                                    <div><a href="#"></a></div>
-                                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> </a></div>
-                                </div>
-                                <h3 class="heading"><a href="#">Click here to get the benifit of amazing loan offers.</a></h3>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 ftco-animate">
-                        <div class="blog-entry-2" data-aos-delay="100">
-                            <a href="blog-single.html" class="block-20-1"
-                                style="background-image: url({% static 'images/fertilizer-1.jpg' %});">
-                            </a>
-                            <div class="text p-4">
-                                <div class="meta mb-3">
-                                    <div><a href="#">Shop now</a></div>
-                                    <div><a href="#"></a></div>
-                                    <div><a href="#" class="meta-chat"><span class="icon-chat"></span> </a></div>
-                                </div>
-                                <h3 class="heading"><a href="#">Click here to get the appropriate fertilizers for your crop at best price.</a></h3>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- <div class="col-md-10 text-center heading-section heading-section-white ftco-animate">
-                        <h2 class="h1 font-weight-bold">Turn every channel into a revenue channel and drive business growth
-                        </h2>
-                        <p><a href="#" class="btn btn-primary btn-outline-white mt-3 py-3 px-4">View more details</a></p>
-                    </div> -->
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-
-    <section class="ftco-section">
-        <div class="container-fluid">
-            <div class="row no-gutters justify-content-center mb-5 pb-5">
-                <div class="col-md-7 text-center heading-section ftco-animate">
-                    <span class="subheading">Videos</span>
-                    <h2>INFORMATIVE VIDEOS FOR YOU</h2>
-                </div>
-            </div>
-            <div class="row no-gutters">
-                <div class="block-3 d-md-flex ftco-animate">
-                    <a href="portfolio.html" class="image" style="background-image: url({% static 'images/a.png' %}); "></a>
-                    <div class="text">
-                        <h4 class="subheading">Illustration</h4>
-                        <h2 class="heading"><a href="portfolio.html">Even the all-powerful Pointing has no control</a></h2>
-                        <p>Even the all-powerful Pointing has no control about the blind texts it is an almost
-                            unorthographic life One day however a small line of blind text by the name of Lorem Ipsum
-                            decided to leave for the far World of Grammar.</p>
-                    </div>
-                </div>
-                <div class="block-3 d-md-flex ftco-animate">
-                    <a href="portfolio.html" class="image order-2" style="background-image: url({% static 'images/b.jpg' %}); "></a>
-                    <div class="text order-1">
-                        <h4 class="subheading">Application</h4>
-                        <h2 class="heading"><a href="portfolio.html">Even the all-powerful Pointing has no control</a></h2>
-                        <p>Even the all-powerful Pointing has no control about the blind texts it is an almost
-                            unorthographic life One day however a small line of blind text by the name of Lorem Ipsum
-                            decided to leave for the far World of Grammar.</p>
-                    </div>
-                </div>
-                <div class="block-3 d-md-flex ftco-animate">
-                    <a href="portfolio.html" class="image" style="background-image: url({% static 'images/c.png' %}); "></a>
-                    <div class="text">
-                        <h4 class="subheading">Web Design</h4>
-                        <h2 class="heading"><a href="portfolio.html">Even the all-powerful Pointing has no control</a></h2>
-                        <p>Even the all-powerful Pointing has no control about the blind texts it is an almost
-                            unorthographic life One day however a small line of blind text by the name of Lorem Ipsum
-                            decided to leave for the far World of Grammar.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-
-
+    
+    
+    <!-- ============================================================================================================ -->
+    
+    
+    <!-- Footer started -->
     <footer class="ftco-footer ftco-bg-dark ftco-section">
         <div class="container">
             <div class="row mb-5">
                 <div class="col-md">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Company</h2>
-                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there
-                            live the blind texts.</p>
+                        <h2 class="ftco-heading-2">DEVELOPERS</h2>
+                        <p><strong style="color:#d1002c;"> PRO-CODERS</strong>
+                        <div>Aaditya Singhal </div>
+                        <div>Abhay Dhiman </div>
+                        <div>Ayush Malik </div>
+                        <div>Akshita Sharma </div>
+                        </p>
                         <ul class="ftco-footer-social list-unstyled float-md-left float-lft">
                             <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
                             <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
@@ -458,7 +446,7 @@
                 </div>
                 <div class="col-md">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Quick Links</h2>
+                        <h2 class="ftco-heading-2">QUICK LINKS</h2>
                         <ul class="list-unstyled">
                             <li><a href="#" class="py-2 d-block">Home</a></li>
                             <li><a href="#" class="py-2 d-block">About</a></li>
@@ -471,18 +459,24 @@
                 </div>
                 <div class="col-md">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Contact Information</h2>
+                        <h2 class="ftco-heading-2">CONTACT</h2>
                         <ul class="list-unstyled">
-                            <li><a href="#" class="py-2 d-block">198 West 21th Street, Suite 721 New York NY 10016</a></li>
-                            <li><a href="#" class="py-2 d-block">+ 1235 2355 98</a></li>
-                            <li><a href="#" class="py-2 d-block">info@yoursite.com</a></li>
-                            <li><a href="#" class="py-2 d-block">email@email.com</a></li>
+                            <li><a href="#" class="py-2 d-block " style=" color: #d1002c ;">Aaditya Singhal -<a
+                                        href=" https://github.com/Aaditya1978">https://github.com/Aaditya1978</a></a>
+                            </li>
+                            <li><a href="#" class="py-2 d-block" style=" color: #d1002c;">Abhay Dhiman -<a
+                                        href="  https://github.com/abhaydhiman"> https://github.com/abhaydhiman</a></a></li>
+                            <li><a href="#" class="py-2 d-block" style=" color: #d1002c;">Ayush Malik -<a
+                                        href="https://github.com/Ayush-Malik ">https://github.com/Ayush-Malik</a></a></li>
+                            <li><a href="#" class="py-2 d-block" style=" color: #d1002c;">Akshita Sharma - <a
+                                        href="https://github.com/akshita-sharma8609 ">https://github.com/akshita-sharma8609</a></a>
+                            </li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-md">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">Newsletter</h2>
+                        <h2 class="ftco-heading-2">NEWSLETTER</h2>
                         <p>Far far away, behind the word mountains, far from the countries.</p>
                         <form action="#" class="subscribe-form">
                             <div class="form-group">
@@ -499,45 +493,59 @@
                     <p>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         Copyright &copy;
-                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is
-                        made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
-                            target="_blank">Colorlib</a>
+                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This template
+                        is
+                        made <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
+                            target="_blank"> &nbsp; PRO-CODERS</a>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </p>
                 </div>
             </div>
         </div>
     </footer>
-
-
-
-
-    <!-- <img src="{% static 'images/home.png' %}" alt="" /> -->
-
-
+    <!-- Footer ending -->
+    
+    
+    <!-- ============================================================================================================== -->
+    
+    
     <!-- loader -->
     <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
             <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
             <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
                 stroke="#F96D00" />
         </svg></div>
+    
+    
+    <!-- ============================================================================================================== -->
+    
+    
+    <!-- Scripts -->
+    <script src="{% static 'js\jquery.min.js' %}"></script>
+    <script src="{% static 'js\jquery-migrate-3.0.1.min.js' %}"></script>
+    <script src="{% static 'js\popper.min.js' %}"></script>
+    <script src="{% static 'js\bootstrap.min.js' %}"></script>
+    <script src="{% static 'js\jquery.easing.1.3.js' %}"></script>
+    <script src="{% static 'js\jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'js\jquery.stellar.min.js' %}"></script>
+    <script src="{% static 'js\owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js\jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js\jquery.animateNumber.min.js' %}"></script>
+    <script src="{% static 'js\scrollax.min.js' %}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="{% static 'js\google-map.js' %}"></script>
+    <script src="{% static 'js\main.js' %}"></script>
+    
+    <script>
+        function openNav() {
+            document.getElementById("myNav").style.width = "100%";
+        }
 
+        function closeNav() {
+            document.getElementById("myNav").style.width = "0%";
+        }
+    </script>
 
-    <script src="{% static 'js/jquery.min.js' %}"></script>
-    <script src="{% static 'js/jquery-migrate-3.0.1.min.js' %}"></script>
-    <script src="{% static 'js/popper.min.js' %}"></script>
-    <script src="{% static 'js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
-    <script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
-    <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
-    <script src="{% static 'js/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
-    <script src="{% static 'js/jquery.animateNumber.min.js' %}"></script>
-    <script src="{% static 'js/scrollax.min.js' %}"></script>
-    <script
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
-    <script src="{% static 'js/google-map.js' %}"></script>
-    <script src="{% static 'js/main.js' %}"></script>
 </body>
 
 </html>
