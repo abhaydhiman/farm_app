@@ -27,7 +27,7 @@ def sign_up():
         lang = language_checker(language)
 
         # Translating Text
-        text_ls = ['Enter Credentials', 'Submit', 'Already Registerd']
+        text_ls = ['Enter Credentials', 'Phone Number', 'Full Name', 'Submit', 'Already Registerd, Login']
         sign_up_list = text_translator(text_ls, lang)
         return render_template('signup.html', sign_up_list = sign_up_list, lang=lang, message="")
 
@@ -55,13 +55,13 @@ def submit_otp():
             
             # If USer is Already Registered
             else:
-                text_ls = ['Enter Credentials', 'Submit', 'Already Registerd', 'You are already Registered']
+                text_ls = ['Enter Credentials', 'Phone Number', 'Full Name', 'Submit', 'Already Registerd, Login', 'You are already Registered']
                 sign_up_list = text_translator(text_ls, lang)
-                return render_template('signup.html', sign_up_list = sign_up_list, lang=lang, message=sign_up_list[3])
+                return render_template('signup.html', sign_up_list = sign_up_list, lang=lang, message=sign_up_list[5])
 
         # To Go To Login Page            
         if request.form['sign-in-button'] == 'log-in':
-            text_ls = ['Login', 'Submit', 'Cancel']
+            text_ls = ['Login', 'Phone Number', 'Password', 'Submit', 'Cancel']
             log_list = text_translator(text_ls, lang)
             return render_template('log_in.html', log_list = log_list, lang=lang, mm="")
 
@@ -85,15 +85,15 @@ def set_password():
                 password_list = text_translator(text_ls, lang)
                 return render_template('set_password.html', password_list=password_list , lang=lang, phone=phone_number, name=name, message="")
 
-            # If OTP is Wrong Go to Sig UP Page                
+            # If OTP is Wrong Go to Sign UP Page                
             else:
-                text_ls = ['Enter Credentials', 'Submit', 'Already Registerd', 'OTP Entered Was Wrong']
+                text_ls = ['Enter Credentials', 'Phone Number', 'Full Name', 'Submit', 'Already Registerd, Login', 'OTP Entered Was Wrong']
                 sign_up_list = text_translator(text_ls, lang)
-                return render_template('signup.html', sign_up_list = sign_up_list, lang=lang, message=sign_up_list[3])
+                return render_template('signup.html', sign_up_list = sign_up_list, lang=lang, message=sign_up_list[5])
         
         # If User Wants To Go back to Signup Page
         if request.form['code-button'] == 'cancel-button':
-            text_ls = ['Enter Credentials', 'Submit', 'Already Registerd']
+            text_ls = ['Enter Credentials', 'Phone Number', 'Full Name', 'Submit', 'Already Registerd, Login']
             sign_up_list = text_translator(text_ls, lang)
             return render_template('signup.html', sign_up_list = sign_up_list, lang=lang, message="")
 
@@ -116,7 +116,7 @@ def user_home():
         
         # If condition not matched then show error
         else:
-            text_ls = ['Submit Password', 'Enter Password', 'Confirm Password', 'Confirm', 'Both Password Do not match  or password must be greater then 6 digits']
+            text_ls = ['Submit Password', 'Enter Password', 'Confirm Password', 'Confirm', 'Both Password Do not match / password must be greater then 6 digits']
             password_list = text_translator(text_ls, lang)
             return render_template('set_password.html', password_list=password_list , lang=lang, phone=phone_number, name=name, message=password_list[4])
 
@@ -141,13 +141,13 @@ def user_home_2():
 
             # Otherwise Then error is shown 
             else:
-                text_ls = ['Login', 'Submit', 'Cancel', 'Password Or Phone Number Did not match']
+                text_ls = ['Login', 'Phone Number', 'Password', 'Submit', 'Cancel', 'Password Or Phone Number Did not match']
                 log_list = text_translator(text_ls, lang)
-                return render_template('log_in.html', log_list = log_list, lang=lang, mm=log_list[3])
+                return render_template('log_in.html', log_list = log_list, lang=lang, mm=log_list[5])
 
         # If user wnats to go back to signup Page 
         if request.form['log-button'] == 'back':
-            text_ls = ['Enter Credentials', 'Submit', 'Already Registerd']
+            text_ls = ['Enter Credentials', 'Phone Number', 'Full Name', 'Submit', 'Already Registerd, Login']
             sign_up_list = text_translator(text_ls, lang)
             return render_template('signup.html', sign_up_list = sign_up_list, lang=lang, message="")
 
