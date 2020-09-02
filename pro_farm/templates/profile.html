@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Profile page</title>
 
-<!-- links -->
-<link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900&display=swap"
-    rel="stylesheet">
+    <!-- links -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="\..\farm_app\pro_farm\static\css\animate.css">
     <link rel="stylesheet" href="\..\farm_app\pro_farm\static\css\owl.theme.default.min.css">
@@ -20,13 +21,54 @@
 
 
 </head>
+
 <body>
     <div class="sidebar">
-        <img src="../static/images/edited_vali4.png" style="border-radius: 50%; width: 150px; height: 150px; padding-top:1px; position: relative; margin-left: 25%; top:1px; padding:25px;" alt="">
-        <a class="active" href="#home">Home</a>
-        <a href="#news">News</a>
-        <a href="#contact">Contact</a>
-        <a href="#about">About</a>
+        <input type="file" accept="image/*">
+        <img src="../static/images/edited_vali4.png"
+            style="border-radius: 50%; width: 150px; height: 150px; padding-top:1px; position: relative; margin-left: 25%; top:1px; padding:25px;"
+            alt="">
+        <a class="active" href="#home">NAME</a>
+        <a href="#news">NUMBER</a>
+        <a href="#contact">LANGUAGE</a>
+        <a href="#about">LOCATION</a>
     </div>
+<section class="ml-5 pl-5">
+    <div class="container mt-5 pt-5" style="position: relative; left: 5%;">
+    <form action="backend.python">
+        <div>
+            <label for="name">NAME:</label>
+            <input type="text"  id="name" onfocus="this.value=''" value="Blabla">
+        </div>
+        <br>
+
+        <div >
+            <label for="number">NUMBER:</label>
+            <input type="number" id="number" onfocus="this.value=''" value="Blabla">
+        </div>
+        <br>
+
+
+        <div >
+            <label for="language">LANGUAGE:</label>
+            <input type="text" id="language" onfocus="this.value=''" value="Blabla"> 
+        </div>
+        <br>
+
+        <div>
+            <label for="location">LOCATION:</label>
+             <input type="text"  id="location"onfocus="this.value=''" value="Blabla">
+        </div>
+        <br>
+
+        <div >
+            <input type="SUBMIT" value="SUBMIT">
+            <input type="RESET" value="RESET">
+        </div>
+    </form>
+    </div>
+    </section>
+
 </body>
+
 </html>
