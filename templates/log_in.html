@@ -58,7 +58,7 @@
 
           <!-- Taking inputs from user; particularly one's phone number as of now -->
           <div class="wrap-input100 validate-input" >
-            <input class="input100" type="text"  id="phone-number" name="phone-number" placeholder="PhoneNumber">
+            <input class="input100" type="text"  id="phone-number" name="phone-number" placeholder="{{log_list[1]}}">
             <span class="focus-input100"></span>
             <span class="symbol-input100">
               <i class="fa fa-phone" aria-hidden="true" for="phone-number"></i>
@@ -68,7 +68,7 @@
 
           <!-- Taking password of the user -->
           <div class="wrap-input100 validate-input">
-            <input class="input100" type="password" id="password" name="password" placeholder="Password">
+            <input class="input100" type="password" id="password" name="password" placeholder="{{log_list[2]}}">
             <span class="focus-input100"></span>
             <span class="symbol-input100">
               <i class="fa fa-user" aria-hidden="true" for="password"></i>
@@ -81,7 +81,7 @@
             <div class="col-md-6">
               <div class="container-login100-form-btn">
                 <button type="submit" class="login100-form-btn" id="sign-in-button" name="log-button" value="log-in">
-                  {{log_list[1]}}
+                  {{log_list[3]}}
                 </button>
               </div>
             </form> </div>
@@ -90,7 +90,7 @@
                 <input type="hidden" name="lang" value={{lang}}>
                 <div class="container-login100-form-btn">
                   <button type="submit" class="login100-form-btn" id="sign-in-button" name="log-button" value="back">
-                      {{log_list[2]}}
+                      {{log_list[4]}}
                     </button> 
                 </div>
               </form>
