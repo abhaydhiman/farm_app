@@ -202,6 +202,14 @@ def weather():
 
 
 
+# To Go to profile page if user clicks on more info link
+@app.route('/profile', methods=['POST','GET'])
+def profile():
+    return render_template('profile.html')
+
+
+
+
 # Running the Flask App
 if __name__ == "__main__":
     app.run(debug=True)
