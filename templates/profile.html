@@ -1,32 +1,225 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <title>Login V1</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Profile page</title>
-
-<!-- links -->
-<link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900&display=swap"
-    rel="stylesheet">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="..\static\css\animate.css">
-    <link rel="stylesheet" href="..\static\css\owl.theme.default.min.css">
-    <link rel="stylesheet" href="..\static\css\magnific-popup.css">
-    <link rel="stylesheet" href="..\static\css\owl.carousel.min.css">
-    <link rel="stylesheet" href="..\static\css\flaticon.css">
-    <link rel="stylesheet" href="..\static\css\style.css">
-    <link rel="stylesheet" href="..\static\css\icomoon.css">
-    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
-
-
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="\..\farm_app\pro_farm\static\images\icons\favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="\..\farm_app\pro_farm\static\vendor\bootstrap\css\bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css"
+        href="\..\farm_app\pro_farm\static\fonts\font-awesome-4.7.0\css\font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="\..\farm_app\pro_farm\static\vendor\animate\animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="\..\farm_app\pro_farm\static\vendor\css-hamburgers\hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="\..\farm_app\pro_farm\static\vendor\select2\select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="\..\farm_app\pro_farm\static\css\util.css">
+    <link rel="stylesheet" type="text/css" href="\..\farm_app\pro_farm\static\css\style.css">
+    <!--===============================================================================================-->
 </head>
+
 <body>
-    <div class="sidebar">
-        <img src="../static/images/edited_vali4.png" style="border-radius: 50%; width: 150px; height: 150px; padding-top:1px; position: relative; margin-left: 25%; top:1px; padding:25px;" alt="">
-        <a class="active" href="#home">Home</a>
-        <a href="#news">News</a>
-        <a href="#contact">Contact</a>
-        <a href="#about">About</a>
+
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+                <label for="image">
+                    <input type="file" accept="image/*" name="image" id="image" style="display:none;" />
+                    <div class="example">
+                        <img src="../static/images/edited_vali4.png" />
+                        <div class="contents">
+                            <div class="text">Upload photo</div>
+                        </div>
+                    </div>
+                </label>
+
+                <form class="login100-form validate-form">
+                    <span class="login100-form-title">
+                        Edit Profile
+                    </span>
+
+                    <div class="wrap-input100 validate-input" data-validate="Valid number is of 10 integers">
+                        <input class="input100" type="text" name="Phone_number" placeholder="Phone Number" onfocus="this.value=''" value="1234567890">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-phone" aria-hidden="true"></i>
+                        </span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Name is required">
+                        <input class="input100" type="text" name="name" placeholder="Full Name" onfocus="this.value=''" value="ooiiii">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                        </span>
+                    </div>
+
+                    <!-- <div class="wrap-input100">
+                        <input class="input100" type="text" name="Language" placeholder="Language" onfocus="this.value=''" value="English">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-language" aria-hidden="true"></i>
+                        </span>
+                    </div> -->
+
+                    <div class="wrap-input100">
+                        <input class="input100" type="text" name="Location" placeholder="Location" onfocus="this.value=''"
+                            value="Moon">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-map-marker" aria-hidden="true"></i>
+                        </span>
+                    </div>
+
+                    <div class="wrap-input100" style="outline: none;">
+                        <select class="input100" name="Language" placeholder="Language">
+                            <option value="English">English</option>
+                            <option value="Hindi">Hindi</option>
+                            <option value="Punjabi">Punjabi</option>
+                            <option value="Marathi">Marathi</option>
+                        </select>
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-language" aria-hidden="true"></i>
+                        </span>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="container-login100-form-btn">
+                                <button class="login100-form-btn">
+                                    Submit
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="container-login100-form-btn">
+                                <button class="login100-form-btn">
+                                    Cancel
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div class="wrap-login100 mt-5 pt-5">
+                <table id="customers">
+                    <tr>
+                        <th style="border-top-left-radius: 15px;">Company</th>
+                        <th>Contact</th>
+                        <th style="border-top-right-radius: 15px;">Country</th>
+                    </tr>
+                    <tr>
+                        <td>Alfreds Futterkiste</td>
+                        <td>Maria Anders</td>
+                        <td>Germany</td>
+                    </tr>
+                    <tr>
+                        <td>Berglunds snabbköp</td>
+                        <td>Christina Berglund</td>
+                        <td>Sweden</td>
+                    </tr>
+                    <tr>
+                        <td>Centro comercial Moctezuma</td>
+                        <td>Francisco Chang</td>
+                        <td>Mexico</td>
+                    </tr>
+                    <tr>
+                        <td>Ernst Handel</td>
+                        <td>Roland Mendel</td>
+                        <td>Austria</td>
+                    </tr>
+                    <tr>
+                        <td>Island Trading</td>
+                        <td>Helen Bennett</td>
+                        <td>UK</td>
+                    </tr>
+                    <tr>
+                        <td>Königlich Essen</td>
+                        <td>Philip Cramer</td>
+                        <td>Germany</td>
+                    </tr>
+                    <tr>
+                        <td>Laughing Bacchus Winecellars</td>
+                        <td>Yoshi Tannamuri</td>
+                        <td>Canada</td>
+                    </tr>
+                    <tr>
+                        <td>Magazzini Alimentari Riuniti</td>
+                        <td>Giovanni Rovelli</td>
+                        <td>Italy</td>
+                    </tr>
+                    <tr>
+                        <td>North/South</td>
+                        <td>Simon Crowther</td>
+                        <td>UK</td>
+                    </tr>
+                    <tr>
+                        <td style="border-bottom-left-radius: 15px;">Paris spécialités</td>
+                        <td>Marie Bertrand</td>
+                        <td style="border-bottom-right-radius: 15px;">France</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
+
+
+
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+                stroke="#F96D00" />
+        </svg></div>
+
+
+
+    <!--===============================================================================================-->
+    <script src="\..\farm_app\pro_farm\static\vendor\jquery\jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="\..\farm_app\pro_farm\static\vendor\bootstrap\js\popper.js"></script>
+    <script src="\..\farm_app\pro_farm\static\vendor\bootstrap\js\bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="\..\farm_app\pro_farm\static\vendor\select2\select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="\..\farm_app\pro_farm\static\vendor\tilt\tilt.jquery.min.js"></script>
+    <script>
+        $('.js-tilt').tilt({
+            scale: 1.1
+        })
+    </script>
+    <!--===============================================================================================-->
+    <script src="\..\farm_app\pro_farm\static\js\jquery.min.js"></script>
+    <script src="\..\farm_app\pro_farm\static\js\jquery-migrate-3.0.1.min.js"></script>
+    <script src="\..\farm_app\pro_farm\static\js\popper.min.js"></script>
+    <script src="\..\farm_app\pro_farm\static\js\bootstrap.min.js"></script>
+    <script src="\..\farm_app\pro_farm\static\js\jquery.easing.1.3.js"></script>
+    <script src="\..\farm_app\pro_farm\static\js\jquery.waypoints.min.js"></script>
+    <script src="\..\farm_app\pro_farm\static\js\jquery.stellar.min.js"></script>
+    <script src="\..\farm_app\pro_farm\static\js\owl.carousel.min.js"></script>
+    <script src="\..\farm_app\pro_farm\static\js\jquery.magnific-popup.min.js"></script>
+    <script src="\..\farm_app\pro_farm\static\js\jquery.animateNumber.min.js"></script>
+    <script src="\..\farm_app\pro_farm\static\js\scrollax.min.js"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="\..\farm_app\pro_farm\static\js\google-map.js"></script>
+    <script src="\..\farm_app\pro_farm\static\js\main.js"></script>
+
 </body>
+
 </html>
+
+
+<!-- <h2>Sign up</h2>
+<form method="post">
+  {% csrf_token %} {{ form.as_p }}
+  <button type="submit">Sign up</button>
+</form> -->
