@@ -6846,6 +6846,10 @@ button.bg-dark:focus {
 .my-5 {
   margin-top: 3rem !important; }
 
+.mt-6,
+.my-6 {
+  margin-top: 3.5rem !important; }
+
 .mr-5,
 .mx-5 {
   margin-right: 3rem !important; }
@@ -6959,6 +6963,10 @@ button.bg-dark:focus {
 .pt-5,
 .py-5 {
   padding-top: 3rem !important; }
+
+.pt-6,
+.py-6 {
+  padding-top: 3.5rem !important; }
 
 .pr-5,
 .px-5 {
@@ -10889,63 +10897,16 @@ iframe {
   position: relative;
   display: block; }
 
-
-
-body {
-  margin: 0;
-  font-family: "Lato", sans-serif;
-}
-
-.sidebar {
-  margin: 0;
-  padding: 0;
-  width: 300px;
-  background-color: #f1f1f1;
-  position: fixed;
-  height: 100%;
-  overflow: auto;
-}
-
-.sidebar a {
-  display: block;
-  color: black;
-  padding: 16px;
-  text-decoration: none;
-}
-
-.sidebar a.active {
-  background-color: #af3d29;
-  color: white;
-}
-
-.sidebar a:hover:not(.active) {
-  background-color: #555;
-  color: white;
-}
-
-div.content {
-  margin-left: 200px;
-  padding: 1px 16px;
-  height: 1000px;
-}
-
-@media screen and (max-width: 700px) {
-  .sidebar {
-    width: 100%;
-    height: auto;
-    position: relative;
-  }
-  .sidebar a {float: left;}
-  div.content {margin-left: 0;}
-}
-
-@media screen and (max-width: 400px) {
-  .sidebar a {
-    text-align: center;
-    float: none;
-  }
-}
-
+.block-20-2 {
+  overflow: hidden;
+  background-size: cover;
+  border-top-right-radius: 25px;
+  border-top-left-radius: 25px;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 200px;
+  position: relative;
+  display: block; }
 /*  */
 
 body {
@@ -11059,3 +11020,135 @@ body {
   left: 30%;
   }
 }
+
+
+.example {
+  position: relative;
+  border-radius: 50%;
+  padding: 25px; 
+  padding-top:1px;
+  /* width: 70px;
+  height: 70px; */
+  display: inline-block;
+  cursor: pointer;
+  /* overflow: hidden; */
+  top:1px; 
+  margin-left: 19%;
+}
+
+.example img{
+  position: relative;
+  width: 170px;
+  height: 170px;
+ }
+
+.contents {
+  border-radius: 50%;
+  opacity: 0;
+  font-size: 40px;
+  position: absolute;
+  top: 1px;
+  left: 26px;
+  color: #70c91c;
+  background-color: rgba(200, 200, 200, 0.5);
+  width: 170px;
+  height: 170px;
+  /* -webkit-transition: all 400ms ease-out;
+  -moz-transition: all 400ms ease-out;
+  -o-transition: all 400ms ease-out;
+  -ms-transition: all 400ms ease-out;
+  transition: all 400ms ease-out; */
+  text-align: center;
+  display: inline-block;
+}
+
+.example .contents:hover {
+  opacity: 1;
+}
+
+.example .contents .text {
+  display: inline-block;
+  opacity: 1;
+  color: black;
+  font-size:14px;
+  transition-delay: 0s;
+  transition-duration: 0s;
+}
+
+.example .contents:hover .text {
+  opacity: 1;
+  position: absolute;
+  left: 40px;
+  top:70px;
+}
+
+/*  */
+
+
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  border-radius: 6px 6px 6px 6px;
+}
+
+#customers td, #customers th {
+  /* border: 1px solid #ddd; */
+  padding: 8px;
+  /* border-radius:25px; */
+}
+
+#customers tr:nth-child(even){background-color: #f2f2f2;}
+
+#customers tr:hover {background-color: rgb(0, 0, 0);
+  color: #fff; 
+  transition-delay: 0s;
+  transition-duration: 0.8s;
+}
+
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
+
+
+.mytable {
+  position: relative;
+  left: 10px;
+  border-collapse: collapse;
+  border-spacing: 0;
+  height: 500px;
+  display: block;
+  overflow-y: auto;
+  overflow-x: hidden; }
+
+.mytable::-webkit-scrollbar {
+  display: none; }
+
+.mytable th {
+  color: white;
+  background-color: rgb(54, 50, 50);
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px; }
+
+.mytable th, td {
+  text-align: center;
+  padding: 14px;
+  width: 200px; }
+
+.mytable td:first-child {
+  text-align: center; }
+
+.mytable tr:nth-child(even) {
+  background-color: rgb(241, 236, 236);
+  border-bottom-right-radius: 5px; }
+
+.mytable tr:nth-child(odd) {
+  background-color: rgb(241, 236, 236);
+  border-bottom-right-radius: 5px; }
+
+.mytable .fa-remove {
+  color: red; } 
