@@ -8,7 +8,7 @@ def user_home_text():
     "Farmer",
     "Location",
     "Ambala, Haryana",
-    "Edit Profile",
+    "More Info",
     "Home",
     "Weather",
     "Work",
