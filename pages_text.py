@@ -66,3 +66,35 @@ def user_home_text():
     ]
 
     return text_lis
+
+
+# Function for storing whole text of Weather Page
+def weather_text():
+    text_lis = [
+    "Weather",
+    "Home",
+    "Weather",
+    "Work",
+    "Blog",
+    "Contact",
+    "Weather ",
+    "Max",
+    "Min",
+    "Visibility",
+    "Wind",
+    "Humidity",
+    "DEVELOPERS",
+    "PRO-CODERS",
+    "Aaditya Singhal",
+    "Abhay Dhiman",
+    "Ayush Malik ",
+    "Akshita Sharma",
+    "CONTACT",
+    "Copyright",
+    "All rights reserved",
+    "This template is made with",
+    "by",
+    "PRO-CODERS"
+    ]
+
+    return text_lis
