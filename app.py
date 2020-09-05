@@ -1,12 +1,13 @@
 # Importing Necessary Libraries
-from flask import Flask, render_template,request
-from modules import opt_generator, msg_sender, firebase_user_checker, firebase_user_registerer, firebase_user_loger, firebase_data_fetcher
-from translator import text_translator, language_checker, user_home_text_translator
+from flask import Flask, render_template,request,session
+from modules import opt_generator, msg_sender, firebase_user_checker, firebase_user_registerer, firebase_user_loger, firebase_data_fetcher, weather_fetcher, day_fetcher
+from translator import text_translator, language_checker, user_home_text_translator, weather_text_translator, english_translator
 
 
 
 # Init flask app
 app = Flask(__name__)
+app.secret_key = 'any random string'
 
 
 
@@ -99,6 +100,7 @@ def set_password():
 
 
 
+
 # TO Go To Home Page If User Follows the Step to Register 
 @app.route('/user_home', methods=['POST'])
 def user_home():
@@ -108,17 +110,26 @@ def user_home():
         name = request.form['name']
         password1 = request.form['password']
         password2 = request.form['password-confirm']
+        state = request.form['stt']
+        city = request.form['city']
         # If Both Password Match then register user and redirect to home page
         if password1 == password2 and len(password1)>=6:
-            firebase_user_registerer(phone_number, password1, name, lang)
-            translated_list, name = user_home_text_translator(lang, name)
-            return render_template('user_home.html', t_lis = translated_list, phone_number = phone_number, name = name)
+            firebase_user_registerer(phone_number, password1, name, lang, state, city)
+            translated_list, name,city, state = user_home_text_translator(lang, name, city, state)
+            session['name'] = name
+            session['lang'] = lang
+            session['phone_number'] = phone_number
+            session['state'] = state
+            session['city'] = city
+            return render_template('user_home.html', t_lis = translated_list, phone_number = phone_number, name = name, city=city, state = state)
         
         # If condition not matched then show error
         else:
             text_ls = ['Submit Password', 'Enter Password', 'Confirm Password', 'Confirm', 'Both Password Do not match / password must be greater then 6 digits']
             password_list = text_translator(text_ls, lang)
             return render_template('set_password.html', password_list=password_list , lang=lang, phone=phone_number, name=name, message=password_list[4])
+
+
 
 
 # TO Go To Home Page If User Follows the Step to Login 
@@ -135,9 +146,14 @@ def user_home_2():
 
             # If Password matches with phone number then Redirect to home page
             if checker == 1:
-                name = firebase_data_fetcher(phone_number)
-                translated_list, name = user_home_text_translator(lang, name)
-                return render_template('user_home.html', t_lis = translated_list, phone_number = phone_number, name = name)
+                name, state, city = firebase_data_fetcher(phone_number)
+                translated_list, name,city, state = user_home_text_translator(lang, name, city, state)
+                session['name'] = name
+                session['lang'] = lang
+                session['phone_number'] = phone_number
+                session['state'] = state
+                session['city'] = city
+                return render_template('user_home.html', t_lis = translated_list, phone_number = phone_number, name = name,city = city, state = state)
 
             # Otherwise Then error is shown 
             else:
@@ -150,6 +166,39 @@ def user_home_2():
             text_ls = ['Enter Credentials', 'Phone Number', 'Full Name', 'Submit', 'Already Registerd, Login']
             sign_up_list = text_translator(text_ls, lang)
             return render_template('signup.html', sign_up_list = sign_up_list, lang=lang, message="")
+
+
+
+
+
+# TO Go To Home Page If User Clicks on Home LINK on user home 
+@app.route('/user_home_3', methods=['POST','GET'])
+def user_home_3():
+    name = session['name']
+    lang = session['lang']
+    phone_number = session['phone_number']
+    state = session['state']
+    city = session['city']
+    translated_list, name, city, state = user_home_text_translator(lang, name, city, state)
+    return render_template('user_home.html', t_lis = translated_list, phone_number = phone_number, name = name, city = city, state = state)
+
+
+
+
+# TO Go To Weather Page If User Clicks on Weather LINK 
+@app.route('/weather', methods=['POST','GET'])
+def weather():
+    name = session['name']
+    lang = session['lang']
+    state = session['state']
+    city = session['city']
+    city = english_translator(city)
+    state = english_translator(state)
+    dt, temp, ma, mi, hum, des, speed, visi, day, code = weather_fetcher(city_name = city, state_name = state, lang = lang)
+    translated_list, city, state = weather_text_translator(lang, city, state)
+    phone_number = session['phone_number']
+    cond = day_fetcher()
+    return render_template('wheather.html', t_lis = translated_list, city = city, state = state, dt = dt, temp = temp,ma = ma,mi = mi,hum = hum,des = des,speed = speed,visi = visi, day = day, cond = cond, code = code)
 
 
 
