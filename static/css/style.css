@@ -9044,7 +9044,8 @@ h1, h2, h3, h4, h5,
   padding-bottom: 0; }
 
 .ftco-section {
-  padding: 12em 0;
+  padding-top: 0em 0;
+  padding-bottom: 4em;
   position: relative;
   z-index: 0; }
   @media (max-width: 767.98px) {
