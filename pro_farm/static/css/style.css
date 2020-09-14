@@ -10765,8 +10765,9 @@ iframe {
     background-position: center center;
     position: relative;
     padding: 15em 0;
-    background: #78efd1; }
-    .ftco-section-parallax .parallax-img .img{
+    background: #b7c6ca;
+  } 
+      .ftco-section-parallax .parallax-img .img{
       background-size: cover;
       background-repeat: no-repeat;
       background-position: center center;
