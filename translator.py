@@ -1,6 +1,6 @@
 # Importing Required Libraries
 from googletrans import Translator
-from pages_text import user_home_text, weather_text
+from pages_text import user_home_text, weather_text, user_home_text2, user_home_text3, user_home_text4, user_home_text5
 
 # Init For GoogleTrans
 trans = Translator()
@@ -40,11 +40,18 @@ def text_translator(text_ls, lang):
 
 # Function for translating User Home Text to the language selected by user
 def user_home_text_translator(lang, name, city, state):
-    text_ls = user_home_text()
-    translated_ls = []
-    for text in text_ls:
-        translated = trans.translate(text, src='en', dest=lang)
-        translated_ls.append(translated.text)
+    if lang == 'English':
+        translated_ls = user_home_text()
+    elif lang == 'Hindi':
+        translated_ls = user_home_text2()
+    elif lang == 'Punjabi':
+        translated_ls = user_home_text3()
+    elif lang == 'Marathi':
+        translated_ls = user_home_text4()
+    elif lang == 'Tamil':
+        translated_ls = user_home_text5()
+    elif lang == 'Haryanvi':
+        translated_ls = user_home_text2()
     name = trans.translate(name, src='en', dest=lang)
     city = trans.translate(city, src='en', dest=lang)
     state = trans.translate(state, src='en', dest=lang)
