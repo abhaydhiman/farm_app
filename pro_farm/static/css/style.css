@@ -11766,7 +11766,8 @@ h5,
 }
 
 .ftco-section {
-  padding: 12em 0;
+  padding-top: 0em 0;
+  padding-bottom: 5em;
   position: relative;
   z-index: 0;
 }
@@ -13914,6 +13915,32 @@ iframe {
 .ftco-section-parallax .parallax-img.parallax-img-2 {
   background: #ee76ad;
 }
+
+.ftco-section-parallax {
+  position: relative; }
+  .ftco-section-parallax .parallax-img {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: relative;
+    padding: 15em 0;
+    background: #e9ebeb; }
+  .ftco-section-parallax .parallax-img-2 {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: relative;
+    padding: 15em 0;
+    background: #b7c6ca;
+  } 
+      .ftco-section-parallax .parallax-img .img{
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      position: relative;
+      padding: 15em 0; }
+    .ftco-section-parallax .parallax-img.parallax-img-2 {
+      background: #ee76ad; }
 
 .block-3 .text,
 .block-3 .image {
