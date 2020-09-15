@@ -36,6 +36,14 @@
     // Scrollax
     $.Scrollax();
 
+    // const socialLink = document.querySelector('.social-link');
+    // const shareLink = document.querySelector('.share-link');
+
+    // socialLink.addEventListener('click', function () {
+    //     socialLink.classList.toggle('active');
+    //     shareLink.classList.toggle('active');
+    // })
+
     var carousel = function () {
         $('.home-slider').owlCarousel({
             loop: true,
@@ -105,6 +113,82 @@
 
     $('#dropdown04').on('show.bs.dropdown', function () {
         console.log('show');
+    });
+
+
+    /*------------------
+    Preloader
+--------------------*/
+    $(window).on('load', function () {
+        $(".loader").fadeOut();
+        $("#preloder").delay(200).fadeOut("slow");
+
+        /*------------------
+            Gallery filter
+        --------------------*/
+        $('.featured__controls li').on('click', function () {
+            $('.featured__controls li').removeClass('active');
+            $(this).addClass('active');
+        });
+        if ($('.featured__filter').length > 0) {
+            var containerEl = document.querySelector('.featured__filter');
+            var mixer = mixitup(containerEl);
+        }
+    });
+
+
+    /*------------------
+    Background Set
+--------------------*/
+    $('.set-bg').each(function () {
+        var bg = $(this).data('setbg');
+        $(this).css('background-image', 'url(' + bg + ')');
+    });
+
+
+    /*--------------------------
+        Latest Product Slider
+    ----------------------------*/
+    $(".latest-product__slider").owlCarousel({
+        loop: true,
+        margin: 1,
+        items: 1,
+        dots: false,
+        smartSpeed: 1200,
+        autoHeight: false,
+        autoplay: true
+    });
+
+
+    /*-----------------------------
+        Product Discount Slider
+    -------------------------------*/
+    $(".product__discount__slider").owlCarousel({
+        loop: true,
+        margin: 0,
+        items: 3,
+        dots: true,
+        smartSpeed: 1200,
+        autoHeight: false,
+        autoplay: true,
+        responsive: {
+
+            320: {
+                items: 1,
+            },
+
+            480: {
+                items: 2,
+            },
+
+            768: {
+                items: 2,
+            },
+
+            992: {
+                items: 3,
+            }
+        }
     });
 
     // scroll
