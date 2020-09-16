@@ -7,8 +7,35 @@
 
     <link rel="stylesheet" href="..\static\css\new_style.css">
     <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <script src="..\static\js\jquery-1.10.2.min.js"></script>
 </head>
 <body>
+<!-- =========================================== -->
+
+
+<!-- -----------------------------------------------
+    preloader ---------------------------------- -->
+
+    <div class="loader">
+        <div class="main">
+            <div class="text">
+                Kissan Tech
+            </div>
+            <div class="title">
+                MADE FOR KISSAN 
+            </div>
+            <div class="bar">
+                <div id="fill"></div>
+            </div>
+        </div>
+    </div>
+
+<!-- =========================================== -->
+
+
+<!-- -------------------------------------------
+    language selection --------------------- -->
+
     <div class="hero" style="background-image: url(../static/images/yekuchnew_h.jpg);">
         <div class="navbar">
             <img src="../static/images/logo.png" class="logo">
@@ -25,7 +52,6 @@
                     चुनें
                 </div>
             </h1>
-            <!-- <h1 class="right_text">choose your <br> Language</h1> -->
             <button type="button">English</button>
             <button type="button">Hindi</button>
             <button type="button">Haryanvi</button> <br>
@@ -43,5 +69,43 @@
             <img src="../static/images/bubble.png" alt="">
         </div>
     </div>
+
+<!-- =========================================== -->
+
+
+<!-- -----------------------------------------------
+    loading scripts ---------------------------- -->
+
+    <script type="text/javascript">
+        var progress = 0;
+        document.onreadystatechange = function()
+        {
+            if(document.readyState == "interactive")
+            {
+                var allElement = $("*");
+                var length = allElement.length;
+                for(var i=0; i<length; i++)
+                {
+                    set_element(allElement[i], length);
+                }
+            }
+        }
+        function set_element(element, totalElement)
+        {
+            var percentage = 100/ totalElement;
+            if($(element).length == 1)
+            {
+                $("#fill").animate({width:progress+percentage+"%"}, 100, function()
+                {
+                    if(document.getElementById("fill").style.width == "100%")
+                    {
+                        $(".main").fadeOut(500);
+                    }
+                });
+                progress = progress + percentage;
+            }
+        }
+    </script>
+
 </body>
 </html>
