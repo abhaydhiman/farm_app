@@ -4,7 +4,10 @@
     font-family: Verdana, Geneva, Tahoma, sans-serif;   
 }
 
-.hero{
+/* ---------------------------------
+    language selector ---------------------- */
+
+.hero{                           /* ---- to cover background image ---- */
     width: 100%;
     height: 100vh;
     background-size: cover;
@@ -13,13 +16,13 @@
     overflow: hidden;
 }
 
-.logo{
+.logo{                           /* ---- to set logo ---- */
     width: 400px;
     padding: 2% 3%;
     cursor: pointer;
 }
 
-.navbar{
+.navbar{                         /* ---- to compiler logo into navbar ---- */
     width: 85%;
     height: 30%;
     display: flex;
@@ -28,7 +31,7 @@
     justify-content: space-between;
 }
 
-button{
+button{                           /* ---- to set buttons ---- */
     left: 20%;
     color: rgb(41, 39, 39);
     font-size: medium;
@@ -52,7 +55,7 @@ button:hover{
     background: #fbfcfd;
 }
 
-.content{
+.content{                           /* ---- to set layout for text ---- */
     color: #fbfcfd;
     position: relative;
     top: 30%;
@@ -61,23 +64,23 @@ button:hover{
     z-index: 2;
 }
 
-.right_text{
+.right_text{                        /* ---- to set layout for hindi text ---- */
     margin-left: 20%;
     display: inline-block;
 }
 
-.right_text_2{
+.right_text_2{                      /* ---- to set layout for hindi text-2 ---- */
     margin-left: 27%;
     display: inline-block;
 }
 
-h1{
+h1{                                 /* ---- to set h1 tag ---- */
     font-size: 60px;
     margin: 10px 0 30px;
     line-height: 80px;
 }
 
-.bubbles img{
+.bubbles img{                       /* ---- to set animation of bubbles ---- */
     width: 50px;
     animation: bubble 7s linear infinite;
 }
@@ -108,7 +111,7 @@ h1{
     }
 }
 
-.bubbles img:nth-child(1){
+.bubbles img:nth-child(1){                           /* ---- to change size and time for bubbles ---- */
     animation-delay: 2s;
     width: 25px;
 }
@@ -133,3 +136,92 @@ h1{
     animation-delay: 7s;
     width: 35px;
 }
+
+/* ---------------------------------
+    preloader ---------------------- */
+
+.loader{
+    margin:0px;
+    padding: 0px;
+}
+
+.loader .main{                           /* ---- to set background color properly ---- */
+    width:100%;
+    height: 100vh;
+    background: linear-gradient(80deg, #110e1f, #1b1730);
+    position: fixed;
+    top:0px;
+    left:0px;
+    z-index: 9999;
+}
+.text{                                  /* ---- to set text of preloader ---- */
+    width: 100%;
+    height: 100vh;
+    background-image: url(../images/Background11.jpg);
+    background-size: 100% 100%;
+    background-position: center;
+    font-family: 'Indie Flower', cursive;
+    font-size: 80px;
+    text-align: center;
+    line-height: 650px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-5deg);
+    color: #d2006b;
+    -webkit-background-clip: text;
+    pointer-events: none;
+    animation: anim1 1.5s infinite, anim2 2s forwards;
+}
+
+@keyframes anim1{                           /* ---- to change images one by one inside the text ---- */
+    0%{background-image: url(../images/Background11.jpg);}
+    10%{background-image: url(../images/Background12.jpg);}
+    20%{background-image: url(../images/Background13.jpg);}
+    30%{background-image: url(../images/Background14.jpg);}
+    40%{background-image: url(../images/Background15.jpg);}
+    50%{background-image: url(../images/Background16.jpg);}
+    60%{background-image: url(../images/Background17.jpg);}
+    70%{background-image: url(../images/Background18.jpg);}
+    80%{background-image: url(../images/Background19.jpg);}
+    90%{background-image: url(../images/Background20.jpg);}
+    100%{background-image: url(../images/Background21.jpg);}
+}
+
+@keyframes anim2{
+    from{color: #d2006b;}
+    to{color:transparent;}
+}
+
+.loader .main .title{                           /* ---- to set tag line ---- */
+    font-family: monospace;
+    font-size: 12px;
+    color: white;
+    letter-spacing: 5px;
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.bar{                                           /* ---- to set loading bar ---- */
+    width: 80px;
+    height: 2px;
+    background-color: #282246;
+    position: absolute;
+    top:63%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+}
+
+#fill{                                          /* ---- to fill loading bar ---- */
+    width: 0%;
+    height: 100%;
+    background-color: white;
+    top: 0px;
+    left: 0px;
+}
+
+/* ---------------------------------
+    la la la ---------------------- */
