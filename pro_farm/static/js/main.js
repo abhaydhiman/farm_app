@@ -36,6 +36,14 @@
     // Scrollax
     $.Scrollax();
 
+    // const socialLink = document.querySelector('.social-link');
+    // const shareLink = document.querySelector('.share-link');
+
+    // socialLink.addEventListener('click', function () {
+    //     socialLink.classList.toggle('active');
+    //     shareLink.classList.toggle('active');
+    // })
+
     var carousel = function () {
         $('.home-slider').owlCarousel({
             loop: true,
@@ -105,6 +113,104 @@
 
     $('#dropdown04').on('show.bs.dropdown', function () {
         console.log('show');
+    });
+
+
+    /*------------------
+    Preloader
+--------------------*/
+    $(window).on('load', function () {
+        $(".loader").fadeOut();
+        $("#preloder").delay(200).fadeOut("slow");
+
+        /*------------------
+            Gallery filter
+        --------------------*/
+        $('.featured__controls li').on('click', function () {
+            $('.featured__controls li').removeClass('active');
+            $(this).addClass('active');
+        });
+        if ($('.featured__filter').length > 0) {
+            var containerEl = document.querySelector('.featured__filter');
+            var mixer = mixitup(containerEl);
+        }
+    });
+
+
+    /*------------------
+    Background Set
+--------------------*/
+    $('.set-bg').each(function () {
+        var bg = $(this).data('setbg');
+        $(this).css('background-image', 'url(' + bg + ')');
+    });
+
+
+    /*--------------------------
+        Latest Product Slider
+    ----------------------------*/
+    $(".latest-product__slider").owlCarousel({
+        loop: true,
+        margin: 1,
+        items: 1,
+        dots: false,
+        smartSpeed: 1200,
+        autoHeight: false,
+        autoplay: true
+    });
+
+
+    /*-------------------
+        Quantity change
+    --------------------- */
+    var proQty = $('.pro-qty');
+    proQty.prepend('<span class="dec qtybtn">-</span>');
+    proQty.append('<span class="inc qtybtn">+</span>');
+    proQty.on('click', '.qtybtn', function () {
+        var $button = $(this);
+        var oldValue = $button.parent().find('input').val();
+        if ($button.hasClass('inc')) {
+            var newVal = parseFloat(oldValue) + 1;
+        } else {
+            // Don't allow decrementing below zero
+            if (oldValue > 0) {
+                var newVal = parseFloat(oldValue) - 1;
+            } else {
+                newVal = 0;
+            }
+        }
+        $button.parent().find('input').val(newVal);
+    });
+
+    /*-----------------------------
+        Product Discount Slider
+    -------------------------------*/
+    $(".product__discount__slider").owlCarousel({
+        loop: true,
+        margin: 0,
+        items: 3,
+        dots: true,
+        smartSpeed: 1200,
+        autoHeight: false,
+        autoplay: true,
+        responsive: {
+
+            320: {
+                items: 1,
+            },
+
+            480: {
+                items: 2,
+            },
+
+            768: {
+                items: 2,
+            },
+
+            992: {
+                items: 3,
+            }
+        }
     });
 
     // scroll
@@ -246,3 +352,60 @@
 
 })(jQuery);
 
+
+(function ($) {
+    "use strict";
+
+
+    /*==================================================================
+    [ Validate ]*/
+    var input = $('.validate-input .input100');
+
+    $('.validate-form').on('submit', function () {
+        var check = true;
+
+        for (var i = 0; i < input.length; i++) {
+            if (validate(input[i]) == false) {
+                showValidate(input[i]);
+                check = false;
+            }
+        }
+
+        return check;
+    });
+
+
+    $('.validate-form .input100').each(function () {
+        $(this).focus(function () {
+            hideValidate(this);
+        });
+    });
+
+    function validate(input) {
+        if ($(input).attr('type') == 'email' || $(input).attr('name') == 'email') {
+            if ($(input).val().trim().match(/^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/) == null) {
+                return false;
+            }
+        }
+        else {
+            if ($(input).val().trim() == '') {
+                return false;
+            }
+        }
+    }
+
+    function showValidate(input) {
+        var thisAlert = $(input).parent();
+
+        $(thisAlert).addClass('alert-validate');
+    }
+
+    function hideValidate(input) {
+        var thisAlert = $(input).parent();
+
+        $(thisAlert).removeClass('alert-validate');
+    }
+
+
+
+})(jQuery);
