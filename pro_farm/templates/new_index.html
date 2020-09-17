@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Select</title>
+
+    <link rel="stylesheet" href="..\static\css\new_style.css">
+    <link rel="stylesheet" href="..\static\css\style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <!-- =========================================== -->
+    <div class="hero-wrap">
+        <div id="vantaBirds"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6" style="margin: 2em; position: relative; top:200px;">
+                    <h1 style="color:white">Kissan Tech</h1>
+                    <p style="color:white">well rooted to nature</p>
+                </div>
+                <div class="col-md-4" style="position: relative; top:200px;">
+                    <div class="col-md-3"><br></div>
+                    <div class="col-md-3">
+                        <a href="#">
+                            <img src="../static/images/edited_vali4.png"
+                                style="border-radius: 50%; width: 150px; height: 150px;" onclick="openNav()" alt="">
+                        </a>
+                    </div>
+                    <div>
+                        <h2 style="color:white">Name- ooiiii</h2>
+                        <p style="color:white; position:relative; left: 20px;">number - 1234567890</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row" style="position: relative; top:700px;">
+            <div class="col-md-12 col-sm-12">
+                <h1>wow</h1>
+            </div>
+        </div>
+    </div>
+    <!-- =========================================== -->
+    <!-- =========================================== -->
+
+    <!-- ----------------------
+    loading scripts ------- -->
+    <script src="https://cdn.jsdelivr.net/gh/tengbao/vanta@master/vendor/three.r119.min.js"></script>
+    <script src="..\static\js\vanta.birds.min.js"></script>
+    <script>
+        VANTA.BIRDS({
+            el: "#vantaBirds",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            backgroundColor: 0x152436,
+            birdSize: 1.0
+        });
+    </script>
+
+</body>
+
+</html>

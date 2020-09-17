@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Select</title>
+
+    <link rel="stylesheet" href="..\static\css\new_style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+    <script src="..\static\js\jquery-1.10.2.min.js"></script>
+</head>
+<body>
+<!-- =========================================== -->
+
+
+<!-- -----------------------------------------------
+    preloader ---------------------------------- -->
+
+    <div class="loader">
+        <div class="main">
+            <div class="text">
+                Kissan Tech
+            </div>
+            <div class="title">
+                MADE FOR KISSAN 
+            </div>
+            <div class="bar">
+                <div id="fill"></div>
+            </div>
+        </div>
+    </div>
+
+<!-- =========================================== -->
+
+
+<!-- -------------------------------------------
+    language selection --------------------- -->
+
+    <div class="hero" style="background-image: url(../static/images/yekuchnew_h.jpg);">
+        <div class="navbar">
+            <img src="../static/images/logo.png" class="logo">
+        </div>
+        <div class="content">
+            <small>Welcome to our kissan tech</small>
+            <div class="row">
+                <div class="col-md-4 col-sm-3">
+                    <h1>Choose your Language</h1> 
+                </div>
+                <div class="col-md-7 col-sm-7">
+                    <div class="right_text">अपनी भाषा चुनें</div>
+                </div>
+            </div>
+            <div class="mybuttons">
+                <button type="button">English</button>
+                <button type="button">Hindi</button>
+                <button type="button">Haryanvi</button> <br>
+                <button type="button">Telugu</button>
+                <button type="button">Punjabi</button>
+                <button type="button">Tamil</button>
+            </div>
+        </div>
+        <div class="bubbles">
+            <img src="../static/images/bubble.png" alt="">
+            <img src="../static/images/bubble.png" alt="">
+            <img src="../static/images/bubble.png" alt="">
+            <img src="../static/images/bubble.png" alt="">
+            <img src="../static/images/bubble.png" alt="">
+            <img src="../static/images/bubble.png" alt="">
+            <img src="../static/images/bubble.png" alt="">
+        </div>
+    </div>
+
+<!-- =========================================== -->
+
+
+<!-- -----------------------------------------------
+    loading scripts ---------------------------- -->
+
+    <script type="text/javascript">
+        var progress = 0;
+        document.onreadystatechange = function()
+        {
+            if(document.readyState == "interactive")
+            {
+                var allElement = $("*");
+                var length = allElement.length;
+                for(var i=0; i<length; i++)
+                {
+                    set_element(allElement[i], length);
+                }
+            }
+        }
+        function set_element(element, totalElement)
+        {
+            var percentage = 100/ totalElement;
+            if($(element).length == 1)
+            {
+                $("#fill").animate({width:progress+percentage+"%"}, 100, function()
+                {
+                    if(document.getElementById("fill").style.width == "100%")
+                    {
+                        $(".main").fadeOut(500);
+                    }
+                });
+                progress = progress + percentage;
+            }
+        }
+    </script>
+
+</body>
+</html>
