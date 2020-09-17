@@ -1,7 +1,7 @@
 # Importing Necessary Libraries
 from flask import Flask, render_template,request,session
-from modules import opt_generator, msg_sender, firebase_user_checker, firebase_user_registerer, firebase_user_loger, firebase_data_fetcher, weather_fetcher, day_fetcher
-from translator import text_translator, language_checker, user_home_text_translator, weather_text_translator, english_translator
+from modules import opt_generator, msg_sender, firebase_user_checker, firebase_user_registerer, firebase_user_loger, firebase_data_fetcher, weather_fetcher, day_fetcher, loan_data, get_current_time
+from translator import text_translator, language_checker, user_home_text_translator, weather_text_translator, english_translator, financial_translator, loan_text_translator
 
 
 
@@ -14,7 +14,7 @@ app.secret_key = 'any random string'
 # Route for home page i.e. Language Selection Page
 @app.route('/')
 def home(): 
-    return render_template('lang_select.html')
+    return render_template('new_lang_select.html')
 
 
 
@@ -23,7 +23,6 @@ def home():
 def sign_up(): 
     if request.method == 'POST':
         language = request.form['submit_button']
-
         # Checking Selected language
         lang = language_checker(language)
 
@@ -205,7 +204,86 @@ def weather():
 # To Go to profile page if user clicks on more info link
 @app.route('/profile', methods=['POST','GET'])
 def profile():
-    return render_template('profile.html')
+    phone_number = session['phone_number']
+    name = session['name']
+    lang = session['lang']
+    state = session['state']
+    city = session['city']
+    ls = text_translator([city, state, name, 'Profile','Upload Photo'], lang)
+    return render_template('profile.html',text = ls[3],text2 = ls[4],name = ls[2],phone_number = phone_number,city = ls[0],state = ls[1])
+
+
+# To Go to financial page if user clicks on more info link
+@app.route('/financial', methods=['POST','GET'])
+def financial():
+    lang = session['lang']
+    ls = financial_translator(lang)
+    return render_template('financial.html', ls = ls, msg = '')
+
+
+
+
+# To Go to financial page if user clicks on more info link
+@app.route('/loan', methods=['POST','GET'])
+def loan():
+    lang = session['lang']
+    ls, t1,t2,t3 = loan_text_translator(lang, t1="Submit", t2="Reset", t3="Cancel")
+    return render_template('loan.html', ls = ls, t1=t1,t2=t2,t3=t3)
+
+
+
+
+# To Go to financial page if user clicks on more info link
+@app.route('/loan_submit', methods=['POST','GET'])
+def loan_submit():
+    if request.method == 'POST':
+        name = request.form['name']
+        name2 = request.form['name2']
+        dob = request.form['dob']
+        number = request.form['number']
+        email = request.form['email']
+        gender = request.form['gender']
+        maritial = request.form['maritial']
+        income = request.form['income']
+        address = request.form['address']
+        loan_type = request.form['type']
+        area = request.form['area']
+        total_area = request.form['totalarea']
+        my_loan = request.form['myloan']
+        amount = request.form['amount']
+        des = request.form['text']
+        c_record = 'False'
+        c_record2 = 'False'
+        blacklist = 'False'
+        sign = 'False'
+        if request.form.get('c1'):
+            c_record = 'True'
+        if request.form.get('c2'):
+            c_record2 = 'True'
+        if request.form.get('c3'):
+            blacklist = 'True'
+        if request.form.get('c4'):
+            sign = 'True'
+        amount_blacklist = request.form['amount2']
+        lang = session['lang']
+        phone_number = session['phone_number']
+        ls = financial_translator(lang)
+        # print(name,name2 ,dob ,number ,email ,gender ,maritial, income ,address ,loan_type,area ,total_area ,my_loan ,amount ,des,c_record ,c_record2 ,blacklist ,sign ,amount_blacklist ,phone_number)
+        time, date = get_current_time()
+        loan_data(name,name2 ,dob ,number ,email ,gender ,maritial, income ,address ,loan_type,area ,total_area ,my_loan ,amount ,des,c_record ,c_record2 ,blacklist ,sign ,amount_blacklist ,phone_number, time, date)
+        msg = text_translator(['Form for loan has been Submited'], lang)
+        return render_template('financial.html', ls = ls, msg = msg[0])
+
+
+
+# To Go to shop page if user clicks on more info link
+@app.route('/shop', methods=['POST','GET'])
+def shop():
+    lang = session['lang']
+    phone_number = session['phone_number']
+    return render_template('shop_now.html')
+
+
 
 
 
