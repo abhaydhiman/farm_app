@@ -5,9 +5,10 @@ import requests
 import json
 import datetime
 import calendar
+import time
 import pyrebase
 from firebase import firebase
-from translator import text_translator
+from translator import text_translator, english_translator
 
 
 #__________________________________________________________________________________
@@ -179,5 +180,61 @@ def day_fetcher():
         return('aft')
     else:
         return('eve')
+
+
+def loan_data(name,name2 ,dob ,number ,email ,gender ,maritial, income ,address ,loan_type,area ,total_area ,my_loan ,amount ,des,c_record ,c_record2 ,blacklist ,sign ,amount_blacklist ,phone_number, time, date):
+    loan_type = english_translator(loan_type)
+    Data = {
+        'Registered Number' : phone_number,
+        'First-Name' :  name,
+        'Last-Name' : name2,
+        'Date-of-Birth' : dob,
+        'Phone Number' : number,
+        'Email' : email,
+        'Gender' : gender,
+        'Maritial Status' : maritial,
+        'Income' : income,
+        'Address' : address,
+        'Loan-Type' : loan_type,
+        'Area' : area,
+        'Total Area' : total_area,
+        'Already Have Loan' : my_loan,
+        'Amount of Loan' : amount,
+        'Loan Description' : des,
+        'Criminal Record' : c_record,
+        'Criminal Case Pending' : c_record2,
+        'Blacklisted' : blacklist,
+        'Blacklist Amount' : amount_blacklist,
+        'Signed Gurantee' : sign,
+        'Time' : time,
+        'Date' : date
+    }
+
+    result = firebase.post('/the-farm-app-4015b/Loan:', Data)
+
+
+
+def get_current_time():
+    from datetime import datetime
+    from datetime import date
+    now = datetime.now() #get a datetime object containing current date and time
+    current_time = now.strftime("%H:%M") #created a string representing current time
+    t = time.strptime(current_time, "%H:%M")
+    timevalue_12hour = time.strftime( "%I:%M %p", t )
+    today = date.today() 
+    return timevalue_12hour, today
+
+
+
+def loan_data_fetcher(phone_number):
+    data_list = firebase.get('the-farm-app-4015b/',None)
+    for data in data_list['Loan:']:
+        if data_list['Loan:'][data]['Registered Number'] == str(phone_number):
+            name = data_list['Loan:'][data]['Name']
+            state = data_list['Loan:'][data]['State']
+            city = data_list['Loan:'][data]['City']
+            break
+    return name, state, city
+
 
 
