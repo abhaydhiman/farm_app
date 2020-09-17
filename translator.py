@@ -1,6 +1,7 @@
 # Importing Required Libraries
 from googletrans import Translator
-from pages_text import user_home_text, weather_text, user_home_text2, user_home_text3, user_home_text4, user_home_text5
+from pages_text import user_home_text, weather_text, user_home_text2, user_home_text3, user_home_text4,\
+    user_home_text5, financial_text,loan_text,loan_text2,loan_text3,loan_text4,loan_text5
 
 # Init For GoogleTrans
 trans = Translator()
@@ -40,17 +41,18 @@ def text_translator(text_ls, lang):
 
 # Function for translating User Home Text to the language selected by user
 def user_home_text_translator(lang, name, city, state):
-    if lang == 'English':
+    translated_ls = []
+    if lang == 'en':
         translated_ls = user_home_text()
-    elif lang == 'Hindi':
+    elif lang == 'hi':
         translated_ls = user_home_text2()
-    elif lang == 'Punjabi':
+    elif lang == 'pa':
         translated_ls = user_home_text3()
-    elif lang == 'Marathi':
+    elif lang == 'mr':
         translated_ls = user_home_text4()
-    elif lang == 'Tamil':
+    elif lang == 'ta':
         translated_ls = user_home_text5()
-    elif lang == 'Haryanvi':
+    elif lang == 'hi':
         translated_ls = user_home_text2()
     name = trans.translate(name, src='en', dest=lang)
     city = trans.translate(city, src='en', dest=lang)
@@ -69,6 +71,41 @@ def weather_text_translator(lang, city, state):
     state = trans.translate(state, src='en', dest=lang)
     return translated_ls, city.text, state.text
 
+
+
 def english_translator(text):
     translated = trans.translate(text, dest='en')
     return translated.text
+
+
+
+def financial_translator(lang):
+    text_ls = financial_text()
+    translated_ls = []
+    for text in text_ls:
+        translated = trans.translate(text, src='en', dest=lang)
+        translated_ls.append(translated.text)
+    return translated_ls
+
+
+
+# Function for translating User Home Text to the language selected by user
+def loan_text_translator(lang, t1, t2, t3):
+    translated_ls = []
+    if lang == 'en':
+        translated_ls = loan_text()
+    elif lang == 'hi':
+        translated_ls = loan_text2()
+    elif lang == 'pa':
+        translated_ls = loan_text3()
+    elif lang == 'mr':
+        translated_ls = loan_text4()
+    elif lang == 'ta':
+        translated_ls = loan_text5()
+    elif lang == 'hi':
+        translated_ls = loan_text2()
+    t1 = trans.translate(t1, src='en', dest=lang)
+    t2 = trans.translate(t2, src='en', dest=lang)
+    t3 = trans.translate(t3, src='en', dest=lang)
+    return translated_ls, t1.text, t2.text, t3.text
+
