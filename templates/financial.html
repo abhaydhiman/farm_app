@@ -18,20 +18,25 @@
     <link rel="stylesheet" href="..\static\css\flaticon.css">
     <link rel="stylesheet" href="..\static\css\style.css">
     <link rel="stylesheet" href="..\static\css\icomoon.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 
 
     <style>
         .container1 {
-            background: #9de9a3;
+            background: #72e9c5;
         }
 
         a {
             text-decoration-line: underline;
-            color: blue;
+            color: rgb(40, 40, 43);
         }
 
         a:hover {
-            color: rgb(1, 107, 1);
+            color: rgb(8, 8, 8);
         }
 
      
@@ -41,21 +46,45 @@
 
 <body>
 
+    <nav class="navbar fixed-top navbar-expand-lg navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">{{ls[0]}}</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('user_home_3')}}">{{ls[1]}}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('weather')}}">{{ls[2]}}</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ls[3]}}
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">{{ls[4]}}</a>
+                <a class="dropdown-item" href="#">{{ls[5]}}</a>
+                <a class="dropdown-item" href="#">{{ls[6]}}</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
 
-
-
-
+  
     <!-- Heading for main features -->
-    <section class="ftco-section-2 degree-right">
+    <section class="ftco-section-2">
         <div class="container1">
-            <div class="row justify-content-center mb-0 pb-0 mt-5 pt-5">
+            <div class="row justify-content-center mb-0 pb-3 mt-0 pt-4">
                 <div class="col-md-7 text-center heading-section ftco-animate">
-                    <h2 class="myheading" style="color:rgb(0, 0, 0); "> <strong>Loans And Insurance</strong> </h2>
-                    <span class="subheading">Agriculture loans and insurance are given to all types of farming
-                        operations, farming equipment, construction of infrastructures, marketing operations etc.
+                    <h2 class="myheading" style="color:rgb(31, 30, 30); "> <strong>{{ls[7]}}</strong> </h2>
+                    <br>
+                    <span class="subheading" style="color: #456ddb;">{{ls[8]}}
                     </span>
                     <a href="https://www.agrifarming.in/agriculture-loans-farmers-india#:~:text=Documents%20required%20for%20Agriculture%20Loans.%201%20Identity%20Proof%3A,Driving%20License%2F%20Ration%20Card%2F%20Bank%20Statement%20etc.%20
-                        " target="_blank" class="primary">Read more</a>
+                        " target="_blank" class="primary">{{ls[9]}}</a>
 
                 </div>
             </div>
@@ -68,22 +97,22 @@
 
 
     <!-- Main features in cards -->
-    <section class="ftco-section-parallax degree-right" >
+    <section class="ftco-section-parallax degree-right">
         <div class="parallax-img-2 d-flex align-items-center">
             <div class="container">
                 <div class="row d-flex justify-content-center">
                     <div class="col-md-4 ftco-animate">
                         <div class="blog-entry-2">
-                            <a href="blog-single.html" class="block-20-1"
+                            <a href="{{url_for('loan')}}" class="block-20-1"
                                 style="background-image: url(../static/images/financial.jpeg);">
                             </a>
                             <div class="text p-4 d-block">
                                 <div class="meta mb-3">
-                                    <div><a href="#">Loans</a></div>
-                                    <div><a href="#"></a></div>
-                                    <div><a href="#" class="meta-chat"><span class="icon-inr"></span></a></div>
+                                    <div><a href="{{url_for('loan')}}">{{ls[10]}}</a></div>
+                                    <div><a href="{{url_for('loan')}}"></a></div>
+                                    <div><a href="{{url_for('loan')}}" class="meta-chat"><span class="icon-inr"></span></a></div>
                                 </div>
-                                <h3 class="heading"><a href="#">click here to apply for loan.</a></h3>
+                                <h3 class="heading"><a href="{{url_for('loan')}}">{{ls[11]}}</a></h3>
                             </div>
                         </div>
                     </div>
@@ -94,43 +123,22 @@
                             </a>
                             <div class="text p-4">
                                 <div class="meta mb-3">
-                                    <div><a href="#">Insurance</a></div>
+                                    <div><a href="#">{{ls[12]}}</a></div>
                                     <div><a href="#"></a></div>
                                     <div><a href="#" class="meta-chat"><span class="icon-inr"></span></a></div>
                                 </div>
-                                <h3 class="heading"><a href="#">Click here to apply for insurance.</a></h3>
+                                <h3 class="heading"><a href="#">{{ls[13]}}</a></h3>
                             </div>
                         </div>
                     </div>
-
+                    <h3>{{msg}}</h3>
                 </div>
             </div>
         </div>
-
     </section>
     <!-- Main features to be shown ended -->
 
     <!-- =============================================================================================================== -->
-
-    <!-- discussion -->
-    <section>
-        <div class="mt-5 pt-5">
-            <!-- <br><br><br> -->
-            <h3 style="color:rgb(17, 36, 36)">HELPFUL LINKS FOR YOU!!</h3>
-            <a href="https://krishijagran.com/agriculture-world/pm-kisan-samman-nidhi-yojana-direct-online-link-application-form-important-documents-eligibility-criteria/"
-                target="_blank">Click here
-                to associate with <strong>PM-KISAN-SAMMAN-NIDHI-YOJANA</strong></a>
-        </div>
-
-        <div>
-            <a href="https://kisansamadhan.com/central-government-schemes/ " target="_blank">Click here to know all
-                details
-                of
-                <strong>CENTRAL-GOVERNMENT-SCHEMES</strong></a>
-        </div>
-
-
-    </section>
 
 
     <!-- =============================================================================================================== -->
@@ -141,16 +149,12 @@
             <div class="row mb-5">
                 <div class="col-md">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">DEVELOPERS</h2>
-                        <p><strong style="color:#d1002c;"> PRO-CODERS</strong><br>
-                            <a href=" https://www.linkedin.com/in/aaditya-singhal-a46720192/" target="_blank">Aditya
-                                Singhal</a><br>
-                            <a href=" https://www.linkedin.com/in/abhay-dhiman-409378191/" target="_blank">Abhay
-                                Dhiman</a><br>
-                            <a href=" https://www.linkedin.com/in/ayush-malik-2252b7199/" target="_blank">Ayush
-                                Malik</a><br>
-                            <a href="https://www.linkedin.com/in/akshita-sharma-a160121b6/" target="_blank">Akshita
-                                Sharma</a>
+                        <h2 class="ftco-heading-2">{{ls[14]}}</h2>
+                        <p><strong style="color:#d1002c;">{{ls[15]}}</strong><br>
+                            <a href=" https://www.linkedin.com/in/aaditya-singhal-a46720192/" target="_blank">{{ls[16]}}</a><br>
+                            <a href=" https://www.linkedin.com/in/abhay-dhiman-409378191/" target="_blank">{{ls[17]}}</a><br>
+                            <a href=" https://www.linkedin.com/in/ayush-malik-2252b7199/" target="_blank">{{ls[18]}}</a><br>
+                            <a href="https://www.linkedin.com/in/akshita-sharma-a160121b6/" target="_blank">{{ls[19]}}</a>
 
                         </p>
                         <ul class="ftco-footer-social list-unstyled float-md-left float-lft">
@@ -162,59 +166,33 @@
                 </div>
                 <div class="col-md">
                     <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">QUICK LINKS</h2>
+                        <h2 class="ftco-heading-2">{{ls[20]}}</h2>
                         <ul class="list-unstyled">
-                            <li><a href="#" class="py-2 d-block">Home</a></li>
-                            <li><a href="#" class="py-2 d-block">About</a></li>
-                            <li><a href="#" class="py-2 d-block">Services</a></li>
-                            <li><a href="#" class="py-2 d-block">Portfolio</a></li>
-                            <li><a href="#" class="py-2 d-block">Contact</a></li>
-                            <li><a href="#" class="py-2 d-block">Privacy</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md">
-                    <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">CONTACT</h2>
-                        <ul class="list-unstyled">
-                            <li><a href="#" class="py-2 d-block " style=" color: #d1002c ;">Aaditya Singhal -<a
+                            <li><a href="#" class="py-2 d-block " style=" color: #d1002c ;">{{ls[16]}} -<a
                                         href=" https://github.com/Aaditya1978">https://github.com/Aaditya1978</a></a>
                             </li>
-                            <li><a href="#" class="py-2 d-block" style=" color: #d1002c;">Abhay Dhiman -<a
+                            <li><a href="#" class="py-2 d-block" style=" color: #d1002c;">{{ls[17]}} -<a
                                         href="  https://github.com/abhaydhiman"> https://github.com/abhaydhiman</a></a>
                             </li>
-                            <li><a href="#" class="py-2 d-block" style=" color: #d1002c;">Ayush Malik -<a
+                            <li><a href="#" class="py-2 d-block" style=" color: #d1002c;">{{ls[18]}} -<a
                                         href="https://github.com/Ayush-Malik ">https://github.com/Ayush-Malik</a></a>
                             </li>
-                            <li><a href="#" class="py-2 d-block" style=" color: #d1002c;">Akshita Sharma - <a
+                            <li><a href="#" class="py-2 d-block" style=" color: #d1002c;">{{ls[19]}} - <a
                                         href="https://github.com/akshita-sharma8609 ">https://github.com/akshita-sharma8609</a></a>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-md">
-                    <div class="ftco-footer-widget mb-4">
-                        <h2 class="ftco-heading-2">NEWSLETTER</h2>
-                        <p>Far far away, behind the word mountains, far from the countries.</p>
-                        <form action="#" class="subscribe-form">
-                            <div class="form-group">
-                                <span class="icon icon-paper-plane"></span>
-                                <input type="text" class="form-control" placeholder="Subscribe">
-                            </div>
-                        </form>
-                    </div>
-                </div>
+               
             </div>
             <div class="row">
                 <div class="col-md-12 text-center">
 
                     <p>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        Copyright &copy;
-                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This template
-                        is
-                        made <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
-                            target="_blank"> &nbsp; PRO-CODERS</a>
+                        {{ls[21]}} &copy;
+                        <script>document.write(new Date().getFullYear());</script> {{ls[22]}} |{{ls[23]}}<i class="icon-heart" aria-hidden="true"></i> {{ls[24]}} <a href="#"
+                            target="_blank"> &nbsp; {{ls[25]}}</a>
                         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     </p>
                 </div>
@@ -254,16 +232,6 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
     <script src="..\static\js\google-map.js"></script>
     <script src="..\static\js\main.js"></script>
-
-    <script>
-        function openNav() {
-            document.getElementById("myNav").style.width = "100%";
-        }
-
-        function closeNav() {
-            document.getElementById("myNav").style.width = "0%";
-        }
-    </script>
 
 
 </body>
