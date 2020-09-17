@@ -34,32 +34,32 @@
                     <div class="example">
                         <img src="../static/images/edited_vali4.png" />
                         <div class="contents">
-                            <div class="text">Upload photo</div>
+                            <div class="text">{{text2}}</div>
                         </div>
                     </div>
                 </label>
 
                 <div class="login100-form validate-form">
                     <span class="login100-form-title">
-                        Profile
+                        {{text}}
                     </span>
 
                     <div class="wrap-input100" style="background-color:rgb(238, 231, 231);border-radius:20px;padding-bottom:7px;padding-top:7px;">
-                        <p name="Phone_number" style="position: relative; left:70px;font-size:large;font-family:Verdana, Geneva, Tahoma, sans-serif;">1234567890</p>
+                        <p name="Phone_number" style="position: relative; left:70px;font-size:large;font-family:Verdana, Geneva, Tahoma, sans-serif;">{{phone_number}}</p>
                         <span class="symbol-input100">
                             <i class="fa fa-phone" aria-hidden="true"></i>
                         </span>
                     </div>
 
                     <div class="wrap-input100" style="background-color:rgb(238, 231, 231);border-radius:20px;padding-bottom:7px;padding-top:7px;">
-                        <p name="name" style="position: relative; left:70px;font-size:large;font-family:Verdana, Geneva, Tahoma, sans-serif;">ooiiii</p>
+                        <p name="name" style="position: relative; left:70px;font-size:large;font-family:Verdana, Geneva, Tahoma, sans-serif;">{{name}}</p>
                         <span class="symbol-input100">
                             <i class="fa fa-user" aria-hidden="true"></i>
                         </span>
                     </div>
 
                     <div class="wrap-input100" style="background-color:rgb(238, 231, 231);border-radius:20px;padding-bottom:7px;padding-top:7px;">
-                        <p name="location" style="position: relative; left:70px;font-size:large;font-family:Verdana, Geneva, Tahoma, sans-serif;">Moon</p>
+                        <p name="location" style="position: relative; left:70px;font-size:large;font-family:Verdana, Geneva, Tahoma, sans-serif;">{{city}}, {{state}}</p>
                         <span class="symbol-input100">
                             <i class="fa fa-map-marker" aria-hidden="true"></i>
                         </span>
@@ -71,9 +71,9 @@
             <div class="wrap-login100 mt-5 pt-5">
                 <table id="customers">
                     <tr>
-                        <th style="border-top-left-radius: 15px;">Company</th>
-                        <th>Contact</th>
-                        <th style="border-top-right-radius: 15px;">Country</th>
+                        <th style="border-top-left-radius: 15px;">Category</th>
+                        <th>Date</th>
+                        <th style="border-top-right-radius: 15px;">Status</th>
                     </tr>
                     <tr>
                         <td>Alfreds Futterkiste</td>
