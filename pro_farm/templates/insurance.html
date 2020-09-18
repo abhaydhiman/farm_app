@@ -4,29 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loan Form</title>
+    <title>Insurance Form</title>
 
     <!-- Link -->
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@469&display=swap" rel="stylesheet">
 
     <style>
-        
         * {
             font-family: 'Oswald', sans-serif;
         }
 
-        .container {
-            width: auto;
-            height: auto;
-            background-image: url("/../farm_app/pro_farm/static/images/cash.jpg");
-        }
+
 
         h2 {
             border: 2px solid black;
             /* border-radius: 10px; */
             position: sticky;
             top: 0;
-            /* background-color: rgb(121 156 160); */
             background-color: rgb(255 45 97);
             width: auto;
             margin: 20px auto;
@@ -44,11 +38,11 @@
             display: block;
             border: 4px solid black;
             /* border-radius: 20px; */
-            /* background-color: #f7ae96; */
-            background-color:  #8fa28f;
+            background-color: rgb(197 197 197);
             height: auto;
             width: 1000px;
-            margin: 0px auto;
+
+            margin: 30px auto;
         }
 
         .container2 {
@@ -74,22 +68,97 @@
         }
 
         .container3 input:hover {
-            background-color: rgb(121 156 160);
+            background-color: rgb(112, 255, 112);
+            cursor: pointer;
         }
+
+        #help {
+            border: 2px solid black;
+            background-color: rgb(197 197 197);
+            position: fixed;
+            right: 8px;
+            bottom: 5px;
+            width: 240px;
+            height: 20px;
+            border-radius: 5px;
+            padding: 5px;
+        }
+
+        #help a {
+            color: rgb(27, 147, 177);
+        }
+
+        #help a:hover {
+            color: rgb(0, 184, 0);
+        }
+
+        h4 {
+
+            text-align: center;
+            margin-top: 100px;
+
+        }
+
+        .box {
+            height: 500px;
+            width: auto;
+            border: 4px solid black;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            justify-content: space-around;
+            align-items: center;
+            background-image: url("/../farm_app/pro_farm/static/images/cloudy_day.jpg");
+        }
+
+        .item {
+            background-color: aqua;
+            border: 2px solid black;
+            margin: 20px;
+            padding: 5px;
+            height: 150px;
+            width: 200px;
+        }
+
+        .item a:hover {
+            color: rgb(35, 182, 35);
+        }
+        
     </style>
 </head>
 
 <body>
 
-    <h2>AGRICULTURE &nbsp LOAN</h2>
+    <h2>INSURANCE FORM</h2>
+
+    <!-- IMAGE START ------------------------------------------------------------------->
+
+    <div>
+        <img src="../static/images/insurance.jpg" alt="Error in loading image" width="100%" height="600px">
+    </div>
+
+    <!-- IMAGE END ------------------------------------------------------------------->
+
+
+    <!-- HELP START ------------------------------------------------------------------->
+
+    <div id="help">
+        Need any help? contact us: &nbsp;
+        <a href=" ">Click Here</a>
+    </div>
+
+    <!-- HELP END ------------------------------------------------------------------->
+
 
     <div class="container">
         <div class="container1">
-            <form action="backend.php">
+            <form action="backend.python">
 
                 <!-- PERSONAL INFORMATION START ------------------------------------------------------------------->
 
                 <h3>Personal Information</h3>
+
+
                 <div class="container2">
 
                     <div>
@@ -161,20 +230,18 @@
 
 
 
-                <!-- LOAN DETAILS START  ------------------------------------------------------------------->
+                <!-- INSURANCE DETAILS START  ------------------------------------------------------------------->
 
-                <h3>Loan Details</h3>
+                <h3>Insurance Details</h3>
                 <div class="container2">
                     <div>
-                        <label for="mytype"> LOAN TYPE:</label>
+                        <label for="mytype"> INSURANCE TYPE:</label>
                         <select id="mytype" placeholder="Select">
-                            <option value="type1">Running day to day operations</option>
-                            <option value="type2">Buying farm machinery</option>
-                            <option value="type3">Purchasing Land</option>
-                            <option value="type4">Storage purposes</option>
-                            <option value="type5">Product marketing loans</option>
-                            <option value="type6">Expansion</option>
-                            <option value="type6">Other</option>
+                            <option value="type1">Multiple Peril Crop Insurance</option>
+                            <option value="type2">Actual Production History</option>
+                            <option value="type3">Crop Revenue Coverage</option>
+                            <option value="type4">Other</option>
+
                         </select>
                     </div>
                     <br>
@@ -191,27 +258,16 @@
                     </div>
                     <br>
 
-                    <div>
 
-                        ALREADY HAVE LOAN: <input type="radio" name="myloan"> Yes &nbsp&nbsp&nbsp&nbsp<input
-                            type="radio" name="myloan">No
-                    </div>
-                    <br>
 
                     <div>
-                        <label for="myamount">AMOUNT REQUIRED:</label>
-                        <input type="text" id="myamount">
-                    </div>
-                    <br>
-
-                    <div>
-                        <label for="mytext"> LOAN REQUIRED FOR:</label>
+                        <label for="mytext"> INSURANCE REQUIRED FOR:</label>
                         <br>
                         <textarea name="text" id="mytext" cols="100" rows="5"></textarea>
                     </div>
                     <br>
                 </div>
-                <!-- LOAN DETAILS END ------------------------------------------------------------------->
+                <!-- INSURANCE DETAILS END ------------------------------------------------------------------->
 
 
 
@@ -274,6 +330,38 @@
                 </div>
 
             </form>
+
+
+        </div>
+
+        <h4>Helpful Details</h4>
+        <div class="box">
+
+            <div class="item" id="box1">Crop Insurance: Coverage, Claim & Renewal <br><br>
+                For Details: <br>
+                <a href="https://www.paisabazaar.com/rural-insurance/crop-insurance/#Crop_Insurance"
+                    target="_blank">Click Here</a></div>
+
+
+            <div class="item" id="box2">Advantages Of Crop Insurance<br><br>
+                For Details: <br>
+                <a href="https://www.paisabazaar.com/rural-insurance/crop-insurance/#Crop_Insurance"
+                    target="_blank">Click Here</a>
+            </div>
+
+            <div class="item" id="box3">Pradhan Mantri Fasal Bima Yojana: Types, Coverage, Exclusions & Claim
+                Process<br><br>
+                For Details: <br>
+                <a href="https://www.paisabazaar.com/rural-insurance/crop-insurance/#Crop_Insurance"
+                    target="_blank">Click Here</a>
+            </div>
+
+            <div class="item" id="box1">FAQs<br><br>
+                For Details: <br>
+                <a href="https://www.paisabazaar.com/rural-insurance/crop-insurance/#Crop_Insurance"
+                    target="_blank">Click Here</a>
+            </div>
+
         </div>
     </div>
 </body>
