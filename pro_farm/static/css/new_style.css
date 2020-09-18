@@ -1789,6 +1789,7 @@ h1 {
 
 /* -----------------------------------
     index page ---------------------- */
+
 #vantaBirds{
   position: absolute;
   display: block;
@@ -1799,4 +1800,8 @@ h1 {
   bottom: 0;
   left: 0;
   z-index: -1;
+}
+
+.topnav a:hover {
+    border-bottom: 3px solid red;
 }
