@@ -1,4 +1,4 @@
-# Importing All Necessary Libraries
+# Importing All Necessary Libraries for different modules
 import random
 import math
 import requests
@@ -84,6 +84,23 @@ def firebase_user_checker(phone_number):
 
 
 #___________________________________________________________________________________________
+# Function for authenticating Seller in firebase if already registered or not
+def firebase_seller_checker(phone_number):
+
+    # Check if Seller is Already Registered Or Not
+    data_list = firebase.get('the-farm-app-4015b/',None)
+    flag = 0
+    for data in data_list['Users']['Sellers:']:
+        if data_list['Users']['Sellers:'][data]['Phone Number'] == str(phone_number):
+            flag = 1
+            break
+    return flag
+
+
+
+
+
+#___________________________________________________________________________________________
 # Function For registering New user To Firebase and Adding His Data To Realtime Database
 def firebase_user_registerer(phone_number, password, name, lang, state, city):
 
@@ -113,6 +130,38 @@ def firebase_user_loger(phone_number, password):
 
 
 
+
+#___________________________________________________________________________________________
+# Function For registering New Seller To Firebase and Adding His Data To Realtime Database
+def firebase_admin_registerer(phone_number, password, name, lang, state, city):
+
+    email = str(phone_number)+"@farmapp.com"
+    user = auth.create_user_with_email_and_password(email, password)
+    Data = {
+        'Phone Number' : phone_number,
+        'Name' :  name,
+        'Language' : lang,
+        'State' : state,
+        'City' : city
+    }
+
+    result = firebase.post('/the-farm-app-4015b/Users/Sellers:', Data)
+
+
+
+#___________________________________________________________________________________________
+# Function for Login Seller, check if Credentials were correct or not
+def firebase_admin_loger(phone_number, password):
+    email = str(phone_number)+"@farmapp.com"
+    try:
+        login = auth.sign_in_with_email_and_password(email, password)
+        return 1
+    except:
+        return 0
+
+
+
+#___________________________________________________________________________________________
 # This function fetches name from database for registerd user
 def firebase_data_fetcher(phone_number):
     data_list = firebase.get('the-farm-app-4015b/',None)
@@ -126,6 +175,7 @@ def firebase_data_fetcher(phone_number):
 
 
 
+#___________________________________________________________________________________________
 # This function fetches all the weather information according to the given location
 def weather_fetcher(city_name = None, state_name = None, lang = None):
     
@@ -170,6 +220,7 @@ def weather_fetcher(city_name = None, state_name = None, lang = None):
 
 
 
+#___________________________________________________________________________________________
 # This fuction fetches the current day condition ,i.e., morning, evening or night
 def day_fetcher():
     currentTime = datetime.datetime.now()
@@ -182,7 +233,10 @@ def day_fetcher():
         return('eve')
 
 
-def loan_data(name,name2 ,dob ,number ,email ,gender ,maritial, income ,address ,loan_type,area ,total_area ,my_loan ,amount ,des,c_record ,c_record2 ,blacklist ,sign ,amount_blacklist ,phone_number, time, date):
+
+#___________________________________________________________________________________________
+# This function sends the the data of Loan form to firebase of that particular user
+def loan_data(name,name2 ,dob ,number ,email ,gender ,maritial, income ,address ,loan_type,area ,total_area ,my_loan ,amount ,des,c_record ,c_record2 ,blacklist ,sign ,amount_blacklist ,phone_number, time, date, status):
     loan_type = english_translator(loan_type)
     Data = {
         'Registered Number' : phone_number,
@@ -207,13 +261,16 @@ def loan_data(name,name2 ,dob ,number ,email ,gender ,maritial, income ,address 
         'Blacklist Amount' : amount_blacklist,
         'Signed Gurantee' : sign,
         'Time' : time,
-        'Date' : date
+        'Date' : date,
+        'Status': status
     }
 
     result = firebase.post('/the-farm-app-4015b/Loan:', Data)
 
 
 
+#___________________________________________________________________________________________
+# This function gets the current time and date and used for Form and Insurance Data
 def get_current_time():
     from datetime import datetime
     from datetime import date
@@ -226,15 +283,75 @@ def get_current_time():
 
 
 
+#___________________________________________________________________________________________
+# This Function Fetches the loan data from firebase as per registered number given
 def loan_data_fetcher(phone_number):
+    date_ls = []
+    time_ls = []
+    status_ls = []
     data_list = firebase.get('the-farm-app-4015b/',None)
     for data in data_list['Loan:']:
         if data_list['Loan:'][data]['Registered Number'] == str(phone_number):
-            name = data_list['Loan:'][data]['Name']
-            state = data_list['Loan:'][data]['State']
-            city = data_list['Loan:'][data]['City']
-            break
-    return name, state, city
+            date = data_list['Loan:'][data]['Date']
+            time = data_list['Loan:'][data]['Time']
+            status = data_list['Loan:'][data]['Status']
+            date_ls.append(date)
+            time_ls.append(time)
+            status_ls.append(status)
+            
+    return date_ls, time_ls, status_ls
 
+
+
+#___________________________________________________________________________________________
+# This Function sends Insurance form data to the firebase as per registered User 
+def insu_data(name,name2 ,dob ,number ,email ,gender ,maritial, income ,address ,insu_type,area ,total_area,des,c_record ,c_record2 ,blacklist ,sign ,amount_blacklist ,phone_number, time, date, status):
+    loan_type = english_translator(insu_type)
+    Data = {
+        'Registered Number' : phone_number,
+        'First-Name' :  name,
+        'Last-Name' : name2,
+        'Date-of-Birth' : dob,
+        'Phone Number' : number,
+        'Email' : email,
+        'Gender' : gender,
+        'Maritial Status' : maritial,
+        'Income' : income,
+        'Address' : address,
+        'Insurance-Type' : loan_type,
+        'Area' : area,
+        'Total Area' : total_area,
+        'Insurance Description' : des,
+        'Criminal Record' : c_record,
+        'Criminal Case Pending' : c_record2,
+        'Blacklisted' : blacklist,
+        'Blacklist Amount' : amount_blacklist,
+        'Signed Gurantee' : sign,
+        'Time' : time,
+        'Date' : date,
+        'Status': status
+    }
+
+    result = firebase.post('/the-farm-app-4015b/Insurance:', Data)
+
+
+
+#_____________________________________________________________________________________________
+# This function fetches the insurance data from firebase as per given registered Phone number
+def insu_data_fetcher(phone_number):
+    date_ls = []
+    time_ls = []
+    status_ls = []
+    data_list = firebase.get('the-farm-app-4015b/',None)
+    for data in data_list['Insurance:']:
+        if data_list['Insurance:'][data]['Registered Number'] == str(phone_number):
+            date = data_list['Insurance:'][data]['Date']
+            time = data_list['Insurance:'][data]['Time']
+            status = data_list['Insurance:'][data]['Status']
+            date_ls.append(date)
+            time_ls.append(time)
+            status_ls.append(status)
+            
+    return date_ls, time_ls, status_ls
 
 
