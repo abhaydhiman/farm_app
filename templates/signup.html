@@ -79,6 +79,14 @@
               </button>
           </div>
           </form>
+          <form id="sign-in-form" action="{{url_for('submit_otp')}}" method="POST">
+            <input type="hidden" name="lang" value={{lang}}>
+            <div class="container-login100-form-btn">
+              <button type="submit" class="login100-form-btn" id="sign-in-button" name="sign-in-button" value="admin">
+                {{sign_up_list[5]}}
+              </button>
+          </div>
+          </form>
         </div>
       <span class="txt3">{{message}}</span> <br> <br>
       </div>
