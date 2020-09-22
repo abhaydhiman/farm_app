@@ -1790,6 +1790,7 @@ h1 {
 /* -----------------------------------
     index page ---------------------- */
 
+  /* --------- animation --------- */
 #vantaBirds{
   position: absolute;
   display: block;
@@ -1804,4 +1805,96 @@ h1 {
 
 .topnav a:hover {
     border-bottom: 3px solid red;
+}
+
+  /* --------- text heading --------- */
+.texting {
+  position: relative;
+  top: 1em;
+  justify-content: center;
+  align-items: center;
+}
+.texting  h2 {
+  position: relative;
+  margin: 0 auto;
+  color: white;
+  text-align: center;
+}
+.texting h3 {
+  position: relative;
+  color: white;
+  text-align: center;
+  font-size: 12px;
+}
+
+  /* --------- cards --------- */
+.card-body {
+  margin: 3em auto;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.card {
+  position: relative;
+  margin: 0 auto;
+  width: 300px;
+  height: 500px;
+  background-color: #211b3a;
+  border-radius: 10px;
+}
+
+.card .sliderText {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    padding-top: 2em;
+    margin-top:0;
+    background: #110e1f;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 1px;
+    border-bottom-left-radius: 100%;
+}
+
+.card .sliderText h3 {
+    font-size: 2.5em;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.card .content {
+    font-size: 12px;
+    font-weight: 50;
+    color: #d8d6e0;
+    margin-top:30px;
+    left: 0;
+    width: 290px;
+    padding: 30px;
+    box-sizing: border-box;
+    background: #211b3a;
+}
+
+.swiper-slide {
+    width: 300px;
+}
+.swiper-slide:nth-child(1) .sliderText {
+    background: #2196f3;
+}
+.swiper-slide:nth-child(2) .sliderText {
+    background: #e91e63;
+}
+.swiper-slide:nth-child(3) .sliderText {
+    background: #c3d41a;
+}
+.swiper-slide:nth-child(4) .sliderText {
+    background: #ff9800;
+}
+.swiper-slide:nth-child(5) .sliderText {
+    background: #c33ada;
 }

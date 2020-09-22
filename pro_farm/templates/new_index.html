@@ -9,35 +9,40 @@
     <!-- ------------------
         links --------- -->
     <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/swiper@4.5.0/dist/css/swiper.min.css">
+    <link rel="stylesheet" href="..\static\css\new_style.css">
+    <link rel="stylesheet" href="..\static\css\style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
     <style>
+        
+        /* --------- navbar ---------- */
         html,
         body {
             height: 100%;
         }
-    
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
-    
+
         body {
             font-family: 'Roboto Condensed', sans-serif;
             line-height: 1.7;
             perspective-origin: 0% 50%;
             perspective: 800px;
             background: #21212d;
-    
         }
-    
+
         nav,
         main {
             transition: transform 150ms ease-out;
         }
-    
+
         nav {
             z-index: 100;
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             bottom: 0;
@@ -45,19 +50,19 @@
             background-color: #353441;
             transform: translateX(-16em);
         }
-    
+
         nav.menu-active {
             transform: translateX(0);
         }
-    
+
         nav.menu-hover {
             transform: translateX(-15em);
         }
-    
+
         nav h1 {
             z-index: 100;
             display: block;
-            position: absolute;
+            position: fixed;
             top: 0;
             right: -65px;
             height: 60px;
@@ -71,19 +76,19 @@
             text-align: center;
             background-color: #353441;
             cursor: pointer;
-            border-bottom-right-radius: 10px;
+            border-bottom-right-radius: 100%;
         }
-    
+
         nav h1:hover {
             color: #e9e8f0;
             background: rgb(32, 26, 58);
         }
-    
+
         nav ul {
             margin: 0;
             padding: 0;
         }
-    
+
         nav li {
             display: inline-block;
             padding: 0 1em;
@@ -94,61 +99,51 @@
             background-color: #353441;
             transition: all 0.5s ease-in;
         }
-    
+
         nav li:nth-of-type(2n) {
             background-color: #3a3947;
         }
-    
+
         nav li:hover {
             background: ORANGERED;
             color: white;
-    
         }
-    
-        main {
-            z-index: 0;
-            position: absolute;
-            top: 0;
-            left: 0;
-            bottom: 0;
-            right: 0;
 
-        }
-    
+
         main:after {
             content: '';
             display: block;
-            position: absolute;
+            position: fixed;
             z-index: 1;
             top: 0;
             left: 0;
             bottom: 0;
             right: 0;
-            background: linear-gradient(to right, transparent, rgba(33, 33, 45, .5));
+            background: linear-gradient(to right, transparent, rgba(93, 13, 167, 0.5));
             visibility: hidden;
             opacity: 0;
             transition: opacity 150ms ease-out, visibility 0s 150ms;
         }
-    
+
         main.menu-active {
             border-radius: 0.001px;
             transform: translateX(16em) rotateY(15deg);
             background-color: rgba(70, 66, 66, 0.5);
         }
-    
+
         main.menu-active:after {
             visibility: visible;
             opacity: 1;
             transition: opacity 150ms ease-out, visibility 0s;
         }
-    
+
         main.menu-hover {
             border-radius: 0.001px;
             transform: translateX(1em) rotateY(1deg);
         }
-    
+
         main section {
-            position: absolute;
+            position: relative;
             top: 0;
             left: 0;
             bottom: 0;
@@ -159,35 +154,22 @@
             overflow: auto;
             background-color: rgba(255, 255, 255, .5);
         }
-    
+
         section h1 {
             font-weight: 800;
             text-transform: uppercase;
             font-size: 2em;
         }
-    
+
         section p {
             display: inline-block;
             margin: 16px 0;
         }
     </style>
-    <link rel="stylesheet" href="..\static\css\new_style.css">
-    <link rel="stylesheet" href="..\static\css\style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
 
 </head>
 
-<body>
-
-    <!-- =========================================== -->
-
-
-    <!-- -------------------------------------
-        loader --------------------------- -->
-
-    <!-- =========================================== -->
-
-
+<body style="background: rgb(22, 17, 44);">
     <!-- -------------------------------------
         navbar --------------------------- -->
     <nav class="menu-activea">
@@ -202,8 +184,6 @@
             <li>FAQ</li>
         </ul>
     </nav>
-    <!-- =========================================== -->
-
 
     <!-- ------------------------------------
         Animation ----------------------- -->
@@ -220,9 +200,9 @@
                     <div class="col-md-4" style="position: relative; top:200px;">
                         <div class="col-md-3"><br></div>
                         <div class="col-md-3">
-                            <a href="#">
+                            <a href="#" style="cursor: pointer;">
                                 <img src="../static/images/edited_vali4.png"
-                                    style="border-radius: 50%; width: 150px; height: 150px;" onclick="openNav()" alt="">
+                                    style="border-radius: 50%; width: 150px; height: 150px; cursor: pointer;" onclick="openNav()" alt="">
                             </a>
                         </div>
                         <div>
@@ -233,23 +213,91 @@
                 </div>
             </div>
         </div>
+    </main>
 
-
-    <!-- =========================================== -->
-
-
-        <div class="container">
-            <div class="row" style="position: relative; top:700px;">
-                <div class="col-md-12 col-sm-12">
-                    <h1>wow</h1>
-                </div>
-            </div>
+    <!-- -----------------------------------------
+        Heading for main features ------------ -->
+    <main>
+        <div class="texting">
+                <h2> OUR SPECIAL FEATURES </h2>
+                <h3>HERE YOU WILL GET THE INFORMATION OF WEATHER OF YOUR LOCATION, FINANCIAL
+                HELP AND FERTILIZERS SUITABLE FOR YOUR CROPS!!
+                </h3>
         </div>
     </main>
 
-    <!-- =========================================== -->
-    <!-- =========================================== -->
-
+    <!-- ---------------------------------
+        cards ------------------------ -->
+    <main>
+        <!-- <div class="container"> -->
+            <div class="card-body">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="card" style="background-color: #211b3a;">
+                                <div class="sliderText">
+                                    <h3>Slide One</h3>
+                                </div>
+                                <div class="content">
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem dolore porro, in tenetur aliquid
+                                        inventore deserunt necessitatibus eveniet quis sit, ratione nesciunt, hic at ut quisquam
+                                        maxime corrupti adipisci! Voluptates.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="card" style="background-color: #211b3a;">
+                                <div class="sliderText">
+                                    <h3>Slide Two</h3>
+                                </div>
+                                <div class="content">
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem dolore porro, in tenetur aliquid
+                                        inventore deserunt necessitatibus eveniet quis sit, ratione nesciunt, hic at ut quisquam
+                                        maxime corrupti adipisci! Voluptates.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="card" style="background-color: #211b3a;">
+                                <div class="sliderText">
+                                    <h3>Slide Three</h3>
+                                </div>
+                                <div class="content">
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem dolore porro, in tenetur aliquid
+                                        inventore deserunt necessitatibus eveniet quis sit, ratione nesciunt, hic at ut quisquam
+                                        maxime corrupti adipisci! Voluptates.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="card" style="background-color: #211b3a;">
+                                <div class="sliderText">
+                                    <h3>Slide Four</h3>
+                                </div>
+                                <div class="content">
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem dolore porro, in tenetur aliquid
+                                        inventore deserunt necessitatibus eveniet quis sit, ratione nesciunt, hic at ut quisquam
+                                        maxime corrupti adipisci! Voluptates.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="card" style="background-color: #211b3a;">
+                                <div class="sliderText">
+                                    <h3>Slide Five</h3>
+                                </div>
+                                <div class="content">
+                                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem dolore porro, in tenetur aliquid
+                                        inventore deserunt necessitatibus eveniet quis sit, ratione nesciunt, hic at ut quisquam
+                                        maxime corrupti adipisci! Voluptates.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <!-- </div> -->
+    </main>
 
     <!-- ----------------------
     loading scripts ------- -->
@@ -294,10 +342,32 @@
             minWidth: 200.00,
             scale: 1.00,
             scaleMobile: 1.00,
-            backgroundColor: 0x152436,
+            backgroundColor:  "rgb(22, 17, 44)",
             birdSize: 1.0
         });
     </script>
+
+    <!-- Initialize Swiper -->
+    <script src="https://unpkg.com/swiper@4.5.0/dist/js/swiper.min.js"></script>
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            effect: 'coverflow',
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            coverflowEffect: {
+                rotate: 30,
+                stretch: 0,
+                depth: 200,
+                modifier: 1,
+                slideShadows: true,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+            },
+        });
+    </script>
+
 
 </body>
 <!-- Ayush Malik5:00 PM
