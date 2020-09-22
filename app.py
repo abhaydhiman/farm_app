@@ -5,8 +5,7 @@ from flask import Flask, render_template,request,session
 # Importing Functions from modules.py
 from modules import opt_generator, msg_sender, firebase_user_checker, firebase_user_registerer, \
 firebase_user_loger, firebase_data_fetcher, weather_fetcher, day_fetcher, loan_data, get_current_time,\
-loan_data_fetcher, firebase_seller_checker, firebase_admin_loger, firebase_admin_registerer, insu_data,\
-insu_data_fetcher
+loan_data_fetcher, insu_data, insu_data_fetcher
 
 
 # Importing Functions For translation from translator.py
@@ -38,7 +37,7 @@ def sign_up():
         lang = language_checker(language)
 
         # Translating Text
-        text_ls = ['Enter Credentials', 'Phone Number', 'Full Name', 'Submit', 'Already Registerd, Login', 'For Seller']
+        text_ls = ['Enter Credentials', 'Phone Number', 'Full Name', 'Submit', 'Already Registerd, Login']
         sign_up_list = text_translator(text_ls, lang)
 
         return render_template('signup.html', sign_up_list = sign_up_list, lang=lang, message="")
@@ -67,9 +66,9 @@ def submit_otp():
             
             # If USer is Already Registered
             else:
-                text_ls = ['Enter Credentials', 'Phone Number', 'Full Name', 'Submit', 'Already Registerd, Login', 'For Seller', 'You are already Registered']
+                text_ls = ['Enter Credentials', 'Phone Number', 'Full Name', 'Submit', 'Already Registerd, Login', 'You are already Registered']
                 sign_up_list = text_translator(text_ls, lang)
-                return render_template('signup.html', sign_up_list = sign_up_list, lang=lang, message=sign_up_list[6])
+                return render_template('signup.html', sign_up_list = sign_up_list, lang=lang, message=sign_up_list[5])
 
         # To Go To Login Page            
         if request.form['sign-in-button'] == 'log-in':
@@ -77,11 +76,6 @@ def submit_otp():
             log_list = text_translator(text_ls, lang)
             return render_template('log_in.html', log_list = log_list, lang=lang, mm="")
 
-        # To Go to For Seller Sign-Up page
-        if request.form['sign-in-button'] == 'admin':
-            text_ls = ['Enter Credentials', 'Phone Number', 'Full Name', 'Submit', 'Already Registerd, Login', 'Back']
-            admin_list = text_translator(text_ls, lang)
-            return render_template('admin_signup.html', admin_list=admin_list, message='',lang=lang)
 
 
 
@@ -106,13 +100,13 @@ def set_password():
 
             # If OTP is Wrong Go to Farmer Sign UP Page                
             else:
-                text_ls = ['Enter Credentials', 'Phone Number', 'Full Name', 'Submit', 'Already Registerd, Login', 'For Seller', 'OTP Entered Was Wrong']
+                text_ls = ['Enter Credentials', 'Phone Number', 'Full Name', 'Submit', 'Already Registerd, Login', 'OTP Entered Was Wrong']
                 sign_up_list = text_translator(text_ls, lang)
-                return render_template('signup.html', sign_up_list = sign_up_list, lang=lang, message=sign_up_list[6])
+                return render_template('signup.html', sign_up_list = sign_up_list, lang=lang, message=sign_up_list[5])
         
         # If User Wants To Go back to Farmer Signup Page
         if request.form['code-button'] == 'cancel-button':
-            text_ls = ['Enter Credentials', 'Phone Number', 'Full Name', 'Submit', 'Already Registerd, Login', 'For Seller']
+            text_ls = ['Enter Credentials', 'Phone Number', 'Full Name', 'Submit', 'Already Registerd, Login']
             sign_up_list = text_translator(text_ls, lang)
             return render_template('signup.html', sign_up_list = sign_up_list, lang=lang, message="")
 
@@ -130,17 +124,19 @@ def user_home():
         password2 = request.form['password-confirm']
         state = request.form['stt']
         city = request.form['city']
+        status = request.form['status']
 
         # If Both Password Match then register user and redirect to home page
         if password1 == password2 and len(password1)>=6:
-            firebase_user_registerer(phone_number, password1, name, lang, state, city)
-            translated_list, name,city, state = user_home_text_translator(lang, name, city, state)
+            firebase_user_registerer(phone_number, password1, name, lang, state, city, status)
+            translated_list, name,city, state , status= user_home_text_translator(lang, name, city, state, status)
             session['name'] = name
             session['lang'] = lang
             session['phone_number'] = phone_number
             session['state'] = state
             session['city'] = city
-            return render_template('user_home.html', t_lis = translated_list, phone_number = phone_number, name = name, city=city, state = state)
+            session['status'] = status
+            return render_template('user_home.html', t_lis = translated_list, phone_number = phone_number, name = name, city=city, state = state, status=status)
         
         # If condition not matched then show error
         else:
@@ -165,14 +161,15 @@ def user_home_2():
 
             # If Password matches with phone number then Redirect to home page
             if checker == 1:
-                name, state, city = firebase_data_fetcher(phone_number)
-                translated_list, name,city, state = user_home_text_translator(lang, name, city, state)
+                name, state, city, status = firebase_data_fetcher(phone_number)
+                translated_list, name,city, state, status = user_home_text_translator(lang, name, city, state, status)
                 session['name'] = name
                 session['lang'] = lang
                 session['phone_number'] = phone_number
                 session['state'] = state
                 session['city'] = city
-                return render_template('user_home.html', t_lis = translated_list, phone_number = phone_number, name = name,city = city, state = state)
+                session['status'] = status
+                return render_template('user_home.html', t_lis = translated_list, phone_number = phone_number, name = name,city = city, state = state, status=status)
 
             # Otherwise Then error is shown 
             else:
@@ -182,157 +179,9 @@ def user_home_2():
 
         # If user wnats to go back to signup Page 
         if request.form['log-button'] == 'back':
-            text_ls = ['Enter Credentials', 'Phone Number', 'Full Name', 'Submit', 'Already Registerd, Login', 'For Seller']
+            text_ls = ['Enter Credentials', 'Phone Number', 'Full Name', 'Submit', 'Already Registerd, Login']
             sign_up_list = text_translator(text_ls, lang)
             return render_template('signup.html', sign_up_list = sign_up_list, lang=lang, message="")
-
-
-
-
-
-# Route for OTP Verification Page i.e. Page For Submitting OTP for seller
-@app.route('/admin_otp', methods=['POST'])
-def admin_otp():
-    if request.method == 'POST':
-        lang = request.form['lang']
-
-        # To Go to Confirm OTP Page
-        if request.form['sign-in-button'] == 'sign-in':
-            phone_number = request.form['phone-number']
-            name = request.form['name']
-            flag = firebase_seller_checker(phone_number)
-
-            # If User is new 
-            if flag == 0:
-                otp = opt_generator()
-                text_ls = ['OTP For Your Farm App : ', 'Enter OTP', 'Verify Code', 'Cancel']
-                otp_list = text_translator(text_ls, lang)
-                msg_sender( given_phone_number = phone_number , given_message = otp_list[0] + str(otp))
-                return render_template('admin_otp.html', otp_list = otp_list, lang=lang, phone=phone_number, name=name, otp=otp)
-            
-            # If USer is Already Registered
-            else:
-                text_ls = ['Enter Credentials', 'Phone Number', 'Full Name', 'Submit', 'Already Registerd, Login', 'Back', 'You are already registerd']
-                admin_list = text_translator(text_ls, lang)
-                return render_template('admin_signup.html', admin_list=admin_list, message=admin_list[6],lang=lang)
-
-        # To Go To Login Page            
-        if request.form['sign-in-button'] == 'log-in':
-            text_ls = ['Login', 'Phone Number', 'Password', 'Submit', 'Cancel']
-            log_list = text_translator(text_ls, lang)
-            return render_template('admin_login.html', log_list = log_list, lang=lang, mm="")
-
-        # To Go to Sign-Up page For farmer
-        if request.form['sign-in-button'] == 'back':
-            text_ls = ['Enter Credentials', 'Phone Number', 'Full Name', 'Submit', 'Already Registerd, Login', 'For Seller']
-            sign_up_list = text_translator(text_ls, lang)
-            return render_template('signup.html', sign_up_list = sign_up_list, lang=lang, message="")
-
-
-
-
-
-# Route for going to Set Password Page for seller
-@app.route('/admin_password', methods=['POST'])
-def admin_password():
-    if request.method == 'POST':
-        lang = request.form['lang']
-
-        # To Go to Set Password Page
-        if request.form['code-button'] == 'verify-code-button':
-            otp_user = request.form['verification-code']
-            phone_number = request.form['phone']
-            name = request.form['name']
-            otp = request.form['otp']
-
-            # check if Otp Is Correct
-            if otp == otp_user:
-                text_ls = ['Submit Password', 'Enter Password', 'Confirm Password', 'Confirm']
-                password_list = text_translator(text_ls, lang)
-                return render_template('admin_password.html', password_list=password_list , lang=lang, phone=phone_number, name=name, message="")
-
-            # If OTP is Wrong Go to Sign UP Page                
-            else:
-                text_ls = ['Enter Credentials', 'Phone Number', 'Full Name', 'Submit', 'Already Registerd, Login', 'Back', 'OTP entered was Wrong']
-                admin_list = text_translator(text_ls, lang)
-                return render_template('admin_signup.html', admin_list=admin_list, message=admin_list[6],lang=lang)
-
-        # If User Wants To Go back to Signup Page
-        if request.form['code-button'] == 'cancel-button':
-            text_ls = ['Enter Credentials', 'Phone Number', 'Full Name', 'Submit', 'Already Registerd, Login', 'Back']
-            admin_list = text_translator(text_ls, lang)
-            return render_template('admin_signup.html', admin_list=admin_list, message='',lang=lang)
-
-
-
-
-
-# TO Go To Seller Home Page If User Follows the Step to Register 
-@app.route('/admin_home', methods=['POST'])
-def admin_home():
-    if request.method == 'POST':
-        lang = request.form['lang']
-        phone_number = request.form['phone']
-        name = request.form['name']
-        password1 = request.form['password']
-        password2 = request.form['password-confirm']
-        state = request.form['stt']
-        city = request.form['city']
-
-        # If Both Password Match then register user and redirect to Seller home page
-        if password1 == password2 and len(password1)>=6:
-            firebase_admin_registerer(phone_number, password1, name, lang, state, city)
-            translated_list, name,city, state = user_home_text_translator(lang, name, city, state)
-            session['name'] = name
-            session['lang'] = lang
-            session['phone_number'] = phone_number
-            session['state'] = state
-            session['city'] = city
-            return render_template('user_home.html', t_lis = translated_list, phone_number = phone_number, name = name, city=city, state = state)
-        
-        # If condition not matched then show error
-        else:
-            text_ls = ['Submit Password', 'Enter Password', 'Confirm Password', 'Confirm', 'Both Password Do not match / password must be greater then 6 digits']
-            password_list = text_translator(text_ls, lang)
-            return render_template('admin_password.html', password_list=password_list , lang=lang, phone=phone_number, name=name, message=password_list[4])
-
-
-
-
-# TO Go To Home Page If seller Follows the Step to Login 
-@app.route('/admin_home_2', methods=['POST'])
-def admin_home_2():
-    if request.method == 'POST':
-        lang = request.form['lang']
-
-        # If user Wants to go to home page by logining
-        if request.form['log-button'] == 'log-in':
-            phone_number = request.form['phone-number']
-            password = request.form['password']
-            checker = firebase_admin_loger(phone_number, password)
-
-            # If Password matches with phone number then Redirect to home page
-            if checker == 1:
-                name, state, city = firebase_data_fetcher(phone_number)
-                translated_list, name,city, state = user_home_text_translator(lang, name, city, state)
-                session['name'] = name
-                session['lang'] = lang
-                session['phone_number'] = phone_number
-                session['state'] = state
-                session['city'] = city
-                return render_template('user_home.html', t_lis = translated_list, phone_number = phone_number, name = name,city = city, state = state)
-
-            # Otherwise Then error is shown 
-            else:
-                text_ls = ['Login', 'Phone Number', 'Password', 'Submit', 'Cancel', 'Password Or Phone Number Did not match']
-                log_list = text_translator(text_ls, lang)
-                return render_template('admin_login.html', log_list = log_list, lang=lang, mm=log_list[5])
-
-        # If user wnats to go back to signup Page 
-        if request.form['log-button'] == 'back':
-            text_ls = ['Enter Credentials', 'Phone Number', 'Full Name', 'Submit', 'Already Registerd, Login', 'Back']
-            admin_list = text_translator(text_ls, lang)
-            return render_template('admin_signup.html', admin_list=admin_list, message='',lang=lang)
 
 
 
@@ -345,8 +194,9 @@ def user_home_3():
     phone_number = session['phone_number']
     state = session['state']
     city = session['city']
-    translated_list, name, city, state = user_home_text_translator(lang, name, city, state)
-    return render_template('user_home.html', t_lis = translated_list, phone_number = phone_number, name = name, city = city, state = state)
+    status = session['status']
+    translated_list, name, city, state, status = user_home_text_translator(lang, name, city, state,status)
+    return render_template('user_home.html', t_lis = translated_list, phone_number = phone_number, name = name, city = city, state = state, status=status)
 
 
 
@@ -376,10 +226,11 @@ def profile():
     lang = session['lang']
     state = session['state']
     city = session['city']
+    tstatus = session['status']
     date,time, status = loan_data_fetcher(phone_number)
     date2,time2,status2 = insu_data_fetcher(phone_number)
-    ls = text_translator([city, state, name, 'Profile','Upload Photo', 'Loan', 'Insurance'], lang)
-    return render_template('profile.html',loan=ls[5],insu=ls[6],text = ls[3],text2 = ls[4],name = ls[2],phone_number = phone_number,city = ls[0],state = ls[1], date = date, time = time, length=len(date), status = status,date2 = date2, time2 = time2, length2=len(date2), status2 = status2)
+    ls = text_translator([city, state, name, 'Profile','Upload Photo', 'Loan', 'Insurance', tstatus], lang)
+    return render_template('profile.html',loan=ls[5],insu=ls[6],text = ls[3],text2 = ls[4],name = ls[2],phone_number = phone_number,city = ls[0],state = ls[1], date = date, time = time, length=len(date), status = status,date2 = date2, time2 = time2, length2=len(date2), status2 = status2, tstatus=tstatus)
 
 
 
@@ -504,7 +355,23 @@ def insu_submit():
 def shop():
     lang = session['lang']
     phone_number = session['phone_number']
-    return render_template('shop_now.html')
+    status = session['status']
+    if status == 'Farmer':
+        b_Text = 'Become Seller'
+    else:
+        b_Text = 'Sell Products'
+    return render_template('shop_now.html', b_Text = b_Text)
+
+
+
+
+# To Go to Sell Product Page
+@app.route('/seller',methods=['POST','GET'])
+def seller():
+    lang = session['lang']
+    phone_number = session['phone_number']
+    status = session['status']
+    return render_template('seller.html')
 
 
 
