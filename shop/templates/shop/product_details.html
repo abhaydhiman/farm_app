@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ogani | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+    <!-- links -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="..\static\css\animate.css">
+    <link rel="stylesheet" href="..\static\css\owl.theme.default.min.css">
+    <link rel="stylesheet" href="..\static\css\magnific-popup.css">
+    <link rel="stylesheet" href="..\static\css\owl.carousel.min.css">
+    <link rel="stylesheet" href="..\static\css\flaticon.css">
+    <link rel="stylesheet" href="..\static\css\jquery-ui.min.css">
+    <link rel="stylesheet" href="\..\farm_app\pro_farm\static\css\icomoon.css">
+    <link rel="stylesheet" href="..\static\css\style.css">
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script>
+
+
+
+        $(document).ready(function () {
+
+
+            $(document).on("click", ".change_quantity", function () {
+                $.ajax({
+                    url: "{% url 'shop:product_details' %}",
+                    type: 'POST',
+                    data: {
+                        'csrfmiddlewaretoken': '{{csrf_token}}',
+                        'product_id': "{{product.product_id }}",
+                        'id': this.id, // this id will help us to distinguish between 'plus' and 'minus' operation
+                        'AlreadyExistsInCart': 'True',
+
+                    },
+                    dataType: 'json',
+                    success: function (resp) {
+                        $("#quantity").replaceWith(resp.c_html);
+                    }
+                });
+            });
+
+            $(document).on("click", "button.add_item_to_cart", function () {
+                $.ajax({
+                    url: "{% url 'shop:add_item_to_cart' %}",
+                    type: 'POST',
+                    data: {
+                        'csrfmiddlewaretoken': '{{csrf_token}}',
+                        'product_id': "{{product.product_id }}",
+                        'AlreadyExistsInCart': 'False',
+                    },
+                    dataType: 'json',
+                    success: function (resp) {
+                        $(".add_item_to_cart").replaceWith(resp.c_html);
+                    }
+                });
+            });
+
+
+        });
+
+
+
+
+
+    </script>
+
+
+
+
+
+
+</head>
+
+<body>
+    <!-- Product Details Section Begin -->
+    <section class="product-details spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-6">
+                    <div class="product__details__pic">
+                        <div class="product__details__pic__item">
+                            <img class="product__details__pic__item--large" src="{{product.image}}" alt="">
+                        </div>
+                        <div class="product__details__pic__slider owl-carousel">
+                            <img data-imgbigurl="../static/images/featured/feature-2.jpg"
+                                src="../static/images/featured/feature-2.jpg" alt="">
+                            <img data-imgbigurl="../static/images/featured/feature-2.jpg"
+                                src="../static/images/featured/feature-2.jpg" alt="">
+                            <img data-imgbigurl="../static/images/featured/feature-2.jpg"
+                                src="../static/images/featured/feature-2.jpg" alt="">
+                            <img data-imgbigurl="../static/images/featured/feature-2.jpg"
+                                src="../static/images/featured/feature-2.jpg" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="product__details__text">
+                        <h3>{{product.product_name}}</h3>
+                        <div class="product__details__rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-half-o"></i>
+                            <span>(18 reviews)</span>
+                        </div>
+                        <div class="product__details__price">{{product.price}}</div>
+                        <p>{{product.desc}}</p>
+
+
+
+                        {% if add_to_cart_button == 'Active' %}
+                        <button class="add_item_to_cart btn btn-secondary">Add to Cart</button>
+                        {% else %}
+                        <button id='plus' class="change_quantity btn btn-secondary">+</button>
+                        <!-- <li id="plus" class="change_quantity"><a><i class="fa fa-shopping-cart"></i></a></li> -->
+                        <a id='quantity'> {{quantity}} </a>
+                        <button id='minus' class="change_quantity btn btn-secondary">-</button>
+                        <!-- <li id="minus" class="change_quantity"><a><i class="fa fa-shopping-cart"></i></a></li> -->
+                        {% endif %}
+
+
+                        <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                        <ul>
+                            <li><b>dynamic ni h Availability</b> <span>In Stock</span></li>
+                            <li><b>dynamic ni h Shipping</b> <span>01 day shipping. <samp>Free pickup
+                                        today</samp></span></li>
+                            <li><b>dynamic ni h Weight</b> <span>0.5 kg</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="product__details__tab">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
+                                    aria-selected="true">Description</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                                <div class="product__details__tab__desc"> <br>
+                                    <h6>Products Infomation</h6>
+                                    <p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.
+                                        Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus. Vivamus
+                                        suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam sit amet quam
+                                        vehicula elementum sed sit amet dui. Donec rutrum congue leo eget malesuada.
+                                        Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur arcu erat,
+                                        accumsan id imperdiet et, porttitor at sem. Praesent sapien massa, convallis a
+                                        pellentesque nec, egestas non nisi. Vestibulum ac diam sit amet quam vehicula
+                                        elementum sed sit amet dui. Vestibulum ante ipsum primis in faucibus orci luctus
+                                        et ultrices posuere cubilia Curae; Donec velit neque, auctor sit amet aliquam
+                                        vel, ullamcorper sit amet ligula. Proin eget tortor risus.</p>
+                                    <p>Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Lorem
+                                        ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit aliquet
+                                        elit, eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna dictum
+                                        porta. Cras ultricies ligula sed magna dictum porta. Sed porttitor lectus
+                                        nibh. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.
+                                        Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui. Sed
+                                        porttitor lectus nibh. Vestibulum ac diam sit amet quam vehicula elementum
+                                        sed sit amet dui. Proin eget tortor risus.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <br>
+                    <div class="product__details__tab">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#tabs-2" role="tab"
+                                    aria-selected="true">Information</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tabs-2" role="tabpanel">
+                                <div class="product__details__tab__desc"> <br>
+                                    <h6>Products Infomation</h6>
+                                    <p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.
+                                        Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus.
+                                        Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam
+                                        sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo
+                                        eget malesuada. Vivamus suscipit tortor eget felis porttitor volutpat.
+                                        Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Praesent
+                                        sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ac
+                                        diam sit amet quam vehicula elementum sed sit amet dui. Vestibulum ante
+                                        ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
+                                        Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.
+                                        Proin eget tortor risus.</p>
+                                    <p>Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Lorem
+                                        ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit aliquet
+                                        elit, eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna dictum
+                                        porta. Cras ultricies ligula sed magna dictum porta. Sed porttitor lectus
+                                        nibh. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div> <br>
+                    <div class="product__details__tab">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#tabs-3" role="tab"
+                                    aria-selected="true">Reviews <span>(1)</span></a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tabs-2" role="tabpanel">
+                                <div class="tab-pane active" id="tabs-3" role="tabpanel">
+                                    <div class="product__details__tab__desc"> <br>
+                                        <h6>Products Infomation</h6>
+                                        <p>Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.
+                                            Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus.
+                                            Vivamus suscipit tortor eget felis porttitor volutpat. Vestibulum ac diam
+                                            sit amet quam vehicula elementum sed sit amet dui. Donec rutrum congue leo
+                                            eget malesuada. Vivamus suscipit tortor eget felis porttitor volutpat.
+                                            Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Praesent
+                                            sapien massa, convallis a pellentesque nec, egestas non nisi. Vestibulum ac
+                                            diam sit amet quam vehicula elementum sed sit amet dui. Vestibulum ante
+                                            ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;
+                                            Donec velit neque, auctor sit amet aliquam vel, ullamcorper sit amet ligula.
+                                            Proin eget tortor risus.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Product Details Section End -->
+
+    <!-- Related Product Section Begin -->
+    <section class="related-product">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title related__product__title">
+                        <h2>Related Product</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="product__item">
+                        <div class="product__item__pic set-bg" data-setbg="../static/images/featured/feature-2.jpg">
+                            <ul class="product__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="product__item__text">
+                            <h6><a href="#">Crab Pool Security</a></h6>
+                            <h5>$30.00</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="product__item">
+                        <div class="product__item__pic set-bg" data-setbg="../static/images/featured/feature-2.jpg">
+                            <ul class="product__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="product__item__text">
+                            <h6><a href="#">Crab Pool Security</a></h6>
+                            <h5>$30.00</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="product__item">
+                        <div class="product__item__pic set-bg" data-setbg="../static/images/featured/feature-2.jpg">
+                            <ul class="product__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="product__item__text">
+                            <h6><a href="#">Crab Pool Security</a></h6>
+                            <h5>$30.00</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="product__item">
+                        <div class="product__item__pic set-bg" data-setbg="../static/images/featured/feature-2.jpg">
+                            <ul class="product__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="product__item__text">
+                            <h6><a href="#">Crab Pool Security</a></h6>
+                            <h5>$30.00</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Related Product Section End -->
+
+    <!-- ================================================================================================================= -->
+
+    <!-- footer added -->
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Company</h2>
+                        <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia,
+                            there
+                            live the blind texts.</p>
+                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft">
+                            <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Quick Links</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="py-2 d-block">Home</a></li>
+                            <li><a href="#" class="py-2 d-block">About</a></li>
+                            <li><a href="#" class="py-2 d-block">Services</a></li>
+                            <li><a href="#" class="py-2 d-block">Portfolio</a></li>
+                            <li><a href="#" class="py-2 d-block">Contact</a></li>
+                            <li><a href="#" class="py-2 d-block">Privacy</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Contact Information</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="py-2 d-block">198 West 21th Street, Suite 721 New York NY 10016</a>
+                            </li>
+                            <li><a href="#" class="py-2 d-block">+ 1235 2355 98</a></li>
+                            <li><a href="#" class="py-2 d-block">info@yoursite.com</a></li>
+                            <li><a href="#" class="py-2 d-block">email@email.com</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">Newsletter</h2>
+                        <p>Far far away, behind the word mountains, far from the countries.</p>
+                        <form action="#" class="subscribe-form">
+                            <div class="form-group">
+                                <span class="icon icon-paper-plane"></span>
+                                <input type="text" class="form-control" placeholder="Subscribe">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+
+                    <p>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This template
+                        is
+                        made with <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
+                            target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- footer ended -->
+
+
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+                stroke="#F96D00" />
+        </svg>
+    </div>
+
+    <!-- =========================================================================================================== -->
+
+
+    <!-- Scripts -->
+    <script src="..\static\js\aos.js"></script>
+    <script src="..\static\js\jquery.min.js"></script>
+    <script src="..\static\js\jquery-migrate-3.0.1.min.js"></script>
+    <script src="..\static\js\popper.min.js"></script>
+    <script src="..\static\js\bootstrap.min.js"></script>
+    <script src="..\static\js\jquery.easing.1.3.js"></script>
+    <script src="..\static\js\jquery.waypoints.min.js"></script>
+    <script src="..\static\js\jquery.stellar.min.js"></script>
+    <script src="..\static\js\owl.carousel.min.js"></script>
+    <script src="..\static\js\jquery.magnific-popup.min.js"></script>
+    <script src="..\static\js\jquery.animateNumber.min.js"></script>
+    <script src="..\static\js\scrollax.min.js"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="..\static\js\google-map.js"></script>
+    <script src="..\static\js\mixitup.min.js"></script>
+    <script src="..\static\js\main.js"></script>
+</body>
+
+</html>
