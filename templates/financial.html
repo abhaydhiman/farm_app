@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Loans and Insurance</title>
+
+
+    <!-- links -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="..\static\css\animate.css">
+    <link rel="stylesheet" href="..\static\css\owl.theme.default.min.css">
+    <link rel="stylesheet" href="..\static\css\magnific-popup.css">
+    <link rel="stylesheet" href="..\static\css\owl.carousel.min.css">
+    <link rel="stylesheet" href="..\static\css\flaticon.css">
+    <link rel="stylesheet" href="..\static\css\style.css">
+    <link rel="stylesheet" href="..\static\css\icomoon.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+
+    <style>
+        .container1 {
+            background: #72e9c5;
+        }
+
+        a {
+            text-decoration-line: underline;
+            color: rgb(40, 40, 43);
+        }
+
+        a:hover {
+            color: rgb(8, 8, 8);
+        }
+
+     
+    </style>
+
+</head>
+
+<body>
+
+    <nav class="navbar fixed-top navbar-expand-lg navbar navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">{{ls[0]}}</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('user_home_3')}}">{{ls[1]}}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{url_for('weather')}}">{{ls[2]}}</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{ls[3]}}
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">{{ls[4]}}</a>
+                <a class="dropdown-item" href="#">{{ls[5]}}</a>
+                <a class="dropdown-item" href="#">{{ls[6]}}</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+  
+    <!-- Heading for main features -->
+    <section class="ftco-section-2">
+        <div class="container1">
+            <div class="row justify-content-center mb-0 pb-3 mt-0 pt-4">
+                <div class="col-md-7 text-center heading-section ftco-animate">
+                    <h2 class="myheading" style="color:rgb(31, 30, 30); "> <strong>{{ls[7]}}</strong> </h2>
+                    <br>
+                    <span class="subheading" style="color: #456ddb;">{{ls[8]}}
+                    </span>
+                    <a href="https://www.agrifarming.in/agriculture-loans-farmers-india#:~:text=Documents%20required%20for%20Agriculture%20Loans.%201%20Identity%20Proof%3A,Driving%20License%2F%20Ration%20Card%2F%20Bank%20Statement%20etc.%20
+                        " target="_blank" class="primary">{{ls[9]}}</a>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Heading ended -->
+
+
+    <!-- =============================================================================================================== -->
+
+
+    <!-- Main features in cards -->
+    <section class="ftco-section-parallax degree-right">
+        <div class="parallax-img-2 d-flex align-items-center">
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-4 ftco-animate">
+                        <div class="blog-entry-2">
+                            <a href="{{url_for('loan')}}" class="block-20-1"
+                                style="background-image: url(../static/images/financial.jpeg);">
+                            </a>
+                            <div class="text p-4 d-block">
+                                <div class="meta mb-3">
+                                    <div><a href="{{url_for('loan')}}">{{ls[10]}}</a></div>
+                                    <div><a href="{{url_for('loan')}}"></a></div>
+                                    <div><a href="{{url_for('loan')}}" class="meta-chat"><span class="icon-inr"></span></a></div>
+                                </div>
+                                <h3 class="heading"><a href="{{url_for('loan')}}">{{ls[11]}}</a></h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 ftco-animate">
+                        <div class="blog-entry-2" data-aos-delay="100">
+                            <a href="{{url_for('insu')}}" class="block-20-1"
+                                style="background-image: url(../static/images/insur2.jpg);">
+                            </a>
+                            <div class="text p-4">
+                                <div class="meta mb-3">
+                                    <div><a href="{{url_for('insu')}}">{{ls[12]}}</a></div>
+                                    <div><a href="{{url_for('insu')}}"></a></div>
+                                    <div><a href="{{url_for('insu')}}" class="meta-chat"><span class="icon-inr"></span></a></div>
+                                </div>
+                                <h3 class="heading"><a href="{{url_for('insu')}}">{{ls[13]}}</a></h3>
+                            </div>
+                        </div>
+                    </div>
+                    <h3>{{msg}}</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Main features to be shown ended -->
+
+    <!-- =============================================================================================================== -->
+
+
+    <!-- =============================================================================================================== -->
+
+    <!-- Footer started -->
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">{{ls[14]}}</h2>
+                        <p><strong style="color:#d1002c;">{{ls[15]}}</strong><br>
+                            <a href=" https://www.linkedin.com/in/aaditya-singhal-a46720192/" target="_blank">{{ls[16]}}</a><br>
+                            <a href=" https://www.linkedin.com/in/abhay-dhiman-409378191/" target="_blank">{{ls[17]}}</a><br>
+                            <a href=" https://www.linkedin.com/in/ayush-malik-2252b7199/" target="_blank">{{ls[18]}}</a><br>
+                            <a href="https://www.linkedin.com/in/akshita-sharma-a160121b6/" target="_blank">{{ls[19]}}</a>
+
+                        </p>
+                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft">
+                            <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">{{ls[20]}}</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="py-2 d-block " style=" color: #d1002c ;">{{ls[16]}} -<a
+                                        href=" https://github.com/Aaditya1978">https://github.com/Aaditya1978</a></a>
+                            </li>
+                            <li><a href="#" class="py-2 d-block" style=" color: #d1002c;">{{ls[17]}} -<a
+                                        href="  https://github.com/abhaydhiman"> https://github.com/abhaydhiman</a></a>
+                            </li>
+                            <li><a href="#" class="py-2 d-block" style=" color: #d1002c;">{{ls[18]}} -<a
+                                        href="https://github.com/Ayush-Malik ">https://github.com/Ayush-Malik</a></a>
+                            </li>
+                            <li><a href="#" class="py-2 d-block" style=" color: #d1002c;">{{ls[19]}} - <a
+                                        href="https://github.com/akshita-sharma8609 ">https://github.com/akshita-sharma8609</a></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+               
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+
+                    <p>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        {{ls[21]}} &copy;
+                        <script>document.write(new Date().getFullYear());</script> {{ls[22]}} |{{ls[23]}}<i class="icon-heart" aria-hidden="true"></i> {{ls[24]}} <a href="#"
+                            target="_blank"> &nbsp; {{ls[25]}}</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer ending -->
+
+
+    <!-- ============================================================================================================== -->
+
+
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+                stroke="#F96D00" />
+        </svg></div>
+
+
+    <!-- ============================================================================================================== -->
+
+
+    <!-- Scripts -->
+    <script src="..\static\js\jquery.min.js"></script>
+    <script src="..\static\js\jquery-migrate-3.0.1.min.js"></script>
+    <script src="..\static\js\popper.min.js"></script>
+    <script src="..\static\js\bootstrap.min.js"></script>
+    <script src="..\static\js\jquery.easing.1.3.js"></script>
+    <script src="..\static\js\jquery.waypoints.min.js"></script>
+    <script src="..\static\js\jquery.stellar.min.js"></script>
+    <script src="..\static\js\owl.carousel.min.js"></script>
+    <script src="..\static\js\jquery.magnific-popup.min.js"></script>
+    <script src="..\static\js\jquery.animateNumber.min.js"></script>
+    <script src="..\static\js\scrollax.min.js"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="..\static\js\google-map.js"></script>
+    <script src="..\static\js\main.js"></script>
+
+
+</body>
+
+</html>

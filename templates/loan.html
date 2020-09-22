@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Form</title>
+
+    <!-- Link -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@469&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+    <style>
+        
+        * {
+            font-family: 'Oswald', sans-serif
+        }
+
+        .container {
+            width: auto;
+            height: auto;
+            background-image: url("/../farm_app/pro_farm/static/images/cash.jpg");
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            border-radius: 10px;
+            background-color: #64d164;
+            margin-bottom: 20px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            text-align: center;
+        }
+
+        h3 {
+            text-align: center;
+            padding-top: 20px;
+        }
+
+
+
+        .container1 {
+            display: block;
+            border: 4px solid black;
+            /* border-radius: 20px; */
+            /* background-color: #f7ae96; */
+            background-color:  #dfe2df;
+            height: auto;
+            width: 1000px;
+            margin: 0px auto;
+            border-radius: 15px;
+        }
+
+        .container2 {
+
+            border: 2px solid black;
+            /* border-radius: 10px; */
+            margin: 30px 30px;
+            padding: 30px 50px;
+
+        }
+
+        .container3 {
+
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        input,
+        textarea {
+            border: 1px solid black;
+            border-radius: 5px;
+            padding-left: 5px;
+            padding-top: 3px;
+            padding-bottom: 3px;
+        }
+        input{
+            margin-left: 20px;
+        }
+
+        .container3 input:hover {
+            background-color: rgb(146, 141, 141);
+            cursor: pointer;
+        }
+        .anchor{
+            padding: 4px;
+            margin: 10px;
+            border: 1px solid black;
+            color: black;
+            border-radius: 5px;
+            background-color: white;;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>{{ls[0]}}</h2>
+
+    <div class="container">
+        <div class="container1">
+            <form action="{{url_for('loan_submit')}}" method="POST">
+
+                <!-- PERSONAL INFORMATION START ------------------------------------------------------------------->
+
+                <h3>{{ls[1]}}</h3>
+                <div class="container2">
+
+                    <div>
+                        <label for="myname">{{ls[2]}} : </label>
+                        <input type="text" id="myname" name="name" required>
+                    </div>
+                    <br>
+
+                    <div>
+                        <label for="myfirstname">{{ls[3]}} : </label>
+                        <input type="text" id="myfirstname" name="name2">
+                    </div>
+                    <br>
+
+                    <div>
+                        <label for="mydob">{{ls[4]}} : </label>
+                        <input type="date" id="mydob" name="dob" required>
+                    </div>
+                    <br>
+
+
+                    <div>
+                        <label for="mynumber">{{ls[5]}} : </label>
+                        <input type="number" id="mynumber" name="number" required>
+                    </div>
+                    <br>
+
+                    <div>
+                        <label for="myemail">{{ls[6]}} : </label>
+                        <input type="email" id="myemail" name="email">
+                    </div>
+                    <br>
+
+                    <div>
+
+                        {{ls[7]}} : <input type="radio" name="gender" id="mygender" value="male" required>{{ls[8]}} &nbsp&nbsp&nbsp&nbsp<input
+                            type="radio" name="gender" id="mygender" value="female">{{ls[9]}} &nbsp&nbsp&nbsp&nbsp<input type="radio"
+                            name="gender" id="mygender" value="other">{{ls[10]}}
+                    </div>
+                    <br>
+
+                    <div>
+
+                        {{ls[11]}} : <input type="radio" name="maritial" id="mystatus" value="single" required>{{ls[12]}}
+                        &nbsp&nbsp&nbsp&nbsp<input type="radio" name="maritial" value="married">{{ls[13]}} &nbsp&nbsp&nbsp&nbsp<input
+                            type="radio" name="maritial" value="other">{{ls[14]}}
+                    </div>
+                    <br>
+
+                    <div>
+                        <label for="myincome">{{ls[15]}} : </label>
+                        <input type="number" id="myincome" name="income" required>
+                    </div>
+                    <br>
+
+
+
+                    <div>
+                        <label for="myadd">{{ls[16]}} : </label><br>
+                        <textarea name="address" id="myadd" cols="100" rows="3" required></textarea>
+                    </div>
+                    <br>
+
+                </div>
+
+                <!-- PERSONAL INFORMATION END ------------------------------------------------------------------->
+
+
+
+                <!-- LOAN DETAILS START  ------------------------------------------------------------------->
+
+                <h3>{{ls[17]}}</h3>
+                <div class="container2">
+                    <div>
+                        <label for="mytype">{{ls[18]}} : </label>
+                        <select name="type" id="mytype" placeholder="Select" style="border-radius: 5px;" required>
+                            <option value="">--{{ls[19]}}--</option>
+                            <option value="{{ls[20]}}">{{ls[20]}}</option>
+                            <option value="{{ls[21]}}">{{ls[21]}}</option>
+                            <option value="{{ls[22]}}">{{ls[22]}}</option>
+                            <option value="{{ls[23]}}">{{ls[23]}}</option>
+                            <option value="{{ls[24]}}">{{ls[24]}}</option>
+                            <option value="{{ls[25]}}">{{ls[25]}}</option>
+                            <option value="{{ls[26]}}">{{ls[26]}}</option>
+                        </select>
+                    </div>
+                    <br>
+
+                    <div>
+                        <label for="myarea">{{ls[27]}} : </label>
+                        <input type="text" id="myarea" name="area" required>
+                    </div>
+                    <br>
+
+                    <div>
+                        <label for="mytotalarea">{{ls[28]}} : </label>
+                        <input type="text" id="mytotalarea" name="totalarea" required>
+                    </div>
+                    <br>
+
+                    <div>
+
+                        {{ls[29]}} : <input type="radio" name="myloan" value="yes" required>{{ls[30]}} &nbsp&nbsp&nbsp&nbsp<input
+                            type="radio" name="myloan" value="no">{{ls[31]}}
+                    </div>
+                    <br>
+
+                    <div>
+                        <label for="myamount">{{ls[32]}} : </label>
+                        <input type="text" id="myamount" name="amount" required>
+                    </div>
+                    <br>
+
+                    <div>
+                        <label for="mytext">{{ls[33]}} :</label>
+                        <br>
+                        <textarea name="text" id="mytext" cols="100" rows="5" required></textarea>
+                    </div>
+                    <br>
+                </div>
+                <!-- LOAN DETAILS END ------------------------------------------------------------------->
+
+
+
+                <!-- ADDITIONAL DETAILS START ------------------------------------------------------------------->
+
+                <h3>{{ls[34]}}</h3>
+                <div class="container2">
+                    <div>
+                        {{ls[35]}}? <input type="checkbox" name="c1"> <br>
+                        {{ls[36]}}? <input type="checkbox" name="c2"><br>
+                        {{ls[37]}}? <input type="checkbox" name="c3"> {{ls[38]}} <input type="number" name="amount2"><br>
+                        {{ls[39]}}? <input type="checkbox" name="c4">
+                    </div>
+                    <br>
+
+                    <div>
+                        <label for="confirm1">{{ls[40]}}**</label>
+                        <br>
+                        <input type="radio" id="confirm1" name="confirm1" required>
+                    </div>
+                    <br>
+
+                    <div>
+                        <label for="confirm2">{{ls[41]}}**</label>
+
+                        <br>
+                        <input type="radio" id="confirm2" name="confirm2" required>
+                    </div>
+                    <br>
+                </div>
+                <!-- ADDITIONAL DETAILS END ------------------------------------------------------------------->
+
+
+                <div class="container3">
+
+                    <input type="submit" value="{{t1}}" style="margin-right: 30px;">
+                    <input type="reset" value="{{t2}}" style="margin-right: 30px;">
+                    <a class="anchor" href="{{url_for('user_home_3')}}">{{t3}}</a>
+
+                </div>
+
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

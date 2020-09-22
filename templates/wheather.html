@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{{t_lis[0]}}</title>
+
+    <!-- links -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="..\static\css\animate.css">
+    <link rel="stylesheet" href="..\static\css\owl.theme.default.min.css">
+    <link rel="stylesheet" href="..\static\css\magnific-popup.css">
+
+    <link rel="stylesheet" href="..\static\css\owl.carousel.min.css">
+    <link rel="stylesheet" href="..\static\css\flaticon.css">
+    <link rel="stylesheet" href="..\static\css\style.css">
+
+
+
+    <link rel="stylesheet" href="..\static\css\icomoon.css">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <!-- <link rel="stylesheet" href="\..\racks\css\style.css"> -->
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="#">The<span>F</span>armer</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+                aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> 
+            </button>
+    
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item"><a href="{{url_for('user_home_3')}}" class="nav-link">{{t_lis[1]}}</a></li>
+                    <li class="nav-item active"><a href="{{url_for('weather')}}" class="nav-link">{{t_lis[2]}}</a></li>
+                    <li class="nav-item"><a href="work.html" class="nav-link">{{t_lis[3]}}</a></li>
+                    <li class="nav-item"><a href="blog.html" class="nav-link">{{t_lis[4]}}</a></li>
+                    <li class="nav-item"><a href="contact.html" class="nav-link">{{t_lis[5]}}</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- ended navbar -->
+
+
+<!-- ============================================================================================================== -->
+
+
+    <section class="ftco-section ftco-section-parallax ftco-degree-bg">
+        <!-- <div class="container">
+                <div class="row justify-content-center mb-5 pb-5">
+                    <div class="col-md-7 text-center heading-section ftco-animate">
+                        <h2>Weather of your location</h2>
+                        <span class="subheading">Ambala, Haryana</span>
+                    </div>
+                </div>
+            </div> -->
+        
+        <div class="parallax-img d-flex align-items-center"
+        {% if (cond == 'mor' or cond == 'aft' ) and code[0] == 800 %}
+            style="background-image:url(../static/images/clear_image.png);">
+        {% elif (cond == 'mor' or cond == 'aft' ) and code[0] >= 200 and code[0] <= 232 %}
+            style="background-image:url(../static/images/rain_heavy.jpg);">
+        {% elif (cond == 'mor' or cond == 'aft' ) and code[0] >= 300 and code[0] <= 321 %}
+            style="background-image:url(../static/images/sun_rain.jpg);">
+        {% elif (cond == 'mor' or cond == 'aft' ) and code[0] >= 500 and code[0] <= 531 %}
+            style="background-image:url(../static/images/rain_heavy.jpg);">
+        {% elif (cond == 'mor' or cond == 'aft' ) and code[0] >= 600 and code[0] <= 622 %}
+            style="background-image:url(../static/images/snowy.png);">
+        {% elif (cond == 'mor' or cond == 'aft' ) and code[0] >= 801 and code[0] <= 804 %}
+            style="background-image:url(../static/images/clear_image.png);">
+        {% elif cond == 'eve' and code[0] == 800 %}
+            style="background-image:url(../static/images/night_image4.jpg);">
+        {% elif cond == 'eve' and code[0] >= 200 and code[0] <= 232 %}
+            style="background-image:url(../static/images/rain_heavy.jpg);">
+        {% elif cond == 'eve'and code[0] >= 300 and code[0] <= 321 %}
+            style="background-image:url(../static/images/cloud_night.jpg);">
+        {% elif cond == 'eve'and code[0] >= 500 and code[0] <= 531 %}
+            style="background-image:url(../static/images/rain_heavy.jpg);">
+        {% elif cond == 'eve'and code[0] >= 600 and code[0] <= 622 %}
+            style="background-image:url(../static/images/snowy.png);">
+        {% elif cond == 'eve'and code[0] >= 801 and code[0] <= 804 %}
+            style="background-image:url(../static/images/night_cloudy.jpg);">
+        {% else %}
+            style="background-image:url(../static/images/cloudy.jfif);">
+        {% endif %}
+        
+            <!-- <div class="img" style="background-image:url(../static/images/c.png);">></div> -->
+            <div class="container">
+            
+                <div class="row justify-content-center mb-5 pb-5 mt-1 pt-1">
+                    <div class="col-md-7 text-center heading-section ftco-animate">
+                        <h3 style="color:white;">{{city}}, {{state}}</h3>
+                        <span style="color:rgb(168, 35, 35);" class="heading">{{day[0]}} &nbsp; {{dt[0][8:10]}}/{{dt[0][5:7]}}/{{dt[0][0:4]}}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
+                        <div class="media block-6 services d-block text-center">
+                            <div class="d-flex justify-content-center">
+                                <div class="icon color-1 d-flex justify-content-center mb-3"><span
+                                    {% if (cond == 'mor' or cond == 'aft' ) and code[0] == 800 %}
+                                        class="align-self-center fa fa-sun-o"></span></div>
+                                    {% elif (cond == 'mor' or cond == 'aft' ) and code[0] >= 200 and code[0] <= 232 %}
+                                        class="align-self-center fas fa-cloud-showers-heavy"></span></div>
+                                    {% elif (cond == 'mor' or cond == 'aft' ) and code[0] >= 300 and code[0] <= 321 %}
+                                        class="align-self-center fas fa-cloud-sun-rain"></span></div>
+                                    {% elif (cond == 'mor' or cond == 'aft' ) and code[0] >= 500 and code[0] <= 531 %}
+                                        class="align-self-center fas fa-cloud-rain"></span></div>
+                                    {% elif (cond == 'mor' or cond == 'aft' ) and code[0] >= 600 and code[0] <= 622 %}
+                                        class="align-self-center fa fa-snowflake-o"></span></div>
+                                    {% elif (cond == 'mor' or cond == 'aft' ) and code[0] >= 801 and code[0] <= 804 %}
+                                        class="align-self-center fas fa-cloud"></span></div>
+                                    {% elif cond == 'eve' and code[0] == 800 %}
+                                        class="align-self-center fa fa-moon-o"></span></div>
+                                    {% elif cond == 'eve' and code[0] >= 200 and code[0] <= 232 %}
+                                        class="align-self-center fas fa-cloud-showers-heavy"></span></div>
+                                    {% elif cond == 'eve'and code[0] >= 300 and code[0] <= 321 %}
+                                        class="align-self-center fas fa-cloud-night-rain"></span></div>
+                                    {% elif cond == 'eve'and code[0] >= 500 and code[0] <= 531 %}
+                                        class="align-self-center fas fa-cloud-rain"></span></div>
+                                    {% elif cond == 'eve'and code[0] >= 600 and code[0] <= 622 %}
+                                        class="align-self-center fa fa-snowflake-o"></span></div>
+                                    {% elif cond == 'eve'and code[0] >= 801 and code[0] <= 804 %}
+                                        class="align-self-center fas fa-cloud"></span></div>
+                                    {% else %}
+                                        class="align-self-center fas fa-cloud"></span></div>
+                                    {% endif %}
+                                <!-- fa fa-sun-o, fa-cloud, moon-o, fas fa-cloud-moon-rain, fas fa-cloud-moon, fas fa-cloud-sun-rain, fas fa-cloud-rain, fas fa-cloud-showers-heavy, fas fa-cloud-sun, fas fa-sun, fas fa-wind, fas fa-bolt -->
+                            </div>
+                            <div class="media-body p-2">
+
+                                <p style="color:white;">{{des[0]}}</p>
+                            </div>
+
+                        </div>
+                        <h3 style="position: relative; margin-left:10px; margin-top:20px; color:white;">{{temp[0]}}&#176</h3>
+                    </div>
+                    <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
+                        <div class="media block-6 services d-block text-center">
+                            <!-- <div class="d-flex justify-content-center">
+                                    <div class="icon color-2 d-flex justify-content-center mb-3"><span
+                                            class="align-self-center icon-gears"></span></div>
+                                </div> -->
+                            <div class="media-body p-2">
+                                <p style="position: relative; margin-top:10px; color:white;">{{t_lis[7]}} {{ma[0]}}&#176</p>
+                                <p style="color:white;">{{t_lis[8]}} {{mi[0]}}&#176</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
+                            <div class="media block-6 services d-block text-center">
+                                <div class="d-flex justify-content-center">
+                                    <div class="icon color-3 d-flex justify-content-center mb-3"><span
+                                            class="align-self-center icon-paper-plane"></span></div>
+                                </div>
+                                <div class="media-body p-2">
+                                    <h3 class="heading">Advanced Visualizations</h3>
+                                    <p>Even the all-powerful Pointing has no control about the blind texts it is an almost
+                                        unorthographic.</p>
+                                </div>
+                            </div>
+                        </div> -->
+
+                    <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
+                        <div class="media block-6 services d-block text-center">
+                            <!-- <div class="d-flex justify-content-center">
+                                    <div class="icon color-4 d-flex justify-content-center mb-3"><span
+                                            class="align-self-center icon-live_help"></span></div>
+                                </div> -->
+                            <div class="media-body p-2">
+                                <p class="ml-3" style="position:relative; margin-top:10px; color:white;">{{t_lis[9]}}: {{visi[0]}} Km</p>
+                                <p class="ml-3" style="color:white;">{{t_lis[10]}}: {{speed[0]}} Km/h</p>
+                                <p style="color:white;">{{t_lis[11]}}: {{hum[0]}}%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row"> <br></div> <br> <br>
+                <div class="row d-flex justify-content-center">
+                    {% for i in range(1,6) %}
+                    <div class="col-sm-2 ftco-animate">
+                        <a href="#">
+                            <div class="blog-entry-2 hover" data-aos-delay="100">
+                                <div class="text p-4">
+                                    <div class="meta mb-3">
+                                        <div>{{day[i]}}, {{dt[i][8:10]}}/{{dt[i][5:7]}}/{{dt[i][0:4]}}</div> <br>
+                                        <div>{{temp[i]}}&#176</div>
+                                    {% if (cond == 'mor' or cond == 'aft' )  and code[i] == 800 %}
+                                    <div><span class="fa fa-sun-o"></span></div>
+                                    {% elif (cond == 'mor' or cond == 'aft' )  and code[i] >= 200 and code[0] <= 232 %}
+                                    <div><span class="fas fa-cloud-showers-heavy"></span></div>
+                                    {% elif (cond == 'mor' or cond == 'aft' ) and code[i] >= 300 and code[0] <= 321 %}
+                                    <div><span class="fas fa-cloud-sun-rain"></span></div>
+                                    {% elif (cond == 'mor' or cond == 'aft' ) and code[i] >= 500 and code[0] <= 531 %}
+                                    <div><span class="fas fa-cloud-rain"></span></div>
+                                    {% elif (cond == 'mor' or cond == 'aft' ) and code[i] >= 600 and code[0] <= 622 %}
+                                    <div><span class="fa fa-snowflake-o"></span></div>
+                                    {% elif (cond == 'mor' or cond == 'aft' ) and code[i] >= 801 and code[0] <= 804 %}
+                                    <div><span class="fas fa-cloud"></span></div>
+                                    {% elif cond == 'eve' and code[i] == 800 %}
+                                    <div><span class="fa fa-moon-o"></span></div>
+                                    {% elif cond == 'eve' and code[i] >= 200 and code[0] <= 232 %}
+                                    <div><span class="fas fa-cloud-showers-heavy"></span></div>
+                                    {% elif cond == 'eve'and code[i] >= 300 and code[0] <= 321 %}
+                                    <div><span class="fas fa-cloud-night-rain"></span></div>
+                                    {% elif cond == 'eve'and code[i] >= 500 and code[0] <= 531 %}
+                                    <div><span class="fas fa-cloud-rain"></span></div>
+                                    {% elif cond == 'eve'and code[i] >= 600 and code[0] <= 622 %}
+                                    <div><span class="fa fa-snowflake-o"></span></div>
+                                    {% elif cond == 'eve'and code[i] >= 801 and code[0] <= 804 %}
+                                    <div><span class="fas fa-cloud"></span></div>
+                                    {% else %}
+                                    <div><span class="align-self-center fas fa-cloud"></span></div>
+                                    {% endif %}
+                    
+                                    </div>
+                                    <p>{{t_lis[7]}} {{ma[i]}}&#176</p>
+                                    <p>{{t_lis[8]}} {{mi[i]}}&#176</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+<!-- ================================================================================================================= -->
+
+    <!-- Footer started -->
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+
+                        <h2 class="ftco-heading-2">{{t_lis[12]}}</h2>
+                        <p><strong style="color:#d1002c;">{{t_lis[13]}}</strong>
+                        <div>{{t_lis[14]}} </div>
+                        <div>{{t_lis[15]}} </div>
+                        <div>{{t_lis[16]}} </div>
+                        <div>{{t_lis[17]}}</div>
+                        </p>
+                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft">
+                            <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+
+                        <h2 class="ftco-heading-2">{{t_lis[18]}}</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="py-2 d-block " style=" color: #d1002c ;">{{t_lis[14]}} -<a
+                                        href=" https://github.com/Aaditya1978" target="_blank">https://github.com/Aaditya1978</a></a>
+                            </li>
+                            <li><a href="#" class="py-2 d-block" style=" color: #d1002c;">{{t_lis[15]}} -<a
+                                        href="  https://github.com/abhaydhiman" target="_blank"> https://github.com/abhaydhiman</a></a></li>
+                            <li><a href="#" class="py-2 d-block" style=" color: #d1002c;">{{t_lis[16]}} -<a
+                                        href="https://github.com/Ayush-Malik " target="_blank">https://github.com/Ayush-Malik</a></a></li>
+                            <li><a href="#" class="py-2 d-block" style=" color: #d1002c;">{{t_lis[17]}} - <a
+                                        href="https://github.com/akshita-sharma8609 " target="_blank">https://github.com/akshita-sharma8609</a></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+
+                    <p>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+
+                        {{t_lis[19]}} &copy;
+                        <script>document.write(new Date().getFullYear());</script> {{t_lis[20]}} | {{t_lis[21]}}<i class="icon-heart" aria-hidden="true"></i>
+                        {{t_lis[22]}} <a href="https://colorlib.com"
+                            target="_blank"> &nbsp; {{t_lis[23]}}</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer ending -->
+
+
+
+
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+                stroke="#F96D00" />
+        </svg></div>
+    
+    
+    <script src="..\static\js\jquery.min.js"></script>
+    <script src="..\static\js\jquery-migrate-3.0.1.min.js"></script>
+    <script src="..\static\js\popper.min.js"></script>
+    <script src="..\static\js\bootstrap.min.js"></script>
+    <script src="..\static\js\jquery.easing.1.3.js"></script>
+    <script src="..\static\js\jquery.waypoints.min.js"></script>
+    <script src="..\static\js\jquery.stellar.min.js"></script>
+    <script src="..\static\js\owl.carousel.min.js"></script>
+    <script src="..\static\js\jquery.magnific-popup.min.js"></script>
+    <script src="..\static\js\jquery.animateNumber.min.js"></script>
+    <script src="..\static\js\scrollax.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="..\static\js\google-map.js"></script>
+    <script src="..\static\js\main.js"></script>
+    </body>
+    
+    </html>
