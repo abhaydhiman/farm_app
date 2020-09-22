@@ -46,7 +46,7 @@ def text_translator(text_ls, lang):
 
 #___________________________________________________________________________
 # Function for translating User Home Text to the language selected by user
-def user_home_text_translator(lang, name, city, state):
+def user_home_text_translator(lang, name, city, state, status):
     translated_ls = []
     if lang == 'en':
         translated_ls = user_home_text()
@@ -63,7 +63,8 @@ def user_home_text_translator(lang, name, city, state):
     name = trans.translate(name, src='en', dest=lang)
     city = trans.translate(city, src='en', dest=lang)
     state = trans.translate(state, src='en', dest=lang)
-    return translated_ls, name.text, city.text, state.text
+    status = trans.translate(status, src='en', dest=lang)
+    return translated_ls, name.text, city.text, state.text, status.text
 
 
 
