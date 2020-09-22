@@ -1,0 +1,536 @@
+{% load static %}
+{% load custom_tags %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>KisanTech</title>
+
+
+    <!-- links -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'css\animate.css' %}">
+    <link rel="stylesheet" href="{% static 'css\owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css\magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'css\owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css\flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'css\style.css' %}">
+    <link rel="stylesheet" href="{% static 'css\icomoon.css' %}">
+</head>
+
+<body>
+    <!-- ============================================================================================================= -->
+
+
+    <!-- Profile Section Started -->
+    <div id="myNav" class="overlay">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">
+            << </a>
+                <div class="container mt-5 pt-5">
+                    <div class="row mt-5 pt-5">
+                        <div class="col-md-6 col-lg-6 ftco-animate">
+                            <img src="{% static 'images/edited_vali4.png' %}" class="profileimage" alt="">
+                        </div>
+                        <div class="col-md-6 col-lg-6 ftco-animate">
+                            <div class="overlay-content ml-1 pl-1">
+                                <p> {% translate "Name" context.language_for_filter %} -
+                                    {% translate  context.name  context.language_for_filter %} </p>
+                                <p> {% translate "Phone Number" context.language_for_filter %} -
+                                    {{context.phone_number}} </p>
+                                <p> {% translate "Status" context.language_for_filter %} -
+                                    {% translate "Farmer" context.language_for_filter %}</p>
+                                <p> {% translate "Location" context.language_for_filter %} -
+                                    {% translate "Ambala, Haryana" context.language_for_filter %}</p>
+                                <a href={% url "user_home:profile" %}>
+                                    {% translate "Edit Profile" context.language_for_filter %} </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </div>
+    <!-- Profile Section Ended -->
+
+
+    <!-- ============================================================================================================= -->
+
+
+    <!-- navbar started -->
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+        <div class="container">
+            <a class="navbar-brand" href="home.html">The<span>F</span>armer</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+                aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="oi oi-menu"></span> Menu
+            </button>
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active"><a href="index.html" class="nav-link">
+                            {% transs "Home" context.language_for_filter %} </a></li>
+                    <li class="nav-item"><a href={% url "user_home:weather" %} class="nav-link">
+                            {% transs "Weather" context.language_for_filter %} </a></li>
+                    <li class="nav-item"><a href="work.html" class="nav-link">
+                            {% transs "Work" context.language_for_filter %} </a></li>
+                    <li class="nav-item"><a href="blog.html" class="nav-link">
+                            {% transs "Blog" context.language_for_filter %} </a></li>
+                    <li class="nav-item"><a href="contact.html" class="nav-link">
+                            {% transs "Contact" context.language_for_filter %} </a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <!-- ended navbar -->
+
+
+    <!-- ============================================================================================================= -->
+
+
+    {% get_static_prefix as STATIC_URL %}
+    <!-- Started carousel -->
+    <section class="hero-wrap degree-right js-fullheight">
+
+
+        <div class="home-slider js-fullheight owl-carousel">
+            {% for image_name in image_lis %}
+            <div class="slider-item js-fullheight"
+                style="background-image:url({{STATIC_URL}}images/{{image_name}}.jpg);">
+                <div class="overlay"></div>
+                <div class="container">
+                    <div class="row no-gutters slider-text js-fullheight align-items-center">
+                        <div class="col-md-6 ftco-animate">
+                            <div class="text">
+                                <h1 class="mb-4 navbar-brand"
+                                    style="font-weight: 500; font-family:Georgia, 'Times New Roman', Times, serif;">
+                                    {% transs "Kisan" context.language_for_filter %}<span
+                                        style="color:#d1002c; display:inline-block;">
+                                        {% transs "Tech" context.language_for_filter %} </span></h1>
+                                <p style="color: white;"><strong>
+                                        {% transs "WELL ROOTED TO NATURE" context.language_for_filter %} </strong></p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 ftco-animate" style="position: relative; left:1px;">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-3"><br></div>
+                                    <div class="col-md-3">
+                                        <a href="#">
+                                            <img src="{% static 'images/edited_vali4.png' %}"
+                                                style="border-radius: 50%; width: 150px; height: 150px;"
+                                                onclick="openNav()" alt="">
+                                        </a>
+                                    </div>
+                                    <div style="position: relative; margin-left:150px;">
+                                        <h2 class="navbar-brand">{% transs "Name" context.language_for_filter %}-<span
+                                                style="color:#d1002c; display:inline-block;">
+                                                {% translate  context.name  context.language_for_filter %} </span></h2>
+                                        <p>{% transs "Phone Number" context.language_for_filter %} -
+                                            {{context.phone_number}} </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+
+    </section>
+    <!-- carousel ended -->
+
+
+    <!-- =============================================================================================================== -->
+
+
+    <!-- Heading for main features -->
+    <section class="ftco-section-2 degree-right">
+        <div class="container">
+            <div class="row justify-content-center mb-0 pb-0 mt-5 pt-5">
+                <div class="col-md-7 text-center heading-section ftco-animate">
+                    <h2 class="myheading"> {% transs "OUR SPECIAL FEATURES" context.language_for_filter %} </h2>
+                    <span class="subheading">
+                        {% transs "HERE YOU WILL GET THE INFORMATION OF WEATHER OF YOUR LOCATION, FINANCIAL HELP AND FERTILIZERS SUITABLE FOR YOUR CROPS!!" context.language_for_filter %}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Heading ended -->
+
+
+    <!-- =============================================================================================================== -->
+
+
+    <!-- Main features in cards -->
+    <section class="ftco-section-parallax degree-right">
+        <div class="parallax-img d-flex align-items-center">
+            <div class="container">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-md-4 ftco-animate">
+                        <div class="blog-entry-2">
+                            <a href={% url 'user_home:weather' %} class="block-20-1"
+                                style="background-image: url({% static 'images/weather2.jpg' %});">
+                            </a>
+                            <div class="text p-4 d-block">
+                                <div class="meta mb-3">
+                                    <div><a href="#"> {% transs "WEATHER FORECAST" context.language_for_filter %} </a>
+                                    </div>
+                                    <div><a href="#"></a></div>
+                                    <div><a href="#" class="meta-chat"><span class="icon-cloud"></span></a></div>
+                                </div>
+                                <h3 class="heading"><a href="#">
+                                        {% transs "click here to know the climatic changes for the next seven days" context.language_for_filter %}
+                                    </a></h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 ftco-animate">
+                        <div class="blog-entry-2" data-aos-delay="100">
+                            <a href={% url 'user_home:financial' %} class="block-20-1"
+                                style="background-image: url({% static 'images/financial.jpeg' %});">
+                            </a>
+                            <div class="text p-4">
+                                <div class="meta mb-3">
+                                    <div><a href="#"> {% transs "Financial help" context.language_for_filter %} </a>
+                                    </div>
+                                    <div><a href="#"></a></div>
+                                    <div><a href="#" class="meta-chat"><span class="icon-inr"></span></a></div>
+                                </div>
+                                <h3 class="heading"><a href="#">
+                                        {% transs "Click here to get the benifit of amazing loan and insurance offers" context.language_for_filter %}
+                                    </a></h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 ftco-animate">
+                        <div class="blog-entry-2" data-aos-delay="100">
+                            <a href={% url 'shop:shop_now' %} class="block-20-1"
+                                style="background-image: url({% static 'images/fertilizer-1.jpg' %});">
+                            </a>
+                            <div class="text p-4">
+                                <div class="meta mb-3">
+                                    <div><a href="#"> {% transs "Shop Now" context.language_for_filter %} </a></div>
+                                    <div><a href="#"></a></div>
+                                    <div><a href="#" class="meta-chat"><span class="icon-institution"></span></a></div>
+                                </div>
+                                <h3 class="heading"><a href="#">
+                                        {% transs "Click here to get the appropriate materials for your crop at best price" context.language_for_filter %}
+                                    </a></h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Main features to be shown ended -->
+
+
+    <!-- =============================================================================================================== -->
+
+
+    <!-- Section where videos are added -->
+    <section class="ftco-section">
+        <div class="container-fluid">
+            <div class="row no-gutters justify-content-center mb-5 pb-5">
+                <div class="col-md-7 text-center heading-section ftco-animate">
+                    <span class="subheading"> {% transs "Videos" context.language_for_filter %} </span>
+                    <h2 class="myheading"> {% transs "INFORMATIVE VIDEOS FOR YOU" context.language_for_filter %} </h2>
+                </div>
+            </div>
+            <div class="row no-gutters">
+                <div class="block-3 d-md-flex ftco-animate">
+                    <iframe class="image" src="https://www.youtube-nocookie.com/embed/be-TpNWMCc8" frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                    <div class="text">
+                        <h4 class="subheading"> {% transs "Illustration" context.language_for_filter %} </h4>
+                        <h2 class="heading"><a href="portfolio.html">
+                                {% transs "Even the all-powerful Pointing has no control" context.language_for_filter %}
+                            </a>
+                        </h2>
+                        <p> {% transs "Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar." context.language_for_filter %}
+                        </p>
+                    </div>
+                </div>
+                <div class="block-3 d-md-flex ftco-animate">
+                    <iframe class="image order-2" src="https://www.youtube-nocookie.com/embed/be-TpNWMCc8"
+                        frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                    <div class="text order-1">
+                        <h4 class="subheading"> {% transs "Application" context.language_for_filter %} </h4>
+                        <h2 class="heading"><a href="portfolio.html">
+                                {% transs "Even the all-powerful Pointing has no control" context.language_for_filter %}
+                            </a>
+                        </h2>
+                        <p> {% transs "Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind tet by the name of Lorem Ipsum decided to leave for the far World of Grammar." context.language_for_filter %}
+                        </p>
+                    </div>
+                </div>
+                <div class="block-3 d-md-flex ftco-animate">
+                    <iframe class="image" src="https://www.youtube-nocookie.com/embed/be-TpNWMCc8" frameborder="0"
+                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen></iframe>
+                    <div class="text">
+                        <h4 class="subheading"> {% transs "Web Design" context.language_for_filter %} </h4>
+                        <h2 class="heading"><a href="portfolio.html">
+                                {% transs "Even the all-powerful Pointing has no control" context.language_for_filter %}
+                            </a>
+                        </h2>
+                        <p> {% transs "Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar." context.language_for_filter %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Videos section ended -->
+
+
+    <!-- ============================================================================================================ -->
+
+
+    <!-- Thanks statement started, main yojnaassss to be displayed started -->
+    <section class="ftco-section ftco-degree-bg">
+        <div class="container">
+            <div class="row justify-content-center mb-5 pb-5">
+                <div class="col-md-7 text-center heading-section ftco-animate">
+                    <p class="myheading"> {% transs "THANKS FOR YOUR VISIT" context.language_for_filter %} </p>
+                    <p class="subheading">
+                        {% transs "HERE WE HAVE MORE FEATURES FOR YOU!!" context.language_for_filter %} </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
+                    <div class="media block-6 services d-block text-center">
+                        <div class="d-flex justify-content-center">
+                            <div class="icon color-1 d-flex justify-content-center mb-3"><span
+                                    class="align-self-center icon-layers"></span></div>
+                        </div>
+                        <div class="media-body p-2">
+                            <h3 class="heading"> {% transs "Financial Help" context.language_for_filter %} </h3>
+                            <p> {% transs "Click here for financial support. 'A good financial plan is a roadmap that shows us exactly how the choices we make today will affect our future.'" context.language_for_filter %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
+                    <div class="media block-6 services d-block text-center">
+                        <div class="d-flex justify-content-center">
+                            <div class="icon color-2 d-flex justify-content-center mb-3"><span
+                                    class="align-self-center icon-gears"></span></div>
+                        </div>
+                        <div class="media-body p-2">
+                            <h3 class="heading"> {% transs "Multiple Functions" context.language_for_filter %} </h3>
+                            <p> {% transs "Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic." context.language_for_filter %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
+                    <div class="media block-6 services d-block text-center">
+                        <div class="d-flex justify-content-center">
+                            <div class="icon color-3 d-flex justify-content-center mb-3"><span
+                                    class="align-self-center icon-paper-plane"></span></div>
+                        </div>
+                        <div class="media-body p-2">
+                            <h3 class="heading"> {% transs "Advanced Visualizations" context.language_for_filter %}
+                            </h3>
+                            <p> {% transs "Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic." context.language_for_filter %}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-3 d-flex align-self-stretch ftco-animate">
+                    <div class="media block-6 services d-block text-center">
+                        <div class="d-flex justify-content-center">
+                            <div class="icon color-4 d-flex justify-content-center mb-3"><span
+                                    class="align-self-center icon-live_help"></span></div>
+                        </div>
+                        <div class="media-body p-2">
+                            <h3 class="heading"> {% transs "Community and Supports" context.language_for_filter %} </h3>
+                            <p> {% transs "Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic." context.language_for_filter %}
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ending of yojnaassss -->
+
+
+    <!-- =========================================================================================================== -->
+
+
+    <!-- discussion -->
+    <section>
+        <div>
+            <h3 style="color:rgb(17, 36, 36)"> {% transs "HELPFUL LINKS FOR YOU!!" context.language_for_filter %} </h3>
+            <a href="https://krishijagran.com/agriculture-world/pm-kisan-samman-nidhi-yojana-direct-online-link-application-form-important-documents-eligibility-criteria/"
+                target="_blank"> {% transs "Click here to associate with - " context.language_for_filter %} <strong>
+                    {% transs "PM-KISAN-SAMMAN-NIDHI-YOJANA" context.language_for_filter %} </strong></a>
+        </div>
+
+        <div>
+            <a href="https://kisansamadhan.com/central-government-schemes/ "
+                target="_blank">{% transs "Click here to know all details of - " context.language_for_filter %}
+                <strong> {% transs "CENTRAL-GOVERNMENT-SCHEMES" context.language_for_filter %} </strong></a>
+        </div>
+
+
+    </section>
+
+
+    <!-- ============================================================================================================ -->
+
+
+    <!-- Footer started -->
+
+
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2"> {% trans "DEVELOPERS" context.language_for_filter %} </h2>
+                        <p><strong style="color:#d1002c;"> {% trans "PRO-CODERS" context.language_for_filter %}
+                            </strong>
+                        <div> {% trans "Aaditya Singhal" context.language_for_filter %} </div>
+                        <div> {% trans "Abhay Dhiman"    context.language_for_filter %} </div>
+                        <div> {% trans "Ayush Malik"     context.language_for_filter %} </div>
+                        <div> {% trans "Akshita Sharma"  context.language_for_filter %} </div>
+                        </p>
+                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft mt-2 pt-2">
+                            <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">QUICK LINKS</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="py-2 d-block">Home</a></li>
+                            <li><a href="#" class="py-2 d-block">About</a></li>
+                            <li><a href="#" class="py-2 d-block">Services</a></li>
+                            <li><a href="#" class="py-2 d-block">Portfolio</a></li>
+                            <li><a href="#" class="py-2 d-block">Contact</a></li>
+                            <li><a href="#" class="py-2 d-block">Privacy</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2"> {% trans "CONTACT" context.language_for_filter %} </h2>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="py-2 d-block " style=" color: #d1002c ;">
+                                    {% trans "Aaditya Singhal" context.language_for_filter %} -<a
+                                        href=" https://github.com/Aaditya1978"
+                                        target="_blank">https://github.com/Aaditya1978</a></a>
+                            </li>
+                            <li><a href="#" class="py-2 d-block"
+                                    style=" color: #d1002c;">{% trans "Abhay Dhiman" context.language_for_filter %} -<a
+                                        href="https://github.com/abhaydhiman" target="_blank">
+                                        https://github.com/abhaydhiman</a></a></li>
+                            <li><a href="#" class="py-2 d-block"
+                                    style=" color: #d1002c;">{% trans "Ayush Malik" context.language_for_filter %} -<a
+                                        href="https://github.com/Ayush-Malik"
+                                        target="_blank">https://github.com/Ayush-Malik</a></a></li>
+                            <li><a href="#" class="py-2 d-block"
+                                    style=" color: #d1002c;">{% trans "Akshita Sharma" context.language_for_filter %} -
+                                    <a href="https://github.com/akshita-sharma8609"
+                                        target="_blank">https://github.com/akshita-sharma8609</a></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">NEWSLETTER</h2>
+                        <p>Far far away, behind the word mountains, far from the countries.</p>
+                        <form action="#" class="subscribe-form">
+                            <div class="form-group">
+                                <span class="icon icon-paper-plane"></span>
+                                <input type="text" class="form-control" placeholder="Subscribe">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+
+                    <p>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        {% trans "Copyright" context.language_for_filter %} &copy;
+                        <script>document.write(new Date().getFullYear());</script>
+                        {% trans "All rights reserved" context.language_for_filter %} |
+                        {% trans "This template is made with" context.language_for_filter %}
+                        made <i class="icon-heart" aria-hidden="true"></i> {% trans "by" context.language_for_filter %}
+                        <a href="https://colorlib.com" target="_blank"> &nbsp;
+                            {% trans "PRO-CODERS" context.language_for_filter %} </a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Footer ending -->
+
+
+    <!-- ============================================================================================================== -->
+
+
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+                stroke="#F96D00" />
+        </svg></div>
+
+
+    <!-- ============================================================================================================== -->
+
+
+    <!-- Scripts -->
+    <script src="{% static 'js\jquery.min.js' %}"></script>
+    <script src="{% static 'js\jquery-migrate-3.0.1.min.js' %}"></script>
+    <script src="{% static 'js\popper.min.js' %}"></script>
+    <script src="{% static 'js\bootstrap.min.js' %}"></script>
+    <script src="{% static 'js\jquery.easing.1.3.js' %}"></script>
+    <script src="{% static 'js\jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'js\jquery.stellar.min.js' %}"></script>
+    <script src="{% static 'js\owl.carousel.min.js' %}"></script>
+    <script src="{% static 'js\jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'js\jquery.animateNumber.min.js' %}"></script>
+    <script src="{% static 'js\scrollax.min.js' %}"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="{% static 'js\google-map.js' %}"></script>
+    <script src="{% static 'js\main.js' %}"></script>
+
+    <script>
+        function openNav() {
+            document.getElementById("myNav").style.width = "100%";
+        }
+
+        function closeNav() {
+            document.getElementById("myNav").style.width = "0%";
+        }
+    </script>
+
+</body>
+
+</html>
