@@ -14,7 +14,7 @@ from translator import text_translator, english_translator
 #__________________________________________________________________________________
 # Configuration Key Of firebase
 firebaseConfig = {
-    
+   
 }
 
 # Init of Pyrebase
@@ -84,25 +84,8 @@ def firebase_user_checker(phone_number):
 
 
 #___________________________________________________________________________________________
-# Function for authenticating Seller in firebase if already registered or not
-def firebase_seller_checker(phone_number):
-
-    # Check if Seller is Already Registered Or Not
-    data_list = firebase.get('the-farm-app-4015b/',None)
-    flag = 0
-    for data in data_list['Users']['Sellers:']:
-        if data_list['Users']['Sellers:'][data]['Phone Number'] == str(phone_number):
-            flag = 1
-            break
-    return flag
-
-
-
-
-
-#___________________________________________________________________________________________
 # Function For registering New user To Firebase and Adding His Data To Realtime Database
-def firebase_user_registerer(phone_number, password, name, lang, state, city):
+def firebase_user_registerer(phone_number, password, name, lang, state, city, status):
 
     email = str(phone_number)+"@farmapp.com"
     user = auth.create_user_with_email_and_password(email, password)
@@ -111,7 +94,8 @@ def firebase_user_registerer(phone_number, password, name, lang, state, city):
         'Name' :  name,
         'Language' : lang,
         'State' : state,
-        'City' : city
+        'City' : city,
+        'Status': status
     }
 
     result = firebase.post('/the-farm-app-4015b/Farmer:', Data)
@@ -130,37 +114,6 @@ def firebase_user_loger(phone_number, password):
 
 
 
-
-#___________________________________________________________________________________________
-# Function For registering New Seller To Firebase and Adding His Data To Realtime Database
-def firebase_admin_registerer(phone_number, password, name, lang, state, city):
-
-    email = str(phone_number)+"@farmapp.com"
-    user = auth.create_user_with_email_and_password(email, password)
-    Data = {
-        'Phone Number' : phone_number,
-        'Name' :  name,
-        'Language' : lang,
-        'State' : state,
-        'City' : city
-    }
-
-    result = firebase.post('/the-farm-app-4015b/Users/Sellers:', Data)
-
-
-
-#___________________________________________________________________________________________
-# Function for Login Seller, check if Credentials were correct or not
-def firebase_admin_loger(phone_number, password):
-    email = str(phone_number)+"@farmapp.com"
-    try:
-        login = auth.sign_in_with_email_and_password(email, password)
-        return 1
-    except:
-        return 0
-
-
-
 #___________________________________________________________________________________________
 # This function fetches name from database for registerd user
 def firebase_data_fetcher(phone_number):
@@ -170,8 +123,10 @@ def firebase_data_fetcher(phone_number):
             name = data_list['Farmer:'][data]['Name']
             state = data_list['Farmer:'][data]['State']
             city = data_list['Farmer:'][data]['City']
+            status = data_list['Farmer:'][data]['Status']
             break
-    return name, state, city
+    return name, state, city,status
+
 
 
 
