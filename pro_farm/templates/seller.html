@@ -6,6 +6,11 @@
     <title>Seller</title>
 
     <!-- links -->
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -151,9 +156,11 @@
                                         voluptatem expedita cupiditate eum cum similique! Quis nesciunt iusto facilis ipsam enim rerum porro odit
                                         recusandae, blanditiis laborum amet. At!</td>
                                     <td class="shoping__cart__item__price">
-                                        <button class="primary-btn cart-btn" type="submit" name="wow">
-                                            Edit
-                                        </button>
+                                        <a href="#hidden_row11" onclick="show_hide_row('hidden_row11');">
+                                            <button  class="primary-btn cart-btn" type="submit" name="wow">
+                                                Edit
+                                            </button>
+                                        </a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -164,7 +171,7 @@
             <div class="row">
                 <div class="col-lg-6 ftco-animate">
                     <div class="shoping__cart__btns" onclick="show_hide_row('hidden_row11');">
-                        <a href="#" class="primary-btn cart-btn" style="border-radius: 30px; font-size: 20px;">+</a>
+                        <a href="#hidden_row11" class="primary-btn cart-btn" style="border-radius: 30px; font-size: 20px;">+</a>
                     </div>
                 </div>
             </div>
@@ -180,13 +187,23 @@
                             <tbody>
                                 <tr id="hidden_row11" class="shoping__cart__price hidden_row ftco-animate">
                                     <td colspan="4">
-                                        <img src="../static/images/featured/feature-1.jpg" alt="">
+                                        <label for="image">
+                                            <input type="file" accept="image/*" name="image" id="image" style="display:none;" />
+                                            <div class="example">
+                                                <img src="https://ohram.org/image/utilities/empty_product.svg" />
+                                                <div class="contents">
+                                                    <div class="text">Upload photo</div>
+                                                </div>
+                                            </div>
+                                        </label>
                                     </td>
                                     <td colspan=4>
                                         <input style="border-radius: 3px;" type="text" placeholder="Item Name"> <br> <br>
                                         <input style="border-radius: 3px;" type="text" placeholder="Price"> <br> <br>
-                                        <input style="border-radius: 3px;" type="text" placeholder="Description"> <br> <br>
                                         <input style="border-radius: 3px;" type="text" placeholder="In Stock"> <br> <br>
+                                        <input style="border-radius: 3px;" type="text" placeholder="Category"> <br> <br>
+                                        <textarea style="border-radius: 3px;" name="description" placeholder="Description" id="" cols="30" rows="6"></textarea><br> <br>
+                                        
                                     </td>
                                     <td class="shoping__cart__item__price">
                                         <button class="primary-btn cart-btn" type="submit" name="wow">
