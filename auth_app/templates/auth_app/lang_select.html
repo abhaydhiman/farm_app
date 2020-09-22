@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Language Select</title>
+
+    <link rel="stylesheet" href="..\static\css\new_style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="hero" style="background-image: url(../static/images/yekuchnew_h.jpg);">
+        <div class="navbar">
+            <img src="../static/images/logo.png" class="logo">
+        </div>
+        <div class="content">
+            <small>Welcome to our kissan tech</small>
+            <h1>Choose your
+                <div class="right_text">
+                    अपनी भाषा
+                </div>
+                <br>
+                Language
+                <div class="right_text_2">
+                    चुनें
+                </div>
+            </h1>
+
+            <form class='form' action="signup" method="POST">
+
+                {% csrf_token %}
+
+                <button type="submit" name="language_selected" value="en">English</button>
+                <button type="submit" name="language_selected" value="hi">हिन्दी</button>
+                <button type="submit" name="language_selected" value="pa">ਪੰਜਾਬੀ</button>
+                <br>
+                <button type="submit" name="language_selected" value="mr">मराठी</button>
+                <button type="submit" name="language_selected" value="ta">తెలుగు</button>
+                <button type="submit" name="language_selected" value="hi">हरियाणवी</button>
+            </form>
+
+
+
+
+        </div>
+        <div class="bubbles">
+            <img src="../static/images/bubble.png" alt="">
+            <img src="../static/images/bubble.png" alt="">
+            <img src="../static/images/bubble.png" alt="">
+            <img src="../static/images/bubble.png" alt="">
+            <img src="../static/images/bubble.png" alt="">
+            <img src="../static/images/bubble.png" alt="">
+            <img src="../static/images/bubble.png" alt="">
+        </div>
+    </div>
+</body>
+
+</html>
