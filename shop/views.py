@@ -179,6 +179,78 @@ def shop_grid(request):
 
 
 # *====================================================================================================================================================================*
+def get_cart_of_user(phone_number):
+    cart = db.child('General_User').child(phone_number).get().val()['cart']
+    return cart
+
+def cart(request):
+
+    if  not request.is_ajax():
+                    phone_number = request.session['loggedin_user_phone_number'] #Getting the phone number of current logged in user
+                    cart = get_cart_of_user(phone_number)
+                    
+                    # Here in cart we have product_id and its quantity , but we want each product details so we will fetch each data of each product in cart and appends it to our new dictationary
+
+                    Products = []
+                    
+                    for item_id , quantity in cart.items() :
+                        if item_id != 'isEmpty':
+                            product_data_dic = dict(db.child('Products').child(item_id).get().val())
+
+                        
+                            product_data_dic['quantity']    = quantity
+
+                            # Next line is to get total price of one product by formula = ( quantity of a product) X (price of that product)
+                            product_data_dic['total_price'] = quantity * product_data_dic['price'] 
+                            Products.append(product_data_dic)
+
+                    # Getting the total bill 
+                    total_bill = 0
+                    for product in Products:
+                        total_bill += product['total_price']
+
+                    context = {
+                        'Products' : Products ,
+                        'total_bill' : total_bill ,
+                    }
+                    return render(request , 'shop/cart.html' , context)
+
+    elif request.is_ajax():
+                    print()
+                    print()
+                    print()
+                    print(request.POST)
+                    print()
+                    print()
+                    print()
+
+                    # Getting the values sended through ajax request
+                    product_id   = request.POST['product_id']
+                    new_quantity = request.POST['new_quantity']
+
+                    phone_number = request.session['loggedin_user_phone_number'] #Getting the phone number of current logged in user
+                    cart = get_cart_of_user(phone_number)
+                    cart[product_id] = int(new_quantity) # Updating the quanttiy of a item
+
+                    # Getting the updated bill
+                    new_total_bill = 0
+                    for item_id , quantity in cart.items():
+                        if item_id != 'isEmpty':
+                            product_data_dic = dict(db.child('Products').child(item_id).get().val())
+                            new_total_bill += product_data_dic['price']*quantity
+
+                    resp_data = {
+                        'product_id':product_id ,
+                        'new_price' :int(new_quantity) * dict(db.child('Products').child(product_id).get().val())['price'],
+                        'new_total_bill' : new_total_bill ,
+                        }                    
+                    # Updating the cart in firebase database for AJAX request
+                    db.child('General_User').child( request.session['loggedin_user_phone_number'] ).child('cart').set(cart)
+                    return JsonResponse(resp_data, status=200)
+                    
+               
+
+# *====================================================================================================================================================================*
 
 # ? Bakwaas h ye dono htaunga isse baad me 😂
 def show_cart_items(request):

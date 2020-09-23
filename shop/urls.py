@@ -27,6 +27,7 @@ urlpatterns = [
     path('shop_grid'        , views.shop_grid        , name = 'shop_grid') , 
     path('product_details'  , views.product_details  , name = 'product_details') , # This url is used with AJAX and normal django requests
     path('category_preview' , views.category_preview , name = 'category_preview') , 
+    path('cart'             , views.cart             , name = 'cart'), # This url is used with AJAX and normal django requests
     
 
 

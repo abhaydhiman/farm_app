@@ -27,7 +27,7 @@
 
 
 
-
+    <!-- very very important for using ajax -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <script>
@@ -38,6 +38,8 @@
 
 
             $(document).on("click", ".change_quantity", function () {
+                alert("Hurrah");
+
                 $.ajax({
                     url: "{% url 'shop:product_details' %}",
                     type: 'POST',
@@ -88,6 +90,7 @@
 </head>
 
 <body>
+    <button class="change_quantity"> Click Me </button>
     <!-- Product Details Section Begin -->
     <section class="product-details spad">
         <div class="container">
@@ -129,10 +132,8 @@
                         <button class="add_item_to_cart btn btn-secondary">Add to Cart</button>
                         {% else %}
                         <button id='plus' class="change_quantity btn btn-secondary">+</button>
-                        <!-- <li id="plus" class="change_quantity"><a><i class="fa fa-shopping-cart"></i></a></li> -->
                         <a id='quantity'> {{quantity}} </a>
                         <button id='minus' class="change_quantity btn btn-secondary">-</button>
-                        <!-- <li id="minus" class="change_quantity"><a><i class="fa fa-shopping-cart"></i></a></li> -->
                         {% endif %}
 
 

@@ -24,10 +24,14 @@
     <link rel="stylesheet" href="..\static\css\flaticon.css">
     <link rel="stylesheet" href="\..\pro_farm\pro_farm\static\css\icomoon.css">
     <link rel="stylesheet" href="..\static\css\style.css">
+     <!-- very very important for using ajax -->
+
+
+  
 </head>
 
 <body>
-
+<br>
     <!-- navbar started -->
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light shop" id="ftco-navbar">
@@ -71,72 +75,34 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                
+
+                            {% for product in Products %}
+
+           
                                 <tr>
                                     <td class="shoping__cart__item">
-                                        <img src="../static/images/featured/feature-2.jpg" alt="">
-                                        <h5>Vegetable’s Package</h5>
+                                        <img src="{{product.image}}" alt="">
+                                        <h5>{{product.product_name}}</h5>
                                     </td>
                                     <td class="shoping__cart__price">
-                                        $55.00
+                                        ₹{{product.price}}
                                     </td>
                                     <td class="shoping__cart__quantity">
                                         <div class="quantity">
                                             <div class="pro-qty">
-                                                <input type="text" value="1">
+                                                <input id="{{product.product_id}}" type="text" value="{{product.quantity}}" oninput="change_quantity(this.value,this.id)">
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="shoping__cart__total">
-                                        $110.00
+                                    <td class="shoping__cart__total" id = "{{product.product_id}}_total_price">
+                                        ₹{{product.total_price}}
                                     </td>
                                     <td class="shoping__cart__item__close">
                                         <span class="fa fa-close"></span>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td class="shoping__cart__item">
-                                        <img src="../static/images/featured/feature-2.jpg" alt="">
-                                        <h5>Fresh Garden Vegetable</h5>
-                                    </td>
-                                    <td class="shoping__cart__price">
-                                        $39.00
-                                    </td>
-                                    <td class="shoping__cart__quantity">
-                                        <div class="quantity">
-                                            <div class="pro-qty">
-                                                <input type="text" value="1">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="shoping__cart__total">
-                                        $39.99
-                                    </td>
-                                    <td class="shoping__cart__item__close">
-                                        <span class="fa fa-close"></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="shoping__cart__item">
-                                        <img src="../static/images/featured/feature-2.jpg" alt="">
-                                        <h5>Organic Bananas</h5>
-                                    </td>
-                                    <td class="shoping__cart__price">
-                                        $69.00
-                                    </td>
-                                    <td class="shoping__cart__quantity">
-                                        <div class="quantity">
-                                            <div class="pro-qty">
-                                                <input type="text" value="1">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="shoping__cart__total">
-                                        $69.99
-                                    </td>
-                                    <td class="shoping__cart__item__close">
-                                        <span class="fa fa-close"></span>
-                                    </td>
-                                </tr>
+                            {% endfor %}                                
                             </tbody>
                         </table>
                     </div>
@@ -154,8 +120,8 @@
                     <div class="shoping__checkout">
                         <h5>Cart Total</h5>
                         <ul>
-                            <li>Subtotal <span>$454.98</span></li>
-                            <li>Total <span>$454.98</span></li>
+                            {% comment %} <li>Subtotal <span>$454.98</span></li> {% endcomment %}
+                            <li>Total <span id = 'new_total_bill'>₹{{total_bill}}</span></li>
                         </ul>
                         <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
                     </div>
@@ -270,6 +236,105 @@
     <script src="..\static\js\google-map.js"></script>
     <script src="..\static\js\mixitup.min.js"></script>
     <script src="..\static\js\main.js"></script>
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script>
+
+
+    function change_quantity(quantity , product_id) {
+    alert("The changed input value is " + quantity + product_id);
+                        $.ajax({
+                        url: "{% url 'shop:cart' %}",
+                        type: 'POST',
+                        data: {
+                            'csrfmiddlewaretoken': '{{csrf_token}}',
+                            'product_id'   : product_id.toString(),
+                            'new_quantity' : quantity  ,
+                           // 'id': this.id, // this id has new quantity value of a single product
+                            //'AlreadyExistsInCart': 'True',
+
+                        },
+                        dataType: 'json',
+                        success: function (resp) {
+                            alert(resp);
+                        document.getElementById(resp.product_id.toString() + "_total_price").innerHTML =resp.new_price;//prod1_total_price
+                        document.getElementById("new_total_bill").innerHTML =resp.new_total_bill;//prod1_total_price
+                       // document.getElementById('demo').innerHTML = "New text!";//#prod1_total_price
+                       // $.val(new_price); 
+                     // $( "#" + product_id.toString() + '_quantity' ).replaceWith(resp.c_html);
+                        }
+            
+                }); 
+    }
+
+
+{% comment %} 
+        $(document).ready(function () {
+            $(document).on("input", ".change_quantity", function () {
+                    alert('COOL');
+                    $.ajax({
+                            url: "{% url 'shop:cart' %}",
+                            type: 'POST',
+                            data: {
+                                'csrfmiddlewaretoken': '{{csrf_token}}',
+                               // 'product_id': "{{product.product_id }}",
+                               // 'new_quantity' :" $(this).attr('id')"  ,
+                            // 'id': this.id, // this id has new quantity value of a single product
+                                //'AlreadyExistsInCart': 'True',
+
+                            },
+                            dataType: 'json',
+                            success: function (resp) {
+                                $( "#" + this.id.toString() ).replaceWith(resp.c_html);
+                            }
+                
+                    }); 
+            }); 
+
+
+        });
+        {% endcomment %}
+
+{% comment %} function change_quantity(value , product_id) {
+                    alert("The input value has changed. The new value is: " + value  );
+                    alert('COOL');
+                    $.ajax({
+                            url: "{% url 'shop:cart' %}",
+                            type: 'POST',
+                            data: {
+                                'csrfmiddlewaretoken': '{{csrf_token}}',
+                               'product_id':protduct_id, 
+                               'new_quantity': value, 
+                               //'id': producy_id, // this id has new quantity value of a single product
+                              // AlreadyExistsInCart': 'True',
+
+                            },
+                            dataType: 'json',
+                            success: function (resp) {
+                                $( "#" + this.id.toString() ).replaceWith(resp.c_html);
+                            }
+                
+                    }); 
+            }); 
+} {% endcomment %}
+
+{% comment %} function myFunction(value){
+    alert("The changed input values is : " + value);
+} {% endcomment %}
+    </script>
+
+
+
+
+
+
+
+
+
 
 
 </body>
