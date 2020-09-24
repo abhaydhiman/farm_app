@@ -8,6 +8,7 @@
     <!-- links -->
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900&display=swap"
         rel="stylesheet">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="..\static\css\animate.css">
     <link rel="stylesheet" href="..\static\css\owl.theme.default.min.css">
@@ -18,6 +19,23 @@
 
     <!-- <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"> -->
 </head>
+
+<script type=text/javascript>
+	$(document).ready(function() {
+        $('#butto').on('click', function(event) {
+            $.ajax({
+                type : 'POST',
+                url : '/become_seller'
+            })
+            .done(function(data) {
+                $("#butto").html(data.b_text);  
+                $("#butto").attr("href", "{{url_for('seller')}}");
+                window.open("{{url_for('seller')}}", '_self'); 
+            });
+            event.preventDefault();
+        });
+    });
+</script>
 
 <body>
 
@@ -36,8 +54,11 @@
                         <li class="nav-item"><a href="{{url_for('weather')}}" class="nav-link">weather</a></li>
                         <li class="nav-item"><a href="#" class="nav-link">Work</a></li>
                         <li class="nav-item"><a href="#" class="nav-link">Blog</a></li>
-
+                    {% if b_text == 'Become Seller' %}
+                        <li class="nav-item"><a href="#" id="butto" class="nav-link">{{b_text}}</a></li>
+                    {% else %}
                         <li class="nav-item"><a href="{{url_for('seller')}}" class="nav-link">{{b_text}}</a></li>
+                    {% endif %}
                     </ul>
                 </div>
             </div>
