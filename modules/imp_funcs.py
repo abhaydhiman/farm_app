@@ -156,7 +156,7 @@ def context_generator(for_page , language_selected ,  texts_to_be_added = None )
 
     elif for_page == 'set_password':
         context = {
-                    'Enter_Password'     : translator('Enter_Password' , to_langg = language_selected) , 
+                    'Enter_Password'     : translator('Enter Password' , to_langg = language_selected) , 
                     'password'           : translator('password' , to_langg = language_selected) , 
                     'confirm_password'   : translator('Confirm Password' , to_langg = language_selected) , 
                     'Set_Password'       : translator('Set Password' , to_langg = language_selected) , 
