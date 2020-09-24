@@ -24,14 +24,14 @@
     <link rel="stylesheet" href="..\static\css\flaticon.css">
     <link rel="stylesheet" href="\..\pro_farm\pro_farm\static\css\icomoon.css">
     <link rel="stylesheet" href="..\static\css\style.css">
-     <!-- very very important for using ajax -->
+    <!-- very very important for using ajax -->
 
 
-  
+
 </head>
 
 <body>
-<br>
+    <br>
     <!-- navbar started -->
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light shop" id="ftco-navbar">
@@ -75,11 +75,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                
 
-                            {% for product in Products %}
 
-           
+                                {% for product in Products %}
+
+
                                 <tr>
                                     <td class="shoping__cart__item">
                                         <img src="{{product.image}}" alt="">
@@ -91,18 +91,32 @@
                                     <td class="shoping__cart__quantity">
                                         <div class="quantity">
                                             <div class="pro-qty">
-                                                <input id="{{product.product_id}}" type="text" value="{{product.quantity}}" oninput="change_quantity(this.value,this.id)">
+                                                <span class="dec qtybtn"
+                                                    onclick="button_click_hua_hai('{{product.product_id}}' , 'minus')">-</span>
+                                                <input id="{{product.product_id}}" type="text"
+                                                    value="{{product.quantity}}"
+                                                    oninput="change_quantity(this.value,this.id)">
+                                                <span class="inc qtybtn"
+                                                    onclick="button_click_hua_hai('{{product.product_id}}' , 'plus')">+</span>
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="shoping__cart__total" id = "{{product.product_id}}_total_price">
+                                    <td class="shoping__cart__total" id="{{product.product_id}}_total_price">
                                         ₹{{product.total_price}}
                                     </td>
                                     <td class="shoping__cart__item__close">
                                         <span class="fa fa-close"></span>
                                     </td>
+                                    <td>
+                                        <form action="product_details" method="POST">
+                                            {% csrf_token %}
+                                            <input type="hidden" name="product_id" value={{product.product_id}}>
+                                            <button type="submit" class="btn btn-success">Product Details</button>
+                                        </form>
+                                    </td>
                                 </tr>
-                            {% endfor %}                                
+
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
@@ -121,7 +135,7 @@
                         <h5>Cart Total</h5>
                         <ul>
                             {% comment %} <li>Subtotal <span>$454.98</span></li> {% endcomment %}
-                            <li>Total <span id = 'new_total_bill'>₹{{total_bill}}</span></li>
+                            <li>Total <span id='new_total_bill'>₹{{total_bill}}</span></li>
                         </ul>
                         <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
                     </div>
@@ -239,92 +253,54 @@
 
 
 
-
+    <!-- VERY VERY IMPORTANT FOR ajax -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <script>
 
 
-    function change_quantity(quantity , product_id) {
-    alert("The changed input value is " + quantity + product_id);
-                        $.ajax({
-                        url: "{% url 'shop:cart' %}",
-                        type: 'POST',
-                        data: {
-                            'csrfmiddlewaretoken': '{{csrf_token}}',
-                            'product_id'   : product_id.toString(),
-                            'new_quantity' : quantity  ,
-                           // 'id': this.id, // this id has new quantity value of a single product
-                            //'AlreadyExistsInCart': 'True',
+        function change_quantity(quantity, product_id) {
+            //alert("The changed input value is " + quantity + product_id);
+            $.ajax({
+                url: "{% url 'shop:cart' %}",
+                type: 'POST',
+                data: {
+                    'csrfmiddlewaretoken': '{{csrf_token}}',
+                    'product_id': product_id.toString(),
+                    'new_quantity': quantity,
+                    // 'id': this.id, // this id has new quantity value of a single product
+                    //'AlreadyExistsInCart': 'True',
 
-                        },
-                        dataType: 'json',
-                        success: function (resp) {
-                            alert(resp);
-                        document.getElementById(resp.product_id.toString() + "_total_price").innerHTML =resp.new_price;//prod1_total_price
-                        document.getElementById("new_total_bill").innerHTML =resp.new_total_bill;//prod1_total_price
-                       // document.getElementById('demo').innerHTML = "New text!";//#prod1_total_price
-                       // $.val(new_price); 
-                     // $( "#" + product_id.toString() + '_quantity' ).replaceWith(resp.c_html);
-                        }
-            
-                }); 
-    }
+                },
+                dataType: 'json',
+                success: function (resp) {
+                    //alert(resp);
+                    document.getElementById(resp.product_id.toString() + "_total_price").innerHTML = resp.new_price;//prod1_total_price
+                    document.getElementById("new_total_bill").innerHTML = resp.new_total_bill;//prod1_total_price
+                    // document.getElementById('demo').innerHTML = "New text!";//#prod1_total_price
+                    // $.val(new_price); 
+                    // $( "#" + product_id.toString() + '_quantity' ).replaceWith(resp.c_html);
+                }
 
+            });
+        }
 
-{% comment %} 
-        $(document).ready(function () {
-            $(document).on("input", ".change_quantity", function () {
-                    alert('COOL');
-                    $.ajax({
-                            url: "{% url 'shop:cart' %}",
-                            type: 'POST',
-                            data: {
-                                'csrfmiddlewaretoken': '{{csrf_token}}',
-                               // 'product_id': "{{product.product_id }}",
-                               // 'new_quantity' :" $(this).attr('id')"  ,
-                            // 'id': this.id, // this id has new quantity value of a single product
-                                //'AlreadyExistsInCart': 'True',
-
-                            },
-                            dataType: 'json',
-                            success: function (resp) {
-                                $( "#" + this.id.toString() ).replaceWith(resp.c_html);
-                            }
-                
-                    }); 
-            }); 
+        function button_click_hua_hai(product_id, type) {
+            var quantity = parseInt(document.getElementById(product_id).value);
+            //alert("Type is " + (type.localeCompare("plus") == 0).toString())
+            //alert(quantity, product_id);
 
 
-        });
-        {% endcomment %}
+            if (type.localeCompare("plus") == 0) // If type == 'plus'
+                quantity += 1;
+            else // If type == 'minus'
+                quantity -= 1;
 
-{% comment %} function change_quantity(value , product_id) {
-                    alert("The input value has changed. The new value is: " + value  );
-                    alert('COOL');
-                    $.ajax({
-                            url: "{% url 'shop:cart' %}",
-                            type: 'POST',
-                            data: {
-                                'csrfmiddlewaretoken': '{{csrf_token}}',
-                               'product_id':protduct_id, 
-                               'new_quantity': value, 
-                               //'id': producy_id, // this id has new quantity value of a single product
-                              // AlreadyExistsInCart': 'True',
 
-                            },
-                            dataType: 'json',
-                            success: function (resp) {
-                                $( "#" + this.id.toString() ).replaceWith(resp.c_html);
-                            }
-                
-                    }); 
-            }); 
-} {% endcomment %}
-
-{% comment %} function myFunction(value){
-    alert("The changed input values is : " + value);
-} {% endcomment %}
+            //alert("New q is " + quantity.toString());
+            //alert(quantity, product_id);
+            change_quantity(quantity.toString(), product_id);
+        }
     </script>
 
 
