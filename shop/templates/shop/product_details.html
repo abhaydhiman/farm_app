@@ -45,7 +45,7 @@
                     type: 'POST',
                     data: {
                         'csrfmiddlewaretoken': '{{csrf_token}}',
-                        'product_id': "{{product.product_id }}",
+                        'product_id': "{{product.product_id}}",
                         'id': this.id, // this id will help us to distinguish between 'plus' and 'minus' operation
                         'AlreadyExistsInCart': 'True',
 
@@ -90,7 +90,6 @@
 </head>
 
 <body>
-    <button class="change_quantity"> Click Me </button>
     <!-- Product Details Section Begin -->
     <section class="product-details spad">
         <div class="container">
