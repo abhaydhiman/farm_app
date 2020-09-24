@@ -7,6 +7,11 @@
     <title>Seller</title>
 
     <!-- links -->
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -70,20 +75,23 @@
                                     <th></th>
                                 </tr>
                             </thead>
+
+                            {% for product in Products  %}
+
                             <tbody>
-                                <tr onclick="show_hide_row('hidden_row1');">
+                                <tr onclick="show_hide_row('desc_of_{{product.product_id}}');">
                                     <td class="shoping__cart__item">
-                                        <img src="../static/images/featured/feature-2.jpg" alt="">
-                                        <h5>Vegetable’s Package</h5>
+                                        <img src="{{product.image}}" alt="">
+                                        <h5>{{product.product_name}}</h5>
                                     </td>
                                     <td class="shoping__cart__price">
-                                        $55.00
+                                        ${{product.price}}
                                     </td>
                                     <td class="shoping__cart__price">
-                                        400kg
+                                        {{product.Details.stock}}
                                     </td>
                                     <td class="shoping__cart__price">
-                                        10
+                                        {{product.Details.buyers}}
                                     </td>
                                     <td class="shoping__cart__item__close">
                                         <a href="#" name="wow">
@@ -91,83 +99,21 @@
                                         </a>
                                     </td>
                                 </tr>
-                                <tr id="hidden_row1" class="shoping__cart__price hidden_row ftco-animate">
-                                    <td colspan=4>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
-                                        blanditiis, ipsam sequi sint tempore nulla quasi consequuntur, modi possimus
-                                        alias vitae. Et aliquid obcaecati alias, nulla officia sapiente vitae debitis
-                                        voluptatem expedita cupiditate eum cum similique! Quis nesciunt iusto facilis
-                                        ipsam enim rerum porro odit recusandae, blanditiis laborum amet. At!</td>
-                                    <td class="shoping__cart__item__price">
-                                        <button class="primary-btn cart-btn" type="submit" name="wow">
-                                            Edit
-                                        </button>
-                                    </td>
-                                </tr>
 
-                                <tr onclick="show_hide_row('hidden_row2');">
-                                    <td class="shoping__cart__item">
-                                        <img src="../static/images/featured/feature-2.jpg" alt="">
-                                        <h5>Fresh Garden Vegetable</h5>
-                                    </td>
-                                    <td class="shoping__cart__price">
-                                        $39.00
-                                    </td>
-                                    <td class="shoping__cart__price">
-                                        400kg
-                                    </td>
-                                    <td class="shoping__cart__price">
-                                        3
-                                    </td>
-                                    <td class="shoping__cart__item__close">
-                                        <span class="fa fa-close"></span>
-                                    </td>
-                                </tr>
-                                <tr id="hidden_row2" class="shoping__cart__price hidden_row ftco-animate">
-                                    <td colspan=4>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
-                                        blanditiis, ipsam sequi sint tempore nulla
-                                        quasi consequuntur, modi possimus alias vitae. Et aliquid obcaecati alias, nulla
-                                        officia sapiente vitae debitis
-                                        voluptatem expedita cupiditate eum cum similique! Quis nesciunt iusto facilis
-                                        ipsam enim rerum porro odit
-                                        recusandae, blanditiis laborum amet. At!</td>
+                                <tr id="desc_of_{{product.product_id}}"
+                                    class="shoping__cart__price hidden_row ftco-animate">
+                                    <td colspan=4>{{product.desc}}</td>
                                     <td class="shoping__cart__item__price">
                                         <button class="primary-btn cart-btn" type="submit" name="wow">
                                             Edit
                                         </button>
                                     </td>
                                 </tr>
-                                <tr onclick="show_hide_row('hidden_row3');">
-                                    <td class="shoping__cart__item">
-                                        <img src="../static/images/featured/feature-2.jpg" alt="">
-                                        <h5>Organic Bananas</h5>
-                                    </td>
-                                    <td class="shoping__cart__price">
-                                        $69.00
-                                    </td>
-                                    <td class="shoping__cart__price">
-                                        400kg
-                                    </td>
-                                    <td class="shoping__cart__price">
-                                        4
-                                    </td>
-                                    <td class="shoping__cart__item__close">
-                                        <span class="fa fa-close"></span>
-                                    </td>
-                                </tr>
-                                <tr id="hidden_row3" class="shoping__cart__price hidden_row ftco-animate">
-                                    <td colspan=4>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet
-                                        blanditiis, ipsam sequi sint tempore nulla
-                                        quasi consequuntur, modi possimus alias vitae. Et aliquid obcaecati alias, nulla
-                                        officia sapiente vitae debitis
-                                        voluptatem expedita cupiditate eum cum similique! Quis nesciunt iusto facilis
-                                        ipsam enim rerum porro odit
-                                        recusandae, blanditiis laborum amet. At!</td>
-                                    <td class="shoping__cart__item__price">
-                                        <button class="primary-btn cart-btn" type="submit" name="wow">
-                                            Edit
-                                        </button>
-                                    </td>
-                                </tr>
+                            </tbody>
+                            {% endfor %}
+                            <!-- New Product Will come Here -->
+                            <tbody id='item_to_be_replaced'>
+
                             </tbody>
                         </table>
                     </div>
@@ -176,7 +122,8 @@
             <div class="row">
                 <div class="col-lg-6 ftco-animate">
                     <div class="shoping__cart__btns" onclick="show_hide_row('hidden_row11');">
-                        <a href="#" class="primary-btn cart-btn" style="border-radius: 30px; font-size: 20px;">+</a>
+                        <a href="#hidden_row11" class="primary-btn cart-btn"
+                            style="border-radius: 30px; font-size: 20px;">+</a>
                     </div>
                 </div>
             </div>
@@ -190,24 +137,66 @@
                     <div class="shoping__cart__table" id="">
                         <table id="table_detail">
                             <tbody>
-                                <tr id="hidden_row11" class="shoping__cart__price hidden_row ftco-animate">
-                                    <td colspan="4">
-                                        <img src="../static/images/featured/feature-1.jpg" alt="">
-                                    </td>
-                                    <td colspan=4>
-                                        <input style="border-radius: 3px;" type="text" placeholder="Item Name"> <br>
-                                        <br>
-                                        <input style="border-radius: 3px;" type="text" placeholder="Price"> <br> <br>
-                                        <input style="border-radius: 3px;" type="text" placeholder="Description"> <br>
-                                        <br>
-                                        <input style="border-radius: 3px;" type="text" placeholder="In Stock"> <br> <br>
-                                    </td>
-                                    <td class="shoping__cart__item__price">
-                                        <button class="primary-btn cart-btn" type="submit" name="wow">
-                                            Add
-                                        </button>
-                                    </td>
-                                </tr>
+
+
+
+
+
+
+
+
+
+
+
+                                <form action="" method="POST" id='nya_product_add_kro_bhai'>
+                                    {% csrf_token %}
+                                    <tr id="hidden_row11" class="shoping__cart__price hidden_row ftco-animate">
+                                        <td colspan="4">
+                                            <label for="image">
+                                                <input type="file" accept="image/*" name="image" id="image"
+                                                    style="display:none;" />
+                                                <div class="example">
+                                                    <img src="https://ohram.org/image/utilities/empty_product.svg" />
+                                                    <div class="contents">
+                                                        <div class="text">Upload photo</div>
+                                                    </div>
+                                                </div>
+                                            </label>
+                                        </td>
+                                        <td colspan=4>
+                                            <input style="border-radius: 3px;" type="text" id='new_item_name'
+                                                placeholder="Item Name"> <br>
+                                            <br>
+                                            <input style="border-radius: 3px;" type="text" id='new_item_price'
+                                                placeholder="Price"> <br>
+                                            <br>
+                                            <input style="border-radius: 3px;" type="text" id='new_item_stock'
+                                                placeholder="In Stock"> <br>
+                                            <br>
+                                            <input style="border-radius: 3px;" type="text" id='new_item_category'
+                                                placeholder="Category"> <br>
+                                            <br>
+                                            <textarea style="border-radius: 3px;" id='new_item_description'
+                                                name="description" placeholder="Description" id="" cols="30"
+                                                rows="6"></textarea><br> <br>
+
+                                        </td>
+                                        <td class="shoping__cart__item__price">
+                                            <button class="primary-btn cart-btn" type="submit" name="wow">
+                                                Add
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </form>
+
+
+
+
+
+
+
+
+
                             </tbody>
                         </table>
                     </div>
@@ -319,6 +308,52 @@
     <script src="..\static\js\google-map.js"></script>
     <script src="..\static\js\mixitup.min.js"></script>
     <script src="..\static\js\main.js"></script>
+
+
+
+    <!-- VERY VERY IMPORTANT FOR ajax -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script>
+        //    function product_add_hua_hai() {
+        //          alert("Ayush kya baat hai")
+        //        }
+
+
+
+        $("#nya_product_add_kro_bhai").submit(function (event) {
+            event.preventDefault();
+
+            var new_item_name = document.getElementById('new_item_name').value;
+            var new_item_price = document.getElementById('new_item_price').value;
+            var new_item_stock = document.getElementById('new_item_stock').value;
+            var new_item_category = document.getElementById('new_item_category').value;
+            var new_item_description = document.getElementById('new_item_description').value;
+
+
+            $.ajax({
+                url: "{% url 'shop:seller_added_new_prduct' %}",
+                type: 'POST',
+                data: {
+                    'csrfmiddlewaretoken': '{{csrf_token}}',
+                    'product_name': new_item_name,
+                    'price': new_item_price,
+                    'stock': new_item_stock,
+                    'category': new_item_category,
+                    'desc': new_item_description,
+                },
+                dataType: 'json',
+                success: function (resp) {
+                    $("#item_to_be_replaced").replaceWith(resp.c_html);
+
+                }
+
+            });
+
+        });
+    </script>
+
+
 
 </body>
 
