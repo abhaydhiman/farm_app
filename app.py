@@ -1,11 +1,11 @@
 # Importing Flask Libraries
-from flask import Flask, render_template,request,session
+from flask import Flask, render_template,request,session, jsonify
 
 
 # Importing Functions from modules.py
-from modules import opt_generator, msg_sender, firebase_user_checker, firebase_user_registerer, \
+from modules import opt_generator, msg_sender, firebase_user_checker, firebase_user_registerer,\
 firebase_user_loger, firebase_data_fetcher, weather_fetcher, day_fetcher, loan_data, get_current_time,\
-loan_data_fetcher, insu_data, insu_data_fetcher
+loan_data_fetcher, insu_data, insu_data_fetcher, update_status, product_data_sender,product_data_fetcher
 
 
 # Importing Functions For translation from translator.py
@@ -44,6 +44,7 @@ def sign_up():
 
 
 
+
 # Route for OTP Verification Page i.e. Page For Submitting OTP
 @app.route('/submit_otp', methods=['POST'])
 def submit_otp():
@@ -75,6 +76,7 @@ def submit_otp():
             text_ls = ['Login', 'Phone Number', 'Password', 'Submit', 'Cancel']
             log_list = text_translator(text_ls, lang)
             return render_template('log_in.html', log_list = log_list, lang=lang, mm="")
+
 
 
 
@@ -113,6 +115,7 @@ def set_password():
 
 
 
+
 # TO Go To Home Page If Farmer Follows the Step to Register 
 @app.route('/user_home', methods=['POST'])
 def user_home():
@@ -143,6 +146,7 @@ def user_home():
             text_ls = ['Submit Password', 'Enter Password', 'Confirm Password', 'Confirm', 'Both Password Do not match / password must be greater then 6 digits']
             password_list = text_translator(text_ls, lang)
             return render_template('set_password.html', password_list=password_list , lang=lang, phone=phone_number, name=name, message=password_list[4])
+
 
 
 
@@ -357,10 +361,23 @@ def shop():
     phone_number = session['phone_number']
     status = session['status']
     if status == 'Farmer':
-        b_Text = 'Become Seller'
+        b_text = 'Become Seller'
     else:
-        b_Text = 'Sell Products'
-    return render_template('shop_now.html', b_Text = b_Text)
+        b_text = 'Sell Products'
+    return render_template('shop_now.html', b_text = b_text)
+
+
+
+
+# To  Make a Farmer to Seller + Farmer
+@app.route('/become_seller',methods=['POST','GET'])
+def become_seller():
+    lang = session['lang']
+    phone_number = session['phone_number']
+    status = update_status(phone_number)
+    session['status'] = status
+    b_text = 'Sell Products'
+    return jsonify({'b_text' : b_text})
 
 
 
@@ -371,7 +388,29 @@ def seller():
     lang = session['lang']
     phone_number = session['phone_number']
     status = session['status']
-    return render_template('seller.html')
+    pname,pdes,price,stock,cat,image,buyers = product_data_fetcher(phone_number)
+    return render_template('seller.html',pname=pname,pdes=pdes,price=price,stock=stock,cat=cat,image=image, buyers=buyers, length=len(pname))
+
+
+
+
+# To Rgister a product on Seller Page
+@app.route('/product',methods=['POST','GET'])
+def product():
+    lang = session['lang']
+    phone_number = session['phone_number']
+    status = session['status']
+    name = request.form['name']
+    price = request.form['price']
+    cat = request.form['cat']
+    des = request.form['des']
+    stock = request.form['stock']
+    image = request.form['image']
+    flag = product_data_sender(phone_number=phone_number,name=name,price=price,category=cat,des=des,in_Stock=stock,image=image)
+     
+    return jsonify({'name' : name,'price':price,'cat':cat,'des':des,'stock':stock, 'image':image,'flag':flag})
+
+
 
 
 
