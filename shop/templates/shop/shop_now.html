@@ -294,7 +294,6 @@
 
                                 <form action="product_details" method="POST">
                                     <input type="hidden" name="product_id" value={{product.product_id}}>
-
                                     {% csrf_token %}
                                     <button type="submit" class="btn btn-success">QV</button>
                                 </form>
@@ -325,7 +324,7 @@
                 <div class="row justify-content-center mb-5">
                     <div class="col-md-8 text-center heading-section ftco-animate">
 
-                        <a href="{% url 'shop:cart' %}">
+                        <a href="{% url 'shop:sell_something' %}">
                             <h2 class="mb-3">Heading</h2>
                         </a>
 
