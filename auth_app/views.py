@@ -1,5 +1,5 @@
 from django.shortcuts import render , redirect
-
+from firebase_manager_new import USER
 
 # from modules.imp_funcs import *
 
@@ -10,11 +10,10 @@ from django.shortcuts import render , redirect
 All the given function are imported from { modules/imp_func.py }
 '''
 # from modules.imp_funcs  import  translator       # Translator translates the context texts
-from modules.imp_funcs  import  OTP_generator      # This function is used to generate OTP
-from modules.imp_funcs  import  msg_sender         # This function is used to send OTP for signup 
-from modules.imp_funcs  import  context_generator  # All functions of auth_app uses this function to generate context
-from firebase_manager   import  FirebaseManager    # Importing the FirebaseManager class 
-from firebase_manager   import  User               # Importing the User class
+from modules.imp_funcs  import  OTP_generator     # This function is used to generate OTP
+from modules.imp_funcs  import  msg_sender        # This function is used to send OTP for signup 
+from modules.imp_funcs  import  context_generator # All functions of auth_app uses this function to generate context
+
 
 # ***********************************************************************
 
@@ -89,11 +88,12 @@ def signup_page(request):
 
     if request.method == 'POST': 
 
-        user                    = User(request.POST['language_selected']) # Creating a User class object
-        request.session['user'] = [user]                                    # Storing the user object as a session variabels
+        request.session['language_selected']  = request.POST['language_selected'] 
+
+        language_selected = request.session['language_selected']
 
         context = context_generator(for_page = 'signup_page' ,
-                                    language_selected =  user.language ,
+                                    language_selected =  language_selected ,
                                     texts_to_be_added = None)
 
         return render(request , 'auth_app/signup.html' , context)
@@ -105,15 +105,12 @@ def signup_page(request):
 # **USE OF IF-ELSE here --> Here user is allowed to generate an OTP if its number is not registered in our firebase** else user recieves an error message
 
 def submit_signup_details(request):
-    # user              = request.session['user']        # Getting the user object which is a session variable here
-    # user.phone_number = request.POST['Phone_number']   # Adding the phone_number of user to user object 
-
-
-    if request.method == 'POST' and not user.isRegistered():
-
+    if request.method == 'POST' and not USER.isRegistered(phone_number = request.POST['Phone_number']) :
+        phone_number                            = request.POST['Phone_number']
         language_selected                       = request.session['language_selected']
         request.session['phone_number_of_user'] = request.POST['Phone_number']
         request.session['name_of_user']         = request.POST['name']
+        request.session['STATUS']               = request.POST['status']
 
         context = context_generator(for_page = 'submit_signup_details'  , 
                                     language_selected = language_selected , 
@@ -144,7 +141,8 @@ def verify_signup_details(request):
         name_of_user         = request.session['name_of_user']
         language_selected    = request.session['language_selected']
 
-        context = context_generator(for_page = 'set_password' , language_selected = language_selected)
+        context = context_generator(for_page = 'set_password' ,
+                                    language_selected = language_selected)
         return render(request , 'auth_app/set_password.html' , context)
 
     else:
@@ -165,7 +163,6 @@ def check_password(request):
     name_of_user         = request.session['name_of_user']
     language_selected    = request.session['language_selected']
 
-
     if request.POST['password_1'] == request.POST['password_2'] :
         email = str(phone_number_of_user) + "@farmapp.com"
         user = auth.create_user_with_email_and_password(email , request.POST['password_1'])
@@ -175,16 +172,26 @@ def check_password(request):
                 'state'        : request.POST['state'] , 
                 'city'         : request.POST['city'] , 
                 'cart'         : {'isEmpty' : True } , 
+                'status'       : request.session['STATUS'],
         }
 
-        db.child('General_User').child(str(phone_number_of_user)).set(data)
-        context = {}
+        # STATUS includes seller than it has a special cart named as SellerCart
+        if "Seller" in  request.session['STATUS']:
+            data['SellerCart'] = {'isEmpty':True}
 
+
+
+        USER.SetUserData(phone_number = phone_number_of_user , data = data)
+        context = {}
         request.session['loggedin_user_phone_number'] = phone_number_of_user
         return redirect('user_home:home_page')
     else:
-        context = context_generator(for_page  = 'set_password')
-        context = {}
+        phone_number_of_user = request.session['phone_number_of_user']
+        name_of_user         = request.session['name_of_user']
+        language_selected    = request.session['language_selected']
+        context = context_generator(for_page = 'set_password' ,
+                                    language_selected = language_selected ,
+                                    texts_to_be_added = [['warning_msg' ,"Entered passwords doesn't match!!" ]])
         return render(request , 'auth_app/set_password.html' , context)
     
 
