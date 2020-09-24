@@ -14,7 +14,7 @@ from translator import text_translator, english_translator
 #__________________________________________________________________________________
 # Configuration Key Of firebase
 firebaseConfig = {
-   
+    
 }
 
 # Init of Pyrebase
@@ -308,5 +308,68 @@ def insu_data_fetcher(phone_number):
             status_ls.append(status)
             
     return date_ls, time_ls, status_ls
+
+
+def update_status(phone_number):
+    data_list = firebase.get('the-farm-app-4015b/',None)
+    status = 'Farmer + Seller' 
+    for data in data_list['Farmer:']:
+        if data_list['Farmer:'][data]['Phone Number'] == str(phone_number):
+            firebase.put('the-farm-app-4015b/Farmer:/'+data,'Status',status)
+            break
+    return status
+
+
+
+def product_data_sender(phone_number,name,des,price,in_Stock, category, image):
+    flag = 0
+    data_list = firebase.get('the-farm-app-4015b/',None)
+    for data in data_list['Products:']:
+        if data_list['Products:'][data]['Registered Number'] == str(phone_number):
+             if name == data_list['Products:'][data]['Product Name']:
+                 flag = 1
+                 break
+    if flag == 0:
+        Data = {
+        'Registered Number': phone_number,
+        'Product Name' : name,
+        'Description' : des,
+        'Price' : price,
+        'In Stock': in_Stock,
+        'Category' : category,
+        'Buyers':'0',
+        'Image':image
+        }
+        result = firebase.post('/the-farm-app-4015b/Products:', Data)
+    return flag
+
+
+
+def product_data_fetcher(phone_number):
+    data_list = firebase.get('the-farm-app-4015b/',None)
+    pname = []
+    pdes = []
+    price = []
+    stock = []
+    cat = []
+    image = []
+    buyers = []
+    for data in data_list['Products:']:
+        if data_list['Products:'][data]['Registered Number'] == str(phone_number):
+            name = data_list['Products:'][data]['Product Name']
+            price1 = data_list['Products:'][data]['Price']
+            des = data_list['Products:'][data]['Description']
+            stock1 = data_list['Products:'][data]['In Stock']
+            cat1 = data_list['Products:'][data]['Category']
+            buy = data_list['Products:'][data]['Buyers']
+            img = data_list['Products:'][data]['Image']
+            pname.append(name)
+            pdes.append(des)
+            price.append(price1)
+            stock.append(stock1)
+            cat.append(cat1)
+            buyers.append(buy)
+            image.append(img)
+    return pname,pdes,price,stock,cat,image, buyers 
 
 
