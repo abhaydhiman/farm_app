@@ -6,6 +6,11 @@
     <title>Seller</title>
 
     <!-- links -->
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -14,10 +19,11 @@
     <link rel="stylesheet" href="..\static\css\magnific-popup.css">
     <link rel="stylesheet" href="..\static\css\owl.carousel.min.css">
     <link rel="stylesheet" href="..\static\css\flaticon.css">
-    <link rel="stylesheet" href="\..\farm_app\pro_farm\static\css\icomoon.css">
+    <link rel="stylesheet" href="..\static\css\icomoon.css">
     <link rel="stylesheet" href="..\static\css\style.css">
     <link rel="stylesheet" type="text/css" href="..\static\css\table_style.css">
     <script type="text/javascript" src="jquery.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script type="text/javascript">
         function show_hide_row(row) {
             $("#" + row).toggle();
@@ -25,23 +31,109 @@
     </script>
 
 </head>
+<script>
+    var images;
+    var loadFile = function(event) {
+        var file = $("input[type=file]").get(0).files[0];
+        var reader = new FileReader();
+        reader.onload = function(){
+            $("#image2").attr("src", reader.result);
+            images = reader.result
+        }
+
+         reader.readAsDataURL(file);
+    };
+
+    $(document).ready(function() {
+        $('#add').on('click', function(event) {
+            $.ajax({
+                data : {
+                    name : $('#name').val(),
+                    price : $('#price').val(),
+                    cat : $('#cat').val(),
+                    des : $('#des').val(),
+                    stock : $('#stock').val(),
+                    image: images
+                },
+                type : 'POST',
+                url : '/product'
+            })
+            .done(function(data) {
+                if(data.flag=='0'){
+               $("#new_product_name").html(data.name);
+               $("#new_product_price").html(data.price);
+               $("#new_product_des").html(data.des);
+               $("#new_product_cat").html(data.cat);
+               $("#new_product_stock").html(data.stock);
+               $("#new_product_image").attr("src", data.image);
+               $("#new_product_buy").html('0');
+               $("#new_product").show(); 
+               $("#new_product").attr("id", data.name+"_product");
+               $("#new_product_price").attr("id", data.name+"_product_price");
+               $("#new_product_name").attr("id", data.name+"_product_name");
+               $("#new_product_cat").attr("id", data.name+"_product_cat");
+               $("#new_product_stock").attr("id", data.name+"_product_stock");
+               $("#new_product_image").attr("id", data.name+"_product_image");
+               $("#new_product_buy").attr("id", data.name+"_product_buy");
+               $("#new_product_des").attr("id", data.name+"_product_des");
+               var html = "<tr onclick='show_hide_row(\""+data.name+"\");' id='new_product' style='display: none;'>\
+                <td class='shoping__cart__item'>\
+                    <img id='new_product_image' src='' alt=''>\
+                    <h5 id='new_product_name'></h5>\
+                </td>\
+                <td class='shoping__cart__price' id='new_product_cat'>\
+                </td>\
+                <td class='shoping__cart__price' id='new_product_price'>\
+                </td>\
+                <td class='shoping__cart__price' id='new_product_stock'>\
+                </td>\
+                <td class='shoping__cart__price' id='new_product_buy'>\
+                </td>\
+                <td class='shoping__cart__item__close'>\
+                    <span class='fa fa-close'></span>\
+                </td>\
+            </tr>\
+            <tr id='"+data.name+"' class='shoping__cart__price hidden_row ftco-animate'>\
+                <td colspan=4 id='new_product_des'></td>\
+                <td class='shoping__cart__item__price'>\
+                    <a href='#hidden_row11' onclick='show_hide_row('hidden_row11');'>\
+                        <button  class='primary-btn cart-btn' type='submit' name='wow'>\
+                            Edit\
+                        </button>\
+                    </a>\
+                </td>\
+            </tr>";
+               document.getElementById("table_body").innerHTML += html;
+                }
+                else{
+                    $("#already_exist").show();
+                    setTimeout(function() { 
+                        $('#already_exist').fadeOut(); 
+                    }, 4000);
+                }
+            });
+            event.preventDefault();
+        });
+    });
+</script>
+
 <body>
     <!-- navbar started -->
     <div class="container">
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light shop" id="ftco-navbar">
             <div class="container navbar">
-                <a class="navbar-brand" href="home.html">The<span>F</span>armer</a>
+                <a class="navbar-brand" href="#">The<span>F</span>armer</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                     aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="oi oi-menu"></span> Menu
                 </button>
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-                        <li class="nav-item"><a href="about.html" class="nav-link">weather</a></li>
-                        <li class="nav-item"><a href="work.html" class="nav-link">Work</a></li>
-                        <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-                        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                        <li class="nav-item active"><a href="{{url_for('user_home_3')}}" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="{{url_for('weather')}}" class="nav-link">weather</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Work</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Blog</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
                     </ul>
                 </div>
             </div>
@@ -62,98 +154,76 @@
                             <thead>
                                 <tr>
                                     <th class="shoping__product">Products</th>
+                                    <th>Category</th>
                                     <th>Price</th>
                                     <th>In Stock</th>
                                     <th>Buyers</th>
                                     <th></th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr onclick="show_hide_row('hidden_row1');">
+                            <tbody id="table_body">
+                            {% for i in range(length) %}
+                                <tr onclick="show_hide_row('{{pname[i]}}');">
                                     <td class="shoping__cart__item">
-                                        <img src="../static/images/featured/feature-2.jpg" alt="">
-                                        <h5>Vegetable’s Package</h5>
+                                        <img src="{{image[i]}}" alt="">
+                                        <h5>{{pname[i]}}</h5>
                                     </td>
                                     <td class="shoping__cart__price">
-                                        $55.00
+                                        {{cat[i]}}
                                     </td>
                                     <td class="shoping__cart__price">
-                                        400kg
+                                        {{price[i]}}
                                     </td>
                                     <td class="shoping__cart__price">
-                                        10
+                                        {{stock[i]}}
+                                    </td>
+                                    <td class="shoping__cart__price">
+                                        {{buyers[i]}}
                                     </td>
                                     <td class="shoping__cart__item__close">
-                                        <a href="#" name="wow">
-                                            <span class="fa fa-close"></span>
+                                        <span class="fa fa-close"></span>
+                                    </td>
+                                </tr>
+                                <tr id="{{pname[i]}}" class="shoping__cart__price hidden_row ftco-animate">
+                                    <td colspan=4>{{pdes[i]}}</td>
+                                    <td class="shoping__cart__item__price">
+                                        <a href="#hidden_row11" onclick="show_hide_row('hidden_row11');">
+                                            <button  class="primary-btn cart-btn" type="submit" name="wow">
+                                                Edit
+                                            </button>
                                         </a>
                                     </td>
                                 </tr>
-                                <tr id="hidden_row1" class="shoping__cart__price hidden_row ftco-animate">
-                                    <td colspan=4>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet blanditiis, ipsam sequi sint tempore nulla quasi consequuntur, modi possimus alias vitae. Et aliquid obcaecati alias, nulla officia sapiente vitae debitis voluptatem expedita cupiditate eum cum similique! Quis nesciunt iusto facilis ipsam enim rerum porro odit recusandae, blanditiis laborum amet. At!</td>
-                                    <td class="shoping__cart__item__price">
-                                        <button class="primary-btn cart-btn" type="submit" name="wow">
-                                            Edit
-                                        </button>
-                                    </td>
-                                </tr>
-
-                                <tr onclick="show_hide_row('hidden_row2');">
+                                {% endfor %}
+                                <tr onclick="show_hide_row('hidden_row4');" id="new_product" style="display: none;">
                                     <td class="shoping__cart__item">
-                                        <img src="../static/images/featured/feature-2.jpg" alt="">
-                                        <h5>Fresh Garden Vegetable</h5>
+                                        <img id="new_product_image" src="" alt="">
+                                        <h5 id="new_product_name"></h5>
                                     </td>
-                                    <td class="shoping__cart__price">
-                                        $39.00
+                                    <td class="shoping__cart__price" id="new_product_cat">
+                                        
                                     </td>
-                                    <td class="shoping__cart__price">
-                                        400kg
+                                    <td class="shoping__cart__price" id="new_product_price">
+                                        
                                     </td>
-                                    <td class="shoping__cart__price">
-                                        3
+                                    <td class="shoping__cart__price" id="new_product_stock">
+                                        
+                                    </td>
+                                    <td class="shoping__cart__price" id="new_product_buy">
+                                        
                                     </td>
                                     <td class="shoping__cart__item__close">
                                         <span class="fa fa-close"></span>
                                     </td>
                                 </tr>
-                                <tr id="hidden_row2" class="shoping__cart__price hidden_row ftco-animate">
-                                    <td colspan=4>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet blanditiis, ipsam sequi sint tempore nulla
-                                        quasi consequuntur, modi possimus alias vitae. Et aliquid obcaecati alias, nulla officia sapiente vitae debitis
-                                        voluptatem expedita cupiditate eum cum similique! Quis nesciunt iusto facilis ipsam enim rerum porro odit
-                                        recusandae, blanditiis laborum amet. At!</td>
+                                <tr id="hidden_row4" class="shoping__cart__price hidden_row ftco-animate">
+                                    <td colspan=4 id="new_product_des"></td>
                                     <td class="shoping__cart__item__price">
-                                        <button class="primary-btn cart-btn" type="submit" name="wow">
-                                            Edit
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr onclick="show_hide_row('hidden_row3');">
-                                    <td class="shoping__cart__item">
-                                        <img src="../static/images/featured/feature-2.jpg" alt="">
-                                        <h5>Organic Bananas</h5>
-                                    </td>
-                                    <td class="shoping__cart__price">
-                                        $69.00
-                                    </td>
-                                    <td class="shoping__cart__price">
-                                        400kg
-                                    </td>
-                                    <td class="shoping__cart__price">
-                                        4
-                                    </td>
-                                    <td class="shoping__cart__item__close">
-                                        <span class="fa fa-close"></span>
-                                    </td>
-                                </tr>
-                                <tr id="hidden_row3" class="shoping__cart__price hidden_row ftco-animate">
-                                    <td colspan=4>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet blanditiis, ipsam sequi sint tempore nulla
-                                        quasi consequuntur, modi possimus alias vitae. Et aliquid obcaecati alias, nulla officia sapiente vitae debitis
-                                        voluptatem expedita cupiditate eum cum similique! Quis nesciunt iusto facilis ipsam enim rerum porro odit
-                                        recusandae, blanditiis laborum amet. At!</td>
-                                    <td class="shoping__cart__item__price">
-                                        <button class="primary-btn cart-btn" type="submit" name="wow">
-                                            Edit
-                                        </button>
+                                        <a href="#hidden_row11" onclick="show_hide_row('hidden_row11');">
+                                            <button  class="primary-btn cart-btn" type="submit" name="wow">
+                                                Edit
+                                            </button>
+                                        </a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -164,13 +234,13 @@
             <div class="row">
                 <div class="col-lg-6 ftco-animate">
                     <div class="shoping__cart__btns" onclick="show_hide_row('hidden_row11');">
-                        <a href="#" class="primary-btn cart-btn" style="border-radius: 30px; font-size: 20px;">+</a>
+                        <a href="#hidden_row11" class="primary-btn cart-btn" style="border-radius: 30px; font-size: 20px;">+</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-
+    <h3 id="already_exist" style="display: none; color:red">Product Already Available</h3>
     <section class="shoping-cart spad">
         <div class="container">
             <div class="row">
@@ -180,16 +250,26 @@
                             <tbody>
                                 <tr id="hidden_row11" class="shoping__cart__price hidden_row ftco-animate">
                                     <td colspan="4">
-                                        <img src="../static/images/featured/feature-1.jpg" alt="">
+                                        <label for="image">
+                                            <input type="file" accept="image/*" name="image" onchange="loadFile(event)" id="image" style="display:none;" />
+                                            <div class="example">
+                                                <img id="image2" src="https://ohram.org/image/utilities/empty_product.svg" />
+                                                <div class="contents">
+                                                    <div class="text">Upload photo</div>
+                                                </div>
+                                            </div>
+                                        </label>
                                     </td>
                                     <td colspan=4>
-                                        <input style="border-radius: 3px;" type="text" placeholder="Item Name"> <br> <br>
-                                        <input style="border-radius: 3px;" type="text" placeholder="Price"> <br> <br>
-                                        <input style="border-radius: 3px;" type="text" placeholder="Description"> <br> <br>
-                                        <input style="border-radius: 3px;" type="text" placeholder="In Stock"> <br> <br>
+                                        <input style="border-radius: 3px;" type="text" id="name" placeholder="Item Name"> <br> <br>
+                                        <input style="border-radius: 3px;" type="text" id="price" placeholder="Price"> <br> <br>
+                                        <input style="border-radius: 3px;" type="text" id="stock" placeholder="In Stock"> <br> <br>
+                                        <input style="border-radius: 3px;" type="text" id="cat" placeholder="Category"> <br> <br>
+                                        <textarea style="border-radius: 3px;" name="description" id="des" placeholder="Description" id="" cols="30" rows="6"></textarea><br> <br>
+                                        
                                     </td>
                                     <td class="shoping__cart__item__price">
-                                        <button class="primary-btn cart-btn" type="submit" name="wow">
+                                        <button class="primary-btn cart-btn" onclick="show_hide_row('hidden_row11');" type="submit" id="add" name="wow">
                                             Add
                                         </button>
                                     </td>
