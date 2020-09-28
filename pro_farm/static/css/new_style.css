@@ -1919,8 +1919,7 @@ h1 {
     background: #c33ada;
 }
 
-/* -------------------------------
-  video section --------------- */
+/* --------- video section ---------- */
 .newh1 {
   text-align: center;
   color: #d2006b;
@@ -1955,8 +1954,7 @@ h1 {
   background-color: #d2006b;
 }
 
-/* --------------------------------------
-  scrolling animation ---------------- */
+/* ----------- scrolling animation ------------- */
 .animation-heading-1  {
   opacity: 0;
 }
@@ -2013,8 +2011,7 @@ h1 {
   opacity: 1;
 }
 
-/* ----------------------------
-  footer section ----------- */
+/* ----------- footer section ------------ */
 footer{
   position: fixed;
   top: 400%;
