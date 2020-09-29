@@ -293,13 +293,20 @@
 
             if (type.localeCompare("plus") == 0) // If type == 'plus'
                 quantity += 1;
-            else // If type == 'minus'
-                quantity -= 1;
+            else // If type == 'minus
+            {
+                if (quantity != 0)
+                    quantity -= 1;
+                else
+                    return;
+            }
 
 
             //alert("New q is " + quantity.toString());
             //alert(quantity, product_id);
+            alert('hurah');
             change_quantity(quantity.toString(), product_id);
+            alert('hurah');
         }
     </script>
 
