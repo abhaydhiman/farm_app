@@ -121,8 +121,8 @@
             </div>
             <div class="row">
                 <div class="col-lg-6 ftco-animate">
-                    <div class="shoping__cart__btns" onclick="show_hide_row('hidden_row11');">
-                        <a href="#hidden_row11" class="primary-btn cart-btn"
+                    <div class="shoping__cart__btns" onclick="show_hide_row('new_product_add_box');">
+                        <a href="#new_product_add_box" class="primary-btn cart-btn"
                             style="border-radius: 30px; font-size: 20px;">+</a>
                     </div>
                 </div>
@@ -150,13 +150,14 @@
 
                                 <form action="" method="POST" id='nya_product_add_kro_bhai'>
                                     {% csrf_token %}
-                                    <tr id="hidden_row11" class="shoping__cart__price hidden_row ftco-animate">
+                                    <tr id="new_product_add_box" class="shoping__cart__price hidden_row ftco-animate">
                                         <td colspan="4">
                                             <label for="image">
-                                                <input type="file" accept="image/*" name="image" id="image"
-                                                    style="display:none;" />
+                                                <input type="file" accept="image/*" onchange="loadFile(event)"
+                                                    name="image" id="image" style="display:none;" />
                                                 <div class="example">
-                                                    <img src="https://ohram.org/image/utilities/empty_product.svg" />
+                                                    <img id='new_product_image'
+                                                        src="https://ohram.org/image/utilities/empty_product.svg" />
                                                     <div class="contents">
                                                         <div class="text">Upload photo</div>
                                                     </div>
@@ -182,7 +183,8 @@
 
                                         </td>
                                         <td class="shoping__cart__item__price">
-                                            <button class="primary-btn cart-btn" type="submit" name="wow">
+                                            <button class="primary-btn cart-btn" type="submit" name="wow"
+                                                onclick="show_hide_row('new_product_add_box');">
                                                 Add
                                             </button>
                                         </td>
@@ -318,7 +320,18 @@
         //    function product_add_hua_hai() {
         //          alert("Ayush kya baat hai")
         //        }
+        var images;
+        var loadFile = function (event) {
+            alert("Mai chal ra hu");
+            var file = $("input[type=file]").get(0).files[0];
+            var reader = new FileReader();
+            reader.onload = function () {
+                $("#new_product_image").attr("src", reader.result);
+                images = reader.result
+            }
 
+            reader.readAsDataURL(file);
+        };
 
 
         $("#nya_product_add_kro_bhai").submit(function (event) {
@@ -341,6 +354,7 @@
                     'stock': new_item_stock,
                     'category': new_item_category,
                     'desc': new_item_description,
+                    'image': images,
                 },
                 dataType: 'json',
                 success: function (resp) {
