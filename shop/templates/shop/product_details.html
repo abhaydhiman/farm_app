@@ -7,7 +7,7 @@
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ogani | Template</title>
+    <title>ProductDetails</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
@@ -24,67 +24,6 @@
     <link rel="stylesheet" href="..\static\css\jquery-ui.min.css">
     <link rel="stylesheet" href="\..\farm_app\pro_farm\static\css\icomoon.css">
     <link rel="stylesheet" href="..\static\css\style.css">
-
-
-
-    <!-- very very important for using ajax -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-    <script>
-
-
-
-        $(document).ready(function () {
-
-
-            $(document).on("click", ".change_quantity", function () {
-                alert("Hurrah");
-
-                $.ajax({
-                    url: "{% url 'shop:product_details' %}",
-                    type: 'POST',
-                    data: {
-                        'csrfmiddlewaretoken': '{{csrf_token}}',
-                        'product_id': "{{product.product_id}}",
-                        'id': this.id, // this id will help us to distinguish between 'plus' and 'minus' operation
-                        'AlreadyExistsInCart': 'True',
-
-                    },
-                    dataType: 'json',
-                    success: function (resp) {
-                        $("#quantity").replaceWith(resp.c_html);
-                    }
-                });
-            });
-
-            $(document).on("click", "button.add_item_to_cart", function () {
-                $.ajax({
-                    url: "{% url 'shop:add_item_to_cart' %}",
-                    type: 'POST',
-                    data: {
-                        'csrfmiddlewaretoken': '{{csrf_token}}',
-                        'product_id': "{{product.product_id }}",
-                        'AlreadyExistsInCart': 'False',
-                    },
-                    dataType: 'json',
-                    success: function (resp) {
-                        $(".add_item_to_cart").replaceWith(resp.c_html);
-                    }
-                });
-            });
-
-
-        });
-
-
-
-
-
-    </script>
-
-
-
-
 
 
 </head>
@@ -127,16 +66,57 @@
 
 
 
+                        <!-- !  Change quantity Logic -->
+
                         {% if add_to_cart_button == 'Active' %}
-                        <button class="add_item_to_cart btn btn-secondary">Add to Cart</button>
+
+                        <div id='add_new_item'>
+                            <button class="btn btn-secondary" onclick="add_item_to_cart('{{product.product_id}}')">Add
+                                to
+                                Cart</buton>
+                        </div>
+
+
+
+
                         {% else %}
-                        <button id='plus' class="change_quantity btn btn-secondary">+</button>
-                        <a id='quantity'> {{quantity}} </a>
-                        <button id='minus' class="change_quantity btn btn-secondary">-</button>
-                        {% endif %}
 
 
-                        <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                        <div class="quantity">
+                            <div class="pro-qty">
+                                <span class="dec qtybtn"
+                                    onclick="button_click_hua_hai('{{product.product_id}}' , 'minus')">-</span>
+                                <input id="{{product.product_id}}" type="text" value="{{product.quantity}}"
+                                    oninput="change_quantity(this.value,this.id)">
+                                <span class="inc qtybtn"
+                                    onclick="button_click_hua_hai('{{product.product_id}}' , 'plus')">+</span>
+
+                                {% endif %}
+                                <!-- !  Change quantity Logic -->
+
+
+                            </div>
+                        </div>
+
+
+                        <div id='dynamic_buttons' style="display: none">
+
+                            <div class="pro-qty">
+                                <span class="dec qtybtn"
+                                    onclick="button_click_hua_hai('{{product.product_id}}' , 'minus')">-</span>
+                                <input id="{{product.product_id}}" type="text" value="{{product.quantity}}"
+                                    oninput="change_quantity(this.value,this.id)">
+                                <span class="inc qtybtn"
+                                    onclick="button_click_hua_hai('{{product.product_id}}' , 'plus')">+</span>
+                            </div>
+
+                        </div>
+
+
+
+
+
+                        <!-- <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a> -->
                         <ul>
                             <li><b>dynamic ni h Availability</b> <span>In Stock</span></li>
                             <li><b>dynamic ni h Shipping</b> <span>01 day shipping. <samp>Free pickup
@@ -425,6 +405,115 @@
     <script src="..\static\js\google-map.js"></script>
     <script src="..\static\js\mixitup.min.js"></script>
     <script src="..\static\js\main.js"></script>
+
+
+
+
+
+
+
+
+    <!-- VERY VERY IMPORTANT FOR ajax -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script>
+        function wow() {
+            alert("huuuuuu");
+        }
+    </script>
+
+    <script>
+
+
+        function change_quantity(quantity, product_id) {
+            //alert("The changed input value is " + quantity + product_id);
+            $.ajax({
+                url: "{% url 'shop:product_details' %}",
+                type: 'POST',
+                data: {
+                    'csrfmiddlewaretoken': '{{csrf_token}}',
+                    'product_id': product_id.toString(),
+                    'new_quantity': quantity,
+                    // 'id': this.id, // this id has new quantity value of a single product
+                    //'AlreadyExistsInCart': 'True',
+
+                },
+                dataType: 'json',
+                success: function (resp) {
+                }
+
+            });
+        }
+
+        function button_click_hua_hai(product_id, type) {
+            var quantity = parseInt(document.getElementById(product_id).value);
+            //alert("Type is " + (type.localeCompare("plus") == 0).toString());
+            //alert("Quantitiy is : " + quantity.toString());
+            //alert(quantity, product_id);
+
+
+            if (type.localeCompare("plus") == 0) // If type == 'plus'
+                quantity += 1;
+            else // If type == 'minus
+            {
+                if (quantity != 0)
+                    quantity -= 1;
+                else
+                    return;
+            }
+
+
+            //alert("New q is " + quantity.toString());
+            //alert(quantity, product_id);
+            //alert('hurah');
+            change_quantity(quantity.toString(), product_id);
+            // alert('hurah');
+        }
+
+        function add_item_to_cart(product_id) {
+            //var plus_minus_inner_html = String.Format()
+            // alert(plus_minus_inner_html);
+            // document.getElementById("add_new_item").innerHTML = plus_minus_inner_html;//prod1_total_price
+            // change_quantity('1', product_id);
+            alert("mai chal ra hu");
+
+
+            // Ye code STACK OVERFLOW se uthaya hai --> Used for string formating in js
+            String.prototype.format = function () {
+                var args = arguments;
+                return this.replace(/\{(\d+)\}/g, function (a, num) {
+                    return args[num] || a
+                })
+                // Ye code STACK OVERFLOW se uthaya hai --> Used for string formating in js
+            }
+
+            //var str = '{0}{1}'.format('Ayush', 'Malik');
+            //alert(str);
+            //var plus_minus_inner_html = '<div class="pro-qty"><span class="dec qtybtn"onclick="button_click_hua_hai({0})">-</span><input id={1} type="text" value="1"oninput="change_quantity(this.value,this.id)"><span class="inc qtybtn"onclick="button_click_hua_hai({2})">+</span></div>'.format("'" + product_id + "'" + ',' + "'minus'", "'" + product_id + "'", "'" + product_id + "'" + ',' + "'plus'");
+            //alert(plus_minus_inner_html);
+            //document.getElementById("add_new_item").innerHTML = plus_minus_inner_html;
+            var add_new_item = document.getElementById("add_new_item");
+            var dynamic_buttons = document.getElementById("dynamic_buttons");
+            add_new_item.style.display = 'none';
+            dynamic_buttons.style.display = 'block';
+            change_quantity('1', product_id);
+
+            alert("mai chal ra hu");
+        }
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 
 </html>
