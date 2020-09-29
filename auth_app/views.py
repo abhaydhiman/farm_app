@@ -169,8 +169,8 @@ def check_password(request):
         data = {'phone_number' : phone_number_of_user ,
                 'language'     : language_selected ,
                 'name'         : name_of_user , 
-                'state'        : request.POST['state'] , 
-                'city'         : request.POST['city'] , 
+                'state'        : request.POST['state'].strip() , # Here strip() is used for removing trailing spaces
+                'city'         : request.POST['city'].strip() ,  # Here strip() is used for removing trailing spaces
                 'cart'         : {'isEmpty' : True } , 
                 'status'       : request.session['STATUS'],
         }
