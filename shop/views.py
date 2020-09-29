@@ -92,71 +92,113 @@ def add_to_cart(request):
 
 
 
+# def product_details(request):
+
+#     '''
+#     This function is called from 'product_details.html'
+#     for more clarity just go product_details.html and search 'shop:product_details
+
+
+#     This function works for both ajax and normal django requests --> Its outermost if-else decides wheteher the request is AJAX or not
+#     structure
+
+#             if non AJAX request:
+
+#                 if product selected for overview is already in cart of user then [+ quantity -] will be displayed
+#                 else [Add to Cart] button is shown
+
+#             elif AJAX request:
+#                 if    [Add to Cart button] is selected then product is added to user's cart
+#                 elif  [+ quantity -] is selected then based upon (id which is either 'plus' or 'minus') product quantity is changed in user's cart
+
+#     '''
+
+    # # Getting the cart from firebase  of current user
+    # cart = db.child('General_User').child( request.session['loggedin_user_phone_number'] ).get().val()['cart'] 
+    # cart_prod_id = request.POST['product_id'] #  cart_prodids are in form --> prod1 , prod2 , prod3 etc 
+
+    # if  not request.is_ajax():
+    #                 if (cart_prod_id in cart.keys()) and  (cart[ cart_prod_id ] != 0) :
+    #                     quantity = cart[ cart_prod_id ]
+    #                     add_to_cart_button = 'inActive'
+    #                 else:
+    #                     quantity = 0
+    #                     add_to_cart_button = 'Active'
+                        
+    #                 # Fetching the data of a product based on product_id      
+    #                 product = db.child("Products").child(str(request.POST['product_id'])).get().val()
+    #                 product['quantity'] = quantity
+
+    #                 context = {'product' : product , 
+    #                         'add_to_cart_button' : add_to_cart_button ,
+    #                         # 'quantity' : quantity , 
+    #                         }
+    #                 return render(request , 'shop/product_details.html' , context)
+    
+    # elif request.is_ajax() :
+#                     cart = db.child('General_User').child( request.session['loggedin_user_phone_number'] ).get().val()['cart'] 
+#                     if request.POST['AlreadyExistsInCart'] == 'True':
+#                                     id = request.POST['id'] # Either contains 'plus' and 'minus'
+#                                     if id == 'plus':
+#                                         cart[ cart_prod_id ] += 1 
+
+#                                     elif id == 'minus':
+#                                         cart[ cart_prod_id ] = max(0 , cart[ cart_prod_id ] - 1) # This prevents -ve value of quantity
+                                        
+#                                     html_code_to_be_send = "<a id='quantity'>" + str(cart[ cart_prod_id ]) + "</a>"
+#                     elif request.POST['AlreadyExistsInCart'] == 'False':
+#                                     cart[ cart_prod_id ] = 1
+#                                     html_code_to_be_send = "<button id='plus' class='change_quantity btn btn-secondary'>+</button><a id='quantity'> 1 </a><button id='minus' class='change_quantity btn btn-secondary'>-</button>"
+
+#                     # Updating the cart in firebase database for AJAX request
+#                     db.child('General_User').child( request.session['loggedin_user_phone_number'] ).child('cart').set(cart)
+                    
+#                     # This dict will be sended to AJAX functions as success response
+#                     resp_data = {
+#                         'c_html': html_code_to_be_send,
+#                     }
+#                     return JsonResponse(resp_data, status=200)
+
 def product_details(request):
-
-    '''
-    This function is called from 'product_details.html'
-    for more clarity just go product_details.html and search 'shop:product_details
-
-
-    This function works for both ajax and normal django requests --> Its outermost if-else decides wheteher the request is AJAX or not
-    structure
-
-            if non AJAX request:
-
-                if product selected for overview is already in cart of user then [+ quantity -] will be displayed
-                else [Add to Cart] button is shown
-
-            elif AJAX request:
-                if    [Add to Cart button] is selected then product is added to user's cart
-                elif  [+ quantity -] is selected then based upon (id which is either 'plus' or 'minus') product quantity is changed in user's cart
-
-    '''
-
+ 
     # Getting the cart from firebase  of current user
-    cart = db.child('General_User').child( request.session['loggedin_user_phone_number'] ).get().val()['cart'] 
+    phone_number = request.session['loggedin_user_phone_number']
+    cart = SHOP.GetUserCart(phone_number = phone_number)
     cart_prod_id = request.POST['product_id'] #  cart_prodids are in form --> prod1 , prod2 , prod3 etc 
 
     if  not request.is_ajax():
-                    if (cart_prod_id in cart.keys()) and  (cart[ cart_prod_id ] != 0) :
-                        quantity = cart[ cart_prod_id ]
-                        add_to_cart_button = 'inActive'
-                    else:
-                        quantity = 0
-                        add_to_cart_button = 'Active'
+                        if (cart_prod_id in cart.keys()) and  (cart[ cart_prod_id ] != 0) :
+                            quantity = cart[ cart_prod_id ]
+                            add_to_cart_button = 'inActive'
+                        else:
+                            quantity = 0
+                            add_to_cart_button = 'Active'
+                            
+                        # Fetching the data of a product based on product_id      
+                        product = SHOP.GetProductById(product_id = cart_prod_id)
+                        product['quantity'] = quantity
+
+                        context = {'product' : product , 
+                                'add_to_cart_button' : add_to_cart_button ,
+                                # 'quantity' : quantity , 
+                                }
+                        return render(request , 'shop/product_details.html' , context)
                         
-                    # Fetching the data of a product based on product_id      
-                    product = db.child("Products").child(str(request.POST['product_id'])).get().val()
+    elif request.is_ajax():
+                        # Getting the values sended through ajax request
+                        product_id   = request.POST['product_id']
+                        new_quantity = int(request.POST['new_quantity'])
 
-                    context = {'product' : product , 
-                            'add_to_cart_button' : add_to_cart_button ,
-                            'quantity' : quantity , 
-                            }
-                    return render(request , 'shop/product_details.html' , context)
+                        cart[product_id] = int(new_quantity)                           # Updating the quanttiy of a item
+                        SHOP.UpdateUserCart(phone_number = phone_number , cart = cart) # Updating the cart in firebase database for AJAX request
+
+                        resp_data = {}
+                        return JsonResponse(resp_data, status=200)
+ 
+
+
     
-    elif request.is_ajax() :
-                    cart = db.child('General_User').child( request.session['loggedin_user_phone_number'] ).get().val()['cart'] 
-                    if request.POST['AlreadyExistsInCart'] == 'True':
-                                    id = request.POST['id'] # Either contains 'plus' and 'minus'
-                                    if id == 'plus':
-                                        cart[ cart_prod_id ] += 1 
-
-                                    elif id == 'minus':
-                                        cart[ cart_prod_id ] = max(0 , cart[ cart_prod_id ] - 1) # This prevents -ve value of quantity
-                                        
-                                    html_code_to_be_send = "<a id='quantity'>" + str(cart[ cart_prod_id ]) + "</a>"
-                    elif request.POST['AlreadyExistsInCart'] == 'False':
-                                    cart[ cart_prod_id ] = 1
-                                    html_code_to_be_send = "<button id='plus' class='change_quantity btn btn-secondary'>+</button><a id='quantity'> 1 </a><button id='minus' class='change_quantity btn btn-secondary'>-</button>"
-
-                    # Updating the cart in firebase database for AJAX request
-                    db.child('General_User').child( request.session['loggedin_user_phone_number'] ).child('cart').set(cart)
-                    
-                    # This dict will be sended to AJAX functions as success response
-                    resp_data = {
-                        'c_html': html_code_to_be_send,
-                    }
-                    return JsonResponse(resp_data, status=200)
+ 
 
 
 # *====================================================================================================================================================================*
@@ -183,11 +225,16 @@ def shop_grid(request):
 # *====================================================================================================================================================================*
 
 def cart(request):
+    """
+    >>> This particular function runs for (shop/cart.html) template
+    >>> if request is not ajax then we fetch complete data of all products present in user's cart using SHOP.GetUserProductCompleteData()`
+    >>> if request is ajax then we have to change quantity of a product of user's cart also we have to update 'new_price'(changed by changing quantity) and 'new_total_bill
+    """ 
     phone_number = request.session['loggedin_user_phone_number'] #Getting the phone number of current logged in user
 
     if  not request.is_ajax():
                     cart = SHOP.GetUserCart(phone_number = phone_number)
-                    # Here in cart we have product_id and its quantity , but we want each product details so we will fetch each data of each product in cart and appends it to our new dictationary
+                    cart = SHOP.GetUserCart(phone_number = phone_number)
                     total_bill , Products_list = SHOP.GetUserCartProductsCompleteData(phone_number = phone_number)
                     context = {
                         'total_bill' : total_bill ,
@@ -218,8 +265,15 @@ def cart(request):
 # *====================================================================================================================================================================*
 
 def sell_something(request):
+    """
+    >>> This particualar function runs for (shop/seller.html) template
+    >>> if request is not AJAX then we fetch all the products which are from SellerCart and display them
+    >>> if requst is AJAX [menas seller added a new product]
+                        >Firslty we fetch newly added product data and add 'buyers' and 'ratings' initially to 0
+                        >Then we call SHOP.SellerAddsNewProduct() to add product data to Products and also to SellerCart[note SellerCart only stores little info about product]
+                        >After that we prepare new_html_str  =  (row element + one empty hidden) , this new_html_str replaces the hidden element 
+    """
     phone_number = request.session['loggedin_user_phone_number']
-
     if not request.is_ajax():
         SellerCartProdsLis = SHOP.GetSellerCartProductsDetails(phone_number = phone_number)
         context = {
@@ -227,29 +281,29 @@ def sell_something(request):
         }
         return render(request , 'shop/seller.html', context)
     elif request.is_ajax() and request.method == 'POST':
-        print()
-        print()
-        print('Post req yha hai')
-        print()
-        print(request.POST)
-        print()
-        print()
-        print(dict(request.POST))
-        print()
 
-        data = dict()
+        data = dict() # Fetching the data sended through ajax request
         data['product_name'] = request.POST['product_name']
-        data['price'] = request.POST['price']
+        data['price'] = int(request.POST['price'])
         data['stock'] = request.POST['stock']
         data['category'] = request.POST['category']
         data['desc'] = request.POST['desc']
+        data['image'] = request.POST['image']
 
-        new_prod_id = SHOP.SellerAddsNewProduct(phone_number = phone_number , prod_data = data)
+        
+        # *Adding rating and buyers initially 0 for newly added product
+        data['buyers'] = 0
+        data['rating'] = 0
+
+
+        new_prod_id , image_URL = SHOP.SellerAddsNewProduct(phone_number = phone_number , prod_data = data) # Getting product_id for newly added product
 
         data['product_id'] = new_prod_id
+        data['image']      = image_URL
         
-        new_html_str = '<tbody><tr onclick="show_hide_row({});"><td class="shoping__cart__item"><img src="{}" alt=""><h5>{}</h5></td><td class="shoping__cart__price">${}</td><td class="shoping__cart__price">{}</td><td class="shoping__cart__price">{}</td><td class="shoping__cart__item__close"><a href="#" name="wow"><span class="fa fa-close"></span></a></td></tr><tr id="desc_of_{}" class="shoping__cart__price hidden_row ftco-animated"><td colspan=4>{}</td><td class="shoping__cart__item__price"><button class="primary-btn cart-btn" type="submit" name="wow">Edit</button></td></tr></tbody><tbody id="item_to_be_replaced"></tbody>'.format("'" + 'desc_of_' +  'prod' + str(data['product_id']) + "'" , 'kdk' , data['product_name'], data['price'] ,data['stock'] ,0 , 'prod' + str( data['product_id']) ,  data['desc'])
-        print(new_html_str)
+        # new_html_str replace an hiddend element and also add it so that more and more products can be furter added
+        new_html_str = '<tbody><tr onclick="show_hide_row({});"><td class="shoping__cart__item"><img src="{}" alt=""><h5>{}</h5></td><td class="shoping__cart__price">${}</td><td class="shoping__cart__price">{}</td><td class="shoping__cart__price">{}</td><td class="shoping__cart__item__close"><a href="#" name="wow"><span class="fa fa-close"></span></a></td></tr><tr id="desc_of_{}" class="shoping__cart__price hidden_row ftco-animated"><td colspan=4>{}</td><td class="shoping__cart__item__price"><button class="primary-btn cart-btn" type="submit" name="wow">Edit</button></td></tr></tbody><tbody id="item_to_be_replaced"></tbody>'.format("'" + 'desc_of_' +  'prod' + str(data['product_id']) + "'" , data['image']  , data['product_name'], data['price'] ,data['stock'] ,0 , 'prod' + str( data['product_id']) ,  data['desc'])
+        
         resp_data = {
             'c_html' : new_html_str ,
         }                    
