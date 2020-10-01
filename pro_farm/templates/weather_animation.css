@@ -1,0 +1,36 @@
+*{
+    box-sizing: border-box;
+}
+.primary{
+    position:relative;
+    width:100%;
+    height:100vh;
+    background: url("/../farm_app/pro_farm/static/images/night_image.jpg");
+    background-size: cover;
+    background-position:bottom;
+}
+
+.primary .clouds{
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    overflow:hidden;
+}
+
+.primary .clouds img{
+    position: absolute;
+    bottom: 0;
+    max-width: 100%;
+    animation: animate calc(9s * var(--i))linear infinite;
+}
+
+@keyframes animate{
+    0%{
+        transform: translateX(-100%);
+    }
+    100%{
+        transform: translateX(100%);
+    }
+}

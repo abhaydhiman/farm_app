@@ -15,11 +15,7 @@
             font-family: 'Oswald', sans-serif;
         }
 
-        .container {
-            width: auto;
-            height: auto;
-            background-image: url("/../farm_app/pro_farm/static/images/cash.jpg");
-        }
+       
 
         h2 {
             border: 2px solid black;
@@ -45,7 +41,7 @@
             border: 4px solid black;
             /* border-radius: 20px; */
             /* background-color: #f7ae96; */
-            background-color:  #8fa28f;
+            background-color:  rgb(197 197 197);
             height: auto;
             width: 1000px;
             margin: 0px auto;
@@ -75,6 +71,60 @@
 
         .container3 input:hover {
             background-color: rgb(121 156 160);
+            cursor: pointer;
+        }
+
+        #help {
+            border: 2px solid black;
+            background-color: rgb(197 197 197);
+            position: fixed;
+            right: 8px;
+            bottom: 5px;
+            width: 240px;
+            height: 20px;
+            border-radius: 5px;
+            padding: 5px;
+        }
+
+        #help a {
+            color: rgb(27, 147, 177);
+        }
+
+        #help a:hover {
+            color: rgb(0, 184, 0);
+            
+        }
+
+        h4 {
+
+            text-align: center;
+            margin-top: 100px;
+
+        }
+
+        .box {
+            height: 500px;
+            width: auto;
+            border: 4px solid black;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            justify-content: space-around;
+            align-items: center;
+            background-image: url("/../farm_app/pro_farm/static/images/edited_vali2.jpg");
+        }
+
+        .item {
+            background-color: aqua;
+            border: 2px solid black;
+            margin: 20px;
+            padding: 5px;
+            height: 150px;
+            width: 200px;
+        }
+
+        .item a:hover {
+            color: rgb(35, 182, 35);
         }
     </style>
 </head>
@@ -82,6 +132,26 @@
 <body>
 
     <h2>AGRICULTURE &nbsp LOAN</h2>
+
+     <!-- IMAGE START ------------------------------------------------------------------->
+
+     <div>
+        <img src="../static/images/as.jpg" alt="Error in loading image" width="100%" height="600px">
+    </div>
+
+    <!-- IMAGE END ------------------------------------------------------------------->
+
+
+
+        <!-- HELP START ------------------------------------------------------------------->
+
+        <div id="help">
+            Need any help? contact us: &nbsp;
+            <a href=" ">Click Here</a>
+        </div>
+    
+        <!-- HELP END ------------------------------------------------------------------->
+    
 
     <div class="container">
         <div class="container1">
@@ -274,6 +344,36 @@
                 </div>
 
             </form>
+
+        </div>
+        <h4>Helpful Details</h4>
+        <div class="box">
+
+            <div class="item" id="box1">What Is Agriculture Loan? Loan Interest Rate For Different Banks In India<br><br>
+                For Details: <br>
+                <a href="https://www.bankbazaar.com/personal-loan/agriculture-loan.html"
+                    target="_blank">Click Here</a></div>
+
+
+            <div class="item" id="box2">Types Of Agriculture Loan <br><br>
+                For Details: <br>
+                <a href="https://www.indiaagronet.com/Agriculture-Loan-and-Insurance/Agricultural-Loans-in-India.html
+                "
+                    target="_blank">Click Here</a>
+            </div>
+
+            <div class="item" id="box3">Agriculture Loan Schemes<br><br>
+                For Details: <br>
+                <a href="https://www.bankbazaar.com/home-loan/types-of-agricultural-loans-in-india.html"
+                    target="_blank">Click Here</a>
+            </div>
+
+            <div class="item" id="box1">Informative Agriculture Essays<br><br>
+                For Details: <br>
+                <a href="https://www.bartleby.com/essay/Agriculture-Agriculture-And-Agriculture-PK6SUPKTG5ZQ"
+                    target="_blank">Click Here</a>
+            </div>
+
         </div>
     </div>
 </body>
