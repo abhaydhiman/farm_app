@@ -20,7 +20,7 @@ Copyright (c) 2015 Daniel Eden
   animation-fill-mode: both;
 }
 .ftco-animated {
-  -webkit-animation-duration: .5s;
+  -webkit-animation-duration: .8s;
   animation-duration: .5s;
   -webkit-animation-fill-mode: both;
   animation-fill-mode: both;
