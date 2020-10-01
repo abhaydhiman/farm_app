@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- links -->
+    <link rel="stylesheet" href="..\static\css\bootstrap\bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -22,80 +23,93 @@
 
 <body>
 
-    <div class="container">
-        <!-- navbar started -->
-        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light shop" id="ftco-navbar">
-            <div class="container navbar">
-                <a class="navbar-brand" href="home.html">The<span>F</span>armer</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
-                    aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="oi oi-menu"></span> Menu
-                </button>
-                <div class="collapse navbar-collapse" id="ftco-nav">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-                        <li class="nav-item"><a href="about.html" class="nav-link">weather</a></li>
-                        <li class="nav-item"><a href="work.html" class="nav-link">Work</a></li>
-                        <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-                        <li class="nav-item"><a href="contact.html" class="nav-link">Became seller</a></li>
-                    </ul>
-                </div>
+    <header>
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-expand-md navbar-dark" style="background-color: #e3f2fd;">
+            <a class="navbar-brand" href="#">Kissan Tech</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" style="color: black;" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: black;" href="#">Link</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" style="color: black;" href="#">Disabled</a>
+                    </li>
+                </ul>
+                <form class="form-inline mt-2 mt-md-0">
+                    <input class="form-control mr-sm-2" type="text" placeholder="Search.." aria-label="Search">
+                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
+                </form>
             </div>
         </nav>
-        <!-- ended navbar -->
-    </div>
+    </header>
 
 
     <!-- ============================================================================================================= -->
 
 
-    <!-- Table added -->
-    <section class="ftco-section-2 ftco-animate my_shop shop">
-        <div class="container">
-            <div class="row">
-                <div class="mytables">
-                    <table class="mytable">
-                        <tr>
-                            <th>Features</th>
-                        </tr>
-                        <tr>
-                            <td>herbicides</td>
-                        </tr>
-                        <tr>
-                            <td>insecticides</td>
-                        </tr>
-                        <tr>
-                            <td>fungicides</td>
-                        </tr>
-                        <tr>
-                            <td>pesticides</td>
-                        </tr>
-                        <tr>
-                            <td>pesticides</td>
-                        </tr>
-                        <tr>
-                            <td>pesticides</td>
-                        </tr>
-                        <tr>
-                            <td>pesticides</td>
-                        </tr>
-                        <tr>
-                            <td style="border-bottom-left-radius: 5px; border-bottom-right-radius: 5px; ">cattle feed</td>
-                        </tr>
-                    </table>
+    <!-- caousel -->
+    <div id="demo" class="carousel slide" data-ride="carousel">
+    
+        <!-- Indicators -->
+        <ul class="carousel-indicators">
+            <li data-target="#demo" data-slide-to="0" class="active"></li>
+            <li data-target="#demo" data-slide-to="1"></li>
+            <li data-target="#demo" data-slide-to="2"></li>
+        </ul>
+    
+        <!-- The slideshow -->
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img style="width: 100%; height:60vh; background:rgb(195, 243, 237);"  alt="">
+                <div class="carousel-caption">
+                    <img src="../static/images/what.png" style="width: 30vw; height:20vw; position:absolute; right:1px; transform: translate(0, -110%);" alt="">
                 </div>
-                <div class="myimage">
-                    <div class="myinput">
-                        <input type="text" name="search" placeholder="Search..">
-                        <button type="submit" class="btn btn-dark">Search</button>
-                    </div>
-                    <div class="myimage-2">
-                        <img src="https://adventures365.in/blog/wp-content/uploads/2016/03/Jal-Mahal-Jaipur.jpg" alt="">
-                    </div>
+                <div class="carousel-caption" style="transform: translate(-30%, -110%);">
+                    <h3 style="font-size:3vw; color: rgb(41, 46, 49);">Los Angeles</h3>
+                    <p style="font-size:1vw; color: rgb(76, 91, 102);">We had such a great time in LA!</p>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img style="width: 100%; height:60vh; background:rgb(195, 233, 243);" alt="">
+                <div class="carousel-caption">
+                    <img src="../static/images/what2.png"
+                        style="width: 30vw; height:20vw; position:absolute; right:1px; transform: translate(0, -110%);" alt="">
+                </div>
+                <div class="carousel-caption" style="transform: translate(-30%, -110%);">
+                    <h3 style="font-size:3vw; color: rgb(41, 46, 49);">Los Angeles</h3>
+                    <p style="font-size:1vw; color: rgb(76, 91, 102);">We had such a great time in LA!</p>
+                </div>
+            </div> 
+            <div class="carousel-item">
+                <img style="width: 100%; height:60vh; background:rgb(195, 243, 221);" alt="">
+                <div class="carousel-caption">
+                    <img src="../static/images/what3.png"
+                        style="width: 20vw; height:15vw; position:absolute; right:1px; transform: translate(0, -110%);" alt="">
+                </div>
+                <div class="carousel-caption" style="transform: translate(-30%, -110%);">
+                    <h3 style="font-size:3vw; color: rgb(41, 46, 49);">Los Angeles</h3>
+                    <p style="font-size:1vw; color: rgb(76, 91, 102);">We had such a great time in LA!</p>
                 </div>
             </div>
         </div>
-    </section>
+    
+        <!-- Left and right controls -->
+        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href="#demo" data-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </a>
+    
+    </div>
 
 
 <!-- =============================================================================================================== -->
@@ -320,6 +334,7 @@
 
 
     <!-- Scripts -->
+    <script src="..\static\js\bootstrap.min.js"></script>
     <script src="..\static\js\aos.js"></script>
     <script src="..\static\js\jquery.min.js"></script>
     <script src="..\static\js\jquery-migrate-3.0.1.min.js"></script>
