@@ -1,0 +1,103 @@
+.primary {
+    background-color: cadetblue;
+}
+
+.secondary{
+    height: 544px; 
+    width: 100%;
+    border: 2px solid black;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; 
+    justify-content: space-around;
+    align-items: center;
+}
+
+h1{
+text-align: center;
+margin-top: 80px;
+}
+
+h2{
+    margin-top: 0px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+h6{
+    color: black;
+text-align: center;
+}
+
+.item{
+    width: 200px;
+    height: 200px;
+    background-color:cyan;
+    border: 2px solid black;
+    margin: 10px;
+    padding: 3px;
+    border-radius: 8px;
+}
+
+/* #item13{
+    height: 10px;
+    width: 50px;
+} */
+
+.ftco-section-parallax .parallax-img {
+    background-color: cadetblue;
+}
+
+.main{
+    /* background-color: darkcyan;
+    width:1000px;
+    margin:auto;
+    margin-top: 100px; */
+
+    height: 600px; 
+    width: 100%;
+    border: 2px solid black;
+    margin-top: 20px;
+    margin-bottom: 50px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; 
+    justify-content: space-around;
+    align-items: center;
+
+   
+}
+
+.container2{
+    background-color: cadetblue;
+    margin-top: 80px;
+}
+
+.card{
+    width: 200px;
+    height: 200px;
+    
+    border: 2px solid black;
+    margin: 10px;
+    padding: 3px;
+    border-radius: 8px;
+
+   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.6);
+   transition: 0.4s;
+   width:200px;
+   background: skyblue;
+   text-align: center;
+   font-size: 16px;
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+   float: left;
+  
+}
+
+.card:hover{
+    box-shadow: 0 8px 16px  0 rgba(0,0,0,0.6);
+
+}
+.content{
+    padding: 2px 16px;
+}

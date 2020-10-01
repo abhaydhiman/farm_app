@@ -1,0 +1,66 @@
+.button{
+    display: inline-block;
+    width:220px;
+    height: 60px;
+    border: 2px solid black;
+    color:rgb(3, 3, 3);
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    text-decoration: none;
+    line-height: 56px;
+    box-sizing: border-box;
+    border-radius: 50px;
+    background-color: transparent;
+    outline: none;
+    transition: all ease 0.5s;
+   margin-top: 300px;
+   margin-left: 550px;
+}
+
+body{
+    background: crimson;
+}
+
+.active{
+    font-size: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border-left-color:transparent;
+    animation: rotate 1.4s ease 0.5s infinite;
+    margin-left: 650px;
+}
+
+@keyframes rotate{
+    0%{
+        transform: rotate(360deg);
+    }
+}
+
+.success{
+    position: relative;
+    background-color: rgb(253, 131, 131);
+    animation: bounce .3s ease-in;
+}
+
+@keyframes bounce{
+    0%{
+        transform: scale(0.9);
+    }
+}
+
+.success:before{
+    content: '';
+    position: absolute;
+    background: url("../static/images/check-symbol.png") no-repeat;
+    left: 30%;
+    right: 0;
+    margin:0 auto;
+    width: 31px;
+    height: 31px;
+    line-height: 31px;
+    top:30%;
+   
+}
