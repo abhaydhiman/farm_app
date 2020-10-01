@@ -1,0 +1,34 @@
+#wrapper
+{
+ text-align:center;
+}
+#wrapper h1
+{
+ font-size:45px;
+ color:#000000;
+}
+#wrapper h1 p
+{
+ font-size:20px;
+}
+#table_detail
+{
+ border-collapse: collapse;
+ color:#000000;
+ border:#000000;
+}
+#table_detail tr, td
+{
+ color: black;
+ text-align: center;
+}
+#table_detail tr:hover
+{
+ background-color:#F2F2F2;
+ color: black;
+}
+#table_detail .hidden_row
+{
+ display:none;
+ color: black;
+}

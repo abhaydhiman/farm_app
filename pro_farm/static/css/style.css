@@ -16198,3 +16198,148 @@ td {
 	width: 100%;
 	margin-top: 10px;
 }
+
+
+/* ----------------------------
+  shop_now ----------------- */
+  /* ---------- cards ---------- */
+
+
+.box-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 1200px;
+    transform-style: preserve-3d;
+}
+
+.box-container .box {
+    position: relative;
+    width: 300px;
+    height: 400px;
+    margin: 40px;
+    background:  rgb(44, 83, 100);
+    border-radius: 20px;
+    transform-style: preserve-3d;
+}
+
+.box-container .box::before {
+    content: 'Farm';
+    position: absolute;
+    top: 28px;
+    left: 54px;
+    /* align-items: center; */
+    /* text-align: center; */
+    font-size: 4em;
+    font-weight: 900;
+    color: #000000;
+    font-style: italic;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+
+.box-container .box::after {
+    content: 'Product';
+    position: absolute;
+    bottom: 28px;
+    left: 8px;
+    font-size: 4em;
+    font-weight: 900;
+    color: #000000;
+    font-style: italic;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.box-container .box:hover::before,
+.box-container .box:hover::after {
+    opacity: 0.04;
+}
+
+.box-container .box .name {
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: center;
+    color: #fff;
+    width: 100%;
+    transform-style: preserve-3d;
+    transform: translate3d(0, 0, 75px);
+    transition: 0.5s;
+    opacity: 0;
+    z-index: 10;
+}
+
+.box-container .box:hover .name {
+    top: 40px;
+    opacity: 1;
+}
+
+.box-container .box .buy {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform-style: preserve-3d;
+    transform: translate3d(-50%, 0, 100px);
+    color: #fff;
+    background: #333;
+    padding: 10px 25px;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: 0.5s;
+    opacity: 0;
+    z-index: 14;
+    cursor: pointer;
+}
+
+.box-container .box:hover .buy {
+    bottom: 30px;
+    opacity: 1;
+}
+
+.box-container .box .circle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    transition: 0.5s;
+    background: #fff;
+    transform-style: preserve-3d;
+    z-index: 10;
+    opacity: 1;
+    transform: translate3d(-50%, -50%, 50px);
+}
+
+.box-container .box .product {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    width: 180px;
+    height: 340px;
+    background: no-repeat;
+    transition: 0.5s;
+    z-index: 11;
+    /* transition: 0.5s; */
+    transform-style: preserve-3d;
+    transform: translate3d(-50%, -50%, 50px) rotate(-7deg);
+}
+
+.box-container .box:hover .product{
+    transform: translate3d(-50%, -50%, 80px) rotate(-7deg);
+}
+
+.box-container .box:nth-child(even) .circle,
+.box-container .box:nth-child(even) .buy {
+    background: #379bf7;
+}
+
+.box-container .box:nth-child(odd) .circle,
+.box-container .box:nth-child(odd) .buy {
+    background: #9bdc28;
+}
