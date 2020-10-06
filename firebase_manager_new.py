@@ -216,6 +216,9 @@ class SHOP(FirebaseManager):
 
     @classmethod
     def UpdateProductData(cls , product_id = None , data = None):
+        if data['image'] != "https://ohram.org/image/utilities/empty_product.svg":
+            data['image'] = SHOP.Base64ImageUploader(base_64_encoded_image = data['image'] , product_id = product_id)
+        
         FirebaseManager.SetChild('Products' , product_id , data = data)
 
 

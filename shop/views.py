@@ -341,8 +341,16 @@ def update_product_data(request):
             data['product_id'] = request.POST['product_id']
 
             try:
+                print("Try chal ra hai")
+                print("Try chal ra hai")
+                print("Try chal ra hai")
+                print("Try chal ra hai")
                 data['image'] = request.POST['image']
             except:
+                print("Except chal ra hai")
+                print("Except chal ra hai")
+                print("Except chal ra hai")
+                print("Except chal ra hai")
                 data['image'] = SHOP.GetProductById(product_id = data['product_id'])['image']
 
             SHOP.UpdateProductData(product_id = data['product_id'],
@@ -365,6 +373,7 @@ def remove_product(request):
         product_id = request.POST['product_id']
         phone_number = request.session['loggedin_user_phone_number']
         SHOP.RemoveProduct(phone_number = phone_number , product_id = product_id)
+        return JsonResponse(status = 200)
 
 # *====================================================================================================================================================================*
 
