@@ -234,7 +234,6 @@ def cart(request):
 
     if  not request.is_ajax():
                     cart = SHOP.GetUserCart(phone_number = phone_number)
-                    cart = SHOP.GetUserCart(phone_number = phone_number)
                     total_bill , Products_list = SHOP.GetUserCartProductsCompleteData(phone_number = phone_number)
                     context = {
                         'total_bill' : total_bill ,
@@ -262,6 +261,18 @@ def cart(request):
                     return JsonResponse(resp_data, status=200)
                     
 
+
+
+
+
+
+
+
+
+
+
+
+
 # *====================================================================================================================================================================*
 
 def sell_something(request):
@@ -288,7 +299,11 @@ def sell_something(request):
         data['stock'] = request.POST['stock']
         data['category'] = request.POST['category']
         data['desc'] = request.POST['desc']
-        data['image'] = request.POST['image']
+
+        try:
+            data['image'] = request.POST['image']
+        except:
+            data['image'] = "https://ohram.org/image/utilities/empty_product.svg"
 
         
         # *Adding rating and buyers initially 0 for newly added product
@@ -302,12 +317,54 @@ def sell_something(request):
         data['image']      = image_URL
         
         # new_html_str replace an hiddend element and also add it so that more and more products can be furter added
-        new_html_str = '<tbody><tr onclick="show_hide_row({});"><td class="shoping__cart__item"><img src="{}" alt=""><h5>{}</h5></td><td class="shoping__cart__price">${}</td><td class="shoping__cart__price">{}</td><td class="shoping__cart__price">{}</td><td class="shoping__cart__item__close"><a href="#" name="wow"><span class="fa fa-close"></span></a></td></tr><tr id="desc_of_{}" class="shoping__cart__price hidden_row ftco-animated"><td colspan=4>{}</td><td class="shoping__cart__item__price"><button class="primary-btn cart-btn" type="submit" name="wow">Edit</button></td></tr></tbody><tbody id="item_to_be_replaced"></tbody>'.format("'" + 'desc_of_' +  'prod' + str(data['product_id']) + "'" , data['image']  , data['product_name'], data['price'] ,data['stock'] ,0 , 'prod' + str( data['product_id']) ,  data['desc'])
+        # new_html_str = '<tbody><tr onclick="show_hide_row({});"><td class="shoping__cart__item"><img src="{}" alt=""><h5>{}</h5></td><td class="shoping__cart__price">${}</td><td class="shoping__cart__price">{}</td><td class="shoping__cart__price">{}</td><td class="shoping__cart__item__close"><a href="#" name="wow"><span class="fa fa-close"></span></a></td></tr><tr id="desc_of_{}" class="shoping__cart__price hidden_row ftco-animated"><td colspan=4>{}</td><td class="shoping__cart__item__price"><button class="primary-btn cart-btn" type="submit" name="wow">Edit</button></td></tr></tbody><tbody id="item_to_be_replaced"></tbody>'.format("'" + 'desc_of_' +  'prod' + str(data['product_id']) + "'" , data['image']  , data['product_name'], data['price'] ,data['stock'] ,0 , 'prod' + str( data['product_id']) ,  data['desc'])
+        new_html_str = '<tbody><tr onclick="show_hide_row({});"><td class="shoping__cart__item"><img src="{}" alt=""><h5>{}</h5></td><td class="shoping__cart__price">${}</td><td id="category_of_{{product.product_id}}" class="shoping__cart__price">{}</td><td class="shoping__cart__price">{}</td><td class="shoping__cart__price">{}</td><td class="shoping__cart__item__close"><a href="#" name="wow"><span class="fa fa-close"></span></a></td></tr><tr id="desc_of_{}" class="shoping__cart__price hidden_row ftco-animated"><td colspan=4>{}</td><td class="shoping__cart__item__price"><button class="primary-btn cart-btn" type="submit" name="wow">Edit</button></td></tr></tbody><tbody id="item_to_be_replaced"></tbody>'.format("'" + 'desc_of_' +  'prod' + str(data['product_id']) + "'" , data['image']  , data['product_name'], data['price'] ,data['stock'] , data['category']  , 0 , 'prod' + str( data['product_id']) ,  data['desc'])
         
         resp_data = {
             'c_html' : new_html_str ,
         }                    
         return JsonResponse(resp_data, status=200)
+
+
+def update_product_data(request):
+    """
+    >>> Used by seller.html page via AJAX request
+    >>> This function is used to update existing product data 
+    """
+    if request.is_ajax():
+            data = dict() # Fetching the data sended through ajax request
+            data['product_name'] = request.POST['product_name']
+            data['price'] = int(request.POST['price'])
+            data['stock'] = request.POST['stock']
+            data['category'] = request.POST['category']
+            data['desc'] = request.POST['desc']
+            data['product_id'] = request.POST['product_id']
+
+            try:
+                data['image'] = request.POST['image']
+            except:
+                data['image'] = SHOP.GetProductById(product_id = data['product_id'])['image']
+
+            SHOP.UpdateProductData(product_id = data['product_id'],
+                                data = data,
+            )
+
+            return JsonResponse(data, status=200)
+
+def remove_product(request):
+    """
+    >>> This function is used to remove a specific product from SellerCart as well as Products
+    """
+    if request.is_ajax():
+        print("AJAX zindabad")
+        print("AJAX zindabad")
+        print("AJAX zindabad")
+        print("AJAX zindabad")
+        print("AJAX zindabad")
+        print("AJAX zindabad")
+        product_id = request.POST['product_id']
+        phone_number = request.session['loggedin_user_phone_number']
+        SHOP.RemoveProduct(phone_number = phone_number , product_id = product_id)
 
 # *====================================================================================================================================================================*
 

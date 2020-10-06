@@ -30,7 +30,8 @@ urlpatterns = [
     path('cart'             , views.cart             , name = 'cart'), # This url is used with AJAX and normal django requests
     path('sell_something'   , views.sell_something   , name = 'sell_something'),
     path('seller_added_new_prduct' , views.sell_something , name = 'seller_added_new_prduct'),
-
+    path('update_product_data'     , views.update_product_data , name = 'update_product_data'   ),
+    path('remove_product'     , views.remove_product , name = 'remove_product'   ),
     # ================================AJAX URLS=====================================
 
     path('add_to_cart'      , views.add_to_cart     , name = 'add_to_cart' ) ,

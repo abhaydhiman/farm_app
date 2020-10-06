@@ -71,6 +71,7 @@
                                     <th class="shoping__product">Products</th>
                                     <th>Price</th>
                                     <th>In Stock</th>
+                                    <th>Category</th>
                                     <th>Buyers</th>
                                     <th></th>
                                 </tr>
@@ -81,30 +82,37 @@
                             <tbody>
                                 <tr onclick="show_hide_row('desc_of_{{product.product_id}}');">
                                     <td class="shoping__cart__item">
-                                        <img src="{{product.image}}" alt="">
-                                        <h5>{{product.product_name}}</h5>
+                                        <img id="image_of_{{product.product_id}}" src="{{product.image}}" alt="">
+                                        <h5 id="name_of_{{product.product_id}}">{{product.product_name}}</h5>
                                     </td>
-                                    <td class="shoping__cart__price">
+                                    <td id="price_of_{{product.product_id}}" class="shoping__cart__price">
                                         ${{product.price}}
                                     </td>
-                                    <td class="shoping__cart__price">
+                                    <td id="stock_of_{{product.product_id}}" class="shoping__cart__price">
                                         {{product.Details.stock}}
                                     </td>
-                                    <td class="shoping__cart__price">
+                                    <td id="category_of_{{product.product_id}}" class="shoping__cart__price">
+                                        {{product.category}}
+                                    </td>
+
+                                    <td id="buyers_of_{{product.product_id}}" class="shoping__cart__price">
                                         {{product.Details.buyers}}
                                     </td>
                                     <td class="shoping__cart__item__close">
                                         <a href="#" name="wow">
-                                            <span class="fa fa-close"></span>
+                                            <span id="remove_{{product.product_id}}" onclick="remove_product(this.id)"
+                                                class="fa fa-close"></span>
                                         </a>
                                     </td>
                                 </tr>
 
                                 <tr id="desc_of_{{product.product_id}}"
                                     class="shoping__cart__price hidden_row ftco-animate">
-                                    <td colspan=4>{{product.desc}}</td>
+                                    <td colspan=4 id="description_of_{{product.product_id}}">{{product.desc}}</td>
                                     <td class="shoping__cart__item__price">
-                                        <button class="primary-btn cart-btn" type="submit" name="wow">
+                                        <button class="primary-btn cart-btn"
+                                            onclick="update_product_data_card_ko_oper_kro('{{product.product_id}}')"
+                                            type="submit" name="wow">
                                             Edit
                                         </button>
                                     </td>
@@ -152,9 +160,10 @@
                                     {% csrf_token %}
                                     <tr id="new_product_add_box" class="shoping__cart__price hidden_row ftco-animate">
                                         <td colspan="4">
-                                            <label for="image">
-                                                <input type="file" accept="image/*" onchange="loadFile(event)"
-                                                    name="image" id="image" style="display:none;" />
+                                            <label for="image_1">
+                                                <input type="file" accept="image/*"
+                                                    onchange="loadFile(event , 'new_product_image')" name="image_1"
+                                                    id="image_1" style="display:none;" />
                                                 <div class="example">
                                                     <img id='new_product_image'
                                                         src="https://ohram.org/image/utilities/empty_product.svg" />
@@ -189,7 +198,85 @@
                                             </button>
                                         </td>
                                     </tr>
+
+
+
                                 </form>
+
+
+
+
+
+                                <form action="" method="POST" id='product_ka_data_update_kro_bhai'>
+                                    {% csrf_token %}
+                                    <tr id="update_product_data" class="shoping__cart__price hidden_row ftco-animate">
+                                        <td colspan="4">
+                                            <label for="image_2">
+                                                <input type="file" accept="image/*"
+                                                    onchange="loadFile(event , 'item_image')" name="image_2"
+                                                    id="image_2" style="display:none;" />
+                                                <div class="example">
+                                                    <img id='item_image'
+                                                        src="https://ohram.org/image/utilities/empty_product.svg" />
+                                                    <div class="contents">
+                                                        <div class="text">Upload photo</div>
+                                                    </div>
+                                                </div>
+                                            </label>
+                                        </td>
+                                        <td colspan=4>
+                                            <input style="border-radius: 3px;" type="text" id='item_name'
+                                                placeholder="Item Name"> <br>
+                                            <br>
+                                            <input style="border-radius: 3px;" type="text" id='item_price'
+                                                placeholder="Price"> <br>
+                                            <br>
+                                            <input style="border-radius: 3px;" type="text" id='item_stock'
+                                                placeholder="In Stock"> <br>
+                                            <br>
+                                            <input style="border-radius: 3px;" type="text" id='item_category'
+                                                placeholder="Category"> <br>
+                                            <br>
+                                            <textarea style="border-radius: 3px;" id='item_description'
+                                                name="description" placeholder="Description" id="" cols="30"
+                                                rows="6"></textarea><br> <br>
+                                            <input type="hidden" id="item_product_id" value="">
+
+                                            <br>
+                                        </td>
+                                        <td class="shoping__cart__item__price">
+                                            <button class="primary-btn cart-btn" type="submit" name="wow"
+                                                onclick="show_hide_row('new_product_add_box');">
+                                                Update
+                                        </td>
+                                    </tr>
+
+                                </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -317,23 +404,35 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
     <script>
-        //    function product_add_hua_hai() {
-        //          alert("Ayush kya baat hai")
-        //        }
+
+        // Function to encode images to base64 format
         var images;
-        var loadFile = function (event) {
-            alert("Mai chal ra hu");
+        function loadFile(event, image_id) {
+            alert(image_id);
             var file = $("input[type=file]").get(0).files[0];
             var reader = new FileReader();
-            reader.onload = function () {
-                $("#new_product_image").attr("src", reader.result);
+            reader.onload = function (event) {
+                $("#" + image_id).attr("src", reader.result);
                 images = reader.result
             }
-
-            reader.readAsDataURL(file);
+            reader.readAsDataURL(event.target.files[0]);
+            alert(images);
         };
+        // var images;
+        // function loadFile(event, image_id) {
+        //     alert(image_id);
+        //     var file = $("input[type=file]").get(0).files[0];
+        //     var reader = new FileReader();
+        //     reader.onload = function () {
+        //         $("#" + image_id).attr("src", reader.result);
+        //         images = reader.result
+        //     }
+        //     reader.readAsDataURL(file);
+        //     alert(images);
+        // };
 
 
+        // this function is triggered when seller adds new product
         $("#nya_product_add_kro_bhai").submit(function (event) {
             event.preventDefault();
 
@@ -342,7 +441,7 @@
             var new_item_stock = document.getElementById('new_item_stock').value;
             var new_item_category = document.getElementById('new_item_category').value;
             var new_item_description = document.getElementById('new_item_description').value;
-
+            alert(images);
 
             $.ajax({
                 url: "{% url 'shop:seller_added_new_prduct' %}",
@@ -365,6 +464,87 @@
             });
 
         });
+
+
+        // This function is triggered when seller want to update of a product
+        function update_product_data_card_ko_oper_kro(product_id) {
+            alert(product_id);
+
+            // Here we are replacing the value of our update_product_data cart by the values of the product which we want to update
+            // trim() is used to remove trailing spaces from strin
+            document.getElementById('item_image').src = document.getElementById("image_of_" + product_id).src;
+            document.getElementById('item_name').value = document.getElementById("name_of_" + product_id).innerHTML.trim();
+            document.getElementById('item_price').value = document.getElementById("price_of_" + product_id).innerHTML.trim().slice(1,);
+            document.getElementById('item_stock').value = document.getElementById("stock_of_" + product_id).innerHTML.trim();
+            document.getElementById('item_category').value = document.getElementById("category_of_" + product_id).innerHTML.trim();
+            document.getElementById('item_description').value = document.getElementById("description_of_" + product_id).innerHTML.trim();
+            document.getElementById('item_product_id').value = product_id;
+            show_hide_row('update_product_data');
+
+        }
+
+        // This function is triggered when update button is clicked
+        $("#product_ka_data_update_kro_bhai").submit(function (event) {
+            event.preventDefault();
+            alert("kyyyyyyyy");
+            var item_image = images;
+            var item_name = document.getElementById('item_name').value;
+            var item_price = document.getElementById('item_price').value;
+            var item_stock = document.getElementById('item_stock').value;
+            var item_category = document.getElementById('item_category').value;
+            var item_description = document.getElementById('item_description').value;
+            var item_product_id = document.getElementById('item_product_id').value;
+            alert(item_image);
+
+            $.ajax({
+                url: "{% url 'shop:update_product_data' %}",
+                type: 'POST',
+                data: {
+                    'csrfmiddlewaretoken': '{{csrf_token}}',
+                    'image': item_image,
+                    'product_name': item_name,
+                    'price': item_price,
+                    'stock': item_stock,
+                    'category': item_category,
+                    'desc': item_description,
+                    'product_id': item_product_id,
+                },
+                dataType: 'json',
+                success: function (resp) {
+
+                    alert(resp);
+                    document.getElementById("image_of_" + resp.product_id).src = resp.image;
+                    document.getElementById("name_of_" + resp.product_id).innerHTML = resp.product_name;
+                    document.getElementById("price_of_" + resp.product_id).innerHTML = resp.price;
+                    document.getElementById("stock_of_" + resp.product_id).innerHTML = resp.stock;
+                    document.getElementById("category_of_" + resp.product_id).innerHTML = resp.category;
+                    document.getElementById("description_of_" + resp.product_id).innerHTML = resp.desc;
+                }
+
+            });
+
+        });
+
+        function remove_product(product_id) {
+            product_id = product_id.slice(7,)
+            $.ajax({
+                url: "{% url 'shop:remove_product' %}",
+                type: 'POST',
+                data: {
+                    'csrfmiddlewaretoken': '{{csrf_token}}',
+                    'product_id': product_id,
+                },
+                dataType: 'json',
+                success: function (resp) {
+                    show_hide_row('desc_of_' + product_id);
+                    alert("kaam khatm ho gya hai");
+                }
+
+            });
+        }
+
+
+
     </script>
 
 

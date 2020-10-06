@@ -51,7 +51,7 @@ class FirebaseManager:
         return child_location
 
     @classmethod
-    def SetChild(cls , *args , data):
+    def SetChild(cls , *args , data ):
         child_location = FirebaseManager.Navigator(*args)
         child_location.set(data)
     
@@ -61,7 +61,7 @@ class FirebaseManager:
         return child_location.get().val()
 
     @classmethod
-    def FilterChilds(cls , *args , property , filter_value ):
+    def FilterChilds(cls , *args , property  , filter_value):
         child_location = FirebaseManager.Navigator(*args) 
         childs = dict( child_location.get().val() ) 
         selected_childs = { key:value for key , value in childs.items() if value[property] == filter_value } # Filtering the required categorical products
@@ -160,15 +160,18 @@ class User(FirebaseManager):
 
 #************************************nya--kaam*****************************************************
 class USER(FirebaseManager):
-    
-    
-    @property
-    def name(phone_number = None):
-        return FirebaseManager.GetChild('General_User',str(phone_number) , 'name')
 
     @classmethod
     def isRegistered(cls , phone_number = None):
-        return str(phone_number) in FirebaseManager.GetChild('General_User').keys()
+        list_of_general_users = FirebaseManager.GetChild('General_User') # Getting the list of all general users if they have any otherwise we get None
+        if list_of_general_users is None: # If value is None means its the first user --> means nobody isRegistered so we can return Fasle
+           return False 
+        else:
+           return str(phone_number) in FirebaseManager.GetChild('General_User') # Returing True if phone_number is already registered else False
+
+    @classmethod
+    def SetUserData(cls , phone_number = None , data = None):
+        FirebaseManager.SetChild('General_User' , phone_number , data = data)
 
     @classmethod
     def ResetPassword(cls , phone_number = None):
@@ -189,7 +192,7 @@ class USER(FirebaseManager):
         from modules.imp_funcs import OTP_generator , msg_sender
         generated_otp        = OTP_generator()
         phone_number_of_user = phone_number
-       # * msg_sender(given_phone_number = phone_number , given_message=str(generated_otp))
+        # * msg_sender(given_phone_number = phone_number , given_message=str(generated_otp))
         print("oooo" , generated_otp)        
         return  generated_otp
         
@@ -210,6 +213,12 @@ class SHOP(FirebaseManager):
     def GetProductById(cls , product_id = None ):
        return dict(FirebaseManager.GetChild('Products' , product_id))
 
+
+    @classmethod
+    def UpdateProductData(cls , product_id = None , data = None):
+        FirebaseManager.SetChild('Products' , product_id , data = data)
+
+
     @classmethod
     def GetAllProducts(cls):
         return dict(FirebaseManager.GetChild('Products'))
@@ -217,6 +226,10 @@ class SHOP(FirebaseManager):
     @classmethod
     def GetUserCart(cls , phone_number = None):
         return dict(FirebaseManager.GetChild('General_User' , phone_number)['cart'])
+
+    @classmethod
+    def GetSellerCart(cls , phone_number = None):
+        return dict(FirebaseManager.GetChild('General_User' , phone_number)['SellerCart'])
 
     @classmethod
     def GetListOfCategories(cls):
@@ -239,7 +252,6 @@ class SHOP(FirebaseManager):
                 if product_id != 'isEmpty':
                     product_data_dic = SHOP.GetProductById(product_id = product_id)
                     total_bill += quantity * product_data_dic['price']
-
         return total_bill
 
     @classmethod
@@ -262,4 +274,109 @@ class SHOP(FirebaseManager):
         total_bill = SHOP.GetTotalBillOfUser(Products_list = Products_list)
         return total_bill , Products_list
 
+    @classmethod 
+    def GetSellerCartProductsDetails(cls , phone_number = None):
+        SellerCart = SHOP.GetSellerCart(phone_number = phone_number)
+        Products_list = []
 
+        for product_id in SellerCart.keys():
+            if product_id != 'isEmpty':
+                product_data_dic                = SHOP.GetProductById(product_id = product_id)
+                product_data_dic['Details']     = SellerCart[product_id]
+                Products_list.append(product_data_dic)
+
+        return Products_list
+
+    @classmethod
+    def UpdateCategories(cls , new_cat = None):
+        categories_present = SHOP.GetListOfCategories() 
+        if new_cat not in categories_present:
+            categories_present.append(new_cat)
+        FirebaseManager.SetChild('categories' , data = categories_present)
+
+
+
+    @classmethod
+    def Base64ImageDecoder(cls , base_64_encoded_image = None):
+        import base64
+
+        base_64_encoded_image = base_64_encoded_image.split(',')[1]
+
+        pad = len(base_64_encoded_image)%4
+        base_64_encoded_image += "="*pad
+
+        data =  base_64_encoded_image.replace(' ', '+')
+        imgdata = base64.b64decode(data)
+        filename = 'DECODED.png'  
+        with open(filename, 'wb') as f:
+            f.write(imgdata)
+    
+    @classmethod
+    def SimpleImageUploader(cls , path_on_local = None , path_on_storage = None , product_id = None):
+        # Connecting to the firebase storage
+        storage = firebase.storage()  
+        storage.child(path_on_storage).put(path_on_local)
+        return storage.child('prod_imgs/' + str(product_id) + '.png').get_url(None) # Returning the URL of uploaded product image
+
+
+    @classmethod
+    def Base64ImageUploader(cls , base_64_encoded_image = None , product_id = None):
+        import sys
+        SHOP.Base64ImageDecoder(base_64_encoded_image = base_64_encoded_image)
+        
+        path_on_local   = sys.path[0] + '\DECODED.png'
+        path_on_storage = 'prod_imgs/' + str(product_id) + '.png'
+
+        return SHOP.SimpleImageUploader(path_on_local = path_on_local , path_on_storage = path_on_storage , product_id = product_id) # Returning the URL of uploaded product image
+   
+
+    @classmethod
+    def SellerAddsNewProduct(cls , phone_number = None , prod_data = None):
+        """
+        >>> Whenever seller adds new product from seller.html , there is an AJAX request generate and it will trigger this particular function from shop/views.py/sell_something
+        >>> The major task of this function is to take prod_data provided by seller and add that product to Firebase realtime db and storage[for image]
+        >>> This function accepts product data and RETURNS (product_id given to new product and image_URL)
+        >>>  WORKFLOW :
+        >>> This function firstly decides product_id of new product based on the total number of products already present in database
+        >>> After we call Base64ImageUploader which will firslty convert b64 format string to a image named (DECODED.png) and then push that particular image to db
+        """
+        
+        total_prods = len( FirebaseManager.GetChild('Products') ) # We fetch total_number of products here because it helps us to decide the product_id of new product just added by SELLER
+        product_id = total_prods + 1
+
+        if prod_data['image'] != "https://ohram.org/image/utilities/empty_product.svg":
+            prod_data['image'] = SHOP.Base64ImageUploader(base_64_encoded_image = prod_data['image'] , product_id = product_id)
+        
+
+        prod_data['product_id'] = 'prod' + str(product_id)
+        FirebaseManager.SetChild('Products' , 'prod'+str(product_id) , data=prod_data ) # Adding the product to Products section of database
+
+        filtered_prod_data = { key:prod_data[key] for key in prod_data.keys() and ['buyers' , 'rating' , 'stock'] } # Getting only 'buyers' , 'rating' nad 'stock' value for dic_for_seller [for more clarification see the realtime database table and also print the prod_data dictationary]
+        FirebaseManager.SetChild('General_User' , phone_number , 'SellerCart' , 'prod'+str(product_id) , data = filtered_prod_data) #Adding the product to SellerCart of 
+
+        #If seller adds new product then we then we have to also update categories (VERY VERY IMPORTANT)
+        SHOP.UpdateCategories(new_cat = prod_data['category'])
+        
+        return product_id , prod_data['image']  # Here (total_prod + 1) actually represent product_id of newly added product
+
+    @classmethod
+    def RemoveProduct(cls , phone_number = None ,  product_id = None):
+        FirebaseManager.SetChild('Products' , product_id , data = 0) # Setting the product details to 0 
+        FirebaseManager.SetChild('General_User' , phone_number , 'SellerCart' , product_id , data = [] ) # Removing the product form seller cart
+
+phone_number = 9306219945
+# SHOP.ellerAddsNewProduct(phone_number = phone_number , prod_data = {'naam' : 'kam hi h' , 'wow' : 'cool'})
+# new = SHOP.GetSellerCartProductsDetails(phone_number=phone_number)
+
+# for p in new:
+#     print(p)
+#     print()
+#     print()
+#     print()
+#     print()
+#     print()
+# print(len(FirebaseManager.GetChild('Products')))
+# print()
+# print()
+# print(FirebaseManager.GetChild('Products'))
+# SHOP.UpdateCategories(new_cat = 'yank')
