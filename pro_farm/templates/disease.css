@@ -46,7 +46,7 @@ text-align: center;
 } */
 
 .ftco-section-parallax .parallax-img {
-    background-color: cadetblue;
+    background-color: rgb(195, 243, 237);
 }
 
 .main{
@@ -57,7 +57,7 @@ text-align: center;
 
     height: 600px; 
     width: 100%;
-    border: 2px solid black;
+    /* border: 2px solid black; */
     margin-top: 20px;
     margin-bottom: 50px;
     display: flex;
@@ -65,8 +65,6 @@ text-align: center;
     flex-wrap: wrap; 
     justify-content: space-around;
     align-items: center;
-
-   
 }
 
 .container2{
@@ -77,24 +75,23 @@ text-align: center;
 .card{
     width: 200px;
     height: 200px;
-    
     border: 2px solid black;
     margin: 10px;
     padding: 3px;
     border-radius: 8px;
-
-   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.6);
-   transition: 0.4s;
-   width:200px;
-   background: skyblue;
-   text-align: center;
-   font-size: 16px;
-   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-   float: left;
-  
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.6);
+    transition: 0.4s;
+    width:200px;
+    background: skyblue;
+    text-align: center;
+    font-size: 16px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    float: left;
 }
 
 .card:hover{
+    transform: scale(1.05);
+    cursor: pointer;
     box-shadow: 0 8px 16px  0 rgba(0,0,0,0.6);
 
 }

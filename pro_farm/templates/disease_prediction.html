@@ -8,6 +8,10 @@
 
 
     <!-- links -->
+    <!--       Bootstrap CSS link      -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- ----------------------------- -->
     <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -18,41 +22,51 @@
     <link rel="stylesheet" href="..\static\css\flaticon.css">
     <link rel="stylesheet" href="..\static\css\style.css">
     <link rel="stylesheet" href="..\static\css\icomoon.css">
-
     <link rel="stylesheet" href="disease.css">
 
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 
+    <script type="text/javascript">
+        function show_hide_row(row) {
+            $("#" + row).toggle();
+        }
+    </script>
 </head>
 
 <body>
 
 
-    <!-- navbar started -->
-    <div class="primary">
-        <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-            <div class="container">
-                <a class="navbar-brand" href="home.html">The<span>F</span>armer</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
-                    aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="oi oi-menu"></span> Menu
-                </button>
-                <div class="collapse navbar-collapse" id="ftco-nav">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-                        <li class="nav-item"><a href="about.html" class="nav-link">weather</a></li>
-                        <li class="nav-item"><a href="work.html" class="nav-link">Work</a></li>
-                        <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-                        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </div>
-    <!-- ended navbar -->
-
-    <div>
-        <img src="../static/images/as.jpg" alt="" style="width:100%; height: 658px;">
-    </div>
+    <!-- BootStrap Black Navbbar Started -->
+    <nav class="navbar navbar-expand-lg navbar-inverse navbar-light" style="background-color:  #e3f2fd;">
+        <a class="navbar-brand" href="#">ML Automator</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="container-fluid" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Doc</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About us</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <button class="btn btn-outline-primary mr-sm-3" type="submit">Sign up</button>
+                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Login</button>
+            </ul>
+        </div>
+    </nav>
+    <!-- Bootstrap Black Navbar clased -->
 
 
 
@@ -60,24 +74,22 @@
 
 
     <!-- Main features in cards -->
-    <section class="ftco-section-parallax degree-right">
+    <section class="ftco-section-parallax">
         <div class="parallax-img d-flex align-items-center">
             <div class="container">
                 <h2>DISEASE PREDICTION</h2>
                 <div class="row d-flex justify-content-center">
-                    <div class="col-md-4 ftco-animate">
-                        <div class="blog-entry-2">
-                            <a href="blog-single.html" class="block-20-1"
+                    <div class="shoping__cart__btns"></div>
+                    <div class="col-md-4 ftco-animate" onclick="show_hide_row('hidden_row11');">
+                        <div class="blog-entry-2" data-aos-delay="100">
+                            <a href="#hidden_row11" class="block-20-1"
                                 style="background-image: url(../static/disease-images/leaves.jpg);">
                             </a>
-                            <div class="text p-4 d-block">
+                            <div class="text p-4">
                                 <div class="meta mb-3">
-                                    <div><a href="#" style="color:black;"><strong>Leaves Disease Prediction</strong></a>
-                                    </div>
-                                    <div><a href="#"></a></div>
-                                    <div><a href="#" class="meta-chat"><span class=""></span></a></div>
+                                    <div><a href="" style="color:black;"><strong>Seeds Prediction</strong> </a></div>
                                 </div>
-                                <h3 class="heading"><a href="#"></a></h3>
+                                <!-- <h3 class="heading"><a href="#"></a></h3> -->
                             </div>
                         </div>
                     </div>
@@ -121,122 +133,112 @@
     <!-- Main features to be shown ended -->
 
 
-    <!-- =============================================================================================================== -->
-    <!-- <br><br><br><br>
-    <section>
-        <h1>Small Cards</h1>
-        <div class="secondary">
-            <div class="item" id="item-1"> 1</div>
-            <div class="item" id="item-2"> 2</div>
-            <div class="item" id="item-3"> 3</div>
-            <div class="item" id="item-4"> 4</div>
-            <div class="item" id="item-5"> 5</div>
-            <div class="item" id="item-6"> 6</div>
-            <div class="item" id="item-7"> 7</div>
-            <div class="item" id="item-8"> 8</div>
-            <div class="item" id="item-9"> 9</div>
-            <div class="item" id="item-10"> 10</div>
-            <div class="item" id="item-11"> 11</div>
-            <div class="item" id="item-12"> 12</div>
-            <div class="" id="item-13">
-                <input type="file" id="photo">
-            </div>
-        </div>
-    </section> -->
-
     <!-- ============================================================================================================ -->
-    <h1>Small Cards</h1>
-    <div class="container2">
-        <div class="main">
-            <div class="card">
-                <img src="../static/images/sunny_cloudy.jpg" alt="" style="width:100%; height: 150px;">
-                <div class="content">
-                    <h6><strong>Content</strong></h6>
-                </div>
-            </div>
+    <section class="ftco-section-parallax" >
+        <div class="parallax-img align-items-center">
+            <div class="" id="hidden_row11" style="display: none;">
+                <h1>Small Cards</h1>
+                <div class="main" >
+                    <div class="card" onclick="show_hide_row('hidden_row12');">
+                        <a href="#hidden_row12">
+                            <img src="../static/images/sunny_cloudy.jpg" alt="" style="width:100%; height: 150px;">
+                            <div class="content">
+                                <h6><strong>Content</strong></h6>
+                            </div>
+                        </a>
+                    </div>
 
-            <div class="card">
-                <img src="../static/images/sunny_cloudy.jpg" alt="" style="width:100%; height: 150px;">
-                <div class="content">
-                    <h6><strong>Content</strong></h6>
-                </div>
-            </div>
+                    <div class="card">
+                        <img src="../static/images/sunny_cloudy.jpg" alt="" style="width:100%; height: 150px;">
+                        <div class="content">
+                            <h6><strong>Content</strong></h6>
+                        </div>
+                    </div>
 
-            <div class="card">
-                <img src="../static/images/sunny_cloudy.jpg" alt="" style="width:100%; height: 150px;">
-                <div class="content">
-                    <h6><strong>Content</strong></h6>
-                </div>
-            </div>
+                    <div class="card">
+                        <img src="../static/images/sunny_cloudy.jpg" alt="" style="width:100%; height: 150px;">
+                        <div class="content">
+                            <h6><strong>Content</strong></h6>
+                        </div>
+                    </div>
 
-            <div class="card">
-                <img src="../static/images/sunny_cloudy.jpg" alt="" style="width:100%; height: 150px;">
-                <div class="content">
-                    <h6><strong>Content</strong></h6>
-                </div>
-            </div>
+                    <div class="card">
+                        <img src="../static/images/sunny_cloudy.jpg" alt="" style="width:100%; height: 150px;">
+                        <div class="content">
+                            <h6><strong>Content</strong></h6>
+                        </div>
+                    </div>
 
-            <div class="card">
-                <img src="../static/images/sunny_cloudy.jpg" alt="" style="width:100%; height: 150px;">
-                <div class="content">
-                    <h6><strong>Content</strong></h6>
-                </div>
-            </div>
+                    <div class="card">
+                        <img src="../static/images/sunny_cloudy.jpg" alt="" style="width:100%; height: 150px;">
+                        <div class="content">
+                            <h6><strong>Content</strong></h6>
+                        </div>
+                    </div>
 
-            <div class="card">
-                <img src="../static/images/sunny_cloudy.jpg" alt="" style="width:100%; height: 150px;">
-                <div class="content">
-                    <h6><strong>Content</strong></h6>
-                </div>
-            </div>
+                    <div class="card">
+                        <img src="../static/images/sunny_cloudy.jpg" alt="" style="width:100%; height: 150px;">
+                        <div class="content">
+                            <h6><strong>Content</strong></h6>
+                        </div>
+                    </div>
 
-            <div class="card">
-                <img src="../static/images/sunny_cloudy.jpg" alt="" style="width:100%; height: 150px;">
-                <div class="content">
-                    <h6><strong>Content</strong></h6>
-                </div>
-            </div>
+                    <div class="card">
+                        <img src="../static/images/sunny_cloudy.jpg" alt="" style="width:100%; height: 150px;">
+                        <div class="content">
+                            <h6><strong>Content</strong></h6>
+                        </div>
+                    </div>
 
-            <div class="card">
-                <img src="../static/images/sunny_cloudy.jpg" alt="" style="width:100%; height: 150px;">
-                <div class="content">
-                    <h6><strong>Content</strong></h6>
-                </div>
-            </div>
+                    <div class="card">
+                        <img src="../static/images/sunny_cloudy.jpg" alt="" style="width:100%; height: 150px;">
+                        <div class="content">
+                            <h6><strong>Content</strong></h6>
+                        </div>
+                    </div>
 
-            <div class="card">
-                <img src="../static/images/sunny_cloudy.jpg" alt="" style="width:100%; height: 150px;">
-                <div class="content">
-                    <h6><strong>Content</strong></h6>
-                </div>
-            </div>
+                    <div class="card">
+                        <img src="../static/images/sunny_cloudy.jpg" alt="" style="width:100%; height: 150px;">
+                        <div class="content">
+                            <h6><strong>Content</strong></h6>
+                        </div>
+                    </div>
 
-            <div class="card">
-                <img src="../static/images/sunny_cloudy.jpg" alt="" style="width:100%; height: 150px;">
-                <div class="content">
-                    <h6><strong>Content</strong></h6>
-                </div>
-            </div>
+                    <div class="card">
+                        <img src="../static/images/sunny_cloudy.jpg" alt="" style="width:100%; height: 150px;">
+                        <div class="content">
+                            <h6><strong>Content</strong></h6>
+                        </div>
+                    </div>
 
-            <div class="card">
-                <img src="../static/images/sunny_cloudy.jpg" alt="" style="width:100%; height: 150px;">
-                <div class="content">
-                    <h6><strong>Content</strong></h6>
-                </div>
-            </div>
+                    <div class="card">
+                        <img src="../static/images/sunny_cloudy.jpg" alt="" style="width:100%; height: 150px;">
+                        <div class="content">
+                            <h6><strong>Content</strong></h6>
+                        </div>
+                    </div>
 
-            <div class="card">
-                <img src="../static/images/sunny_cloudy.jpg" alt="" style="width:100%; height: 150px;">
-                <div class="content">
-                    <h6><strong>Content</strong></h6>
+                    <div class="card">
+                        <img src="../static/images/sunny_cloudy.jpg" alt="" style="width:100%; height: 150px;">
+                        <div class="content">
+                            <h6><strong>Content</strong></h6>
+                        </div>
+                    </div>
                 </div>
-            </div>
-
-            <div>
-                <input type="file">
             </div>
         </div>
-    </div>
+    </section>
+
+    <section class="ftco-section-parallax mb-5 pb-5 mt-3" id="hidden_row12" style="display: none;">
+        <div class="align-items-center">
+            <div>
+                <center>
+                    <input type="file" accept="image/*" name="image" id="image"/>
+                </center>
+            </div>
+        </div>
+    </section>
+
 
     <!-- Footer started -->
     <footer class="ftco-footer ftco-bg-dark ftco-section">
