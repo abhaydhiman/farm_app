@@ -28,11 +28,6 @@
 
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-        <div class="container">
-            <a class="navbar-brand" href="#">The<span>F</span>armer</a>
-    </nav>
-
     <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100">
@@ -40,21 +35,15 @@
                     <img src="{% static 'images\kisan-1.png' %}" alt="IMG">
                 </div>
 
-                <form class="login100-form validate-form" method = "POST" action = "check_login_details">
+                <form class="login100-form validate-form" method="POST" action="check_login_details">
                     {% csrf_token %}
-
-                    {% if warning_msg %}
-                
-                        {{warning_msg}}
-                    
-                    {% endif %}
 
                     <span class="login100-form-title">
                         {{Enter_Credentials}}
                     </span>
 
                     <div class="wrap-input100 validate-input" data-validate="Valid number is of 10 integers">
-                        <input class="input100" type="text" name="Phone_number" placeholder="{{Phone_Number}}">
+                        <input class="input100" type="tel" name="Phone_number" placeholder="{{Phone_Number}}">
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-phone" aria-hidden="true"></i>
@@ -75,7 +64,9 @@
                         </button>
 
                     </div>
-                    <br> <br> <br> <br> <br> <br>
+                    <br> <br>
+                    <span style="color: red;">{{warning_msg}}</span>
+                    <br> <br> <br> <br>
                 </form>
 
 

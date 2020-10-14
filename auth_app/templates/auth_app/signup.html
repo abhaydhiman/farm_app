@@ -28,10 +28,6 @@
 
 <body>
 
-  <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
-    <div class="container">
-      <a class="navbar-brand" href="#">The<span>F</span>armer</a>
-  </nav>
 
   <div class="limiter">
     <div class="container-login100">
@@ -76,90 +72,62 @@
 
           <br>
 
-
-          <div class="container-login100-form-btn" method="POST" action="login_page">
-            <button class="login100-form-btn">
-              {{Generate_OTP}}
-            </button>
-
-          </div>
-
-
-          {% if warning_msg %}
-          <br>
-          {{warning_msg}}
-          <br>
-          <br>
-          {% else %}
-          <br>
-          <br>
-          <br>
-          <br>
-          <br>
-          <br>
-          {% endif %}
-
+          <div class="col-md-12">
+            <div class="container-login100-form-btn" method="POST" action="login_page">
+              <button class="login100-form-btn">
+                {{Generate_OTP}}
+              </button>
+            </div>
         </form>
-        {% else %}
-        <form class="login100-form validate-form" method="POST" action="verify_signup_details">
-          {% csrf_token %}
-          <span class="login100-form-title">
-            {{Verify_OTP}}
-          </span>
-
-          <div class="wrap-input100 validate-input" data-validate="Valid number is of 6 integers">
-            <input class="input100" type="text" name="otp_given_by_user" placeholder="{{OTP}}">
-            <span class="focus-input100"></span>
-            <span class="symbol-input100">
-              <i class="fa fa-phone" aria-hidden="true"></i>
-            </span>
-          </div>
-
-          <input type="hidden" name="generated_otp" value={{generated_otp}}>
-
-
-
+        <form method='POST' action='login_page'>
           <div class="container-login100-form-btn">
-            <button class="login100-form-btn">
-              {{Confirm}}
-            </button>
-
-          </div>
-          {% if warning_msg %}
-          <br>
-          {{warning_msg}}
-          <br>
-          <br>
-          {% else %}
-          <br>
-          <br>
-          <br>
-          <br>
-          <br>
-          <br>
-          {% endif %}
-
-        </form>
-
-        {% endif %}
-
-        {% if confirmation_state == 1 %}
-
-        <div class="container">
-          <form method='POST' method='POST' action='login_page'>
             {% csrf_token %}
-
             <button class="login100-form-btn">
               {{Already_a_user}}
             </button>
-
-          </form>
-        </div>
-        {% endif %}
-
-
+          </div>
+        </form> <br>
+        <span style="color: red;">{{warning_msg}}</span>
       </div>
+
+
+      {% else %}
+      <form class="login100-form validate-form" method="POST" action="verify_signup_details">
+        {% csrf_token %}
+        <span class="login100-form-title">
+          {{Verify_OTP}}
+        </span>
+
+        <div class="wrap-input100 validate-input" data-validate="Valid number is of 6 integers">
+          <input class="input100" type="text" name="otp_given_by_user" placeholder="{{OTP}}">
+          <span class="focus-input100"></span>
+          <span class="symbol-input100">
+            <i class="fa fa-phone" aria-hidden="true"></i>
+          </span>
+        </div>
+
+        <input type="hidden" name="generated_otp" value={{generated_otp}}>
+
+
+
+        <div class="container-login100-form-btn">
+          <button class="login100-form-btn">
+            {{Confirm}}
+          </button>
+
+        </div>
+        {{warning_msg}}
+
+
+      </form>
+
+      {% endif %}
+
+
+
+
     </div>
+  </div>
   </div>
 
 
