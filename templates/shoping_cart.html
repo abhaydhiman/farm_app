@@ -7,7 +7,7 @@
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ogani | Template</title>
+    <title>Shopping Cart</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
@@ -38,11 +38,11 @@
                 </button>
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav ml-auto">
-                        <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-                        <li class="nav-item"><a href="about.html" class="nav-link">weather</a></li>
-                        <li class="nav-item"><a href="work.html" class="nav-link">Work</a></li>
-                        <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-                        <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                        <li class="nav-item active"><a href="{{url_for('user_home_3')}}" class="nav-link">Home</a></li>
+                        <li class="nav-item"><a href="{{url_for('weather')}}" class="nav-link">weather</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Work</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Blog</a></li>
+                        <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
                     </ul>
                 </div>
             </div>
@@ -70,72 +70,30 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                {% for i in range(length) %}
                                 <tr>
                                     <td class="shoping__cart__item">
-                                        <img src="../static/images/featured/feature-2.jpg" alt="">
-                                        <h5>Vegetable’s Package</h5>
+                                        <img src="{{img_lis[i]}}" alt="">
+                                        <h5>{{name_lis[i]}}</h5>
                                     </td>
                                     <td class="shoping__cart__price">
-                                        $55.00
+                                        &#8377; {{price_lis[i]}}
                                     </td>
                                     <td class="shoping__cart__quantity">
                                         <div class="quantity">
                                             <div class="pro-qty">
-                                                <input type="text" value="1">
+                                                <input type="text" value="{{amount_lis[i]}}">
                                             </div>
                                         </div>
                                     </td>
                                     <td class="shoping__cart__total">
-                                        $110.00
+                                        &#8377; {{price12[i]}}
                                     </td>
                                     <td class="shoping__cart__item__close">
                                         <span class="fa fa-close"></span>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td class="shoping__cart__item">
-                                        <img src="../static/images/featured/feature-2.jpg" alt="">
-                                        <h5>Fresh Garden Vegetable</h5>
-                                    </td>
-                                    <td class="shoping__cart__price">
-                                        $39.00
-                                    </td>
-                                    <td class="shoping__cart__quantity">
-                                        <div class="quantity">
-                                            <div class="pro-qty">
-                                                <input type="text" value="1">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="shoping__cart__total">
-                                        $39.99
-                                    </td>
-                                    <td class="shoping__cart__item__close">
-                                        <span class="fa fa-close"></span>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="shoping__cart__item">
-                                        <img src="../static/images/featured/feature-2.jpg" alt="">
-                                        <h5>Organic Bananas</h5>
-                                    </td>
-                                    <td class="shoping__cart__price">
-                                        $69.00
-                                    </td>
-                                    <td class="shoping__cart__quantity">
-                                        <div class="quantity">
-                                            <div class="pro-qty">
-                                                <input type="text" value="1">
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="shoping__cart__total">
-                                        $69.99
-                                    </td>
-                                    <td class="shoping__cart__item__close">
-                                        <span class="fa fa-close"></span>
-                                    </td>
-                                </tr>
+                                {% endfor %}
                             </tbody>
                         </table>
                     </div>
@@ -153,10 +111,10 @@
                     <div class="shoping__checkout">
                         <h5>Cart Total</h5>
                         <ul>
-                            <li>Subtotal <span>$454.98</span></li>
-                            <li>Total <span>$454.98</span></li>
+                            <li>Subtotal <span>&#8377; {{sum_price}}</span></li>
+                            <li>Total <span>&#8377; {{totp_price}}</span></li>
                         </ul>
-                        <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
+                        <button href="#" class="primary-btn">PROCEED TO CHECKOUT</button>
                     </div>
                 </div>
             </div>
