@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Disease Prediction</title>
+
+
+    <!-- links -->
+    <!--       Bootstrap CSS link      -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- ----------------------------- -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,600,700,800,900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="..\static\css\animate.css">
+    <link rel="stylesheet" href="..\static\css\owl.theme.default.min.css">
+    <link rel="stylesheet" href="..\static\css\magnific-popup.css">
+    <link rel="stylesheet" href="..\static\css\owl.carousel.min.css">
+    <link rel="stylesheet" href="..\static\css\flaticon.css">
+    <link rel="stylesheet" href="..\static\css\style.css">
+    <link rel="stylesheet" href="..\static\css\icomoon.css">
+    <link rel="stylesheet" href="../static/css/disease_prediction.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+
+    <script type="text/javascript">
+        function show_hide_row(row) {
+            $("#" + row).toggle();
+        }
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#leaf').on('click', function(event) {
+                $.ajax({
+                    data : {
+                        name : "hello",
+                    },
+                    type : 'POST',
+                    url : '/disease'
+                })
+                .done(function(data) {
+                    alert(data.name)
+                });
+                event.preventDefault();
+            });
+        });
+    </script>
+
+</head>
+
+<body>
+
+
+    <!-- BootStrap Black Navbbar Started -->
+    <nav class="navbar navbar-expand-lg navbar-inverse navbar-light" style="background-color:  #99A3E0;">
+        <a class="navbar-brand" href="#">KisanTech</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="container-fluid" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" style="font-weight: bolder;font-size:15px;color:rgb(19, 18, 18);" href="{{url_for('user_home_3')}}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="font-weight: bolder;font-size:15px;color:rgb(19, 18, 18);" href="{{url_for('weather')}}">Weather</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" style="font-weight: bolder;font-size:15px;color:rgb(19, 18, 18);" href="{{url_for('shop')}}">Shop</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!-- Bootstrap Black Navbar clased -->
+
+
+
+    <!-- =============================================================================================================== -->
+
+
+    <!-- Main features in cards -->
+    <section class="ftco-section-parallax">
+        <div class="parallax-img d-flex align-items-center" style="padding-top:30px;">
+            <div class="container">
+                <h2 style="font-weight: 500; font-family:Georgia, 'Times New Roman', Times, serif;">DISEASE PREDICTION</h2>
+                <p style="font-weight:300;font-size:20px;font-family:Georgia, 'Times New Roman', Times, serif;padding-bottom:30px;padding-top:-30px;text-align:center;color:rgb(13, 122, 77);">Here You will Get know the Kind of Disease
+                Your Crop/Seeds are having and How to cure Them.</p>
+
+                <div class="row d-flex justify-content-center">
+
+                    <div class="col-md-4 ftco-animate" id="leaf" onclick="show_hide_row('hidden_row11');">
+                        <div class="blog-entry-2" data-aos-delay="100">
+                            <a href="#hidden_row11" class="block-20-1"
+                                style="background-image: url(../static/images/leaf_disease.jpg);">
+                            </a>
+                            <div class="text p-4">
+                                <div class="meta mb-3">
+                                    <div><a href="" style="color:black;"><strong>Leaf Disease Prediction</strong> </a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 ftco-animate" id="seed" onclick="show_hide_row('hidden_row11');">
+                        <div class="blog-entry-2" data-aos-delay="100">
+                            <a href="#hidden_row11" class="block-20-1"
+                                style="background-image: url(../static/images/seed_disease.jpg);">
+                            </a>
+                            <div class="text p-4">
+                                <div class="meta mb-3">
+                                    <div><a href="" style="color:black;"><strong>Seeds Disease Prediction</strong> </a></div>
+                                    <div><a href=""></a></div>
+                                    <div><a href="" class="meta-chat"><span class=""></span></a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 ftco-animate" id="crop" onclick="show_hide_row('hidden_row11');">
+                        <div class="blog-entry-2" data-aos-delay="100">
+                            <a href="#hidden_row11" class="block-20-1"
+                                style="background-image: url(../static/images/crop.jpg);">
+                            </a>
+                            <div class="text p-4">
+                                <div class="meta mb-3">
+                                    <div><a href="" style="color:black;"><strong>Crop Disease Prediction</strong></a>
+                                    </div>
+                                    <div><a href=""></a></div>
+                                    <div><a href="" class="meta-chat"><span class=""></span></a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+    <!-- Main features to be shown ended -->
+
+
+    <!-- ============================================================================================================ -->
+    <section class="ftco-section-parallax" >
+        <div class="parallax-img align-items-center" style="padding-top: 20px;">
+            <div class="" id="hidden_row11" style="display: none;">
+                <h1>Small Cards</h1>
+                <div class="main" >
+                    <div class="card" onclick="show_hide_row('hidden_row12');">
+                        <a href="#hidden_row12">
+                            <img src="../static/images/sunny_cloudy.jpg" alt="" style="width:100%; height: 150px; border-top-left-radius:15px;border-top-right-radius:15px">
+                            <div class="content">
+                                <h6><strong>Content</strong></h6>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="ftco-section-parallax mb-5 pb-5 mt-3" id="hidden_row12" style="display: none;">
+        <div class="align-items-center">
+            <div>
+                <center>
+                    <!-- <input type="file" accept="image/*" name="image" id="image"/> -->
+                    <div class="container">
+                        <div class="fileUploadInput">
+                        <label style="font-weight: bolder;font-size:larger;">Upload File</label>
+                        <input type="file" />
+                        <button>+</button></div>
+                    </div>
+                </center>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer started -->
+    <footer class="ftco-footer ftco-bg-dark ftco-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">DEVELOPERS</h2>
+                        <p><strong style="color:#d1002c;"> PRO-CODERS</strong><br>
+                            <a href=" https://www.linkedin.com/in/aaditya-singhal-a46720192/" target="_blank">Aditya
+                                Singhal</a><br>
+                            <a href=" https://www.linkedin.com/in/abhay-dhiman-409378191/" target="_blank">Abhay
+                                Dhiman</a><br>
+                            <a href=" https://www.linkedin.com/in/ayush-malik-2252b7199/" target="_blank">Ayush
+                                Malik</a><br>
+                            <a href="https://www.linkedin.com/in/akshita-sharma-a160121b6/" target="_blank">Akshita
+                                Sharma</a>
+
+                        </p>
+                        <ul class="ftco-footer-social list-unstyled float-md-left float-lft">
+                            <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                            <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">QUICK LINKS</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="py-2 d-block">Home</a></li>
+                            <li><a href="#" class="py-2 d-block">About</a></li>
+                            <li><a href="#" class="py-2 d-block">Services</a></li>
+                            <li><a href="#" class="py-2 d-block">Portfolio</a></li>
+                            <li><a href="#" class="py-2 d-block">Contact</a></li>
+                            <li><a href="#" class="py-2 d-block">Privacy</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">CONTACT</h2>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="py-2 d-block " style=" color: #d1002c ;">Aaditya Singhal -<a
+                                        href=" https://github.com/Aaditya1978">https://github.com/Aaditya1978</a></a>
+                            </li>
+                            <li><a href="#" class="py-2 d-block" style=" color: #d1002c;">Abhay Dhiman -<a
+                                        href="  https://github.com/abhaydhiman"> https://github.com/abhaydhiman</a></a>
+                            </li>
+                            <li><a href="#" class="py-2 d-block" style=" color: #d1002c;">Ayush Malik -<a
+                                        href="https://github.com/Ayush-Malik ">https://github.com/Ayush-Malik</a></a>
+                            </li>
+                            <li><a href="#" class="py-2 d-block" style=" color: #d1002c;">Akshita Sharma - <a
+                                        href="https://github.com/akshita-sharma8609 ">https://github.com/akshita-sharma8609</a></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md">
+                    <div class="ftco-footer-widget mb-4">
+                        <h2 class="ftco-heading-2">NEWSLETTER</h2>
+                        <p>Far far away, behind the word mountains, far from the countries.</p>
+                        <form action="#" class="subscribe-form">
+                            <div class="form-group">
+                                <span class="icon icon-paper-plane"></span>
+                                <input type="text" class="form-control" placeholder="Subscribe">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+
+                    <p>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This template
+                        is
+                        made <i class="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
+                            target="_blank"> &nbsp; PRO-CODERS</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer ending -->
+
+
+    <!-- ============================================================================================================== -->
+
+
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px">
+            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee" />
+            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10"
+                stroke="#F96D00" />
+        </svg></div>
+
+
+    <!-- ============================================================================================================== -->
+
+
+    <!-- Scripts -->
+    <script src="..\static\js\jquery.min.js"></script>
+    <script src="..\static\js\jquery-migrate-3.0.1.min.js"></script>
+    <script src="..\static\js\popper.min.js"></script>
+    <script src="..\static\js\bootstrap.min.js"></script>
+    <script src="..\static\js\jquery.easing.1.3.js"></script>
+    <script src="..\static\js\jquery.waypoints.min.js"></script>
+    <script src="..\static\js\jquery.stellar.min.js"></script>
+    <script src="..\static\js\owl.carousel.min.js"></script>
+    <script src="..\static\js\jquery.magnific-popup.min.js"></script>
+    <script src="..\static\js\jquery.animateNumber.min.js"></script>
+    <script src="..\static\js\scrollax.min.js"></script>
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="..\static\js\google-map.js"></script>
+    <script src="..\static\js\main.js"></script>
+
+    <script>
+        function openNav() {
+            document.getElementById("myNav").style.width = "100%";
+        }
+
+        function closeNav() {
+            document.getElementById("myNav").style.width = "0%";
+        }
+    </script>
+
+
+</body>
+
+</html>
