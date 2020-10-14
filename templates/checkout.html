@@ -7,7 +7,7 @@
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ogani | Template</title>
+    <title>Checkout Page</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
@@ -30,18 +30,18 @@
 <div class="container">
     <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light shop" id="ftco-navbar">
         <div class="container navbar">
-            <a class="navbar-brand" href="home.html">The<span>F</span>armer</a>
+            <a class="navbar-brand" href="#">The<span>F</span>armer</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
                 aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="oi oi-menu"></span> Menu
             </button>
             <div class="collapse navbar-collapse" id="ftco-nav">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active"><a href="index.html" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="about.html" class="nav-link">weather</a></li>
-                    <li class="nav-item"><a href="work.html" class="nav-link">Work</a></li>
-                    <li class="nav-item"><a href="blog.html" class="nav-link">Blog</a></li>
-                    <li class="nav-item"><a href="contact.html" class="nav-link">Contact</a></li>
+                    <li class="nav-item active"><a href="{{url_for('user_home_3')}}" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="{{url_for('weather')}}" class="nav-link">weather</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Work</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Blog</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Contact</a></li>
                 </ul>
             </div>
         </div>
@@ -139,21 +139,13 @@
                                 <h4>Your Order</h4>
                                 <div class="checkout__order__products">Products <span>Total</span></div>
                                 <ul>
-                                    <li>Vegetable’s Package <span>$75.99</span></li>
-                                    <li>Fresh Vegetable <span>$151.99</span></li>
-                                    <li>Organic Bananas <span>$53.99</span></li>
+                                    <li>{{pname}} <span>&#8377; {{price}}</span></li>
                                 </ul>
-                                <div class="checkout__order__subtotal">Subtotal <span>$750.99</span></div>
-                                <div class="checkout__order__total">Total <span>$750.99</span></div>
+                                <div class="checkout__order__subtotal">Subtotal <span>&#8377; {{price}}</span></div>
+                                <div class="checkout__order__total">Total(with Delivery Charges) <span>&#8377; {{price12}}</span></div>
                                 <div class="checkout__input__checkbox">
-                                    <!-- <label for="acc-or">
-                                        Create an account?
-                                        <input type="checkbox" id="acc-or">
-                                        <span class="checkmark"></span>
-                                    </label> -->
                                 </div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adip elit, sed do eiusmod tempor incididunt
-                                    ut labore et dolore magna aliqua.</p>
+                                <p>{{des}}</p>
                                 <div class="checkout__input__checkbox">
                                     <label for="payment">
                                         Check Payment
