@@ -8,6 +8,18 @@
 
     <!-- Link -->
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@469&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
 
     <style>
         * {
@@ -18,23 +30,21 @@
             width: auto;
             height: auto;
             background-image: url("/../farm_app/pro_farm/static/images/cash.jpg");
+            margin-bottom: 20px;
         }
 
         h2 {
-            border: 2px solid black;
-            /* border-radius: 10px; */
-            position: sticky;
-            top: 0;
-            /* background-color: rgb(121 156 160); */
-            background-color: rgb(255 45 97);
-            width: auto;
-            margin: 20px auto;
-            padding: 20px;
+            border-radius: 10px;
+            background-color: #64d164;
+            margin-bottom: 20px;
+            padding-top: 20px;
+            padding-bottom: 20px;
             text-align: center;
         }
 
         h3 {
             text-align: center;
+            padding-top: 20px;
         }
 
 
@@ -44,10 +54,11 @@
             border: 4px solid black;
             /* border-radius: 20px; */
             /* background-color: #f7ae96; */
-            background-color: #8fa28f;
+            background-color: #dfe2df;
             height: auto;
             width: 1000px;
             margin: 0px auto;
+            border-radius: 15px;
         }
 
         .container2 {
@@ -62,95 +73,115 @@
         .container3 {
 
             border-radius: 10px;
-            margin: 4px auto;
             text-align: center;
+            margin-bottom: 20px;
         }
 
         input,
         textarea {
             border: 1px solid black;
             border-radius: 5px;
+            padding-left: 5px;
+            padding-top: 3px;
+            padding-bottom: 3px;
+        }
+
+        input {
+            margin-left: 20px;
         }
 
         .container3 input:hover {
-            background-color: rgb(121 156 160);
+            background-color: rgb(146, 141, 141);
+            cursor: pointer;
+        }
+
+        .anchor {
+            padding: 4px;
+            margin: 10px;
+            border: 1px solid black;
+            color: black;
+            border-radius: 5px;
+            background-color: white;
+            ;
         }
     </style>
 </head>
 
 <body>
 
-    <h2>AGRICULTURE &nbsp LOAN</h2>
+    <h2>{{texts.AGRICULTURE_LOAN}}</h2>
 
     <div class="container">
         <div class="container1">
-            <form action="backend.php">
-
+            <form action="submit_loan_form" method="POST">
+                {% csrf_token %}
                 <!-- PERSONAL INFORMATION START ------------------------------------------------------------------->
 
-                <h3>Personal Information</h3>
+                <h3>{{texts.Personal_Information}}</h3>
                 <div class="container2">
 
                     <div>
-                        <label for="myname">FULL NAME:</label>
-                        <input type="text" id="myname">
+                        <label for="myname">{{texts.FIRST_NAME}} : </label>
+                        <input type="text" id="myname" name="first_name" required>
                     </div>
                     <br>
 
                     <div>
-                        <label for="myfirstname"> FIRST NAME:</label>
-                        <input type="text" id="myfirstname">
-                        <label for="mylastname"> LAST NAME:</label>
-                        <input type="text" id="mylastname">
+                        <label for="myfirstname">{{texts.LAST_NAME}} : </label>
+                        <input type="text" id="myfirstname" name="last_name">
                     </div>
                     <br>
 
                     <div>
-                        <label for="mydob"> DATE OF BIRTH: </label>
-                        <input type="date" id="mydob">
+                        <label for="mydob">{{texts.DATE_OF_BIRTH}} : </label>
+                        <input type="date" id="mydob" name="DOB" required>
                     </div>
                     <br>
 
 
                     <div>
-                        <label for="mynumber"> MOBILE NUMBER:</label>
-                        <input type="text" id="mynumber">
+                        <label for="mynumber">{{texts.MOBILE_NUMBER}} : </label>
+                        <input type="number " id="mynumber" name="phone_number" required>
                     </div>
                     <br>
 
                     <div>
-                        <label for="myemail"> EMAIL:</label>
-                        <input type="email" id="myemail">
-                    </div>
-                    <br>
-
-                    <div>
-
-                        GENDER: <input type="radio" name="gender" id="mygender">Male &nbsp&nbsp&nbsp&nbsp<input
-                            type="radio" name="gender" id="mygender">Female &nbsp&nbsp&nbsp&nbsp<input type="radio"
-                            name="gender" id="mygender">Other
+                        <label for="myemail">{{texts.EMAIL}} : </label>
+                        <input type="email" id="myemail" name="email">
                     </div>
                     <br>
 
                     <div>
 
-                        MARITAL STATUS: <input type="radio" name="marital" id="mystatus">Single
-                        &nbsp&nbsp&nbsp&nbsp<input type="radio" name="marital">Married &nbsp&nbsp&nbsp&nbsp<input
-                            type="radio" name="marital">Other
+                        {{texts.GENDER}} : <input type="radio" name="gender" id="mygender" value="Male"
+                            required>{{texts.Male}}
+                        &nbsp&nbsp&nbsp&nbsp<input type="radio" name="gender" id="mygender"
+                            value="Female">{{texts.Female}}
+                        &nbsp&nbsp&nbsp&nbsp<input type="radio" name="gender" id="mygender"
+                            value="Other">{{texts.Other}}
                     </div>
                     <br>
 
                     <div>
-                        <label for="myincome"> ANNUAL INCOME:</label>
-                        <input type="text" id="myincome">
+
+                        {{texts.MARITAL_STATUS}} : <input type="radio" name="maritial_status" id="mystatus"
+                            value="Single" required>{{texts.Single}}
+                        &nbsp&nbsp&nbsp&nbsp<input type="radio" name="maritial_status" value="Married">{{texts.Married}}
+                        &nbsp&nbsp&nbsp&nbsp<input type="radio" name="maritial_status" value=" Other">{{texts.Other}}
+                    </div>
+                    <br>
+
+                    <div>
+                        <label for="myincome">{{texts.ANNUAL_INCOME}} : </label>
+                        <input type="number" id="myincome" name="annual_income" required>
                     </div>
                     <br>
 
 
 
                     <div>
-                        <label for="myadd"> PERMANENT ADDRESS:</label><br>
-                        <textarea name="address" id="myadd" cols="150" rows="1"></textarea>
+                        <label for="myadd">{{texts.PERMANENT_ADDRESS}} : </label><br>
+                        <textarea name="permanent_address" id="myadd" cols="100" rows="3" required></textarea>
                     </div>
                     <br>
 
@@ -162,51 +193,54 @@
 
                 <!-- LOAN DETAILS START  ------------------------------------------------------------------->
 
-                <h3>Loan Details</h3>
+                <h3>{{texts.LOAN_DETAILS}}</h3>
                 <div class="container2">
                     <div>
-                        <label for="mytype"> LOAN TYPE:</label>
-                        <select id="mytype" placeholder="Select">
-                            <option value="type1">Running day to day operations</option>
-                            <option value="type2">Buying farm machinery</option>
-                            <option value="type3">Purchasing Land</option>
-                            <option value="type4">Storage purposes</option>
-                            <option value="type5">Product marketing loans</option>
-                            <option value="type6">Expansion</option>
-                            <option value="type6">Other</option>
+                        <label for="mytype">{{texts.LOAN_TYPE}} : </label>
+                        <select name="loan_type" id="mytype" placeholder="Select" style="border-radius: 5px;" required>
+                            <option value="">--{{texts.Please_choose_an_option}}--</option>
+                            <option value="{{texts.Running_day_to_day_operations}}">
+                                {{texts.Running_day_to_day_operations}}</option>
+                            <option value="{{texts.Buying_farm_machinery}}">{{texts.Buying_farm_machinery}}</option>
+                            <option value="{{texts.Purchasing_Land}}">{{texts.Purchasing_Land}}</option>
+                            <option value="{{texts.Storage_purposes}}">{{texts.Storage_purposes}}</option>
+                            <option value="{{texts.Product_marketing_loans}}">{{texts.Product_marketing_loans}}</option>
+                            <option value="{{texts.Expansion}}">{{texts.Expansion}}</option>
+                            <option value="{{texts.Other}}">{{texts.Other}}</option>
                         </select>
                     </div>
                     <br>
 
                     <div>
-                        <label for="myarea"> AGRICULTURAL LAND AREA:</label>
-                        <input type="text" id="myarea">
+                        <label for="myarea">{{texts.AGRICULTURAL_LAND_AREA}} : </label>
+                        <input type="text" id="myarea" name="agricultural_land_area" required>
                     </div>
                     <br>
 
                     <div>
-                        <label for="mytotalarea"> TOTAL LAND AREA:</label>
-                        <input type="text" id="mytotalarea">
+                        <label for="mytotalarea">{{texts.TOTAL_LAND_AREA}} : </label>
+                        <input type="text" id="mytotalarea" name="total_land_area" required>
                     </div>
                     <br>
 
                     <div>
 
-                        ALREADY HAVE LOAN: <input type="radio" name="myloan"> Yes &nbsp&nbsp&nbsp&nbsp<input
-                            type="radio" name="myloan">No
+                        {{texts.ALREADY_HAVE_LOAN}} : <input type="radio" name="already_have_loan" value="Yes"
+                            required>{{texts.Yes}}
+                        &nbsp&nbsp&nbsp&nbsp<input type="radio" name="already_have_loan" value="No">{{texts.No}}
                     </div>
                     <br>
 
                     <div>
-                        <label for="myamount">AMOUNT REQUIRED:</label>
-                        <input type="text" id="myamount">
+                        <label for="myamount">{{texts.AMOUNT_REQUIRED}} : </label>
+                        <input type="text" id="myamount" name="amount_required" required>
                     </div>
                     <br>
 
                     <div>
-                        <label for="mytext"> LOAN REQUIRED FOR:</label>
+                        <label for="mytext">{{texts.LOAN_REQUIRED_FOR}} :</label>
                         <br>
-                        <textarea name="text" id="mytext" cols="100" rows="5"></textarea>
+                        <textarea name="loan_required_for" id="mytext" cols="100" rows="5" required></textarea>
                     </div>
                     <br>
                 </div>
@@ -216,49 +250,35 @@
 
                 <!-- ADDITIONAL DETAILS START ------------------------------------------------------------------->
 
-                <h3>Additional Details</h3>
+                <h3>{{texts.Additional_Details}}</h3>
                 <div class="container2">
                     <div>
-                        Is there a criminal record on you? <input type="checkbox"> <br>
-                        Is there pending criminal case on you? <input type="checkbox"><br>
-                        Have you been blacklisted? <input type="checkbox"> If yes, amount <input type="number"><br>
-                        Have you signed a guarantee or surety for an entity? <input type="checkbox">
+                        {{texts.Is_there_a_criminal_record_on_you}}? <input type="checkbox"
+                            name="Is_there_a_criminal_record_on_you" value="Yes"> <br>
+                        {{texts.Is_there_pending_criminal_case_on_you}}? <input type="checkbox"
+                            name="is_there_pending_criminal_case_on_you" value="Yes"><br>
+                        {{texts.Have_you_been_blacklisted}}? <input type="checkbox" name="have_you_been_blacklisted"
+                            value="Yes"> {{texts.If_yes__amount}}
+                        <input type="number" name="if_yes__amount"><br>
+                        {{texts.Have_you_signed_a_guarantee_or_surety_for_an_entity}}? <input type="checkbox"
+                            name="Have_you_signed_a_guarantee_or_surety_for_an_entity" value="Yes">
                     </div>
                     <br>
 
                     <div>
-                        <label for="confirm1"> I authorize prospective credit granters/lending/leasing companies to
-                            obtain
-                            personal and credit
-                            information
-                            about me from credit bureau, or credit reporting agency, any person who has or may have any
-                            financial
-                            dealing with me, or from any refereces i have provided. this information, as well as that
-                            provided
-                            by me
-                            in
-                            the application, will be refered to in connection with this lease or any other relationships
-                            we
-                            may
-                            establish from time to time. Any personal and credit information obtained may be disclosed
-                            from
-                            time
-                            to
-                            time
-                            to the lemders, credit bureaus or other credit reporting agencies.**</label>
+                        <label
+                            for="confirm1">{{texts.I_authorize_prospective_credit_granters_lending_leasing_companies_to_obtain_personal_and_credit_____information_about_me_from_credit_bureau__or_credit_reporting_agency__any_person_who_has_or_may_have_any____financial_dealing_with_me__or_from_any_refereces_i_have_provided__this_information__as_well_as_that____provided_by_me_in_the_application__will_be_refered_to_in_connection_with_this_lease_or_any_other_____relationships_we_may_establish_from_time_to_time__Any_personal_and_credit_information_obtained____may_be_disclosed_from_time_to_time_to_the_lemders__credit_bureaus_or_other_credit_reporting_agencies_}}**</label>
                         <br>
-                        <input type="radio" id="confirm1">
+                        <input type="radio" id="confirm1" name="confirm1" required>
                     </div>
                     <br>
 
                     <div>
-                        <label for="confirm2">I hereby agree that the information given is true, accurate and complete
-                            as of
-                            the date of this form
-                            submission.**</label>
+                        <label
+                            for="confirm2">{{texts.I_hereby_agree_that_the_information_given_is_true__accurate_and_complete_as_of_the_date_of_this____form_submission}}**</label>
 
                         <br>
-                        <input type="radio" id="confirm2">
+                        <input type="radio" id="confirm2" name="confirm2" required>
                     </div>
                     <br>
                 </div>
@@ -267,8 +287,9 @@
 
                 <div class="container3">
 
-                    <input type="submit" value="SUBMIT NOW">
-                    <input type="reset" value="RESET NOW">
+                    <input type="submit" value="{{texts.Submit}}" style="margin-right: 30px;">
+                    <input type="reset" value="{{texts.Reset}}" style="margin-right: 30px;">
+                    <a class="anchor" href={% url "user_home:home_page" %}>{{texts.Cancel}}</a>
 
                 </div>
 
