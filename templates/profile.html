@@ -21,8 +21,35 @@
     <!--===============================================================================================-->
     <link rel="stylesheet" type="text/css" href="..\static\css\util.css">
     <link rel="stylesheet" type="text/css" href="..\static\css\style.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <!--===============================================================================================-->
 </head>
+
+<script>
+    var images;
+
+    $(document).ready(function() {
+        $('input[type=file]').on('change', function(event) {
+            var file = $("input[type=file]").get(0).files[0];
+            var reader = new FileReader();
+            reader.onload = function(){
+                $("#image2").attr("src", reader.result);
+                images = reader.result;
+            }
+             reader.readAsDataURL(file);
+            $.ajax({
+                data : {
+                    image : images, 
+                },
+                type : 'POST',
+                url : '/user_image',
+            }).done(function(data) {
+                console.log(data.image);
+            });
+            event.preventDefault();
+        });
+    });
+</script>
 
 <body>
 
@@ -30,9 +57,13 @@
         <div class="container-login100">
             <div class="wrap-login100">
                 <label for="image">
-                    <input type="file" accept="image/*" name="image" id="image" style="display:none;" />
+                    <input type="file" accept="image/*"  name="image" id="image" style="display:none;" />
                     <div class="example">
-                        <img src="../static/images/edited_vali4.png" />
+                        {% if image=='Null' %}
+                        <img id="image2" src="../static/images/edited_vali4.png" />
+                        {% else %}
+                        <img id="image2" src="{{image}}" />
+                        {% endif %}
                         <div class="contents">
                             <div class="text">{{text2}}</div>
                         </div>
