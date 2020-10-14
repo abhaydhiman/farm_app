@@ -17,29 +17,29 @@ db = firebase.database()
 # *====================================================================================================================================================================*
 
 def shop_now(request):
-    product_dic = dict(db.child("Products").get().val()) # Getting all teh products from the database and Converting ordered dict to dict
+    # product_dic = dict(db.child("Products").get().val()) # Getting all teh products from the database and Converting ordered dict to dict
     # Getting the cart of ( LOGGED IN user ) from firebase  of current user
-    cart = db.child('General_User').child( request.session['loggedin_user_phone_number'] ).get().val()['cart']
+    # cart = db.child('General_User').child( request.session['loggedin_user_phone_number'] ).get().val()['cart']
 
     # *******************************************
     '''
     with this for loop i am adding a new bool variable to each product based on its presence or
     absence in cart --> for more clarity open 'shop_now.html' and search 'product.inCart'
     '''
-    new_prod_lis = []
+    # new_prod_lis = []
 
-    for product_id , product in product_dic.items():
-        # cart_prod_id = product['product_id']
-        if  product_id in cart.keys() and cart[ product_id ] != 0:
-            product['inCart'] = True
-        else:
-            product['inCart'] = False
-        new_prod_lis.append(product)
+    # for product_id , product in product_dic.items():
+    #     # cart_prod_id = product['product_id']
+    #     if  product_id in cart.keys() and cart[ product_id ] != 0:
+    #         product['inCart'] = True
+    #     else:
+    #         product['inCart'] = False
+    #     new_prod_lis.append(product)
     # *******************************************
-
-    categories = db.child('categories').get().val() # Fetching all unique categories from firebase database
-    context  = {'categories' : categories , 
-                'products_lis': new_prod_lis , 
+    products_lis = SHOP.GetAllProducts().values()
+    # categories = db.child('categories').get().val() # Fetching all unique categories from firebase database
+    context  = {'categories' : SHOP.GetListOfCategories() ,
+                'products_lis': products_lis ,
     }
     return render(request , 'shop/shop_now.html' , context)
 
@@ -194,11 +194,7 @@ def product_details(request):
 
                         resp_data = {}
                         return JsonResponse(resp_data, status=200)
- 
 
-
-    
- 
 
 
 # *====================================================================================================================================================================*
@@ -209,11 +205,11 @@ This function is used to display all the products of a selected category
 def category_preview(request):
     if request.method == 'POST':
         cat_selected = request.POST['cat_selected'] # Recieving the category selected by user
-        products = dict(db.child('Products').get().val()) # Fetching all products from firebase database
-        selected_cat_prods = [ product for product_id , product in products.items() if product['category'] == cat_selected ] # Filtering the required categorical products
+        selected_cat_prods = SHOP.FilterProductsByCategory(cat_req = cat_selected) # Filtering the required categorical products
         context = {'selected_prods' : selected_cat_prods}
+        print(context['selected_prods'])
         return render(request , 'shop/shop_grid.html' , context)
-                    
+
 # *====================================================================================================================================================================*
 
 
