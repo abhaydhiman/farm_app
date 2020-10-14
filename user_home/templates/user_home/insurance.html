@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insurance Form</title>
+
+    <!-- Link -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@469&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+
+    <style>
+        * {
+            font-family: 'Oswald', sans-serif;
+        }
+
+
+
+        h2 {
+            border: 2px solid black;
+            border-radius: 10px;
+            background-color: rgb(255 45 97);
+            padding: 20px;
+            text-align: center;
+        }
+
+        h3 {
+            margin: 20px;
+            text-align: center;
+        }
+
+
+
+        .container1 {
+            display: block;
+            border: 4px solid black;
+            border-radius: 20px;
+            background-color: #dfe2df;
+            height: auto;
+            width: 100%;
+            margin-top: 30px;
+        }
+
+        .container2 {
+
+            border: 2px solid black;
+            border-radius: 10px;
+            margin: 30px 30px;
+            padding: 30px 50px;
+
+        }
+
+        .container3 {
+
+            border-radius: 10px;
+            margin: 4px auto;
+            text-align: center;
+        }
+
+        input,
+        textarea {
+            border: 1px solid black;
+            border-radius: 5px;
+            padding-left: 5px;
+            padding-top: 3px;
+            padding-bottom: 3px;
+        }
+
+        input {
+            margin-left: 20px;
+        }
+
+        .container3 input:hover {
+            background-color: rgb(112, 255, 112);
+            cursor: pointer;
+        }
+
+        #help {
+            border: 2px solid black;
+            background-color: rgb(197 197 197);
+            position: fixed;
+            text-align: center;
+            right: 3px;
+            bottom: 12px;
+            margin-bottom: 12px;
+            width: 260px;
+            height: 35px;
+            border-radius: 5px;
+        }
+
+        #help a {
+            color: rgb(27, 147, 177);
+        }
+
+        #help a:hover {
+            color: rgb(0, 184, 0);
+        }
+
+        h4 {
+
+            text-align: center;
+            margin-top: 100px;
+
+        }
+
+        .box {
+            height: 500px;
+            width: 100%;
+            border: 4px solid black;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            justify-content: space-around;
+            align-items: center;
+            background-image: url("../static/images/cloudy_day.jpg");
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        .item {
+            background-color: rgb(227, 219, 241);
+            border: 2px solid rgb(39, 39, 39);
+            margin: 20px;
+            padding: 12px;
+            height: 180px;
+            width: 200px;
+            border-radius: 20px;
+            transition: transform 0.3s;
+        }
+
+        .item:hover {
+            transform: scale(1.15);
+            background-color: rgb(234, 221, 238);
+            border: 3px solid rgb(29, 29, 29);
+        }
+
+        .item a:hover {
+            color: rgb(35, 182, 35);
+        }
+
+        .anchor {
+            padding: 4px;
+            margin: 10px;
+            border: 1px solid black;
+            color: black;
+            border-radius: 5px;
+            background-color: white;
+        }
+
+        .anchor:hover {
+            background-color: rgb(35, 182, 35);
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2 class="container">{{texts.INSURANCE_FORM}}</h2>
+
+    <!-- IMAGE START ------------------------------------------------------------------->
+
+    <div class="container">
+        <img src="../static/images/insurance.png" alt="Error in loading image" width="100%" height="550px"
+            style="border-radius: 10px;">
+    </div>
+
+    <!-- IMAGE END ------------------------------------------------------------------->
+
+
+    <!-- HELP START ------------------------------------------------------------------->
+
+    <div id="help">
+        {{texts.Need_any_help__contact_us}}: &nbsp;
+        <a href=" ">{{texts.Click_Here}}</a>
+    </div>
+
+    <!-- HELP END ------------------------------------------------------------------->
+
+
+    <div class="container">
+        <div class="container1">
+            <form action="submit_insurance_form" method="POST">
+
+                {% csrf_token %}
+                <!-- PERSONAL INFORMATION START ------------------------------------------------------------------->
+
+                <h3>{{texts.Personal_Information}}</h3>
+
+
+                <div class="container2">
+
+                    <div>
+                        <label for="myfirstname">{{texts.FIRST_NAME}}:</label>
+                        <input type="text" id="myfirstname" required name='first_name'>
+                        <br>
+                        <br>
+                        <label for="mylastname">{{texts.LAST_NAME}}:</label>
+                        <input type="text" id="mylastname" required name='last_name'>
+                    </div>
+                    <br>
+
+                    <div>
+                        <label for="mydob">{{texts.DATE_OF_BIRTH}}: </label>
+                        <input type="date" id="mydob" required name='DOB'>
+                    </div>
+                    <br>
+
+
+                    <div>
+                        <label for="mynumber">{{texts.MOBILE_NUMBER}}:</label>
+                        <input type="text" id="mynumber" required name='phone_number'>
+                    </div>
+                    <br>
+
+                    <div>
+                        <label for="myemail">{{texts.EMAIL}}:</label>
+                        <input type="email" id="myemail" required name="email">
+                    </div>
+                    <br>
+
+                    <div>
+
+                        {{texts.GENDER}}: <input type="radio" required name="gender" id="mygender"
+                            value="Male">{{texts.Male}}
+                        &nbsp&nbsp&nbsp&nbsp<input type="radio" name="gender" id="mygender"
+                            value="Female">{{texts.Female}}
+                        &nbsp&nbsp&nbsp&nbsp<input type="radio" name="gender" id="mygender" value="Other">
+                        {{texts.Other}}
+                    </div>
+                    <br>
+
+                    <div>
+
+                        {{texts.MARITAL_STATUS}}: <input type="radio" required name="maritial_status" id="mystatus"
+                            value="Single">{{texts.Single}}
+                        &nbsp&nbsp&nbsp&nbsp<input type="radio" name="maritial_status" value="Married">{{texts.Married}}
+                        &nbsp&nbsp&nbsp&nbsp<input type="radio" name="maritial_status" value="Other">{{texts.Other}}
+                    </div>
+                    <br>
+
+                    <div>
+                        <label for="myincome">{{texts.ANNUAL_INCOME}}:</label>
+                        <input type="text" id="myincome" required name="annual_income">
+                    </div>
+                    <br>
+
+
+
+                    <div>
+                        <label for="myadd">{{texts.PERMANENT_ADDRESS}}:</label><br>
+                        <textarea name="permanent_address" id="myadd" required cols="100" rows="4"></textarea>
+                    </div>
+                    <br>
+
+                </div>
+
+                <!-- PERSONAL INFORMATION END ------------------------------------------------------------------->
+
+
+
+                <!-- INSURANCE DETAILS START  ------------------------------------------------------------------->
+
+                <h3>{{texts.Insurance_Details}}</h3>
+                <div class="container2">
+                    <div>
+                        <label for="mytype">{{texts.INSURANCE_TYPE}}:</label>
+                        <select id="mytype" placeholder="Select" required name="insurance_type"
+                            style="border-radius: 5px;">
+                            <option value="">--{{texts.Please_Select_A_Option}}--</option>
+                            <option value="type1">{{texts.AGRICULTURAL_LAND_AREA}}</option>
+                            <option value="type2">{{texts.Multiple_Peril_Crop_Insurance}}</option>
+                            <option value="type3">{{texts.Actual_Production_History}}</option>
+                            <option value="type4">{{texts.Crop_Revenue_Coverage}}</option>
+
+                        </select>
+                    </div>
+                    <br>
+
+                    <div>
+                        <label for="myarea">{{texts.Land_Area}}:</label>
+                        <input type="text" required id="myarea" name="land_area">
+                    </div>
+                    <br>
+
+                    <div>
+                        <label for="mytotalarea">{{texts.TOTAL_LAND_AREA}}:</label>
+                        <input type="text" required id="mytotalarea" name="total_land_area">
+                    </div>
+                    <br>
+
+
+
+                    <div>
+                        <label for="mytext">{{texts.INSURANCE_REQUIRED_FOR}}:</label>
+                        <br>
+                        <textarea name="insurance_required_for" id="mytext" required cols="100" rows="5"></textarea>
+                    </div>
+                    <br>
+                </div>
+                <!-- INSURANCE DETAILS END ------------------------------------------------------------------->
+
+
+
+                <!-- ADDITIONAL DETAILS START ------------------------------------------------------------------->
+
+                <h3>{{texts.Additional_Details}}</h3>
+                <div class="container2">
+                    <div>
+                        {{texts.Is_there_a_criminal_record_on_you}}? <input name="is_there_a_criminal_record_on_you"
+                            value="Yes" type="checkbox"> <br>
+                        {{texts.Is_there_pending_criminal_case_on_you}}? <input
+                            name="Is_there_pending_criminal_case_on_you" value="Yes" type="checkbox"><br>
+                        {{texts.Have_you_been_blacklisted}}? <input name="have_you_been_blacklisted" value="Yes"
+                            type="checkbox">{{texts.If_yes__amount}}
+                        <input type="number" name="if_yes__amount"><br>
+                        {{texts.Have_you_signed_a_guarantee_or_surety_for_an_entity}}? <input value="Yes"
+                            name="Have_you_signed_a_guarantee_or_surety_for_an_entity" type="checkbox">
+                    </div>
+                    <br>
+
+                    <div>
+                        <label
+                            for="confirm1">{{texts.I_authorize_prospective_credit_granters_lending_leasing_companies_to_obtain_personal____and_credit_information_about_me_from_credit_bureau__or_credit_reporting_agency______any_person_who_has_or_may_have_any_financial_dealing_with_me______or_from_any_refereces_i_have_provided__this_information______as_well_as_that_provided_by_me_in_the_application__will_be_refered_to_in_connection_____with_this_lease_or_any_other_relationships_we_may_establish_from_time_to_time______Any_personal_and_credit_information_obtained_may_be_disclosed_from_time_to_time____to_the_lemders__credit_bureaus_or_other_credit_reporting_agencies___}}**</label>
+                        <br>
+                        <input type="radio" id="confirm1" required>
+                    </div>
+                    <br>
+
+                    <div>
+                        <label
+                            for="confirm2">{{texts.I_hereby_agree_that_the_information_given_is_true__accurate_and_complete_as_of____the_date_of_this_form_submission___}}**</label>
+
+                        <br>
+                        <input type="radio" id="confirm2" required>
+                    </div>
+                    <br>
+                </div>
+                <!-- ADDITIONAL DETAILS END ------------------------------------------------------------------->
+
+
+                <div class="container3">
+
+                    <input type="submit" value="Submit" style="margin-right: 30px;">
+                    <input type="reset" value="Reset" style="margin-right: 30px; margin-bottom:20px;">
+                    <a class="anchor" href={% url "user_home:home_page" %}>{{texts.Cancel}}</a>
+                </div>
+
+            </form>
+
+
+        </div>
+
+        <h4>{{texts.Helpful_Details}}</h4>
+        <div class="box">
+
+            <div class="item" id="box1">{{texts.Crop_Insurance__Coverage__Claim___Renewal}} <br><br>
+                {{texts.For_Details}}: <br>
+                <a href="https://www.paisabazaar.com/rural-insurance/crop-insurance/#Crop_Insurance"
+                    target="_blank">{{texts.Click_Here}}</a></div>
+
+
+            <div class="item" id="box2">{{texts.Advantages_Of_Crop_Insurance}}<br><br>
+                {{texts.For_Details}}: <br>
+                <a href="https://www.paisabazaar.com/rural-insurance/crop-insurance/#Crop_Insurance"
+                    target="_blank">{{texts.Click_Here}}</a>
+            </div>
+
+            <div class="item" id="box3">
+                {{texts.Pradhan_Mantri_Fasal_Bima_Yojana__Types__Coverage__Exclusions___Claim_Process}}<br><br>
+                {{texts.For_Details}}: <br>
+                <a href="https://www.paisabazaar.com/rural-insurance/crop-insurance/#Crop_Insurance"
+                    target="_blank">{{texts.Click_Here}}</a>
+            </div>
+
+            <div class="item" id="box1">{{texts.FAQs}}<br><br>
+                {{texts.For_Details}}: <br>
+                <a href="https://www.paisabazaar.com/rural-insurance/crop-insurance/#Crop_Insurance"
+                    target="_blank">{{texts.Click_Here}}</a>
+            </div>
+
+        </div>
+    </div>
+</body>
+
+</html>
