@@ -41,8 +41,9 @@
             images = reader.result
         }
 
-         reader.readAsDataURL(file);
+        reader.readAsDataURL(file);
     };
+
 
     $(document).ready(function() {
         $('#add').on('click', function(event) {
@@ -60,50 +61,7 @@
             })
             .done(function(data) {
                 if(data.flag=='0'){
-               $("#new_product_name").html(data.name);
-               $("#new_product_price").html(data.price);
-               $("#new_product_des").html(data.des);
-               $("#new_product_cat").html(data.cat);
-               $("#new_product_stock").html(data.stock);
-               $("#new_product_image").attr("src", data.image);
-               $("#new_product_buy").html('0');
-               $("#new_product").show(); 
-               $("#new_product").attr("id", data.name+"_product");
-               $("#new_product_price").attr("id", data.name+"_product_price");
-               $("#new_product_name").attr("id", data.name+"_product_name");
-               $("#new_product_cat").attr("id", data.name+"_product_cat");
-               $("#new_product_stock").attr("id", data.name+"_product_stock");
-               $("#new_product_image").attr("id", data.name+"_product_image");
-               $("#new_product_buy").attr("id", data.name+"_product_buy");
-               $("#new_product_des").attr("id", data.name+"_product_des");
-               var html = "<tr onclick='show_hide_row(\""+data.name+"\");' id='new_product' style='display: none;'>\
-                <td class='shoping__cart__item'>\
-                    <img id='new_product_image' src='' alt=''>\
-                    <h5 id='new_product_name'></h5>\
-                </td>\
-                <td class='shoping__cart__price' id='new_product_cat'>\
-                </td>\
-                <td class='shoping__cart__price' id='new_product_price'>\
-                </td>\
-                <td class='shoping__cart__price' id='new_product_stock'>\
-                </td>\
-                <td class='shoping__cart__price' id='new_product_buy'>\
-                </td>\
-                <td class='shoping__cart__item__close'>\
-                    <span class='fa fa-close'></span>\
-                </td>\
-            </tr>\
-            <tr id='"+data.name+"' class='shoping__cart__price hidden_row ftco-animate'>\
-                <td colspan=4 id='new_product_des'></td>\
-                <td class='shoping__cart__item__price'>\
-                    <a href='#hidden_row11' onclick='show_hide_row('hidden_row11');'>\
-                        <button  class='primary-btn cart-btn' type='submit' name='wow'>\
-                            Edit\
-                        </button>\
-                    </a>\
-                </td>\
-            </tr>";
-               document.getElementById("table_body").innerHTML += html;
+                    $("#new_product_row").replaceWith(data.html);
                 }
                 else{
                     $("#already_exist").show();
@@ -115,6 +73,89 @@
             event.preventDefault();
         });
     });
+
+
+    $(document).ready(function() {
+        $('.bedit').on('click', function(event) {
+            $.ajax({
+                data : {
+                    name : $(this).attr('value'),
+                },
+                type : 'POST',
+                url : '/pedit',
+            })
+            .done(function(data) {
+                $('#image_edit').attr('src',data.img);
+                $('#name_edit').html(data.name);
+                $('#des_edit').html(data.des);
+                $('#price_edit').attr('value',data.price);
+                $('#stock_edit').attr('value',data.stock);
+                $('#cat_edit').attr('value',data.cat);
+                
+            });
+            event.preventDefault();
+        });
+    });
+
+
+    var images33;
+    var loadFile2 = function(event) {
+        var file = $("#image33").get(0).files[0];
+        var reader = new FileReader();
+        reader.onload = function(){
+            $("#image_edit").attr("src", reader.result);
+            images33 = reader.result
+        }
+
+         reader.readAsDataURL(file);
+    };
+
+
+    $(document).ready(function() {
+        $('#update').on('click', function(event) {
+            $.ajax({
+                data : {
+                    name : $('#name_edit').html(),
+                    price : $('#price_edit').val(),
+                    cat : $('#cat_edit').val(),
+                    des : $('#des_edit').val(),
+                    stock : $('#stock_edit').val(),
+                    image: images33
+                },
+                type : 'POST',
+                url : '/update_product'
+            })
+            .done(function(data) {
+                $('#'+data.name+'_image').attr('src',data.img);
+                $('#'+data.name+'_name').html(data.name);
+                $('#'+data.name+'_des').html(data.des);
+                $('#'+data.name+'_price').html(data.price);
+                $('#'+data.name+'_stock').html(data.stock);
+                $('#'+data.name+'_cat').html(data.cat);
+                
+            });
+            event.preventDefault();
+        });
+    });
+
+    $(document).ready(function() {
+        $('.remove_row').on('click', function(event) {
+            $.ajax({
+                data : {
+                    name : $(this).attr('value'),
+                },
+                type : 'POST',
+                url : '/product_remove',
+            })
+            .done(function(data) {
+                $('.'+data.name).remove();
+                $('#'+data.name).remove();
+                
+            });
+            event.preventDefault();
+        });
+    });
+
 </script>
 
 <body>
@@ -163,69 +204,44 @@
                             </thead>
                             <tbody id="table_body">
                             {% for i in range(length) %}
-                                <tr onclick="show_hide_row('{{pname[i]}}');">
+                                <tr class="{{pname[i]}}" onclick="show_hide_row('{{pname[i]}}');">
                                     <td class="shoping__cart__item">
-                                        <img src="{{image[i]}}" alt="">
-                                        <h5>{{pname[i]}}</h5>
+                                        <img id="{{pname[i]}}_image" src="{{image[i]}}" alt="">
+                                        <h5 id="{{pname[i]}}_name">{{pname[i]}}</h5>
                                     </td>
-                                    <td class="shoping__cart__price">
+                                    <td id="{{pname[i]}}_cat" class="shoping__cart__price">
                                         {{cat[i]}}
                                     </td>
-                                    <td class="shoping__cart__price">
+                                    <td id="{{pname[i]}}_price" class="shoping__cart__price">
                                         {{price[i]}}
                                     </td>
-                                    <td class="shoping__cart__price">
+                                    <td id="{{pname[i]}}_stock" class="shoping__cart__price">
                                         {{stock[i]}}
                                     </td>
-                                    <td class="shoping__cart__price">
+                                    <td id="{{pname[i]}}_buy" class="shoping__cart__price">
                                         {{buyers[i]}}
                                     </td>
                                     <td class="shoping__cart__item__close">
-                                        <span class="fa fa-close"></span>
+                                        <span >
+                                            <button class="fa fa-close remove_row" value="{{pname[i]}}">
+                                            </button>
+                                        </span>
                                     </td>
                                 </tr>
                                 <tr id="{{pname[i]}}" class="shoping__cart__price hidden_row ftco-animate">
-                                    <td colspan=4>{{pdes[i]}}</td>
+                                    <td colspan=4 id="{{pname[i]}}_des">{{pdes[i]}}</td>
                                     <td class="shoping__cart__item__price">
-                                        <a href="#hidden_row11" onclick="show_hide_row('hidden_row11');">
-                                            <button  class="primary-btn cart-btn" type="submit" name="wow">
+                                        <a href="#hidden_row12" onclick="show_hide_row('hidden_row12');">
+                                            <button class="primary-btn cart-btn bedit" value="{{pname[i]}}" type="submit" name="wow">
                                                 Edit
                                             </button>
                                         </a>
                                     </td>
                                 </tr>
                                 {% endfor %}
-                                <tr onclick="show_hide_row('hidden_row4');" id="new_product" style="display: none;">
-                                    <td class="shoping__cart__item">
-                                        <img id="new_product_image" src="" alt="">
-                                        <h5 id="new_product_name"></h5>
-                                    </td>
-                                    <td class="shoping__cart__price" id="new_product_cat">
-                                        
-                                    </td>
-                                    <td class="shoping__cart__price" id="new_product_price">
-                                        
-                                    </td>
-                                    <td class="shoping__cart__price" id="new_product_stock">
-                                        
-                                    </td>
-                                    <td class="shoping__cart__price" id="new_product_buy">
-                                        
-                                    </td>
-                                    <td class="shoping__cart__item__close">
-                                        <span class="fa fa-close"></span>
-                                    </td>
-                                </tr>
-                                <tr id="hidden_row4" class="shoping__cart__price hidden_row ftco-animate">
-                                    <td colspan=4 id="new_product_des"></td>
-                                    <td class="shoping__cart__item__price">
-                                        <a href="#hidden_row11" onclick="show_hide_row('hidden_row11');">
-                                            <button  class="primary-btn cart-btn" type="submit" name="wow">
-                                                Edit
-                                            </button>
-                                        </a>
-                                    </td>
-                                </tr>
+                            </tbody>
+                            <tbody id="new_product_row">
+
                             </tbody>
                         </table>
                     </div>
@@ -271,6 +287,47 @@
                                     <td class="shoping__cart__item__price">
                                         <button class="primary-btn cart-btn" onclick="show_hide_row('hidden_row11');" type="submit" id="add" name="wow">
                                             Add
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="shoping-cart spad">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 ftco-animate">
+                    <div class="shoping__cart__table" id="">
+                        <table id="table_detail">
+                            <tbody>
+                                <tr id="hidden_row12" class="shoping__cart__price hidden_row ftco-animate">
+                                    <td colspan="4">
+                                        <label for="image33">
+                                            <input type="file" accept="image/*" name="image33" onchange="loadFile2(event)" id="image33" style="display:none;" />
+                                            <div class="example">
+                                                <img id="image_edit" src="https://ohram.org/image/utilities/empty_product.svg" />
+                                                <div class="contents">
+                                                    <div class="text">Change photo</div>
+                                                </div>
+                                            </div>
+                                        </label>
+                                    </td>
+                                    <td colspan=4>
+                                        <p style="border-radius: 3px;" type="text" id="name_edit" value="" placeholder="Item Name"></p> <br> <br>
+                                        <input style="border-radius: 3px;" type="text" id="price_edit"value="" placeholder="Price"> <br> <br>
+                                        <input style="border-radius: 3px;" type="text" id="stock_edit"value="" placeholder="In Stock"> <br> <br>
+                                        <input style="border-radius: 3px;" type="text" id="cat_edit"value="" placeholder="Category"> <br> <br>
+                                        <textarea style="border-radius: 3px;" name="description" id="des_edit"value="" placeholder="Description" cols="30" rows="6"></textarea><br> <br>
+                                        
+                                    </td>
+                                    <td class="shoping__cart__item__price">
+                                        <button class="primary-btn cart-btn" onclick="show_hide_row('hidden_row12');" type="submit" id="update" name="wow">
+                                            Update
                                         </button>
                                     </td>
                                 </tr>
