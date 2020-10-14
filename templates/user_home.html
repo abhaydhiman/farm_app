@@ -32,7 +32,11 @@
         <div class="container mt-5 pt-5">
             <div class="row mt-5 pt-5">
                 <div class="col-md-6 col-lg-6 ftco-animate">
+                    {% if image=='Null' %}
                     <img src="../static/images/edited_vali4.png" class="profileimage" alt="">
+                    {% else %}
+                    <img src="{{image}}" class="profileimage" alt="">
+                    {% endif %}
                 </div>
                 <div class="col-md-6 col-lg-6 ftco-animate">
                     <div class="overlay-content ml-1 pl-1">
@@ -250,6 +254,21 @@
                                     <div><a href="{{url_for('shop')}}" class="meta-chat"><span class="icon-institution"></span></a></div>
                                 </div>
                                 <h3 class="heading"><a href="{{url_for('shop')}}">{{t_lis[23]}}</a></h3>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 ftco-animate">
+                        <div class="blog-entry-2" data-aos-delay="100">
+                            <a href="{{url_for('disease_prediction')}}" class="block-20-1"
+                                style="background-image: url(../static/images/disease.jpg);">
+                            </a>
+                            <div class="text p-4">
+                                <div class="meta mb-3">
+                                    <div><a href="{{url_for('disease_prediction')}}">{{t_lis[62]}}</a></div>
+                                    <div><a href="{{url_for('disease_prediction')}}"></a></div>
+                                    <div><a href="{{url_for('disease_prediction')}}" class="meta-chat"><span class="icon-institution"></span></a></div>
+                                </div>
+                                <h3 class="heading"><a href="{{url_for('disease_prediction')}}">{{t_lis[63]}}</a></h3>
                             </div>
                         </div>
                     </div>
