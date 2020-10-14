@@ -14,7 +14,14 @@ from translator import text_translator, english_translator
 #__________________________________________________________________________________
 # Configuration Key Of firebase
 firebaseConfig = {
-    
+    "apiKey": "AIzaSyA8fPmhBUpiqpj_IV9pZQvZPUmVYD0XphU",
+    "authDomain": "the-farm-app-4015b.firebaseapp.com",
+    "databaseURL": "https://the-farm-app-4015b.firebaseio.com",
+    "projectId": "the-farm-app-4015b",
+    "storageBucket": "the-farm-app-4015b.appspot.com",
+    "messagingSenderId": "186366819148",
+    "appId": "1:186366819148:web:484a0bc6255b7be4bd6de9",
+    "measurementId": "G-DY7EK60ZK8"
 }
 
 # Init of Pyrebase
@@ -60,7 +67,7 @@ def msg_sender( given_phone_number = None , given_message = None ):
 
     payload = "sender_id=FSTSMS&message=" + message + "&language=english&route=p&numbers=" + str(phone_number)
     headers = {
-    'authorization': "",
+    'authorization': "KFtoB6GWnRhX2IYQkgyzqsUwf9JSN7VaiT1LAjeHuEmDMrd34PQZmUNxsL48nWuhiDC7zRwGVFBvMoaJ",
     'Content-Type': "application/x-www-form-urlencoded",
     'Cache-Control': "no-cache",
     }
@@ -95,7 +102,8 @@ def firebase_user_registerer(phone_number, password, name, lang, state, city, st
         'Language' : lang,
         'State' : state,
         'City' : city,
-        'Status': status
+        'Status': status,
+        'Image': 'Null'
     }
 
     result = firebase.post('/the-farm-app-4015b/Farmer:', Data)
@@ -135,7 +143,7 @@ def firebase_data_fetcher(phone_number):
 def weather_fetcher(city_name = None, state_name = None, lang = None):
     
     #type your API KEY Here.
-    api_key = ""
+    api_key = "a0b9cc010f855a1e70a2b59ea96b931f"
     base_url = "https://api.openweathermap.org/data/2.5/forecast?"
     #complete_url variable to store the complete_url address
     complete_url= base_url + "appid=" + api_key + "&q=" + city_name + "," + state_name + '&units=metric'
@@ -145,7 +153,7 @@ def weather_fetcher(city_name = None, state_name = None, lang = None):
     #json method of response object convert json format data into python format data
     x = response.json()
 
-    current_time = datetime.date.today() 
+    current_time = datetime.date.today()
     dt = []
     temp = []
     ma = []
@@ -233,7 +241,7 @@ def get_current_time():
     current_time = now.strftime("%H:%M") #created a string representing current time
     t = time.strptime(current_time, "%H:%M")
     timevalue_12hour = time.strftime( "%I:%M %p", t )
-    today = date.today() 
+    today = date.today()
     return timevalue_12hour, today
 
 
@@ -253,7 +261,7 @@ def loan_data_fetcher(phone_number):
             date_ls.append(date)
             time_ls.append(time)
             status_ls.append(status)
-            
+
     return date_ls, time_ls, status_ls
 
 
@@ -306,13 +314,13 @@ def insu_data_fetcher(phone_number):
             date_ls.append(date)
             time_ls.append(time)
             status_ls.append(status)
-            
+
     return date_ls, time_ls, status_ls
 
 
 def update_status(phone_number):
     data_list = firebase.get('the-farm-app-4015b/',None)
-    status = 'Farmer + Seller' 
+    status = 'Farmer + Seller'
     for data in data_list['Farmer:']:
         if data_list['Farmer:'][data]['Phone Number'] == str(phone_number):
             firebase.put('the-farm-app-4015b/Farmer:/'+data,'Status',status)
@@ -326,9 +334,9 @@ def product_data_sender(phone_number,name,des,price,in_Stock, category, image):
     data_list = firebase.get('the-farm-app-4015b/',None)
     for data in data_list['Products:']:
         if data_list['Products:'][data]['Registered Number'] == str(phone_number):
-             if name == data_list['Products:'][data]['Product Name']:
-                 flag = 1
-                 break
+            if name == data_list['Products:'][data]['Product Name']:
+                flag = 1
+                break
     if flag == 0:
         Data = {
         'Registered Number': phone_number,
@@ -370,6 +378,141 @@ def product_data_fetcher(phone_number):
             cat.append(cat1)
             buyers.append(buy)
             image.append(img)
-    return pname,pdes,price,stock,cat,image, buyers 
+    return pname,pdes,price,stock,cat,image, buyers
 
 
+def  product_data_fetcher2(phone_number,name):
+    data_list = firebase.get('the-farm-app-4015b/',None)
+    for data in data_list['Products:']:
+        if data_list['Products:'][data]['Registered Number'] == str(phone_number):
+            if str(name) == data_list['Products:'][data]['Product Name']:
+                price1 = data_list['Products:'][data]['Price']
+                des = data_list['Products:'][data]['Description']
+                stock1 = data_list['Products:'][data]['In Stock']
+                cat1 = data_list['Products:'][data]['Category']
+                buy = data_list['Products:'][data]['Buyers']
+                img = data_list['Products:'][data]['Image']
+                break
+    return price1,des,stock1,cat1,buy,img
+
+
+
+def product_data_updater(phone_number,name,price,category,des,in_Stock,image):
+    data_list = firebase.get('the-farm-app-4015b/',None)
+    for data in data_list['Products:']:
+        if data_list['Products:'][data]['Registered Number'] == str(phone_number):
+            if str(name) == data_list['Products:'][data]['Product Name']:
+                firebase.put('the-farm-app-4015b/Products:/'+data,'Price',price)
+                firebase.put('the-farm-app-4015b/Products:/'+data,'Description',des)
+                firebase.put('the-farm-app-4015b/Products:/'+data,'In Stock',in_Stock)
+                firebase.put('the-farm-app-4015b/Products:/'+data,'Category',category)
+                firebase.put('the-farm-app-4015b/Products:/'+data,'Image',image)
+                break
+
+
+
+
+def product_remover(phone_number, name):
+    data_list = firebase.get('the-farm-app-4015b/',None)
+    for data in data_list['Products:']:
+        if data_list['Products:'][data]['Registered Number'] == str(phone_number):
+            if str(name) == data_list['Products:'][data]['Product Name']:
+                firebase.delete('the-farm-app-4015b/Products:/',data)
+                break
+
+
+
+def all_product_fetcher():
+    data_list = firebase.get('the-farm-app-4015b/',None)
+    pname = []
+    pdes = []
+    price = []
+    stock = []
+    cat = []
+    image = []
+    buyers = []
+    for data in data_list['Products:']:
+        name = data_list['Products:'][data]['Product Name']
+        price1 = data_list['Products:'][data]['Price']
+        des = data_list['Products:'][data]['Description']
+        stock1 = data_list['Products:'][data]['In Stock']
+        cat1 = data_list['Products:'][data]['Category']
+        buy = data_list['Products:'][data]['Buyers']
+        img = data_list['Products:'][data]['Image']
+        pname.append(name)
+        pdes.append(des)
+        price.append(price1)
+        stock.append(stock1)
+        cat.append(cat1)
+        buyers.append(buy)
+        image.append(img)
+    unique_cat = set(cat)
+    return pname,pdes,price,stock,cat,image, buyers, unique_cat
+
+
+
+
+
+def buy_product_data(pname):
+    data_list = firebase.get('the-farm-app-4015b/',None)
+    for data in data_list['Products:']:
+        if str(pname) == data_list['Products:'][data]['Product Name']:
+            name = data_list['Products:'][data]['Product Name']
+            price1 = data_list['Products:'][data]['Price']
+            des = data_list['Products:'][data]['Description']
+            stock1 = data_list['Products:'][data]['In Stock']
+            cat1 = data_list['Products:'][data]['Category']
+            buy = data_list['Products:'][data]['Buyers']
+            img = data_list['Products:'][data]['Image']
+    return price1,des,stock1,cat1,buy,img
+
+
+
+
+
+
+def user_image_sender(phone_number,image):
+    data_list = firebase.get('the-farm-app-4015b/',None)
+    for data in data_list['Farmer:']:
+        if data_list['Farmer:'][data]['Phone Number'] == str(phone_number):
+            firebase.put('the-farm-app-4015b/Farmer:/'+data,'Image',image)
+            break
+
+
+
+def user_image_fetcher(phone_number):
+    data_list = firebase.get('the-farm-app-4015b/',None)
+    for data in data_list['Farmer:']:
+        if data_list['Farmer:'][data]['Phone Number'] == str(phone_number):
+            image = data_list['Farmer:'][data]['Image']
+            break
+
+    return image
+
+
+
+# To send the data of the product to user cart
+def user_cart_data_sender(phone_number, pname, amount):
+    data = {
+    'Phone Number': phone_number,
+    'Product Name': pname,
+    'Amount' : amount
+    }
+
+    result = firebase.post('/the-farm-app-4015b/Cart:', data)
+
+
+
+
+# To Fetch the user cart data
+def user_cart_data_fetcher(phone_number):
+    data_list = firebase.get('the-farm-app-4015b/',None)
+    pname = []
+    amount_lis = []
+    for data in data_list['Cart:']:
+        if data_list['Cart:'][data]['Phone Number'] == str(phone_number):
+            name = data_list['Cart:'][data]['Product Name']
+            amount = data_list['Cart:'][data]['Amount']
+            pname.append(name)
+            amount_lis.append(amount)
+    return pname, amount_lis
