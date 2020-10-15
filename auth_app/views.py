@@ -111,9 +111,9 @@ def submit_signup_details(request):
         request.session['phone_number_of_user'] = request.POST['Phone_number']
         request.session['name_of_user']         = request.POST['name']
         request.session['STATUS']               = request.POST['status']
-
-        context = context_generator(for_page = 'submit_signup_details'  , 
-                                    language_selected = language_selected , 
+        request.session['dp']                   = "https://firebasestorage.googleapis.com/v0/b/testing-54b5b.appspot.com/o/profile_pics%2Fdefault_dp.png?alt=media"
+        context = context_generator(for_page = 'submit_signup_details'  ,
+                                    language_selected = language_selected ,
                                     texts_to_be_added = [['generated_otp' , OTP_generator()]] )
 
         # msg_sender( given_phone_number = request.POST['Phone_number'] , given_message = str(context['generated_otp']) )
