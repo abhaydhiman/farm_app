@@ -19,10 +19,14 @@ from user_home import views
 app_name = 'user_home'
 
 urlpatterns = [
-    path('' , views.home_page , name = 'home_page') , 
-    path('weather' , views.weather , name = 'weather') , 
-    path('shop_now' , views.shop_now , name = 'shop_now') , 
+    path('' , views.home_page , name = 'home_page') ,
+    path('weather' , views.weather , name = 'weather') ,
+    path('shop_now' , views.shop_now , name = 'shop_now') ,
     path('financial' , views.financial , name = 'financial'),
     path('profile' , views.profile , name = 'profile') ,
-    path('change_dp' , views.profile , name = 'change_dp')
+    path('change_dp' , views.profile , name = 'change_dp'),
+    path('loan' , views.loan , name = 'loan'),
+    path('submit_loan_form' , views.submit_loan_form , name = 'submit_loan_form'),
+    path('insurance' , views.insurance , name = 'insurance'),
+    path('submit_insurance_form' , views.submit_insurance_form , name = 'submit_insurance_form'),
 ]
