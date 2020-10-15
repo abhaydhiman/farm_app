@@ -2,6 +2,7 @@ from modules.imp_funcs import firebaseConfig
 from pyrebase import pyrebase
 firebase = pyrebase.initialize_app(firebaseConfig)
 auth = firebase.auth()
+from modules.imp_funcs import translator
 import sys
 
 
@@ -193,7 +194,7 @@ class USER(FirebaseManager):
         generated_otp        = OTP_generator()
         phone_number_of_user = phone_number
         # * msg_sender(given_phone_number = phone_number , given_message=str(generated_otp))
-        print("oooo" , generated_otp)        
+        print("oooo" , generated_otp)
         return  generated_otp
         
     @classmethod
@@ -207,6 +208,120 @@ class USER(FirebaseManager):
     def UpdateUserCart(cls , phone_number = None , Cart = None):
         FirebaseManager.SetChild('General_User' , phone_number  , data = Cart )
 
+    @classmethod
+    def GetLangOfUser(cls , phone_number = None):
+        return FirebaseManager.GetChild('General_User' , phone_number , 'language')
+
+    @classmethod
+    def GetTranslatedTexts(cls , phone_number = None , for_page = None):
+        language = USER.GetLangOfUser(phone_number = phone_number)
+        return dict(FirebaseManager.GetChild('pages_text' , for_page , language))
+
+    @classmethod
+    def submit_loan_form(cls , phone_number = None , data = None):
+        if data is not None:
+            loans = FirebaseManager.GetChild('General_User' , phone_number , 'loan_data')
+            if loans is not None:
+                new_loan_index = len(loans)
+            else:
+                new_loan_index = 1
+            FirebaseManager.SetChild('General_User' , phone_number , 'loan_data' , 'LoanForm ' + str(new_loan_index) , data=data )
+
+    @classmethod
+    def submit_insurance_form(cls , phone_number = None , data = None):
+        if data is not None:
+            insurances = FirebaseManager.GetChild('General_User' , phone_number , 'insurance_data')
+            if insurances is not None:
+                new_insurance_index = len(insurances)
+            else:
+                new_insurance_index = 1
+            FirebaseManager.SetChild('General_User' , phone_number , 'insurance_data' , 'InsuranceForm ' + str(new_insurance_index) , data=data )
+
+    @classmethod
+    def translate_dic(cls , dic = None , to_langg = None):
+        return {key:translator(text , to_langg = to_langg) for key , text in dic.items()}
+
+    @classmethod
+    def GetProfilePageData(cls , phone_number = None):
+        user_data = dict(FirebaseManager.GetChild('General_User' , phone_number))
+
+        language = user_data['language']
+
+        profile_data = {}
+        profile_data['name']         = user_data['name']
+        profile_data['phone_number'] = user_data['phone_number']
+        profile_data['status']       = user_data['status']
+        profile_data['location']     = user_data['state'] + ','  + user_data['city']
+        profile_data['dp']           = user_data['dp']
+
+        profile_data = USER.translate_dic(dic=profile_data , to_langg=language)
+
+        loan_and_insurance_lis = []
+
+        if 'loan_data' in user_data.keys():
+            for data in user_data['loan_data'].values():
+                data = {key:value for key , value in data.items() if key  in ('date' , 'time' , 'STATUS')}
+                data['form_type'] = 'loan'
+                data['form_type'] = translator( data['form_type'] , to_langg = language)
+                data['STATUS'] = translator( data['STATUS'] , to_langg = language)
+                loan_and_insurance_lis.append(data)
+
+        
+        if 'insurance_data' in user_data.keys():
+            for data in user_data['insurance_data'].values():
+                data = {key:value for key , value in data.items() if key  in ('date' , 'time' , 'STATUS')}
+                data['form_type'] = 'insurance'
+                data['form_type'] = translator( data['form_type'] , to_langg = language)
+                data['STATUS'] = translator( data['STATUS'] , to_langg = language)
+                loan_and_insurance_lis.append(data)
+
+
+        profile_data['loan_and_insurance_data'] = loan_and_insurance_lis
+        return profile_data
+
+    @classmethod
+    def Base64ImageDecoder(cls , base_64_encoded_image = None):
+        import base64
+
+        base_64_encoded_image = base_64_encoded_image.split(',')[1]
+
+        pad = len(base_64_encoded_image)%4
+        base_64_encoded_image += "="*pad
+
+        data =  base_64_encoded_image.replace(' ', '+')
+        imgdata = base64.b64decode(data)
+        filename = 'new_dp.png'
+        with open(filename, 'wb') as f:
+            f.write(imgdata)
+
+    @classmethod
+    def SimpleImageUploader(cls , path_on_local = None , path_on_storage = None , phone_number=None):
+        # Connecting to the firebase storage
+        storage = firebase.storage()
+        storage.child(path_on_storage).put(path_on_local)
+        return storage.child('profile_pics/' + str(phone_number) + '.png').get_url(None) # Returning the URL of uploaded product image
+
+
+    @classmethod
+    def Base64ImageUploader(cls , base_64_encoded_image = None , phone_number = None):
+        import sys
+        USER.Base64ImageDecoder(base_64_encoded_image = base_64_encoded_image)
+
+        path_on_local   = sys.path[0] + '\\new_dp.png'
+        path_on_storage = 'profile_pics/' + str(phone_number) + '.png'
+
+        return USER.SimpleImageUploader(path_on_local = path_on_local , path_on_storage = path_on_storage , phone_number=phone_number) # Returning the URL of uploaded product image
+
+    @classmethod
+    def update_dp(cls , phone_number = None , image = None):
+        new_dp = USER.Base64ImageUploader(base_64_encoded_image=image , phone_number = phone_number)
+        FirebaseManager.SetChild('General_User' , phone_number , 'dp' , data = new_dp)
+
+    def UpdateProductData(cls , product_id = None , data = None):
+        if data['image'] != "https://ohram.org/image/utilities/empty_product.svg":
+            data['image'] = SHOP.Base64ImageUploader(base_64_encoded_image = data['image'] , product_id = product_id)
+
+        FirebaseManager.SetChild('Products' , product_id , data = data)
 
 class SHOP(FirebaseManager):
     @classmethod
@@ -224,7 +339,9 @@ class SHOP(FirebaseManager):
 
     @classmethod
     def GetAllProducts(cls):
-        return dict(FirebaseManager.GetChild('Products'))
+        Products = dict(FirebaseManager.GetChild('Products'))
+        Products = {product_id:data for product_id , data in Products.items() if not isinstance(data , int)}
+        return Products
 
     @classmethod
     def GetUserCart(cls , phone_number = None):
@@ -237,6 +354,7 @@ class SHOP(FirebaseManager):
     @classmethod
     def GetListOfCategories(cls):
         return FirebaseManager.GetChild('categories') # Returns a list of all categories 
+        
 
     @classmethod
     def UpdateUserCart(cls , phone_number = None ,  cart = None):
@@ -290,12 +408,20 @@ class SHOP(FirebaseManager):
 
         return Products_list
 
+
+
     @classmethod
     def UpdateCategories(cls , new_cat = None):
-        categories_present = SHOP.GetListOfCategories() 
-        if new_cat not in categories_present:
-            categories_present.append(new_cat)
-        FirebaseManager.SetChild('categories' , data = categories_present)
+        if new_cat is not None:
+            categories_present = SHOP.GetListOfCategories() 
+            if new_cat not in categories_present:
+                categories_present.append(new_cat)
+            FirebaseManager.SetChild('categories' , data = categories_present)
+        else:
+            Products = SHOP.GetAllProducts()
+            updated_categories = {data['category'] for product_id , data in Products.items()}
+            FirebaseManager.SetChild('categories' , data = list(updated_categories))
+
 
 
 
@@ -367,6 +493,12 @@ class SHOP(FirebaseManager):
         FirebaseManager.SetChild('Products' , product_id , data = 0) # Setting the product details to 0 
         FirebaseManager.SetChild('General_User' , phone_number , 'SellerCart' , product_id , data = [] ) # Removing the product form seller cart
 
+    @classmethod
+    def FilterProductsByCategory(cls , cat_req = None):
+        Products = SHOP.GetAllProducts()
+        Products = [ data for product_id , data in Products.items() ]
+        return [product for product in Products if product['category'] == cat_req]
+
 phone_number = 9306219945
 # SHOP.ellerAddsNewProduct(phone_number = phone_number , prod_data = {'naam' : 'kam hi h' , 'wow' : 'cool'})
 # new = SHOP.GetSellerCartProductsDetails(phone_number=phone_number)
@@ -383,3 +515,13 @@ phone_number = 9306219945
 # print()
 # print(FirebaseManager.GetChild('Products'))
 # SHOP.UpdateCategories(new_cat = 'yank')
+
+
+# print(SHOP.FilterProductsByCategory('ooterikiii'))
+
+# translated_texts = USER.GetTranslatedTexts(phone_number = phone_number , for_page = 'for_loan_page')
+# new__dic = {'csrfmiddlewaretoken': ['sZ5XGkGvs2VqAl8LK99EneHr7TARFAq53YCwpMjtAJ9oAMF5tMleMbVsqWkmJhEq'], 'first_name': ['ayush'], 'last_name': ['Malik'], 'DOB': ['2001-10-04'], 'phone_number': ['9306219945'], 'email': ['ayushmalik779@gmail.com'], 'gender': ['Male'], 'maritial_status': ['Single'], 'annual_income': ['1'], 'permanent_address': ['111'], 'insurance_type': ['type3'], 'land_area': ['1'], 'total_land_area': ['1'], 'insurance_required_for': ['okiee'], 'is_there_a_criminal_record_on_you': ['Yes'], 'Is_there_pending_criminal_case_on_you': ['Yes'], 'have_you_been_blacklisted': ['Yes'], 'if_yes__amount': ['10'], 'Have_you_signed_a_guarantee_or_surety_for_an_entity': ['Yes']}
+# USER.submit_loan_form(phone_number = phone_number , data=new__dic)
+
+# print(USER.GetProfilePageData(phone_number = phone_number))
+# print(USER.translate_dic({'Ayush':'Ayush' , 'Malik': 'Malik'} , to_langg='hi'))
