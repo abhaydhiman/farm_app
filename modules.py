@@ -14,14 +14,7 @@ from translator import text_translator, english_translator
 #__________________________________________________________________________________
 # Configuration Key Of firebase
 firebaseConfig = {
-    "apiKey": "AIzaSyA8fPmhBUpiqpj_IV9pZQvZPUmVYD0XphU",
-    "authDomain": "the-farm-app-4015b.firebaseapp.com",
-    "databaseURL": "https://the-farm-app-4015b.firebaseio.com",
-    "projectId": "the-farm-app-4015b",
-    "storageBucket": "the-farm-app-4015b.appspot.com",
-    "messagingSenderId": "186366819148",
-    "appId": "1:186366819148:web:484a0bc6255b7be4bd6de9",
-    "measurementId": "G-DY7EK60ZK8"
+    
 }
 
 # Init of Pyrebase
@@ -67,7 +60,7 @@ def msg_sender( given_phone_number = None , given_message = None ):
 
     payload = "sender_id=FSTSMS&message=" + message + "&language=english&route=p&numbers=" + str(phone_number)
     headers = {
-    'authorization': "KFtoB6GWnRhX2IYQkgyzqsUwf9JSN7VaiT1LAjeHuEmDMrd34PQZmUNxsL48nWuhiDC7zRwGVFBvMoaJ",
+    'authorization': "",
     'Content-Type': "application/x-www-form-urlencoded",
     'Cache-Control': "no-cache",
     }
@@ -143,7 +136,7 @@ def firebase_data_fetcher(phone_number):
 def weather_fetcher(city_name = None, state_name = None, lang = None):
     
     #type your API KEY Here.
-    api_key = "a0b9cc010f855a1e70a2b59ea96b931f"
+    api_key = ""
     base_url = "https://api.openweathermap.org/data/2.5/forecast?"
     #complete_url variable to store the complete_url address
     complete_url= base_url + "appid=" + api_key + "&q=" + city_name + "," + state_name + '&units=metric'
