@@ -7,7 +7,8 @@ from modules import opt_generator, msg_sender, firebase_user_checker, firebase_u
 firebase_user_loger, firebase_data_fetcher, weather_fetcher, day_fetcher, loan_data, get_current_time,\
 loan_data_fetcher, insu_data, insu_data_fetcher, update_status, product_data_sender,product_data_fetcher,\
 product_data_fetcher2, product_data_updater, product_remover, user_image_sender, user_image_fetcher,\
-all_product_fetcher, buy_product_data, user_cart_data_sender, user_cart_data_fetcher
+all_product_fetcher, buy_product_data, user_cart_data_sender, user_cart_data_fetcher,leaf_disease_predictor,\
+image_decoder
 
 
 # Importing Functions For translation from translator.py
@@ -541,7 +542,9 @@ def buy_now():
 @app.route('/disease_prediction', methods=['POST','GET'])
 def disease_prediction():
     phone_number = session['phone_number']
-    return render_template('disease_prediction.html')
+    leaf_name = ['Tomato','Cotton','Apple','Blueberry','Cherry','Corn','Grapes','Orange','Peach',\
+        'Pepperbell','Potato','Raspberry','Soybean','Squash-Powdery','Strawberry']
+    return render_template('disease_prediction.html', leaf_name = leaf_name)
 
 
 
@@ -549,10 +552,13 @@ def disease_prediction():
 # To Show the Different categories of Disease Cards based on the Main Card Clicked
 @app.route('/disease', methods=['POST','GET'])
 def disease():
-    phone_number = session['phone_number']
     name = request.form['name']
-    print(name)
-    return jsonify({'name':name})
+    image = request.form['image']
+    image = image_decoder(image)
+    prediction = ""
+    if name == "Tomato_leaf":
+        prediction = leaf_disease_predictor(image)
+    return jsonify({'prediction':prediction})
 
 
 
