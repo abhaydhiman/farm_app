@@ -173,3 +173,18 @@ text-align: center;
     display: none
     }
     }
+
+#predict{
+    border-radius: 8px;
+    background-color:rgb(31, 185, 121);
+    padding:10px;
+    border: 1px #323262;
+    color: azure;
+    font-size: large;
+    font-weight: 800;
+}
+#predict:hover{
+    transform: scale(1.05);
+    cursor: pointer;
+    box-shadow: 0 8px 16px  0 rgba(0,0,0,0.6);
+}
