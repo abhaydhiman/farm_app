@@ -8,13 +8,23 @@ import calendar
 import time
 import pyrebase
 from firebase import firebase
+import os
+import cv2
+from io import BytesIO
+import base64
+import numpy as np
+from PIL import Image
+from keras.models import Sequential
+from keras.layers import Dense
+from keras.models import model_from_json
+from matplotlib import pyplot as plt
 from translator import text_translator, english_translator
 
 
 #__________________________________________________________________________________
 # Configuration Key Of firebase
 firebaseConfig = {
-    
+   
 }
 
 # Init of Pyrebase
@@ -25,21 +35,30 @@ auth = pirebase.auth()
 firebase = firebase.FirebaseApplication("https://the-farm-app-4015b.firebaseio.com/", None)
 
 
+# Loading the Model for disease prediction
+json_file = open('model_num.json', 'r')
+loaded_model_json = json_file.read()
+json_file.close()
+loaded_model = model_from_json(loaded_model_json)
+# Loading the weights
+loaded_model.load_weights("model_num.h5")
+
+
 
 #___________________________________________________________________________________________
 # Function For Generating OTP. It returns a OTP Of length 6
 def opt_generator():
 
-    # for nuemeric OTP 
+    # for nuemeric OTP
     corpus= "0123456789"
-    generate_OTP = "" 
+    generate_OTP = ""
 
     size = 6 # length of generated OTP
 
-    length = len(corpus) 
+    length = len(corpus)
 
-    for i in range(size) : 
-        generate_OTP += corpus[math.floor(random.random() * length)] 
+    for i in range(size) :
+        generate_OTP += corpus[math.floor(random.random() * length)]
     return generate_OTP
 
 
@@ -134,7 +153,7 @@ def firebase_data_fetcher(phone_number):
 #___________________________________________________________________________________________
 # This function fetches all the weather information according to the given location
 def weather_fetcher(city_name = None, state_name = None, lang = None):
-    
+
     #type your API KEY Here.
     api_key = ""
     base_url = "https://api.openweathermap.org/data/2.5/forecast?"
@@ -260,7 +279,7 @@ def loan_data_fetcher(phone_number):
 
 
 #___________________________________________________________________________________________
-# This Function sends Insurance form data to the firebase as per registered User 
+# This Function sends Insurance form data to the firebase as per registered User
 def insu_data(name,name2 ,dob ,number ,email ,gender ,maritial, income ,address ,insu_type,area ,total_area,des,c_record ,c_record2 ,blacklist ,sign ,amount_blacklist ,phone_number, time, date, status):
     loan_type = english_translator(insu_type)
     Data = {
@@ -311,6 +330,9 @@ def insu_data_fetcher(phone_number):
     return date_ls, time_ls, status_ls
 
 
+
+#_____________________________________________________________________________________________
+# This function  updates the status of the user from farmer to farmer+seller
 def update_status(phone_number):
     data_list = firebase.get('the-farm-app-4015b/',None)
     status = 'Farmer + Seller'
@@ -322,6 +344,8 @@ def update_status(phone_number):
 
 
 
+#_____________________________________________________________________________________________
+# This function sends the product data to the firebase
 def product_data_sender(phone_number,name,des,price,in_Stock, category, image):
     flag = 0
     data_list = firebase.get('the-farm-app-4015b/',None)
@@ -346,6 +370,8 @@ def product_data_sender(phone_number,name,des,price,in_Stock, category, image):
 
 
 
+#__________________________________________________________________________________________________________________________
+# This function fetches the product data fors eller page for a particular seller, the products he is currently selleing
 def product_data_fetcher(phone_number):
     data_list = firebase.get('the-farm-app-4015b/',None)
     pname = []
@@ -374,6 +400,10 @@ def product_data_fetcher(phone_number):
     return pname,pdes,price,stock,cat,image, buyers
 
 
+
+
+#_____________________________________________________________________________________________
+# This function fetches the product data of a particular product for editing
 def  product_data_fetcher2(phone_number,name):
     data_list = firebase.get('the-farm-app-4015b/',None)
     for data in data_list['Products:']:
@@ -390,6 +420,9 @@ def  product_data_fetcher2(phone_number,name):
 
 
 
+
+#_____________________________________________________________________________________________
+# This function updates the data for a product if user changes the data
 def product_data_updater(phone_number,name,price,category,des,in_Stock,image):
     data_list = firebase.get('the-farm-app-4015b/',None)
     for data in data_list['Products:']:
@@ -405,6 +438,8 @@ def product_data_updater(phone_number,name,price,category,des,in_Stock,image):
 
 
 
+#_____________________________________________________________________________________________
+# This function removes aparticular product from the firebase
 def product_remover(phone_number, name):
     data_list = firebase.get('the-farm-app-4015b/',None)
     for data in data_list['Products:']:
@@ -415,6 +450,8 @@ def product_remover(phone_number, name):
 
 
 
+#_____________________________________________________________________________________________
+# This function fetches all the products from firebase
 def all_product_fetcher():
     data_list = firebase.get('the-farm-app-4015b/',None)
     pname = []
@@ -446,6 +483,8 @@ def all_product_fetcher():
 
 
 
+#_____________________________________________________________________________________________
+# This function fetches the data from firebase for the product the user wants to buy
 def buy_product_data(pname):
     data_list = firebase.get('the-farm-app-4015b/',None)
     for data in data_list['Products:']:
@@ -462,8 +501,8 @@ def buy_product_data(pname):
 
 
 
-
-
+#_____________________________________________________________________________________________
+# This function sends the user image to the firebase
 def user_image_sender(phone_number,image):
     data_list = firebase.get('the-farm-app-4015b/',None)
     for data in data_list['Farmer:']:
@@ -473,6 +512,8 @@ def user_image_sender(phone_number,image):
 
 
 
+#_____________________________________________________________________________________________
+# This function fetches the image of the user
 def user_image_fetcher(phone_number):
     data_list = firebase.get('the-farm-app-4015b/',None)
     for data in data_list['Farmer:']:
@@ -484,6 +525,7 @@ def user_image_fetcher(phone_number):
 
 
 
+#_____________________________________________________________________________________________
 # To send the data of the product to user cart
 def user_cart_data_sender(phone_number, pname, amount):
     data = {
@@ -496,7 +538,7 @@ def user_cart_data_sender(phone_number, pname, amount):
 
 
 
-
+#_____________________________________________________________________________________________
 # To Fetch the user cart data
 def user_cart_data_fetcher(phone_number):
     data_list = firebase.get('the-farm-app-4015b/',None)
@@ -509,3 +551,50 @@ def user_cart_data_fetcher(phone_number):
             pname.append(name)
             amount_lis.append(amount)
     return pname, amount_lis
+
+
+
+
+
+#_____________________________________________________________________________________________
+# This function is used to convert base64 to image.
+def image_decoder(image):
+    encoded_data = image.split(',')[1]
+    nparr = np.fromstring(base64.b64decode(encoded_data), np.uint8)
+    img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+    return img
+
+
+
+#_____________________________________________________________________________________________
+# This function is used to classify the disease for a leaf for image uploaded by user
+def leaf_disease_predictor(img):
+    # Reading the image
+    # Converting image to array
+    img = cv2.resize(img, (224, 224)).astype(np.float32)
+    img = np.expand_dims(img, axis=0)
+    # making the prediction
+    prediction = loaded_model.predict(img)
+    if np.argmax(prediction) == 0:
+        result = "Bacterial_spot"
+    elif np.argmax(prediction) == 1:
+        result = "Early_Blight"
+    elif np.argmax(prediction) == 2:
+        result = "Late Blight"
+    elif np.argmax(prediction) == 3:
+        result = "Leaf Mold"
+    elif np.argmax(prediction) == 4:
+        result = "Septoria Leaf Mold"
+    elif np.argmax(prediction) == 5:
+        result = "Spider mites"
+    elif np.argmax(prediction) == 6:
+        result = "Target Spot"
+    elif np.argmax(prediction) == 7:
+        result = "Yellow Leaf Curl Virus"
+    elif np.argmax(prediction) == 8:
+        result = "Mosaic Virus"
+    else:
+        result = "Healthy"
+    return result
+
+
