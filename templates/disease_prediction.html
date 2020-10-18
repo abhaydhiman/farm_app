@@ -39,17 +39,38 @@
     </script>
 
     <script>
+
+    var images;
+    var loadFile = function(event) {
+        var file = $("input[type=file]").get(0).files[0];
+        var reader = new FileReader();
+        reader.onload = function(){
+            $("#image2").attr("src", reader.result);
+            $("#image2").css("display","block");
+            images = reader.result
+        }
+
+        reader.readAsDataURL(file);
+    };
+
         $(document).ready(function() {
-            $('#leaf').on('click', function(event) {
+            $('.card').on('click', function(event) {
+                $('#predict').attr('value',$(this).attr('id'))
+            });
+        });
+
+        $(document).ready(function() {
+            $('#predict').on('click', function(event) {
                 $.ajax({
                     data : {
-                        name : "hello",
+                        name : $(this).attr('value'),
+                        image: images,
                     },
                     type : 'POST',
                     url : '/disease'
                 })
                 .done(function(data) {
-                    alert(data.name)
+                    $('#output').html(data.prediction);
                 });
                 event.preventDefault();
             });
@@ -113,9 +134,9 @@
                         </div>
                     </div>
 
-                    <div class="col-md-4 ftco-animate" id="seed" onclick="show_hide_row('hidden_row11');">
+                    <div class="col-md-4 ftco-animate" id="seed" onclick="show_hide_row('hidden_row12');">
                         <div class="blog-entry-2" data-aos-delay="100">
-                            <a href="#hidden_row11" class="block-20-1"
+                            <a href="#hidden_row12" class="block-20-1"
                                 style="background-image: url(../static/images/seed_disease.jpg);">
                             </a>
                             <div class="text p-4">
@@ -128,9 +149,9 @@
                         </div>
                     </div>
 
-                    <div class="col-md-4 ftco-animate" id="crop" onclick="show_hide_row('hidden_row11');">
+                    <div class="col-md-4 ftco-animate" id="crop" onclick="show_hide_row('hidden_row13');">
                         <div class="blog-entry-2" data-aos-delay="100">
-                            <a href="#hidden_row11" class="block-20-1"
+                            <a href="#hidden_row13" class="block-20-1"
                                 style="background-image: url(../static/images/crop.jpg);">
                             </a>
                             <div class="text p-4">
@@ -157,32 +178,73 @@
     <section class="ftco-section-parallax" >
         <div class="parallax-img align-items-center" style="padding-top: 20px;">
             <div class="" id="hidden_row11" style="display: none;">
-                <h1>Small Cards</h1>
+                <h1>Leaf Disease Prediction</h1>
                 <div class="main" >
-                    <div class="card" onclick="show_hide_row('hidden_row12');">
-                        <a href="#hidden_row12">
-                            <img src="../static/images/sunny_cloudy.jpg" alt="" style="width:100%; height: 150px; border-top-left-radius:15px;border-top-right-radius:15px">
+                    {% for i in range(15) %}
+                    <div class="card" id="{{leaf_name[i]}}_leaf" onclick="show_hide_row('hidden_row15');">
+                        <a href="#hidden_row15">
+                            <img src="../static/images/leaf_disease/{{leaf_name[i]}}_leaf.jfif" alt="" style="width:100%; height: 150px; border-top-left-radius:15px;border-top-right-radius:15px">
                             <div class="content">
-                                <h6><strong>Content</strong></h6>
+                                <h6><strong>{{leaf_name[i]}} Leaf</strong></h6>
                             </div>
                         </a>
                     </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="" id="hidden_row12" style="display: none;">
+                <h1>Seed Disease Prediction</h1>
+                <div class="main" >
+                    {% for i in range(15) %}
+                    <div class="card" id="{{leaf_name[i]}}_leaf" onclick="show_hide_row('hidden_row15');">
+                        <a href="#hidden_row15">
+                            <img src="../static/images/leaf_disease/{{leaf_name[i]}}_leaf.jfif" alt="" style="width:100%; height: 150px; border-top-left-radius:15px;border-top-right-radius:15px">
+                            <div class="content">
+                                <h6><strong>{{leaf_name[i]}} Leaf</strong></h6>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="" id="hidden_row13" style="display: none;">
+                <h1>Crop Disease Prediction</h1>
+                <div class="main" >
+                    {% for i in range(15) %}
+                    <div class="card" id="{{leaf_name[i]}}_leaf" onclick="show_hide_row('hidden_row15');">
+                        <a href="#hidden_row15">
+                            <img src="../static/images/leaf_disease/{{leaf_name[i]}}_leaf.jfif" alt="" style="width:100%; height: 150px; border-top-left-radius:15px;border-top-right-radius:15px">
+                            <div class="content">
+                                <h6><strong>{{leaf_name[i]}} Leaf</strong></h6>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="ftco-section-parallax mb-5 pb-5 mt-3" id="hidden_row12" style="display: none;">
+    <section class="ftco-section-parallax mb-5 pb-5 mt-3" id="hidden_row15" style="display: none;">
         <div class="align-items-center">
             <div>
                 <center>
-                    <!-- <input type="file" accept="image/*" name="image" id="image"/> -->
-                    <div class="container">
-                        <div class="fileUploadInput">
-                        <label style="font-weight: bolder;font-size:larger;">Upload File</label>
-                        <input type="file" />
-                        <button>+</button></div>
-                    </div>
+                    <form action="" method="POST">
+                        <div class="container">
+                            <div class="fileUploadInput">
+                            <label style="font-weight: bolder;font-size:larger;">Upload File</label>
+                            <input onchange="loadFile(event)" type="file" />
+                            <button>+</button></div>
+                        </div>
+                        <br>
+                        <img id="image2" style="height: 300px; width:340px;display:none;" src="" alt="">
+                        <br>
+                        <br>
+                        <button type="submit" id="predict" name="predict" value="">Predict</button>
+                    </form>
+                    <br>
+                    <br>
+                    <h2 id="output" style="color: green;"></h2>
                 </center>
             </div>
         </div>
